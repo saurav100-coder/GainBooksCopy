@@ -1,0 +1,341 @@
+﻿@{
+    ViewData["Title"] = "UpdateInfotable";
+}
+<link rel="stylesheet" href="~/Content/Custom/UpdateInfotable.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/UpdateInfotable.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+
+<style>
+    .close {
+        opacity: 0.8;
+    }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 5px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+            .MoreDetails:hover i:hover .MoreDetails {
+                background: #8f1fe7;
+            }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .xdsoft_datetimepicker {
+        height: 212px;
+    }
+
+    td.xdsoft_date div {
+        padding: 0px 9px 0px 9px;
+    }
+
+    div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 8px 23.4px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .content-wrapper {
+        height: 580px;
+    }
+
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+        .sticky + .ShowRemarksValues {
+            padding-top: 102px;
+        }
+
+    .numberCircle {
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        padding: 1px;
+        margin-right: 5px;
+        background: #FF0000;
+        border: 0.5px solid #FF0000;
+        color: #fff;
+        text-align: center;
+        font: 11px Arial, sans-serif;
+    }
+
+    .context-menu-item {
+        padding-left: 30px;
+        padding-right: 20px;
+    }
+
+    .context-menu-list {
+        width: 220px;
+    }
+
+    .context-menu-item labels context-menu-visible {
+        padding-left: 15px;
+    }
+
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+</style>
+
+<div Class="container" style="width: 100%;"></div>
+<input type="hidden" name="grid1" id="grid1" value="">
+<p Class="text-center text-success">@TempData["Message"]</p>
+
+
+ 
+<div Class="row calHeightIcon" style="padding-left: 15px; padding-right: 15px; margin-top: -11px !important; padding-bottom: 3px;">
+    <div id="main" Class="col-md-12" style="margin-bottom:0px !important;">
+        <div Class=" icons col-md-2" style="top:12px; margin-right: 8px; margin-left: 0px; padding-top: 0px; display: inline-block; width: auto; margin-right: 28px; bottom: 5px; padding-left: 0px;">
+            <a data-toggle="Add Infotable">
+            <i Class="glyphicon glyphicon-plus" onclick="AddInfotableCtrls()" style="font-size: 14px; margin-right: 10px; padding: 5px; cursor: pointer;"></i>
+            </a>
+
+            <a Class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh">
+                <i Class="fa fa-refresh" style="font-size: 16px; margin-right: 10px; padding: 5px; cursor: pointer; "></i>
+            </a>
+
+
+
+            
+        </div>
+
+        @*<form class="col-md-6 search-container" style="display: inline-block; padding-left: 0px; top: 10px; ">
+            <div id="Text" class="SearchDiv" style=" width: 100%; position: relative; display: flex;">
+                <input type="text" id="SearchText" class="" placeholder="Type to search" style=" " />
+                <div id="search1" onclick="DoSearch();" class="searchButton1"><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+        </form>*@
+
+        <div class="col-md-2" style="text-align:right; padding:0px; float:right;padding-top:7px;">
+            <label id="info" style="font-size: 12px; padding-right: 6px; color: #808080;"> </label>
+            <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                <i class="fa fa-angle-left" style="font-size:19px"></i>
+            </div>
+            <div Class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                <i Class="fa fa-angle-right" style="font-size:19px"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div Class="col-md-12 " style="padding-left: 10px; padding-right: 10px;">
+    <div Class="col-md-12 col-sm-12 TaskBar calHeightTaskBar" style="font-family: verdana,arial,sans-serif; font-size: 11px; display:flex;flex-direction:row;">
+        <div Class="" style="width: 10%; padding: 8px 0px 0px 0px; text-align: left; margin-left: 20px;"><b>SNo.</b></div>
+        <div Class="" style="width:15%;padding:8px 0px 0px 0px;text-align:left; margin-left: 5px;"><b>P_Infotable</b></div>
+        <div Class="" style="width:15%;padding:8px 0px 0px 0px;text-align:left;"><b>Info_Type</b></div>
+        <div Class="" style="width:30%;padding:8px 10px 0px 10px;text-align:left;"><b>Name_Of_Info</b></div>
+        <div Class="" style="width:15%; padding:8px 0px 0px 0px;text-align:left;"><b>Generated By</b></div>
+    </div>
+    <div id="loading" style="margin-bottom: 0px; padding-bottom: 0px; "><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6" style="padding-top: 10px; margin-bottom: 0px; padding-bottom: 0px; "></div><p id="Msg"></p></div></div>
+    <div class="col-md-12 " id="example" style="overflow-y:scroll; padding-bottom:20px; "></div>
+</div>
+
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+<div Class="LoaderOverlay">
+    <div Class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px; "></div>
+</div>
+
+<div Class="modal fade" id="NoRow"></div>
+<div Class="modal fade" id="CallClosed">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div Class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div id="CallClosedContent" Class="col-md-6"></div>
+                <div Class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Infotable">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:20px;padding-top:20px; padding-left: 40px;" class="modal-title">  </h4>
+            <hr style="width:95%; margin-top:10px; margin-bottom:10px;" />
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <div id="myInfotable" class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post" id="myInfotableForm">
+                        <input type="hidden" name="P_infotable" id="P_infotable"  value=""/>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group" id="InfotypeDiv">
+                            <label>InfoType</label>
+                            <input type="number" name="Infotype" id="Infotype" value=""  class="form-control input-sm" min="0"/>
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">NameOfInfo</label>
+                            <input class="form-control input-sm" name="NameOfInfo" id="NameOfInfo" />
+                        </div>
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button" id="SubmitInfotableBtn" Class="btn btn-primary" onclick="SubmitInfotable()" style="margin-right:25px; margin-top:20px">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div Class="modal fade" id="deleteInfotable">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title">Delete NameOfInfo</h4>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <form Class="form-horizontal" role="form" method="post" id="deleteInfotableForm">
+                    <input type="hidden" id="p_infotable" name="p_infotable" value="" />
+                    <input type="hidden" name="nameofinfo" id="nameofinfo" value="" />
+                    <input type="hidden" name="infotype" id="infotype" value="" />
+                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="button" Class="btn btn-primary" onclick="DeleteInfotable()" style="margin-right:25px; margin-top:20px">Delete</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

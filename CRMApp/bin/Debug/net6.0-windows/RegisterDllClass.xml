@@ -1,0 +1,88 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RegisterDllClass
+</name>
+</assembly>
+<members>
+<member name="T:RegisterDllClass.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:RegisterDllClass.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:RegisterDllClass.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.QuitError(System.Exception,Microsoft.VisualBasic.ErrObject,System.Diagnostics.StackTrace,System.Boolean)">
+ <summary>
+ Error Message box before quitting the application
+ </summary>
+ <param name="ex">Error on exception </param>
+ <param name="err"> error object </param>
+ <remarks></remarks>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.QuitMessage(System.String,System.String,System.Diagnostics.StackTrace@,System.Boolean)">
+ <summary>
+ Message box before quitting the application
+ </summary>
+ <param name="MessageString"> message as string</param>
+<param name="QuitProcedure" >Function or sunroutine name from exception thrown</param>
+ <remarks></remarks>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.StringWrite(System.String,System.String,System.Boolean,System.Text.Encoding)">
+ <summary>
+ Write string to a file
+ </summary>
+ <param name="TxtFile">Output full file name </param>
+ <param name="TxtString">Sring to be written</param>
+<param name="AppendMode">True,if string is added to an existing file </param>
+ <returns> string to be written</returns>
+ <remarks></remarks>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.TextToAscii(System.String)">
+ <summary>
+ Convert Character string into ascii string
+ </summary>
+ <param name="TextString "></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.AsciiToText(System.String)">
+ <summary>
+ Convert ascii string into character string
+ </summary>
+ <param name="AsciiString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.SendingEmail(System.String,System.String,System.String,System.String)">
+ <summary>
+ To send emails with attatchments
+ </summary>
+ <param name="ToMailId">Email id to which mail to be sent</param>
+ <param name="MailSubject">Subject of email</param>
+ <param name="MyMailText">Body of email</param>
+ <param name="AttachmentFileName">Comma separated FileNames with path to be attatched</param>
+ <remarks></remarks>
+</member>
+<member name="M:RegisterDllClass.ValidateClass.StringWriteLine(System.String,System.Collections.Generic.List{System.String},System.Boolean)">
+ <summary>
+ Write string to a file
+ </summary>
+ <param name="TxtFile">Output full file name </param>
+ <param name="ListString">List of text lines to be written</param>
+<param name="AddLast">True,if string is added to an existing file </param>
+ <returns> string to be written</returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

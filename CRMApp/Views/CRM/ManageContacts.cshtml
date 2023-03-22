@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@Optimization.Scripts.Render("~/Scripts/Manage_Contacts")
+@Optimization.Styles.Render("~/Content/Manage_Contacts")*@
+
+<script src="~/Scripts/FrameWork/bootstrap.js"></script>
+<script src="~/Scripts/Custom/ManageContacts.js"></script>
+
+<link  rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css"/>
+<link  rel="stylesheet" href="~/Content/Custom/GridCss.css"/>
+<link  rel="stylesheet" href="~/Content/Custom/ManageContacts.css"/>
+
+<style>
+    .content{
+       height:580px
+    }
+</style>
+
+<div class="container">
+    <div class="icon-bar">
+        <a class="top" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Create New" href="@Url.Action("ContactsForm", "CRM")">
+            <i class="glyphicon glyphicon-plus"></i>
+        </a>
+        <a class="top btn-edit" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Edit" onclick="dd();">
+            <i class="glyphicon glyphicon-pencil"></i>
+        </a>
+        <a class="top btn-delete" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete" onclick="dd();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="main" class="col-md-12" style="padding-right:25px">
+            <div id="dropdown" class="col-md-4 search ">
+                <select class="col-md-2" id="filter" style="height:26px">
+                    <option value="0">Filter</option>   
+                </select>
+                <div id="TextC" style="display:none">
+                    <input type="text" id="filterText" class="col-md-3" placeholder="Type to search" style="height:26px" /><div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" style="color:#337ab7; margin-left:10px; width:30px; height:25px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; border-radius:0px; margin-top:10px">
+                    <p id="popover1" data-placement="bottom" style="margin-top:0px;"><i class="fa fa-gear xx" style="font-size:20px; margin-top:2px"></i></p>
+                    <div id="popover_content_wrapper1" style="display: none">
+                        <ul style="list-style:none; padding-left:0px">
+                            <li id="popover2" data-placement="left" style="left:-90px; width:90px;">Set Page Size</li>
+                        </ul>
+                    </div>
+                    <div id="popover_content_wrapper2" style="display:none; width:148px">
+                        <input type="number" id="size" style="padding:2px 2px 3px 5px; width:70%;height:25px" /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px;border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <input type="hidden" name="grid1" id="grid1" value="">
+    <div class="col-md-12">      
+        <table id="example" class="table row-border table-responsive" cellspacing="0">
+            <thead>
+                <tr style="text-align:center;">
+                    <th>Select</th>
+                    <th style="cursor: pointer;"><input type="hidden" id="head1" value="2:Fullname:none" />Name<i class="glyphicon glyphicon-sort sortable " id="sort-2" style="color:#C7C7C7"></i></th>
+                    <th>Phone</th>
+                    <th style="cursor: pointer;"><input type="hidden" id="head2" value="4:Email:none" />Email<i class="glyphicon glyphicon-sort sortable " id="sort-4" style="color:#C7C7C7"></i></th>
+                    <th>Job Title</th>
+                </tr>
+                <tr id="loading"><td colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="type2" value="@ViewBag.Message" /> 
+

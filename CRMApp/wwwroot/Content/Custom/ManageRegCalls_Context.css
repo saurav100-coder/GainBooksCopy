@@ -1,0 +1,106 @@
+﻿  ul.context-menu-list.context-menu-root {
+        padding: 0px 0px 0px 0px;
+    }
+
+    li.context-menu-item {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-right: 0px;
+    }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-comment-o::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-pencil::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-envelope-o::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-mobile-phone::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-comment-o::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+        li.context-menu-item:hover {
+            font-size: 14px;
+        }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon-MailD {
+            background-image: url("/images/icon.png");
+            background-repeat: no-repeat;
+        }
+
+            li.context-menu-item.context-menu-icon.context-menu-icon-MailD:hover {
+                background-image: url(/images/icon-hover.png);
+            }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon-mobile {
+            background-image: url(/images/icon1-phone.png);
+            background-repeat: no-repeat;
+        }
+
+            li.context-menu-item.context-menu-icon.context-menu-icon-mobile:hover {
+                background-image: url(/images/icon1-phone-hover.png);
+                background-repeat: no-repeat;
+            }
+
+        li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-phone::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-check::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-filter::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-calendar-plus-o::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-sitemap::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-pencil-square-o::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-users::before {
+            
+            padding-top: 5px;
+        }
+
+         li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-th-list::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+          li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-calender::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+          li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-user-plus::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }
+          li.context-menu-item.context-menu-icon.context-menu-icon--fa.fa.fa-tasks::before {
+            font-weight: bold;
+            padding-top: 5px;
+        }

@@ -1,0 +1,248 @@
+﻿/*body {
+}
+.subTaskBar {
+    display: flex;
+    padding: 18px;
+    background: #f3f8fa;
+    margin-top: 35px;
+    font-weight: 600;
+}
+
+    .subTaskBar div {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+.subTaskBarValue {
+    display: flex;
+    padding: 18px;
+    color: #404040;
+}
+
+    .subTaskBarValue div {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+#tr-15.whitecolor {*/
+    /*background-color: white !important;*/
+    /*box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+
+#tr-15:hover {
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    transition: 0.3s;
+}
+#BillDateValue, #ShopCodeValue, #ShopNameValue, #totalAmountValue {
+    padding-left: 0px !important;
+    padding-top: 10px !important;
+    
+    font-size: 13px !important;
+}
+
+@media only screen and (max-width:600px) {
+    #BillDate, #ShopCode,#ShopName, #totalAmount {
+        padding-left: 0px !important;
+        padding-top: 10px !important;
+      
+    }
+    #BillDateValue, #ShopCodeValue, #ShopNameValue, #totalAmountValue {
+        padding-left: 0px !important;
+        padding-top: 10px !important;
+        font-size: 13px !important;
+    }
+
+    .ItemName{
+        padding-left: 0px !important;
+    }
+
+    .ItemNameValue {
+        padding-left: 0px !important;
+    }
+
+    .parentrow {
+        height: auto;
+    }
+    .subTaskBar, .subTaskBarValue{
+        padding-left:0px !important;
+        padding-right:0px !important;
+    }
+        .subTaskBar div {
+            padding-right: 0px !important;
+        }
+}*/
+body .table {
+    overflow: scroll;
+}
+.table tr {
+    padding-left:10px;
+   /* padding-right:10px;*/
+}
+.table tbody > tr > th {
+    padding: 0 !important;
+    font-weight: normal;
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    border:none;
+    padding:0;
+}
+.billdatepicker {
+    border-style: none;
+    border-bottom: 1px solid #404040;
+    background-color: transparent;
+    outline: none;
+    font-size: 13px;
+   
+    
+}
+    .billdatepicker:focus {
+        border-bottom: 1px solid #105faf;
+        color: #105faf;
+    }
+select {
+    border-style: none;
+    border-bottom: 1px solid #404040;
+    background-color: transparent;
+    outline: none;
+    font-size: 13px;
+    margin-left: 8px;
+}
+    select:focus {
+        border-bottom: 1px solid #105faf;
+    }
+
+select option{
+    padding:10px;
+}
+#SName {
+    color: #404040;
+    font-size: 12px;
+    padding-left: 25px;
+    margin-right:15px;
+}
+.TotalAmountSection {
+    display: flex;
+    float: right;
+    margin-top: 20px;
+   
+}
+.TotalAmounLabel {
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 4px;
+    padding-right: 8px;
+    
+}
+.TotalAmountValue {
+    font-weight: bold;
+    font-size: 18px;
+    color: #337ab7;
+}
+.content{
+    padding-top:0px !important;
+}
+#btnSearch{
+
+}
+#btnSearch:hover {
+    cursor: pointer;
+    color: #23527c;
+}
+
+.style {
+    background-color: #ddeaf7 !important;
+    font-size:12px;
+}
+@media only screen and (max-width:600px) {
+    .BillDate, #ShopCode, #ShopName, .billdatepicker, #SCode {
+        
+        
+        margin-left:0px !important;
+    }
+    /*.BillDateDiv, .ShopCodeDiv{
+        display:block !important;
+        margin-left:0px !important;
+        
+    }*/
+    .ShopNameDiv {
+        padding-left: 15px !important;
+        padding-top:20px !important;
+    }
+    #SName{
+        margin-left:10px;
+        margin-right:15px;
+    }
+ 
+}
+@media only screen and (max-width:480px) {
+    .SaleDate{
+        display:none !important;
+    }
+   
+    .PackingCode {
+        display: none !important;
+    }
+    .Payment {
+        display: none !important;
+    }
+    .Quantity {
+        display: none !important;
+    }
+    .mrp {
+        display: none !important;
+    }
+    .total {
+        display: none !important;
+    }
+    .Timestamp {
+        display: none !important;
+    }
+
+    .icon {
+        width: 10% !important;
+    }
+    .sno {
+        width: 7% !important;
+    }
+    .billseries {
+        width: 9% !important;
+    }
+    .billno {
+        width: 9% !important;
+    }
+    .customer {
+        width: 25% !important;
+        padding-left: 0 !important;
+    }
+    .salesman {
+        width: 22% !important;
+        padding-left:0 !important;
+    }
+    .orderid {
+        width: 22% !important;
+    }
+    .Icon {
+        width: 7% !important;
+    }
+    .SNo {
+        width: 8% !important;
+    }
+    .Series {
+        width: 10% !important;
+    }
+    .No {
+        width: 11% !important;
+    }
+    .Customer {
+        width: 23% !important;
+    }
+    .Salesman {
+        width: 23% !important;
+    }
+    .Order {
+        width: 20% !important;
+    }
+    
+}

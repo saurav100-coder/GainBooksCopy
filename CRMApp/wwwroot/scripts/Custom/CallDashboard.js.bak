@@ -1,0 +1,791 @@
+﻿var options = { "backdrop": "static", keyboard: true };
+$(document).ready(function () {
+    $(".NoRecord").hide();
+
+    //Click of search button
+    $(".btn-Submit").click(function () {
+        $("#CallDetails").hide();
+        document.getElementById("loadspin").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+
+        var Pissuesfilegst = $("#CallId").val();
+
+        GetCallData(Pissuesfilegst)
+        GetRemarkData(Pissuesfilegst)
+        GetAssignData(Pissuesfilegst);
+        GetPrevCallData(Pissuesfilegst)
+        GetCallEngagedData(Pissuesfilegst)
+
+    });
+
+
+});
+//Get latest call details from server
+function GetCallData(value) {
+    var data;
+    data = { CallId: value }
+    $.post('/CustomerDetails/SearchCallDetails',
+        data = data,
+        success = function (data) {
+            if (data != "Error" && data != "logout") {
+                //loadCallData(data);
+                $(".NoRecord").hide();
+                var obj1, obj2, obj3 = "";
+                var data1 = data.split("|");
+                if (data1[0] != "" && data1[0] != "[]") {
+                    obj1 = JSON.parse(data1[0]);
+                    $("#Firmname").text(obj1[0].Firmname);
+                    $("#Assignedto").text(obj1[0].Assignedtotext);
+                    $("#issue").text(obj1[0].Issuetypetext)
+                    $("#desc").text(obj1[0].Issuedescription)
+                    $("#MobNo").text(obj1[0].Mobileno);
+                } else {
+                    $("#Firmname").text("N/A");
+                    $("#Assignedto").text("N/A");
+                    $("#issue").text("N/A")
+                    $("#desc").text("N/A")
+                    $("#MobNo").text("N/A");
+                }
+                if (data1[1] != "" && data1[1] != "[]") {
+                    obj2 = JSON.parse(data1[1]);
+                    $("#callTime").text(obj2[0].frmtCallTime)
+                    $("#callDuration").text(obj2[0].callduration)
+                } else {
+
+                    $("#callTime").text("N/A")
+                    $("#callDuration").text("N/A")
+                }
+                if (data1[2] != "" && data1[2] != "[]") {
+                    obj3 = JSON.parse(data1[2]);
+                    $("#Collab").text(obj3[0].TxtCollaborator)
+                } else {
+                    $("#Collab").text("N/A")
+                }
+
+
+                $("#P_allcallsreg").val(value);
+
+
+
+
+
+
+
+                $("#CallDetails").show();
+                document.getElementById("loadspin").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            } else if (data == "False") {
+                $("#CallDetails").hide();
+                document.getElementById("loadspin").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+                $(".NoRecord").show();
+                var options = { "backdrop": "static", keyboard: true };
+                $('#CallClosed').modal(options);
+                $('#CallClosed').modal("show");
+
+            } else if (data == "logout") {
+                location.href = '/Home/LogOut/';
+            }
+        });
+}
+//Function to get the remark list of this  call
+function GetRemarkData(value) {
+    var data;
+    data = { CallId: value, calltype: "C" }
+    $.post('/CustomerDetails/GetRemarkDataofACall',
+        data = data,
+        success = function (data) {
+            if (data != "Error" && data != "logout") {
+                LoadRemarkData(data);
+                $("#CallDetails").show();
+                document.getElementById("loadspin").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            } else if (data == "logout") {
+                location.href = '/Home/LogOut/';
+            }
+        });
+
+}
+//function to get AssgnHistory of the call
+function GetAssignData(value) {
+    var data;
+    data = { CallId: value, calltype: "C" }
+    $.post('/CustomerDetails/GetAssignedHistoryOfCall',
+        data = data,
+        success = function (data) {
+            console.log(data)
+            if (data != "Error" && data != "logout") {
+                LoadAssignData(data);
+                $("#CallDetails").show();
+                document.getElementById("loadspin").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            } else if (data == "logout") {
+                location.href = '/Home/LogOut/';
+            }
+        });
+}
+//function to get callEngageStatusHistory of the call
+function GetCallEngagedData(value) {
+    var data;
+    data = { CallId: value }
+    $.post('/CustomerDetails/GetCallEngagedStatusHistoryOfCall',
+        data = data,
+        success = function (data) {
+            console.log(data)
+            if (data != "Error" && data != "logout") {
+                LoadCallEngageStatusData(data);
+                $("#CallDetails").show();
+                document.getElementById("loadspin").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            } else if (data == "logout") {
+                location.href = '/Home/LogOut/';
+            }
+        });
+}
+//function to get the Previous call data of same customer
+function GetPrevCallData(value) {
+    var data;
+    data = { CallId: value }
+    $.post('/CustomerDetails/GetPreviousCallDetails',
+        data = data,
+        success = function (data) {
+            if (data != "Error" && data != "logout") {
+                loadPrevCallData(data);
+                $("#CallDetails").show();
+                document.getElementById("loadspin").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            } else if (data == "logout") {
+                location.href = '/Home/LogOut/';
+            }
+        });
+}
+
+
+//function to dynamically Remarks related data 
+function LoadRemarkData(Calldata) {
+    var parentCallDiv = $("#RemarkList");
+    parentCallDiv.text('');
+    //if there is no data
+    if (Calldata.length == 0) {
+        var containerDiv = document.createElement('h4');
+        containerDiv.className = 'text-center';
+        containerDiv.style = "color:gray; margin-bottom:20px; margin-top:20px";
+        containerDiv.innerHTML = 'No Remarks!'
+        parentCallDiv.append(containerDiv);
+    } else {
+        var arr = JSON.parse(Calldata)
+        $.each(arr, function (index, item) {
+            var m = index + 1;
+            var fileName = '';
+            if (item.FileName == null) {
+                item.FileName = "N/A";
+            }
+
+            var more1 = $("<div class='col-md-12' style='display: inline-flex;'></div>");
+            more1.html(("<div class='col-md-1' style='font-size:13px; color:#222d32;margin-top:15px;padding-left: 5px;'>" + m + "</div>")
+                   + " " + ("<div class='col-md-2' style='font-size:13px; color:#222d32;margin-top:15px;text-align:left;padding-left:0;padding-right:0;' >" + item.TextCommunicationType + "</div>")
+             + " " + ("<div class='col-md-4' style='font-size:13px; color:#222d32;margin-top:15px;text-align:left;padding-left:0;padding-right:0;' >" + item.commtext + "</div>")
+              + " " + ("<div class='col-md-3' style='font-size:13px; color:#222d32;margin-top:15px;text-align:left;padding-left:0;padding-right:0;' >" + item.TextLogincode + "</div>")
+              + " " + ("<div class='col-md-2' style='font-size:13px; color:#222d32;margin-top:15px;text-align:left;padding-left:0;padding-right:0;' >" + item.FrmtCreationDate + "</div>")
+                 );
+            parentCallDiv.append(more1);
+        });
+
+    }
+    return false;
+}
+//function to dynamically show callengaged related data 
+function LoadCallEngageStatusData(Calldata) {
+    var parentCallDiv = $("#CallEngageList");
+    parentCallDiv.text('');
+    //if there is no data
+    if (Calldata.length == 0 || Calldata == "False") {
+        var containerDiv = document.createElement('h4');
+        containerDiv.className = 'text-center';
+        containerDiv.style = "color:gray; margin-bottom:20px; margin-top:20px";
+        containerDiv.innerHTML = 'No Record Found!'
+        parentCallDiv.append(containerDiv);
+    } else {
+        var arr = JSON.parse(Calldata)
+        $.each(arr, function (index, item) {
+            var m = index + 1;
+
+            var more1 = $("<div class='col-md-12' style='display: inline-flex;'></div>");
+            more1.html(("<div class='col-md-1' style='font-size:13px; color:#222d32;margin-top:10px;padding-left: 5px;'>" + m + "</div>")
+             + " " + ("<div class='col-md-4' style='font-size:13px; color:#222d32;margin-top:10px;' >" + item.txtengageStatus + "</div>")
+             + " " + ("<div class='col-md-3' style='font-size:13px; color:#222d32;margin-top:10px;text-align:center;padding-left: 0px;'  >" + item.LoginName + " </div>")
+              + " " + ("<div class='col-md-4' style='font-size:13px; color:#222d32;margin-top:10px;text-align:center;padding-left: 0px;'  >" + item.frmtStartime + " </div>")
+                 );
+            parentCallDiv.append(more1);
+        });
+
+    }
+    return false;
+}
+
+function SubmitCallEngage(ctrl) {
+    var status = ""
+    if (ctrl.id == "popup") {
+        status = $("#callEngageStatus :selected").val();
+        $("#callEngageStatus").val("")
+        $('#EngageStatus').modal("hide");
+    } else {
+        var id = $(ctrl).parent().parent().parent().parent().parent()[0].id;
+        var Rowid = "#tr-" + id;
+        var select = $(Rowid).find(".callstatusInput");
+        status = $(select[0]).children("option:selected").val();
+    }
+
+    var CallId = $("#callId").val();
+    $(ctrl).addClass("disabledbutton");
+    //var status = $("#callstatusInput").val();
+    if (status != "0") {
+
+        $.ajax({
+            type: "POST",
+            url: "/CRM/AddCallEngageStatus",
+            data: { CallId: CallId, status: status },
+            success: function (data) {
+                if (data == "LogOut") {
+                    window.location.href = "/Home/LogOut";
+                    return true;
+                }
+                var id = "#eng-" + CallId;
+                $(id).html(data);
+
+
+                var Mtitle = "Status added successfully.";
+                $('#CallClosedContent').html('');
+                $('#CallClosed').modal(options);
+                $('#CallClosed .modal-title').text(Mtitle);
+                $('#CallClosed').modal("show");
+                $("#callId").val("");
+                $("#CallEngageStatus").val("");
+                setTimeout(function () { $('#CallClosed').modal("hide"); }, 1000);
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+}
+//function to dynamically load assignment related data 
+function LoadAssignData(Calldata) {
+    var parentCallDiv = $("#AssignList");
+    parentCallDiv.text('');
+    //if there is no data
+    if (Calldata.length == 0) {
+        var containerDiv = document.createElement('h4');
+        containerDiv.className = 'text-center';
+        containerDiv.style = "color:gray; margin-bottom:20px; margin-top:20px";
+        containerDiv.innerHTML = 'No Assignment History!'
+        parentCallDiv.append(containerDiv);
+    } else {
+        var arr = JSON.parse(Calldata)
+        var m = 1;
+        $.each(arr, function (index, item) {
+
+            //if (item.Assignedtotext != "") {
+            if (item.TextAssignedto != "") {
+                var more1 = $("<div class='col-md-12' style='display: inline-flex;'></div>");
+                more1.html(("<div class='col-md-1' style='font-size:13px; color:#222d32;margin-top:15px;padding-left: 5px;'>" + m + "</div>")
+                 + " " + ("<div class='col-md-7' style='font-size:13px; color:#222d32;margin-top:15px;padding-left: 110px;' >" + item.TextAssignedto + "</div>")
+                 + " " + ("<div class='col-md-4' style='font-size:13px; color:#222d32;margin-top:15px;padding-right: 0px;text-align:center;padding-left: 0px;'  >" + item.frmtStartDate + " </div>")
+                     );
+                m = m + 1;
+                parentCallDiv.append(more1);
+            }
+        });
+
+    }
+    return false;
+}
+//Function to load previous call data of a ccustomer
+function loadPrevCallData(Calldata) {
+    var parentCallDiv = $("#ParentCallDiv");
+    parentCallDiv.text('');
+    //if there is no data
+    if (Calldata.length == 0) {
+        var containerDiv = document.createElement('h4');
+        containerDiv.className = 'text-center';
+        containerDiv.style = "color:gray; margin-bottom:20px; margin-top:20px";
+        containerDiv.innerHTML = 'No Call Registered'
+        parentCallDiv.append(containerDiv);
+    } else {
+        var arr = JSON.parse(Calldata)
+        $.each(arr, function (index, item) {
+            var containerDiv = document.createElement('div');
+            containerDiv.className = 'col-md-12 ';
+            containerDiv.style = "padding:0px; height:auto; margin-top:20px;";
+            parentCallDiv.append(containerDiv);
+            var SnoDiv = document.createElement('div');
+            SnoDiv.className = 'col-md-1 CallSno';
+            SnoDiv.style = 'width:21px; padding-left:10px; padding-right:0px; margin-right:5px; font-size:14px';
+
+            SnoDiv.innerHTML = index + 1 + ".";
+            containerDiv.append(SnoDiv);
+            var IssueTypeDiv = document.createElement('div');
+            IssueTypeDiv.className = 'col-md-8 FirmNameDiv';
+            IssueTypeDiv.style = 'padding-left:0px';
+            containerDiv.append(IssueTypeDiv);
+            var IssueTypeLabel = document.createElement('label')
+            IssueTypeLabel.style = 'font-weight:600; margin-right:5px;font-size:14px '
+            IssueTypeLabel.innerHTML = 'IssueType:';
+            IssueTypeDiv.append(IssueTypeLabel);
+            var IssueTypeSpan = document.createElement('span');
+
+            if (item.TextIssuetype == '' || item.TextIssuetype == undefined || item.TextIssuetype == null) {
+                IssueTypeSpan.innerHTML = 'Not Available';
+            } else {
+                IssueTypeSpan.innerHTML = item.TextIssuetype;
+            }
+            IssueTypeDiv.append(IssueTypeSpan);
+
+            var statusDiv = document.createElement('div');
+            statusDiv.className = 'col-md-3 statusDiv';
+            statusDiv.style = "";
+            containerDiv.append(statusDiv);
+            var statusspan = document.createElement('span');
+            //statusDiv.className = 'col-md-2';
+            statusspan.innerHTML = item.TextStatus;
+            if (item.TextStatus.trim() == "Call Registered") {
+                statusspan.className = "label label-danger"
+            } else {
+                statusspan.className = "label label-success"
+            }
+
+            statusDiv.append(statusspan);
+            var statusbreak = document.createElement('br');
+            containerDiv.append(statusbreak);
+            var IssueDiv = document.createElement('div');
+            IssueDiv.className = 'col-md-7';
+            IssueDiv.style = "margin-top:5px; clear:both";
+            containerDiv.append(IssueDiv);
+            var IssueLabel = document.createElement('label')
+            IssueLabel.style = 'font-weight:600; margin-right:5px;font-size:14px'
+            IssueLabel.innerHTML = 'IssueDescription:';
+            IssueDiv.append(IssueLabel);
+            var IssueSpan = document.createElement('span');
+            if (item.Issuedescription == '' || item.Issuedescription == undefined || item.Issuedescription == null) {
+                IssueSpan.innerHTML = 'Not Available';
+            } else {
+                IssueSpan.innerHTML = item.Issuedescription;
+            }
+            IssueDiv.append(IssueSpan);
+
+
+            var CreationdateDiv = document.createElement('div');
+            CreationdateDiv.className = 'col-md-5 CreationDate';
+            CreationdateDiv.innerHTML = item.frmtRegisterDate;
+            CreationdateDiv.style = "text-align:left";
+            CreationdateDiv.style = "padding-right:0px";
+            CreationdateDiv.style = "font-size:14px";
+            CreationdateDiv.style = "top:8px";
+            containerDiv.append(CreationdateDiv);
+
+            var TimeTakenDiv = document.createElement('div');
+            TimeTakenDiv.className = 'col-md-6';
+            TimeTakenDiv.style = "margin-top:5px; margin-bottom:10px; padding-right:0px; padding-left:15px; ";
+            containerDiv.append(TimeTakenDiv);
+            var TimeTakenLabel = document.createElement('label');
+            TimeTakenLabel.style = 'font-weight:600;  margin-right:5px; font-size:14px';
+            TimeTakenLabel.innerHTML = 'Time Taken:';
+            TimeTakenDiv.append(TimeTakenLabel);
+            var TimeTakenSpan = document.createElement('span');
+            var accordiondiv = document.createElement('div');
+
+            if (item.TextStatus == "Call Registered") {
+                TimeTakenDiv.style = "display:none";
+                accordiondiv.className = 'accordion col-md-12 CallAccordion';
+            }
+            else {
+                TimeTakenSpan.innerHTML = item.timeTakentoComplete;
+                accordiondiv.className = 'accordion col-md-6 CallAccordion';
+                TimeTakenDiv.append(TimeTakenSpan);
+            }
+
+            accordiondiv.id = item.P_allcallsreg;
+
+            accordiondiv.style = "";
+            containerDiv.append(accordiondiv);
+            var accordioni = document.createElement('i')
+            accordioni.className = 'glyphicon glyphicon-plus';
+            accordioni.style = "left: 150px;top: 10px;";
+            accordiondiv.append(accordioni);
+            var paneldiv = document.createElement('div')
+            paneldiv.className = 'panel col-md-12';
+            paneldiv.style = "margin-top:40px;overflow-y:scroll";
+            paneldiv.id = 'panel-' + item.P_allcallsreg;
+            containerDiv.append(paneldiv);
+        });
+        //Code to dynamically create Call remarks accordion
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    $(this).children('i').removeClass();
+                    $(this).children('i').addClass('glyphicon glyphicon-plus');
+
+                } else {
+                    var P_allcallsreg = this.id;
+                    var panelDivId = "#panel-" + allcallsreg;
+                    var paneldiv = $(panelDivId);
+
+                    //$(panelDivId).html('');
+                    if ($(panelDivId).html().length) {
+                        panel.style.maxHeight = 88 + "px";
+                        $(this).children('i').removeClass();
+                        $(this).children('i').addClass('glyphicon glyphicon-minus');
+                    } else {
+                        $.post('/CustomerDetails/GetCallRemarkData', { P_allcallsreg: this.id }, function (CallRemarkdata) {
+                            console.log(CallRemarkdata.data.length);
+                            if (CallRemarkdata.data.length == 0) {
+                                var remarkContainerDiv = document.createElement('div');
+                                remarkContainerDiv.className = 'col-md-12';
+                                remarkContainerDiv.style = "height:20px; margin-bottom:10px";
+                                paneldiv.append(remarkContainerDiv);
+                                var RemarkDiv = document.createElement('div');
+                                RemarkDiv.className = 'col-md-7';
+                                RemarkDiv.innerHTML = 'Remarks not available';
+                                remarkContainerDiv.append(RemarkDiv);
+                            } else {
+                                $.each(CallRemarkdata.data, function (index, item) {
+                                    var remarkContainerDiv = document.createElement('div');
+                                    remarkContainerDiv.className = 'col-md-12';
+                                    remarkContainerDiv.style = "margin-bottom:10px";
+                                    paneldiv.append(remarkContainerDiv);
+                                    var RemarkSnoDiv = document.createElement('div');
+                                    RemarkSnoDiv.className = 'col-md-1 RemarkSnoDiv';
+                                    RemarkSnoDiv.innerHTML = (index + 1) + '.';
+                                    remarkContainerDiv.append(RemarkSnoDiv);
+                                    var RemarkDiv = document.createElement('div');
+                                    RemarkDiv.className = 'col-md-11';
+                                    RemarkDiv.style = 'font-weight:bold; margin-bottom:3px';
+                                    RemarkDiv.innerHTML = item.Commtext;
+                                    remarkContainerDiv.append(RemarkDiv);
+                                    //var RemarkByDiv = document.createElement('div');
+                                    //RemarkByDiv.className = 'col-md-4';
+                                    //RemarkByDiv.innerHTML = item.FrmtCreationDate;
+                                    //remarkContainerDiv.append(RemarkByDiv);
+                                    var RemarkByDiv = document.createElement('div');
+                                    RemarkByDiv.className = 'col-md-6';
+                                    RemarkByDiv.style = 'padding-left:50px; margin-bottom:10px';
+                                    RemarkByDiv.innerHTML = item.TextLogincode;
+                                    remarkContainerDiv.append(RemarkByDiv);
+                                    var RemarkCreationDiv = document.createElement('div');
+                                    RemarkCreationDiv.className = 'col-md-6 RemarkCreationDiv';
+                                    RemarkCreationDiv.style = '';
+                                    RemarkCreationDiv.innerHTML = item.FrmtCreationDate;
+                                    remarkContainerDiv.append(RemarkCreationDiv);
+                                    var hr = document.createElement('hr');
+                                    hr.className = 'col-md-12';
+                                    remarkContainerDiv.append(hr);
+                                });
+                                panel.style.maxHeight = 88 + "px";
+                                $(panel).parent().find('i').removeClass();
+                                $(panel).parent().find('i').addClass('glyphicon glyphicon-minus');
+                            }
+                        });
+
+                    }
+                }
+            });
+
+        }
+        $("#CallsSeeMore").show();
+    }
+    if (Calldata.length > 3) {
+
+        $("#ParentCallDiv").css("height", "300px");
+        $("#ParentCallDiv").css("overflow-y", "scroll");
+    }
+    return false;
+}
+
+
+
+
+
+//Added by Aslam 
+
+
+///START -> ADD REMARK FROM DASHBOARD///
+//show remark entry window
+function AddRemarkCtrl() {
+    $('#AddRemarkDiv').show();
+}
+
+//close remark entry window
+function popoverClose() {
+    $('#AddRemarkDiv').hide();
+    $("#AddRemarkInput").val("");
+}
+
+//Submit button on remark entry window
+function SubmitCallRemark() {
+    var Callid = $("#newCallId").val();;
+    var remark = $("#AddRemarkInput").val();
+    $("#AddRemarkDiv").hide();
+    $("#AddRemarkInput").val("");
+    if (remark != "") {
+        $.ajax({
+            type: "POST",
+            url: "/CRM/AddCallRemark",
+            data: { CallId: Callid, remark: remark },
+            success: function (data) {
+                if (data == "LogOut") {
+                    window.location.href = "/Home/LogOut";
+                    return true;
+                }
+
+                GetRemarkData(Callid)
+
+            }
+        })
+        return false;
+    }
+}
+
+///END -> ADD REMARK FROM DASHBOARD///
+
+
+///START -> EDIT CALL DETAILS ON DASHBOARD///
+//Fill dropdowns on Edit form
+function FillCallEditFormDropdowns() {
+    //BussinessTypes
+    $.ajax({
+        type: "Get",
+        url: "/CustomerDetails/GetBussinessType",
+        success: function (data) {
+
+            var select = $("#Buss");
+            select.empty();
+            $(select).append('<option value=0>-Select Business Types-</option');
+            $.each(data.data, function (index, item) {
+
+                $(select).append('<option value=' + item.P_Infotable + '>' + item.NameOfInfo + '</option>');
+            });
+            $(select).append('<option value=-1>Others</option');
+        }
+    });
+
+    //Dealers
+    $.ajax({
+        type: "Get",
+        url: "/CustomerDetails/GetActiveDealer",
+        success: function (data) {
+
+            var select = $("#p_dealers");
+            $(select).append('<option value=0>-Select Dealer-</option');
+            var a = 1;
+            $.each(data.data, function (index, item) {
+                $(select).append('<option value=' + item.P_acccode + '>' + item.AccName + '</option>');
+            });
+        }
+    });
+
+    //IssueTypes
+    $.ajax({
+        type: "Get",
+        url: "/CustomerDetails/GetIssueType",
+        success: function (Issuedata) {
+
+            var select = $("#IssueType");
+            select.empty();
+            $(select).append('<option value=0>-Select Issue Types-</option');
+            $.each(Issuedata.data, function (index, item) {
+
+                $(select).append('<option value=' + item.P_Infotable + '>' + item.NameOfInfo + '</option>');
+            });
+        }
+    });
+
+    //IssueStatus
+    $.ajax({
+        type: "Get",
+        url: "/CustomerDetails/GetIssueStatus",
+        success: function (data) {
+
+            var select = $("#Status");
+            select.empty();
+            $(select).append('<option value=0>-Select Issue Status-</option');
+            var a = 1;
+            $.each(data.data, function (index, item) {
+                $(select).append('<option value=' + item.P_Infotable + '>' + item.NameOfInfo + '</option>');
+            });
+            $(select).append('<option value=-1>Others</option');
+        }
+    });
+}
+
+//Show call edit form
+function EditCall() {
+    var P_issue = $("#newCallId").val();
+    //window.location.href = "/CRM/EditRegCalls?P_issue=" + P_issuesfilegst + "&CalledFrom=ManageRegCalls";
+
+
+    $.ajax({
+        type: "POST",
+        url: "/CustomerDetails/EditRegCallsJson",
+        data: { P_issue },
+        success: function (data) {
+            $("#CallEditForm input[name='FirmName']").val(data.Firmname);
+            $("#CallEditForm input[name='ContactPerson']").val(data.Contactperson);
+            $("#CallEditForm input[name='EmailId']").val(data.Emailid)
+            $("#CallEditForm input[name='Mobileno']").val(data.Mobileno);
+            $("#Buss").val(data.Businesstype);
+            $("#CallEditForm input[name='Location']").val(data.Location);
+            $("#p_dealers").val(data.p_dealers);
+            $("#IssueType").val(data.Issuetype);
+            $("#CallEditForm input[name='IssueDescription']").val(data.IssueDescription);
+            $("#Status").val(data.Status);
+            $("#CallEditForm input[name='Creationdate']").val(data.FrmtCreationdate);
+            $("#CallEditForm input[name='PriorityOrder']").val(data.PriorityOrder);
+            $("#CallEditForm input[name='RemarkSaral']").val(data.RemarkSaral);
+            $("#CallEditForm input[name='Issuesfilegstkey']").val(data.Issuesfilegstkey);
+            $("#CallEditForm input[name='P_issuesfilegst']").val(data.P_issuesfilegst);
+            $("#CallEditForm input[name='P_Customers']").val(data.P_Customers);
+
+            $("#CallDetails #CallDetails").hide();
+            $("#CallEditFormDiv .error").text("");
+            $("#CallEdit").show();
+
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//Close Call Edit Form
+function CloseEditForm() {
+    $("#CallDetails #CallDetails").show();
+    $("#CallEdit").hide();
+}
+
+//Submit call Edit Form
+function SubmitCallEditForm() {
+    debugger
+    var isFormValid = CallEditFormValidation();
+    if (isFormValid) {
+
+        var data = $("#CallEditForm").serialize();
+        var Callid = $("#newCallId").val();
+        $.ajax({
+            type: "POST",
+            url: "/CustomerDetails/SubmitEditRegCalls",
+            data: data,
+            success: function (data) {
+                if (data == "logout") {
+                    window.location.href = "/Home/LogOut";
+                    return true;
+                }
+                else if (data == "customerError") {
+                    $("#errorCustomer").text("Call Is Not linked To customer, please link customer , then close the call.");
+                }
+                else {
+                    GetCallData(Callid);
+                    $("#CallEditFormDiv .error").text("");
+                    CloseEditForm();
+                }
+
+            }
+        });
+    }
+}
+
+function CallEditFormValidation() {
+    debugger
+    var isFormValid = true;
+    var firmName = $("#CallEditForm input[name='FirmName']").val().trim();
+    if (firmName == "") {
+        isFormValid = false;
+        $("#CallEditForm #errorFirmName").text("FirmName is Required");
+    }
+    var mobile = $("#CallEditForm input[name='Mobileno']").val().trim();
+    if (mobile == "") {
+        isFormValid = false;
+        $("#CallEditForm #errorMobile").text("Mobile Number is Required");
+    }
+
+    return isFormValid;
+}
+///END -> EDIT CALL DETAILS ON DASHBOARD///
+
+
+//Show window for call assign , here we fill employee dropdown 
+function CallAssignCtrl() {
+
+    if ($("#UserId").val() == 8357 || $("#UserId").val() == 8374 || $("#UserId").val() == 7) {
+        $('#CallAssignDiv').show();
+        $("#CallAssignToInput").empty();
+
+        $.ajax({
+            type: "POST",
+            url: "/CRM/GetActiveEmployeeofCS",
+            data: {},
+            success: function (data) {
+                if (data == "") {
+                    window.location.href = "/Home/LogOut";
+                    return true;
+                }
+                var select = $("#CallAssignToInput");
+                $(select).append('<option value=0>Select Employee</option');
+                var a = 1;
+                $.each(data.data, function (index, item) {
+                    $(select).append('<option value=' + item.P_acccode + '>' + item.AccName + '</option>');
+                });
+            },
+        });
+    }
+    else {
+        var options = { "backdrop": "static", keyboard: true };
+        $('#AssignedtoModal').modal(options);
+        var Mtitle = "You are not authorized to perform this action!"
+        $('#AssignedtoModal .modal-title').text(Mtitle);
+        $('#AssignedtoModal').modal("show");
+
+
+    }
+
+
+}
+
+//close call assign window
+function CallAssignPopoverClose() {
+    $('#CallAssignDiv').hide();
+}
+
+//Submit button on call assign window
+function SubmitCallAssignTo(ctrl) {
+    var Callid = $("#newCallId").val();
+    var select = $("#CallAssignToInput");
+    var empId = $(select).children("option:selected").val();
+    $('#CallAssignDiv').hide();
+    if (empId != "0") {
+        $.ajax({
+            type: "POST",
+            url: "/CRM/CallAssignedTo",
+            data: { Callid: Callid, empId: empId },
+            success: function (data) {
+                if (data == "LogOut") {
+                    window.location.href = "/Home/LogOut";
+                    return true;
+                }
+                GetAssignData(Callid);
+                GetCallData(Callid);
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+}

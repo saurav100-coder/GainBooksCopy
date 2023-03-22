@@ -1,0 +1,1661 @@
+﻿<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageRegCalls1.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+
+@*@Optimization.Scripts.Render("~/Scripts/Link_Customer")
+@Optimization.Scripts.Render("~/Scripts/Msg_To_Customer")*@
+
+<script src="~/Scripts/Custom/LinkCustomer.js"></script>
+<script src="~/Scripts/Custom/MsgToCustomer.js"></script>
+
+
+
+<style>
+    .loader {
+        margin: auto;
+        border: 0.625em solid #f3f3f3; /* Light grey */
+        border-top: 0.625em solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 4.375em;
+        height: 4.375em;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    .loader1 {
+        margin: auto;
+        border: 0.425em solid #f3f3f3; /* Light grey */
+        border-top: 0.425em solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 3.375em;
+        height: 3.375em;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    tbody tr:hover {
+        background-color: #d5d5fa;
+    }
+
+    .content-wrapper {
+        background-color: white;
+    }
+
+    .accordionBlue .Blue {
+        background-color: white;
+        color: #444;
+        cursor: pointer;
+        width: 0%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 0.938em;
+        transition: 0.4s;
+    }
+
+        .accordionBlue .Blue:after {
+            /*content: '\002B';*/
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 0.3125em;
+            font-size: 1.875em;
+        }
+
+    .accordionRed {
+        background-color: white;
+        color: #444;
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 0.938em;
+        transition: 0.4s;
+    }
+
+        .accordionRed:after {
+            /*content: '\002B';*/
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 0.3125em;
+            font-size: 1.875em;
+        }
+
+    .accordionGrey {
+        background-color: white;
+        color: #444;
+        cursor: pointer;
+        width: 0%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 0.938em;
+        transition: 0.4s;
+    }
+
+        .accordionGrey:after {
+            /*content: '\002B';*/
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 0.3125em;
+            font-size: 1.875em;
+        }
+
+    .panelBlue {
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0s ease-out;
+        margin-top: 0em;
+        margin-left: 0em;
+        width: 100%;
+        border-top-left-radius: 0em;
+        border-top-right-radius: 0em;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        font-size: 13px;
+        margin-bottom: 15px;
+        z-index: 10;
+    }
+
+
+    .panelRed {
+        padding: 0 0em;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0s ease-out;
+        margin-top: 0em;
+        margin-left: 0em;
+        width: 100%;
+        border-top-left-radius: 0em;
+        border-top-right-radius: 0em;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        margin-bottom: 15px;
+        font-size: 13px;
+        z-index: 10;
+    }
+
+    .panelGrey {
+        padding: 0 0em;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0s ease-out;
+        margin-top: 0em;
+        margin-left: 0em;
+        width: 100%;
+        border-top-left-radius: 0em;
+        border-top-right-radius: 0em;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        margin-bottom: 15px;
+        font-size: 0.75em;
+        z-index: 10;
+    }
+
+    #rcorners1 {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        background-color: white;
+        border-radius: 12px;
+        /*border-top: 3px solid #3c8dbc;
+            border-left: 3px solid #3c8dbc;
+            border-right: 3px solid #3c8dbc;*/
+        border-bottom: 0px;
+        width: 100%;
+        min-height: 2.5em;
+    }
+
+    #rcorners2 {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        background-color: white;
+        padding-top: 0px;
+        border-radius: 12px;
+        border-top: 0.1875em solid #7c888e;
+        border-left: 0.1875em solid #7c888e;
+        border-right: 0.1875em solid #7c888e;
+        border-bottom: 0px;
+        width: 100%;
+        min-height: 2.5em;
+        border-left-width: 0px;
+        padding-top: 0px;
+    }
+
+    #rcorners3 {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        background-color: white;
+        padding-top: 0px;
+        border-radius: 12px;
+        border-top: 0px solid #e64945;
+        border-left: 0.1875em solid #e64945;
+        border-right: 0px solid #e64945;
+        border-bottom: 0px;
+        width: 100%;
+        min-height: 2.5em;
+        border-left-width: 0px;
+        padding-top: 0px;
+    }
+
+    .rcorners_inner {
+        z-index: 20;
+        padding-bottom: 0px;
+        padding-left: 0.3125em;
+        padding-right: 1.375em;
+        padding: 1.25em;
+        padding: 0.125em 0.3125em 0px 0.3125em;
+        margin-right: 1.25em;
+        background-color: white;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top: 2px solid #d8d8d8;
+        border-right: 2px solid #3c8dbc;
+        border-left: 2px solid #3c8dbc;
+        border-bottom: 0.0625em solid #3c8dbc;
+        width: 100%;
+    }
+
+    #rcorners_innerRed {
+        z-index: 20;
+        padding-bottom: 0px;
+        padding-left: 0.3125em;
+        padding-right: 1.375em;
+        padding: 1.25em;
+        padding: 0.125em 0.3125em 0px 0.3125em;
+        margin-right: 1.25em;
+        background-color: white;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top: 2px solid #d8d8d8;
+        border-right: 2px solid #e64945;
+        border-left: 2px solid #e64945;
+        border-bottom: 0.0625em solid #e64945;
+        width: 100%;
+    }
+
+    #rcorners_innerGrey {
+        z-index: 20;
+        padding-bottom: 0px;
+        padding-left: 0.3125em;
+        padding-right: 1.375em;
+        padding: 1.25em;
+        padding: 0.125em 0.3125em 0px 0.3125em;
+        margin-right: 1.25em;
+        background-color: white;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top: 0.125em solid #d8d8d8;
+        border-right: 0.125em solid #7c888e;
+        border-left: 0.125em solid #7c888e;
+        border-bottom: 0.0625em solid #7c888e;
+        width: 100%;
+    }
+
+    .numberCircle {
+        font-size: 10px;
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        margin-right: 0.3125em;
+        background: #e64945;
+        border: 0.03125em solid #e64945;
+        color: white;
+        text-align: center;
+        font: 12px Arial, sans-serif;
+        margin-left: 0px;
+        bottom: 0px;
+        padding-top: 1px;
+        margin-top: 2px;
+    }
+
+    .hover:hover {
+        box-shadow: 20px 21px 20px -20px gray, 0px -11px 8px -12px gray;
+    }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+            .MoreDetails:hover i:hover .MoreDetails {
+                background: #8f1fe7;
+            }
+
+    .HiddenBlue:hover {
+        background-color: #ecf0f5;
+    }
+
+    .TopBlue {
+        display: inline-flex;
+        height: 1.8em;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-left: 0.1875em solid #3c8dbc;
+        border-right: 0.1875em solid #3c8dbc;
+        border-top: 0.1875em solid #3c8dbc;
+        /*border-bottom: 2px solid #d8d8d8;*/
+        width: 100%;
+        top: 0.3125em;
+        background-color: #ecf0f5;
+        padding-left: 35px;
+    }
+
+    .HiddenGrey:hover {
+        background-color: #eae9e9;
+    }
+
+    .TopGrey {
+        display: inline-flex;
+        height: 1.4375em;
+        border-top-left-radius: 0.75em;
+        border-top-right-radius: 0.75em;
+        border-left: 0.1875em solid #7c888e;
+        width: 100%;
+        background-color: #eae9e9;
+    }
+
+    .HiddenRed:hover {
+        background-color: #ffd4d1;
+    }
+
+    .TopRed {
+        display: inline-flex;
+        height: 1.82em;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-left: 0.1875em solid #e64945;
+        width: 100%;
+        background-color: #ffd4d1;
+        border-top: 0.1875em solid #e64945;
+        border-right: 0.1875em solid #e64945;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            display: none;
+            border-left: 0.3125em solid transparent;
+            border-right: 0.3125em solid transparent;
+            border-bottom: 0.3125em solid #1a1a1a;
+            position: absolute;
+            top: -0.6875em;
+            left: 8.125em;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 1.875em;
+            left: 0px;
+            padding: 0 0.3125em;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            padding-top: 1px;
+            font-size: 12px;
+            height: 15px;
+            max-width: none;
+            text-align: center;
+            line-height: 1.125em;
+            -webkit-border-radius: 0.1875em;
+            -moz-border-radius: 0.1875em;
+            border-radius: 0.1875em;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .arrow-position-reset {
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: 0;
+    }
+    /*.MoreDetails{
+                        position:absolute;display:inline-flex;width:375px; height:35px; padding-left:0.75em;padding-top:8px; margin-left:700px;top:156px;background-color:white;
+                    }*/
+</style>
+
+<div class="container" style="width:100%;"></div>
+<input type="hidden" name="grid1" id="grid1" value="">
+
+@*<p class="text-center text-success">@ViewContext.TempData("Message")</p>*@
+<div class="panel panel-default" style="margin-bottom: 0.75em;">
+    <div class="panel-body" style="padding:0px;">
+        <div id="main" class="col-md-12">
+            <div class="col-md-1">
+                <a id="RegisterCalls" href='/CRM/RegisterCalls' title="" data-placement="bottom" data-toggle="Register New Call" style="text-align:left">
+                    <i class="glyphicon glyphicon-plus" style="font-size:1.0625em; margin-right:1.25em;top: 0.3125em;"></i>
+                </a>
+                <a class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh" style="top: 0.25em;">
+                    <i class="fa fa-refresh" style="font-size:1.1875em; padding-top:0.75em; padding-right:0.75em; padding-bottom:0.3125em;"></i>
+                </a>
+            </div>
+            <div id="dropdown" class="col-md-5 search ">
+                <select class="col-md-4" id="filter" style="height:26px;top: 10px;padding-left: 5px;">
+                    <option value="0">Filter By</option>
+                    <option value="Customername:string">Customer Name</option>
+                    <option value="ServicingDealer:string">Servicing Dealer</option>
+                    <option value="HomeTown:string">HomeTown</option>
+                    <option value="AssignedTo:string">Assigned To</option>
+                    <option value="Status:integer">Status</option>
+                </select>
+                <div id="dateC" style="display:none">
+                    <div class="col-md-1">
+                        <label class="ee">   From: </label>
+                    </div>
+                    <input type="date" id="min" class="col-md-9" style="height:26px" />
+                    <div class="col-md-1">
+                        <label class="ww">  To: </label>
+                    </div>
+                    <input type="date" id="max" class="col-md-9" style="height:26px" />
+                    <div id="search2" onclick="DateSearch();" class="btn btn-primary col-md-3 date"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+                <div id="TextC" style="display:none;width: 450px;margin-top: 10px;margin-left: 200px;">
+                    <input type="text" id="filterText" class="col-md-4" placeholder="Type to search" style="height:26px;padding-left:5px;" /><div id="search1" onclick="DoSearch();" class="btn btn-primary" style="padding-bottom: 3px;padding-top: 3px;"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+                <div id="StatusC" style="display:none;">
+                    @Html.List_Search("StatusFilter", "39", "-Select Status-",0,"", new {@class = "col-md-3", @style = "height:26px; margin:10px 0px 0px 40px; width:35%; padding-left:0px;"})
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:0.75em; width:1.875em; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:0.75em; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:1.5em"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:0.75em; width:1.875em; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:0.75em;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:1.5em"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading">
+    <div colspan="5">
+        <div id="loadingmessage" class="loader overlay col-md-offset-6" style="margin-top:1.25em;">
+        </div><p id="Msg"></p>
+    </div>
+</div>
+<div id="example"></div>
+
+<div class="modal fade" id="Remark">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:0.375em 0.75em 1.25em 1.25em; font-size:2em;cursor:pointer;">&times;</span>
+            <h4 style="text-align:center; font-size: 1.03125em; margin-top:0px; padding-top:1.875em; padding-left:1.875em;" class="modal-title"> Add Remark </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px; height: 11.875em;">
+                <hr style="margin-top:0.75em; margin-bottom:1.875em; width:80%" />
+                <div id="myRemark" class="col-md-12" style="padding-right: 4.6875em;">
+                    <form Class="form-horizontal" role="form" method="post" id="RegForm" style="margin-top:0px;">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <div Class="form-group">
+                            <input type="hidden" name="issueId" id="issueId" />
+                            <input type="hidden" name="calledfrom" id="calledfrom" />
+                            <Label for="inputEmail1" class="col-sm-4 control-label">Remark</Label>
+                            <textarea id="Remarktextarea" cols="30" rows="4" name="Remark" value=""></textarea>
+                            <Button type="button" onclick="SubmitCallRemark();" class="btn btn-primary" style="padding:0px; width:6.375em; height:1.625em;margin-left: 20px; margin-top:7.25em; position:absolute; left:14.0625em;">Submit</Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="MsgCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:1.5em;cursor:pointer;">&times;</span></a>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px; padding-top:1.25em; padding-left: 1.875em;" class="modal-title"> Message To Customer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <div id="msg">
+                    <hr style="margin-top:0.75em; margin-bottom:1.875em; width:80%" />
+                    <div id="myMsgCustomer" class="col-md-12">
+                        <form Class="form-horizontal" role="form" method="post">
+                            <div Class="form-group">
+                                <input type="hidden" name="P_issuesfilegst" id="PCallMsgToCustomer" />
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em">Customer Name</label>
+                                <div class="col-sm-5">
+                                    <input type="text" id="firmNameMsgtoCustomer" name="FirmName" style="width:14.375em" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em">Phone No</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="Phoneno" id="Mobileno" style="width:14.375em" maxlength="10" placeholder="Enter 10 digit number only" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em">Template</label>
+                                <div class="col-sm-5">
+                                    <select id="Template" name="" class="" style="width:14.375em; height:1.625em; padding-bottom:0.0625em; padding-top:0.0625em; font-size:inherit" onchange="myFunction(this.value,this.id);">
+                                        <option value="0">Select an template</option>
+                                        <option value="1">Customer Unavailable</option>
+                                        <option value="2">Off in office</option>
+                                        <option value="3">Mail to dealer</option>
+                                        <option value="4">For Rajasthan Parties</option>
+                                        <option value="5"> For Outside Rajasthan Parties</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label">Message</label>
+                                <div class="col-sm-5">
+                                    <textarea rows="4" cols="35" id="T" name="msg" style="width:14.375em" value=""></textarea>
+                                </div>
+                            </div>
+                            <div Class="text-center" style="margin:1.25em 0px 0.75em 3.125em">
+                                <Button type="button" Class="btn btn-primary" onclick="SubmitMsgToCustomer()" style="margin-right:0.9375em">Submit</Button>
+                                <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MailToCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:1.5em;cursor:pointer;">&times;</span></a>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px; padding-top:1.25em; padding-left:1.875em;" class="modal-title"> Mail To Customer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:0.75em; margin-bottom:1.875em; width:80%" />
+                <div id="MailCustomerContent" class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="P_issuesfilegst" id="PCallMailToCustomer" />
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em">Customer Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="firmNameMailtoCustomer" name="FirmName" style="width:14.375em" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em">Email Id</label>
+                            <div class="col-sm-5">
+                                <input type="email" id="emailMailtoCustomer" name="EmailId" style="width:14.375em" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label">Email Content</label>
+                            <div class="col-sm-5">
+                                <textarea rows="4" cols="35" name="msg" id="msgMailToCustomer" value="" style="width:14.375em"></textarea>
+                            </div>
+                        </div>
+                        <div Class="text-center" style="margin:1.25em 0px 0.75em 3.125em">
+                            <Button type="button" onclick="SubmitMailToCustomer();" Class="btn btn-primary" style="margin-right:0.9375em">Submit</Button>
+                            <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MailToDealer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:1.5em;cursor:pointer;">&times;</span></a>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px; padding-top:1.25em; padding-left:3.125em" class="modal-title"> Mail To Dealer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:0.75em; margin-bottom:1.875em; width:80%" />
+                <div id="MailDealerContent" class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post" id="MailDealer">
+                        <input type="hidden" name="issuesfilegstkey" id="issuesfilegstkeyMailTodealer" />
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em">Dealer Name</label>
+                            <div class="col-sm-5">
+                                <select name="email" style="width:14.375em">
+                                    <option selected="selected" value="0">- Select Dealer-</option>
+                                    <option value="bikash_2006@rediffmail.com">bikash_2006@rediffmail.com</option>
+                                    <option value="csc456457@hotmail.com">csc456457@hotmail.com</option>
+                                    <option value="faheemsaral@gmail.com">faheemsaral@gmail.com</option>
+                                    <option value="hcgupta@saralerp.com">hcgupta@saralerp.com</option>
+                                    <option value="mithun411@gmail.com">mithun411@gmail.com</option>
+                                    <option value="naveensaral@yahoo.com">naveensaral@yahoo.com</option>
+                                    <option value="neha19985@gmail.com">neha19985@gmail.com</option>
+                                    <option value="p2007_sharma@yahoo.co.in">p2007_sharma@yahoo.co.in</option>
+                                    <option value="praveen_bhl@yahoo.in">praveen_bhl@yahoo.in</option>
+                                    <option value="ramlawania@yahoo.co.in">ramlawania@yahoo.co.in</option>
+                                    <option value="ratul.epi09@gmail.com">ratul.epi09@gmail.com</option>
+                                    <option value="saral_nng@rediffmail.com">saral_nng@rediffmail.com</option>
+                                    <option value="saralregistration@yahoo.com">saralregistration@yahoo.com</option>
+                                    <option value="saralreg@yahoo.com">saralreg@yahoo.com</option>
+                                    <option value="satpal_saral@yahoo.com">satpal_saral@yahoo.com</option>
+                                    <option value="saralhnd@gmail.com">saralhnd@gmail.com</option>
+                                    <option value="yashpalsaral@yahoo.com">yashpalsaral@yahoo.com</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em"> Other Email</label>
+                            <div class="col-sm-5">
+                                <input type="email" name="OtherEmail" id="OtherEmail" style="width:14.375em" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label">Email Content</label>
+                            <div class="col-sm-5">
+                                <textarea rows="4" cols="40" name="msg" style="width:14.375em" id="MailtodealerEmail"></textarea>
+                            </div>
+                        </div>
+                        <div Class="text-center" style="margin:1.25em 0px 0.75em 3.125em">
+                            <Button type="button" onclick='SubmitMailtoDealer();' Class="btn btn-primary" style="margin-right:0.9375em">Submit</Button>
+                            <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="LoaderOverlay">
+    <div class="loaderspin" id="loadspin" style="text-align:center; margin-left:43.75em; margin-bottom:3.125em; margin-top:18.75em"></div>
+</div>
+
+<div class="modal fade" id="FollowUpCall">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close" style="cursor:pointer;"><span aria-hidden="true">&times;</span></a>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px; padding-top:1.25em" class="modal-title">  </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:0.625em; margin-bottom:1.875em; width:80%" />
+                <div id="IssueDescription" class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="padding-top:1.25em; text-align:right">Issue :</label>
+                        <div class="col-sm-5" style="padding-left:0px">
+                            <textarea rows="4" cols="35" name="msg" style="width:14.375em" id="description" value=""></textarea><br />
+                        </div>
+                    </div>
+                    <div class="form-group text-center" style="clear:both; margin:0px 0px 0.625em 3.125em">
+                        <input type="submit" Class="btn btn-primary" style="margin-right:0.9375em; margin-top:1.25em" value="Submit" />
+                        <a data-dismiss="modal" Class="btn btn-default" style="margin-top:1.25em">Cancel</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Assignedto">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:0.375em 0.75em 1.25em 1.25em; font-size:2em;cursor:pointer;">&times;</span>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px;padding-top:1.25em;padding-left: 3.125em;" class="modal-title">Select Team Member</h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:0.625em; margin-bottom:1.875em; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="AssignedtoForm">
+                    <input type="hidden" name="PCall" id="PCall" value="">
+                    <input type="hidden" name="CalledFrom" value="ManageRegCall">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="padding-top:0px">Select Employee</label>
+                        @Html.List_Search("Employee", "- Select Employee -", "AccMaster", "AccName", "P_acccode", "rowstatus=0 and acctype = 3042 and status='Y'", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:0.125em; border-radius:0px; padding-right:0px; margin:0px; width:202px"})
+                    </div>
+                    <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                        <Button type="button" Class="btn btn-primary" onclick="SubmitCallAssignTo();" style="margin-right:0.9375em; margin-top:1.25em">Submit</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="OnsiteModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:0.375em 0.75em 1.25em 1.25em; cursor:pointer; font-size:2em">&times;</span>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px; padding-top:1.25em; padding-left: 3.125em;" class="modal-title" id="Onsitevisit"></h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:0.625em; margin-bottom:1.875em; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="OnsiteForm">
+                    <input type="hidden" name="PCall" id="PCall1" value="">
+                    <div class="text-center"><p style="font-size:1.0625em"> Do you want to register Onsite Service </p></div>
+                    <div Class="text-center" style="margin:0.625em 0px 0.625em 3.125em">
+                        <Button type="button" Class="btn btn-primary" onclick="submitOnsiteVisit();" style="margin-right:0.9375em; margin-top:1.25em; width:4.75em">Yes</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="NoRow"></div>
+
+<div class="modal fade" id="CallClosed">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:1.5em;cursor:pointer;">&times;</span></a>
+            <h4 style="text-align:center; font-size:1.125em; padding-left: 0.625em; margin-top:0px; padding-top:1.25em" class="modal-title"> Call Closed Successfully </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 1.25em;">
+                <div id="CallClosedContent" class="col-md-6"></div>
+                <div class="form-group text-center" style="clear:both; margin:0px 0px 0.625em 3.125em">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CallCollaborators">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:0.375em 0.75em 0.80em 1.25em; font-size:2em;cursor:pointer;">&times;</span>
+            <h4 style="text-align:center; font-size:1.5em; margin-top:0px; margin-bottom:1em;padding-top:1.25em; padding-left: 3em;" class="modal-title"> Add Collaborators </h4>
+            <hr style="width:80%; margin-top:0.225em" />
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <div id="myCollaborators" class="col-md-12" style="top:10px">
+                    <form Class="form-horizontal" action="@Url.Action("AddCallCollaborators")" role="form" method="post">
+                        <input type="hidden" name="PCall" id="PCall" value="">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <div class="form-group" style="margin-left: 80px;">
+                            <label class="col-sm-4 control-label" style="padding-top:0px">Add Collaborator</label>
+                            @Html.List_Search("collaboratorId", "- Select Employee -", "Accmaster", "accname", "p_acccode", "rowstatus = 0 and acctype=3042 and status='Y'", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:0.125em; border-radius:0px; padding-right:0px; margin:0px; width:12.625em"})
+                        </div>
+                        <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                            <Button type="button" Class="btn btn-primary" onclick="submitCallCollaborator()" style="margin-right:1.5625em; margin-top:1.25em">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="LinkCustomer">
+    <div class="modal-dialog" role="form" style="min-width:950px;">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-top: 0.625em;padding-left: 1.25em;padding-bottom: 1.25em;padding-right: 0.9375em;cursor:pointer;">
+                <span aria-hidden="true" style="font-size:1.5em;">&times;</span>
+            </button>
+            <h4 class="modal-title" style="text-align:center; padding-top:1.25em;margin-left: 45px;">Link Customer</h4>
+            <hr style="width:80%; margin-top:0.625em" />
+            <div class="modal-body" id="LinkCustomerContent">
+                <div>
+                    <form Class="form-horizontal" action="@Url.Action("LinkCustomer")" role="form" method="post">
+                        <div Class="form-group">
+                            <input type="hidden" id="P_Customers" name="P_Customers" />
+                            <input type="hidden" id="Issuesfilegstkey" name="Issuesfilegstkey" />
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:0.1875em;font-size:15px;bottom: 20px;">Firm Name</label>
+                            <div class="col-sm-5" style="bottom: 20px; ">
+                                <input type="text" class="form-control input-sm" id="FirmName1" name="FirmName1" style="border-radius:0px;padding-left:0.25em; width:20.125em" value="" />
+                            </div>
+                        </div>
+                        <div id="CustContainer" style="display:none; width:46.875em; background-color:white; font-family: verdana,arial,sans-serif; font-size:0.6875em; margin-bottom:0.625em">
+                            <table id="tblCustomers" class="table table-bordered" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align:center;">
+                                        <th>S.No</th>
+                                        <th style="width:10.875em">CustName</th>
+                                        <th style="width:5.3125em">Mobile No</th>
+                                        <th style="width:8em">BusinessType</th>
+                                        <th style="width:6.875em">HomeTown</th>
+                                        <th style="width:8.375em">Address</th>
+                                        <th style="width:8.375em">BilledUpto</th>
+                                        <th style="width:8.375em">OpenedUpto</th>
+                                        <th style="width:8.375em">onsiteflag</th>
+                                    </tr>
+                                    @*<tr id="loading1"><td colspan="9"><div id="loadingmessage1" class="loader1 overlay col-md-offset-6"></div><p id="Msg1"></p></td></tr>*@
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div Class="text-center" style="margin:1.25em 0px 0.625em 0px">
+                            <Button type="button" Class="btn btn-primary" onclick="SubmitLinkCustomer();" style="margin-right:0.9375em">Submit</Button>
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ViewCollaborator">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width:25em; margin-left:6.25em;min-height:13.125em;">
+            <span class="close" data-dismiss="modal" style="padding:0.375em 0.75em 1.25em 1.25em; font-size:2em;cursor:pointer;">&times;</span>
+            <h4 style="text-align:center; font-size:1.25em; margin-top:0px; margin-bottom:0.9375em; padding-top:1.25em; padding-left:2.8125em;" class="modal-title">Collaborators </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;min-height:9.375em">
+                <div class="col-md-12" style="height:1.875em; margin-bottom:0.5em">
+                    <div class="col-md-3" style="margin-top:0.3125em;margin-top: 0.3125em;width: 6.875em;"><b>Sno.</b></div>
+                    <div class="col-md-9" style="padding-left: 0px;width: 9.375em;margin-top:0.3125em;text-align:left;padding-right: 1.875em;"><b>Employee Name</b></div>
+                </div>
+                <div id="loading1">
+                    <div colspan="8" style="padding:0px"><div id="loadingmessage1" class="loader1 overlay col-md-offset-6"></div><p id="Msg1"></p></div>
+                </div>
+                <div id="ShowCollaborators" class="col-md-12"></div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade ShowRemark" id="ViewRemarks" style="width:700px">
+        <div class="modal-dialog" role="form">
+            <div class="modal-content" style="width: 775px;height: 15.625em; overflow-y:scroll;">
+                <div class="modal-header" style="border:none; padding:0px">
+                    <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px; font-size:2em; cursor:pointer;">&times;</span>
+                </div>
+                <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                    <h4 style="text-align:center; font-size:1.125em;  margin-top:0px; margin-bottom:0.9375em" class="modal-title">Remarks</h4>
+                    <div class="col-sm-12 col-md-12" style="display:flex; position:absolute; padding-right: 0px; z-index:10; margin-bottom:2.5em; width:41.5625em; color:#325faf; padding-left:0px; background-color:white; width:45.625em;">
+                        <div class="col-sm-1 col-md-1 " style="text-align:center; padding-top:0.625em; margin-bottom:0.3125em; padding-left: 0px;"><b>Sno.</b></div>
+                        <div class="col-sm-3 col-md-3" style="padding-left: 0px;padding-top: 0.625em;margin-bottom: 0.3125em;padding-right: 3.125em; text-align:center;"><b>Remark</b></div>
+                        <div class="col-sm-3 col-md-3" style="text-align: center;padding-top: 0.625em;margin-bottom: 0.3125em;padding-right: 0px;padding-left: 0px;width: 6.25em;"><b>Comm. type</b></div>
+                        <div class="col-sm-3 col-md-3" style="text-align: center;padding-top: 0.625em;margin-bottom: 0.3125em;"><b>Date</b></div>
+                        <div class="col-sm-2 col-md-2" style="padding-left: 0px; text-align:right; padding-top: 0.625em; margin-bottom: 0.3125em;padding-right:0.625em;"><b>Created by</b></div>
+                    </div>
+                    <div class="ShowRemark col-md-12" id="ShowRemarkContent" style="margin-top:3.125em;"></div>
+                </div>
+                <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div>
+    @* <div class="accordionBlue">
+            <div id="rcorners1" class="hover">
+                <div class="col-md-12 TopBlue" style="">
+
+                    <div class="col-md-1" style="font-size:16px; color:#504f4f; bottom:0px;padding-right:0px;width:70px;padding-left:20px;">&nbsp;&nbsp;&nbsp;<b>1</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; width: 35%;color:#504f4f; top:2px; margin-left:0px;padding-left: 0px;">&nbsp;&nbsp;&nbsp;<b>RAJENDRAKUMAR SURESHKUMAR KHANDELWAL</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black; top:3px; padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px;width:22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;DUSHYANT MANGLIK</div>
+                    <div class="col-md-2" style="font-size:16px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center;width:12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;7627043956</div>
+                    <div class="col-md-1" style="font-size:16px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center; float:right;">#9124</div>
+                    <div class="col-md-2" style="font-size:15px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                    </div>
+
+                <div id="rcorners_innerBlue"  class="clickableBlue" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12"style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Incoming 9414184250 missed
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>  GSTR I report related issues.
+                            </div>
+                            <div  style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div  style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;YashPal Malav&nbsp;&nbsp;</b></div>
+                                <div  style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Active&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div  style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;MainGroup</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelBlue">
+                        <div class="col-md-6 HiddenBlue"style="height:36px;padding-left: 23px; overflow-y:auto">
+                            <b>Description:-</b>All the format like ledger All the format like ledger book. loremip sum20All the format like ledger book.lorem ipsum20A
+                        </div>
+
+                        <div class="col-md-3 HiddenBlue" style="padding-left:10px;height: 36px;">
+                            <b>Servicing Dealer:</b><br /> H.O. Kota
+                        </div>
+
+
+                        <div class="col-md-3 HiddenBlue" style="padding-left:10px;height: 36px;">
+                            <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+                        </div>
+                    </div>
+
+        <div class="accordionBlue">
+            <div id="rcorners1" class="hover">
+                <div class="col-md-12 TopBlue" style="">
+
+                    <div class="col-md-1" style="font-size:16px; color:#504f4f; bottom:0px;padding-right:0px;width:70px;padding-left:20px;">&nbsp;&nbsp;&nbsp;<b>2</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; color:#504f4f;width: 35%; top:2px; margin-left:0px;padding-left: 0px;"><b>&nbsp;&nbsp;&nbsp;H.S.U.W.B. HANUMANGARH LOC-1</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black; top:3px; padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px;width:22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;PAWAN KUMAR SONI</div>
+                    <div class="col-md-2" style="font-size:16px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center;width:12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;9413441021</div>
+                    <div class="col-md-1" style="font-size:16px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center; float:right;">#9124</div>
+                    <div class="col-md-2" style="font-size:15px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                </div>
+
+                <div id="rcorners_innerBlue" class="clickableBlue" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12" style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Incoming 9414184250 missed
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>  Other issue
+                            </div>
+                            <div style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;Raj Khushwah&nbsp;&nbsp;</b></div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Active&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Ramganjmandi</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelBlue">
+            <div class="col-md-6 HiddenBlue" style="height:36px;padding-left: 23px; overflow-y:auto">
+                <b>Description:-</b>saral not open
+            </div>
+
+            <div class="col-md-3 HiddenBlue" style="padding-left:10px;height: 36px;">
+                <b>Servicing Dealer:</b><br />H. O. Kota (Within State)
+            </div>
+
+
+            <div class="col-md-3 HiddenBlue" style="padding-left:10px;height: 36px;">
+                <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+            </div>
+        </div>
+
+        <div class="accordionBlue">
+            <div id="rcorners1" class="hover">
+                <div class="col-md-12 TopBlue" style="">
+
+                    <div class="col-md-1" style="font-size:16px; color:#504f4f; bottom:0px;padding-right:0px;width:70px;padding-left:20px;">&nbsp;&nbsp;&nbsp;<b>3</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; color:#504f4f;width: 35%; top:2px; margin-left:0px;padding-left: 0px;">&nbsp;&nbsp;&nbsp;<b>SKYLARK HOSPITAL & RESERCH CENTER</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black; top:3px; padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px;width:22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;.R.MANOJ BHALERIWALA</div>
+                    <div class="col-md-2" style="font-size:16px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center;width:12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;7627043956</div>
+                    <div class="col-md-1" style="font-size:16px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center; float:right;">#9124</div>
+                    <div class="col-md-2" style="font-size:15px; color:black; bottom:0px; padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                </div>
+
+                <div id="rcorners_innerBlue" class="clickableBlue" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12" style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Incoming 9414184250 missed
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>  GSTR I report related issues.
+                            </div>
+                            <div style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;Mayank Nagar&nbsp;&nbsp;</b></div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Active&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Hindaun City</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelBlue">
+            <div class="col-md-6 HiddenBlue" style="height:36px;padding-left: 23px; overflow-y:auto">
+                <b>Description:-</b>All the format like ledger All the format like ledger book. loremip sum20All the format like ledger book.lorem ipsum20A
+            </div>
+
+            <div class="col-md-3 HiddenBlue" style="padding-left:10px;height: 36px;">
+                <b>Servicing Dealer:</b><br /> H.O. Kota
+            </div>
+
+
+            <div class="col-md-3 HiddenBlue" style="padding-left:10px;height: 36px;">
+                <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+            </div>
+        </div>
+
+        <div class="accordionGrey">
+            <div id="rcorners2" class="hover">
+                <div class="col-md-12 TopGrey" style="">
+
+                    <div class="col-md-1" style="font-size:16px; color:#504f4f; bottom:0px;padding-right:0px;width:70px;padding-left:20px;">&nbsp;&nbsp;&nbsp;<b>4</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; color:#504f4f;width: 35%; top:2px;margin-left:0px;padding-left: 0px;">&nbsp;&nbsp;&nbsp;<b>SKYLARK HOSPITAL & RESERCH CENTER</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black; top:3px; padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px; width:22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;MR. ANIL KUMAR</div>
+                    <div class="col-md-2" style="font-size:16px; color:black; top:1px; padding-left:0px; padding-right:0px; text-align:center;  width:12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;7627043956</div>
+                    <div class="col-md-1" style="font-size:16px; color:black; top:1px; padding-left:0px; padding-right:0px; text-align:center;  float:right;">#9124</div>
+                    <div class="col-md-2" style="font-size:15px; color:black; top:1px; padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                </div>
+
+                <div id="rcorners_innerGrey" class="clickableGrey" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12" style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Incoming 6377174954 recvd
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>  GSTR I report related issues.
+                            </div>
+                            <div style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp; Ashish Makhija&nbsp;&nbsp;</b></div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Deffered&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Hindaun City</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelGrey">
+            <div class="col-md-6 HiddenGrey" style="height:36px;padding-left: 23px; overflow-y:auto">
+                <b>Description:-</b>All the format like ledger All the format like ledger book. loremip sum20All the format like ledger book.lorem ipsum20A
+            </div>
+
+            <div class="col-md-3 HiddenGrey" style="padding-left:10px;height: 36px;">
+                <b>Servicing Dealer:</b><br /> H.O. Kota
+            </div>
+
+
+            <div class="col-md-3 HiddenGrey" style="padding-left:10px;height: 36px;">
+                <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+            </div>
+        </div>
+
+        <div class="accordionRed">
+            <div id="rcorners3" class="hover">
+                <div class="col-md-12 TopRed" style="">
+                    <div class="col-md-1 numberCircle" style="">20</div>
+                    <div class="col-md-1" style="font-size:16px; color:#504f4f; bottom:0px;padding-right:0px;width:50px;padding-left: 0px;">&nbsp;&nbsp;&nbsp;<b>5</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; color:#504f4f; top:2px;width: 35%;padding-left: 0px;">&nbsp;&nbsp;&nbsp;<b>SINGHAL TRADING COMPANY</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black; top:3px; padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px; width:22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;MR. SHAILENDRA BOHRA</div>
+                    <div class="col-md-2" style="font-size:16px; color:black; top: 1px; padding-left:0px; padding-right:0px; text-align:center; width:12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;7627043956</div>
+                    <div class="col-md-1" style="font-size:16px; color:black; top: 1px; padding-left:0px; padding-right:0px; text-align:center; float:right;">#9124</div>
+                    <div class="col-md-2" style="font-size:15px; color:black; top: 1px; padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                </div>
+
+                <div id="rcorners_innerRed" class="clickableRed" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12" style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Employee Registered
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>  GSTR I report related issues.
+                            </div>
+                            <div style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;Bhuvnesh Suman&nbsp;&nbsp;</b></div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Deffered&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Hindaun City</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelRed">
+            <div class="col-md-6 HiddenRed" style="height:36px;padding-left: 23px; overflow-y:auto">
+                <b>Description:-</b>All the format like ledger All the format like ledger book. loremip sum20All the format like ledger book.lorem ipsum20A
+            </div>
+
+            <div class="col-md-3 HiddenRed" style="padding-left:10px;height: 36px;">
+                <b>Servicing Dealer:</b><br />H. O. Kota (Within State)
+            </div>
+
+
+            <div class="col-md-3 HiddenRed" style="padding-left:10px;height: 36px;">
+                <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+            </div>
+        </div>
+
+        <div class="accordionGrey">
+            <div id="rcorners2" class="hover">
+                <div class="col-md-12 TopGrey" style="">
+
+                    <div class="col-md-1" style="font-size:16px; color:#504f4f; bottom:0px;padding-right:0px;width:70px;padding-left: 20px;">&nbsp;&nbsp;&nbsp;<b>6</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; color:#504f4f; top:2px;width: 35%;margin-left:0px;padding-left: 0px;">&nbsp;&nbsp;&nbsp;<b>GRAMIN KIRANA UPBHOKTA BHANDAR</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black; top:3px; padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px;width: 22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;DEVENDRA KUMAR AGARWAL</div>
+                    <div class="col-md-2" style="font-size:16px; color:black; top:1px; padding-left:0px; padding-right:0px; text-align:center; width: 12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;9294810155</div>
+                    <div class="col-md-1" style="font-size:16px; color:black; top:1px; padding-left:0px; padding-right:0px; text-align:center; float:right;">#11164</div>
+                    <div class="col-md-2" style="font-size:15px; color:black; top:1px; padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                </div>
+
+                <div id="rcorners_innerGrey" class="clickableGrey" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12" style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Incoming 9414184250 missed
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>Other Issue
+                            </div>
+                            <div style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;Mayank Nagar&nbsp;&nbsp;</b></div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Active&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Sheopur</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelGrey">
+            <div class="col-md-6 HiddenGrey" style="height:36px;padding-left: 23px; overflow-y:auto">
+                <b>Description:-</b>
+            </div>
+
+            <div class="col-md-3 HiddenGrey" style="padding-left:10px;height: 36px;">
+                <b>Servicing Dealer:</b><br />Santushti Infotech Sikar
+            </div>
+
+
+            <div class="col-md-3 HiddenGrey" style="padding-left:10px;height: 36px;">
+                <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+            </div>
+        </div>
+
+        <div class="accordionRed">
+            <div id="rcorners3" class="hover">
+                <div class="col-md-12 TopRed" style="">
+                    <div class="col-md-1 numberCircle" style="">20</div>
+                    <div class="col-md-1" style="font-size:16px;   color:#504f4f; bottom:0px;padding-left:0px;  padding-right:0px;width:50px;">&nbsp;&nbsp;&nbsp;<b>7</b></div>
+                    <div class="col-md-4" style="font-size:15.5px; color:#504f4f; top:2px;   padding-left:0px;  width: 35%;">&nbsp;&nbsp;&nbsp;<b>SKYLARK HOSPITAL & RESERCH CENTER</b></div>
+                    <div class="col-md-2" style="font-size:14.5px; color:black;   top:3px;   padding-left:10px; padding-right:0px; text-align:left; margin-bottom:0px;width: 22%;"><i class="fa fa-user" style="color:#504f4f;"></i>&nbsp;&nbsp;MR. ANIL KUMAR YADAV</div>
+                    <div class="col-md-2" style="font-size:16px;   color:black;   top:1px;   padding-left:0px; padding-right:0px; text-align:center; width: 12%;"><i class="fa fa-phone" style="color:#504f4f;"></i>&nbsp;&nbsp;7627043956</div>
+                    <div class="col-md-1" style="font-size:16px;   color:black;   top:1px;   padding-left:0px; padding-right:0px; text-align:center; float:right;">#9124</div>
+                    <div class="col-md-2" style="font-size:15px;   color:black;   top:1px;   padding-left:0px; padding-right:0px; text-align:center;">20 Days, 12 Hrs, 45 Mins </div>
+                </div>
+
+                <div id="rcorners_innerRed" class="clickableRed" style="" onmouseover="hoverId(this)" onmouseout="hoverNot(this)">
+                    <div class="col-md-12" style="min-height: 40px;">
+
+                        <div class="col-md-6" style="float:right; padding-left:220px;font-size:13.5px;">
+                            <b>Last Action Date: </b> <i class="fa fa-user-clock"></i>05 Days, 12 Hrs, 45 Mins  <br />
+                            <b>Call Source: </b>Incoming 9414184250 missed
+                        </div>
+                        <div style="padding-left:0px;font-size:14px;">
+                            <div class="col-md-12">
+                                <b>Issue:</b>  GSTR I report related issues.
+                            </div>
+                            <div style="padding-left: 15px;font-size:14px;display:inline-flex;bottom:3px;">
+                                <div style="padding-right:0px;min-width:140px;"><b><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp; Ashish Makhija&nbsp;&nbsp;</b></div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:85px;"><i class="fa fa-bell"></i>&nbsp;Deffered&nbsp;&nbsp; &nbsp;&nbsp;</div>
+                                <div style="padding-left: 5px;padding-right:0px;min-width:100px;"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;Hindaun City</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="MoreDetails" style="">
+                        <a data-toggle="Accordion" style="bottom:15px; padding-right:11px;">
+                            <i class="glyphicon glyphicon-plus Plus" style="right: 0px; bottom:0px; top:17px; font-size: 17px;color:#616A6B; cursor:pointer;"></i>
+                        </a>
+                        <a data-toggle="Add Remarks">
+                            <i class="glyphicon glyphicon-comment" style="font-size:18px; color:#616A6B;"></i>
+                        </a>
+                        <a data-toggle="View Remarks">
+                            <i class="glyphicon glyphicon-list" style="font-size:16px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="LinkCustomer">
+                            <i class="fa fa-link" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Call Assign To">
+                            <i class="fa fa-phone" style="font-size:19px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="CallClose">
+                            <i class="fa fa-close" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Onsite Service">
+                            <i class="fa fa-suitcase" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Edit">
+                            <i class="glyphicon glyphicon-pencil" style="font-size:18px; color:#616A6B;padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="DeferCall">
+                            <i class="fa fa-clock-o" style="font-size:21px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Contact Customer">
+                            <i class="fa fa-address-book" style="font-size:19px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mark Duplicate">
+                            <i class="fa fa-clone " style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Collaborators">
+                            <i class="fa fa-users" style="font-size:18px; color:#616A6B; padding-left:9px;"></i>
+                        </a>
+                        <a data-toggle="Mail ToDealer">
+                            <i class="fa fa-envelope" style="font-size:18px;color:#616A6B; padding-left:9px;"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelRed">
+            <div class="col-md-6 HiddenRed" style="height:36px;padding-left: 23px; overflow-y:auto">
+                <b>Description:-</b>All the format like ledger All the format like ledger book. loremip sum20All the format like ledger book.lorem ipsum20A
+            </div>
+
+            <div class="col-md-3 HiddenRed" style="padding-left:10px;height: 36px;">
+                <b>Servicing Dealer:</b><br /> H.O. Kota
+            </div>
+
+
+            <div class="col-md-3 HiddenRed" style="padding-left:10px;height: 36px;">
+                <b> Next Action Date: </b> <br />25/12/2019 12:30 PM
+            </div>
+        </div>
+
+
+                    <script>
+                        function hoverId(ctrl) {
+                            $(ctrl).find('.MoreDetails').show();
+                            $(ctrl).find('.MoreDetails').css("display", "inline-flex");
+                        }
+
+                        function hoverNot(ctrl) {
+                            $('.MoreDetails').hide();
+                        }
+
+                        var acc = document.getElementsByClassName("accordionBlue");
+                        var i;
+
+                        for (i = 0; i < acc.length; i++) {
+                            acc[i].addEventListener("click", function () {
+                                this.classList.toggle("active");
+                                var panelBlue = this.nextElementSibling;
+                                if (panelBlue.style.maxHeight) {
+                                    panelBlue.style.maxHeight = null;
+                                    panelBlue.style.borderBottom = '0px solid #4e4c4c';
+                                    panelBlue.style.borderTop = '0px';
+                                    panelBlue.style.borderLeft = '1px solid #4e4c4c';
+                                    panelBlue.style.borderRight = '1px solid #4e4c4c';
+
+                                    $(this).find('.clickableBlue').css('border-top-left-radius', ' 0px');
+                                    $(this).find('.clickableBlue').css('border-top-right-radius', ' 0px');
+                                    $(this).find('.clickableBlue').css('border-bottom-right-radius', '12px');
+                                    $(this).find('.clickableBlue').css('border-bottom-left-radius', '12px');
+                                    $(this).find('.clickableBlue').css('border-bottom-width', '1px');
+                                    $(this).find('.plus').removeClass('glyphicon-minus');
+                                    $(this).find('.plus').addClass('glyphicon-plus');
+                                } else {
+                                    panelBlue.style.maxHeight = panelBlue.scrollHeight + "px";
+                                    panelBlue.style.borderBottom = '1px solid #3c8dbc';
+                                    //panelBlue.style.borderTop = '2px solid #d8d8d8';
+                                    panelBlue.style.borderLeft = '3px solid #3c8dbc';
+                                    panelBlue.style.borderRight = '3px solid #3c8dbc';
+
+                                    $(this).find('.clickableBlue').css('border-top-left-radius', ' 0px');
+                                    $(this).find('.clickableBlue').css('border-top-right-radius', ' 0px');
+                                    $(this).find('.clickableBlue').css('border-bottom-right-radius', '0px');
+                                    $(this).find('.clickableBlue').css('border-bottom-left-radius', '0px');
+                                    $(this).find('.clickableBlue').css('border-bottom-width', '0px');
+                                    $(this).find('.plus').removeClass('glyphicon-plus');
+                                    $(this).find('.plus').addClass('glyphicon-minus');
+                                }
+                            });
+                        }
+                        var acc = document.getElementsByClassName("accordionRed");
+                        var i;
+                        for (i = 0; i < acc.length; i++) {
+                            acc[i].addEventListener("click", function () {
+                                this.classList.toggle("active");
+                                var panelRed = this.nextElementSibling;
+                                if (panelRed.style.maxHeight) {
+                                    panelRed.style.maxHeight = null;
+                                    panelRed.style.borderBottom = '0px solid #e64945';
+                                    panelRed.style.borderTop = '0px';
+                                    panelRed.style.borderLeft = '1px solid #e64945';
+                                    panelRed.style.borderRight = '1px solid #e64945';
+
+                                    $(this).find('.clickableRed').css('border-top-left-radius', ' 0px');
+                                    $(this).find('.clickableRed').css('border-top-right-radius', ' 0px');
+                                    $(this).find('.clickableRed').css('border-bottom-right-radius', '12px');
+                                    $(this).find('.clickableRed').css('border-bottom-left-radius', '12px');
+                                    $(this).find('.clickableRed').css('border-right', '3px solid #e64945');
+                                    $(this).find('.clickableRed').css('border-left', '3px solid #e64945');
+                                    $(this).find('.clickableRed').css('border-bottom-width', '1px');
+                                    $(this).find('.plus').removeClass('glyphicon-minus');
+                                    $(this).find('.plus').addClass('glyphicon-plus');
+                                } else {
+                                    panelRed.style.maxHeight = panelRed.scrollHeight + "px";
+                                    panelRed.style.borderBottom = '1px solid #e64945';
+                                    //panel1.style.borderTop = '2px solid #d8d8d8';
+                                    panelRed.style.borderLeft = '3px solid #e64945';
+                                    panelRed.style.borderRight = '3px solid #e64945';
+
+                                    $(this).find('.clickableRed').css('border-top-left-radius', ' 0px');
+                                    $(this).find('.clickableRed').css('border-top-right-radius', ' 0px');
+                                    $(this).find('.clickableRed').css('border-bottom-right-radius', '0px');
+                                    $(this).find('.clickableRed').css('border-bottom-left-radius', '0px');
+                                    $(this).find('.clickableRed').css('border-bottom-width', '0px');
+                                    $(this).find('.plus').removeClass('glyphicon-plus');
+                                    $(this).find('.plus').addClass('glyphicon-minus');
+                                }
+                            });
+                        }
+
+
+                        var acc = document.getElementsByClassName("accordionGrey");
+                        var i;
+                        for (i = 0; i < acc.length; i++) {
+                            acc[i].addEventListener("click", function () {
+                                this.classList.toggle("active");
+                                var panelGrey = this.nextElementSibling;
+                                if (panelGrey.style.maxHeight) {
+                                    panelGrey.style.maxHeight = null;
+                                    panelGrey.style.borderBottom = '0px solid #7c888e';
+                                    panelGrey.style.borderTop = '0px';
+                                    panelGrey.style.borderLeft = '1px solid #7c888e';
+                                    panelGrey.style.borderRight = '1px solid #7c888e';
+
+                                    $(this).find('.clickableGrey').css('border-top-left-radius', ' 0px');
+                                    $(this).find('.clickableGrey').css('border-top-right-radius', ' 0px');
+                                    $(this).find('.clickableGrey').css('border-bottom-right-radius', '12px');
+                                    $(this).find('.clickableGrey').css('border-bottom-left-radius', '12px');
+                                    $(this).find('.clickableGrey').css('border-bottom-width', '1px');
+                                    $(this).find('.plus').removeClass('glyphicon-minus');
+                                    $(this).find('.plus').addClass('glyphicon-plus');
+                                } else {
+                                    panelGrey.style.maxHeight = panelGrey.scrollHeight + "px";
+                                    panelGrey.style.borderBottom = '1px solid #7c888e';
+                                    //panelGrey.style.borderTop = '2px solid #d8d8d8';
+                                    panelGrey.style.borderLeft = '3px solid #7c888e';
+                                    panelGrey.style.borderRight = '3px solid #7c888e';
+
+                                    $(this).find('.clickableGrey').css('border-top-left-radius', ' 0px');
+                                    $(this).find('.clickableGrey').css('border-top-right-radius', ' 0px');
+                                    $(this).find('.clickableGrey').css('border-bottom-right-radius', '0px');
+                                    $(this).find('.clickableGrey').css('border-bottom-left-radius', '0px');
+                                    $(this).find('.clickableGrey').css('border-bottom-width', '0px');
+                                    $(this).find('.plus').removeClass('glyphicon-plus');
+                                    $(this).find('.plus').addClass('glyphicon-minus');
+                                }
+                            });
+                        }
+                    </script>*@
+
+</div>

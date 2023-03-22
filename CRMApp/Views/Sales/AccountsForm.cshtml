@@ -1,0 +1,293 @@
+﻿@model CRMApp.Models.CRMAccountsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@Optimization.Styles.Render("~/Content/Accounts_Form")*@
+<link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css"/>
+<link rel="stylesheet" href="~/Content/Custom/ContactsForm.css"/>
+
+
+@*@*@Optimization.Scripts.Render("~/Scripts/Accounts_Form")*@*@*@
+<style>
+    .rr {
+        padding-right: 0px;
+    }
+
+    cont {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    .acc.col-md-6 {
+        width: 245px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("#searchString").css("width","250px");
+        if ("@ViewBag.ExitMode"=="edit"){
+            if ("@Model.Hometown" != 0 && "@Model.Hometown" != null) {
+                $("#searchString").val("@Model.TextHometown");
+                $("#homeTown").val(@Model.Hometown);
+            }
+            if (@Model.ParentAccount!=0){
+                $("#searchAccount").val("@Model.TextParentAccount.ToString().Trim()")
+                $("#AccountCode").val("@Model.ParentAccount");
+            }
+
+        }
+
+    })
+</script>
+<div class="cont">
+    <div class="row">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header" style="border-top-color: #3c8dbc;padding-left: 0px;padding-right: 0px;bottom: 13px;">
+                <div class="rr" style="height: 50px;width: 575px; margin-top: 0px;border-top: 3px solid #3c8dbc;padding-top: 15px;border-radius: 3px;left: 502px;">
+                    <h2 class="box-title text-primary" style="color:#3c8dbc;">Account Form  </h2>
+                    @*<div class="panel uu col-md-12" style="text-align: center;">
+                            <a href="#collapseOne" class="active" id="gd"> General Details </a>
+                            <a href="#collapseTwo" id="od"> Other Details </a>
+                        </div>*@
+                </div>
+            </div>
+            <form action="@Url.Action("AccountsForm")" method="post">
+                <p id="error" class="text-danger text-center"></p>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.",new {@class = "text-danger text-center"})
+                @Html.HiddenFor(model=> model.CRMAccounts_Key)
+                @Html.HiddenFor(model=> model.P_CRMAccounts)
+                @Html.HiddenFor(model=> model.CreationDate)
+                <input type="hidden" name="exitmode" id="exitmode" value="@ViewBag.ExitMode" />
+                <div class="row" id="top-menu">
+                    <div class="col-md-12" style="bottom: 20px;">
+                        <div class="panel-group" id="accordion">
+                            <div id="collapseOne">
+                                <div class="panel-body" style="padding:15px 15px 0px 15px;">
+                                    @*<p class="text-center extra" style="margin-bottom:0px; font-size:20px; background-color:lightsteelblue; margin-top:10px">General Details</p>
+                                        <br />*@
+
+                                    <div class="row" id="gen">
+                                        <div class="col-sm-12 col-md-12" style="padding:0px;left: 30px;">
+                                            <div class="col-sm-12 col-md-6" style="top: 0px;padding:0px;width: 250px;">
+                                                <div class="form-group" style="">
+                                                    <label class="text-info"> Parent Account Name</label>
+                                                    @*@Html.TextBoxFor(model=> model.TextParentAccount,new {.class = "form-control input-sm", .style = "margin-bottom: 5px;"})*@
+                                                    <div class="jj">
+                                                        @*Aslam_ Commented at this time, but need to update it after*@
+                                                       @* @Html.Action("AccountsGrid", "CRM",new {.class = "form-control input-sm", .id = "AccountsGrid", .style = "width: 245px;"})*@
+                                                       @await Component.InvokeAsync("LocationGrid")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6" style="top: 0px;padding:0px; left: 23px;">
+                                                <div class="form-group">
+                                                    <label class="text-info">Account Name</label>
+                                                    @Html.TextBoxFor(model=> model.AccountName1,new {@class = "form-control input-sm", @style = "padding-left:5px;width: 245px;"})
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12" style="overflow:auto;">
+                                            <div class="col-sm-12 col-md-6" style="top: 0px;">
+
+
+
+                                                <div class="form-group">
+                                                    <label class="text-info">Industry</label>
+                                                    @Html.List_Search("Industry", "34", "Select Industry", Model.Industry,"",new {@class = "form-control input-sm", @style = "padding-left:2px"}, false)
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label class="text-info">Business Type</label>
+                                                    @Html.List_Search("BussType", "7", "- Select BusinessTypes -", Model.BussType, "",new {@class = "form-control input-sm", @style = "padding-left:2px"}, false)
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="text-info">Phone</label>
+                                                    @Html.TextBoxFor(model=> model.Phone,new {@class = "form-control input-sm", @style = "padding-left:5px"})
+                                                </div>
+                                                @*<label class="col-md-12 col-sm-12 text-info" style="padding:0px;margin-top:0px;">Owner</label>
+                                                    <div class="row rad" style="">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6" style="font-size:12px;width:100px;padding: 0px;">@Html.RadioButtonFor(model=> model.OwnerType, "E",new {.class = "form-group", .checked = True, .onClick = "owner(this.id,this.value);", .style = "padding:0px;margin-right: 5px;"})Employee</div>
+                                                            <div class="col-md-6" style="font-size:12px;width:100px;padding: 0px;">@Html.RadioButtonFor(model=> model.OwnerType, "D",new {.class = "form-group", .onClick = "owner(this.id,this.value);", .style = "padding-left:0px;margin-right: 5px;text-align: left;"})Dealer</div>
+                                                        </div>
+                                                        <br />
+                                                        <div class="col-md-12" id="empdea" style="top: 10px;left: 0px;">
+                                                            <div id="emp">@Html.List_Search("OwnerEmployee", "- Select Employee -", "Employees", "EmpName", "Employees_Key", "", Model.OwnerID, "",new {.onChange = "", .class = "form-control input-sm", .style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px 0px 25px 0px; width:245px"})</div>
+
+                                                            <div id="dealer" hidden> @Html.List_Search("OwnerDealer", "- Select Dealer -", "Dealers", "DealerName", "Dealers_Key", "", Model.OwnerID, "",new {.onChange = "", .class = "form-control input-sm", .style = "padding-left:  2px; border-radius:0px; padding-right:0px; margin:0px 0px 25px 0px;width:245px"}) </div>
+                                                        </div>
+                                                    </div>*@
+
+
+                                                <div class="col-sm-12 col-md-12" style="padding:0px; margin-top:0px;">
+                                                    <div class="form-group" style="margin-bottom:0px">
+                                                        <label class="text-info" style="">Home Town </label>
+                                                        @*@Html.TextBoxFor(model=> model.TextHomeTown,new {.class = "form-control input-sm", .style = "margin-bottom: 5px;"})*@
+                                                        <div class="ii">
+                                                            @*Aslam_ Commented at this time, but need to update it after*@
+                                                            @*@Html.Action("LocationGrid", "CRM",new {.id = "LocationGrid"})*@
+                                                            @await Component.InvokeAsync("LocationGrid")
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 " style="top: 0px;">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label class="text-info">Mobile no.<strong style="color:red;">*</strong></label>
+                                                        @Html.TextBoxFor(model=> model.mobileno,new {@class = "form-control input-sm", @style = "padding-left:5px", @minlength = "10"})
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="text-info">Email</label>
+                                                        @Html.TextBoxFor(model=> model.Email,new {@class = "form-control input-sm", @style = "padding-left:5px"})
+                                                    </div>
+
+
+
+                                                    <label class="text-info">Website</label>
+                                                    @Html.TextBoxFor(model=> model.Website,new {@class = "form-control input-sm", @style = "padding-left:5px;margin-bottom: 15px;"})
+
+                                                    <div class="form-group">
+                                                        <label class="text-info">Address</label>
+                                                        @Html.TextBoxFor(model=> model.Address1,new {@class = "form-control input-sm", @style = "padding-left:5px;margin-bottom: 5px;"})
+                                                        @Html.TextBoxFor(model=> model.Address2,new {@class = "form-control input-sm", @style = "padding-left:5px"})
+
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-12 col-sm-12 form-group" style="padding-left: 0px;">
+                                            <div class="text-center form-group ne" style="margin-top:0px;">
+                                                <input type="button" class="btn btn-primary btn-1" onclick="next()" value="Next" style="padding:0px" />
+                                            </div>
+
+                                    </div>*@
+
+                            </div>
+
+
+
+                            <div id="collapseTwo" class="col-md-12" style="padding-right: 30px;padding-left: 30px;bottom: 10px;">
+                                <div class="panel-body" style="padding:0px ">
+
+                                    @*<p class="text-center extra" style="margin-bottom:0px; font-size:20px; background-color:lightsteelblue">Others Details</p>
+                                        <br />*@
+                                    <div class="row" id="gen">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="text-info"> Preffered Contact Method</label>
+                                                @Html.List_Search("Cn_pref_contact", "35", "Select ", Model.Cn_pref_ContactMethod,"",new { @class = "form-control input-sm", @style = "padding-left:2px"}, false)
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-info">Email Preference</label>
+                                                @Html.List_Search("Cn_pref_email", "36", "Select ", Model.Cn_pref_Email,"",new {@class = "form-control input-sm", @style = "padding-left:2px"}, false)
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-info">Bulk Email Preference</label>
+                                                @Html.List_Search("Cn_pref_Bulkemail", "36", "Select ", Model.Cn_pref_Bulkemail,"",new {@class = "form-control input-sm", @style = "padding-left:2px"}, false)
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="text-info">Facebook</label>
+                                                @Html.TextBoxFor(model=> model.FacebookId,new {@class = "form-control input-sm", @style = "padding-left:5px"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-info">Twitter</label>
+                                                @Html.TextBoxFor(model=> model.TwitterID,new {@class = "form-control input-sm", @style = "padding-left:5px"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <label class="text-info">Details</label><br />
+                                                <div Class="col-sm-4" style="padding-left:0px;width: 256px;height: 96px;">
+                                                    <textarea class="form-control input-sm" style="width: 242px; height: 96px;" name="Details" value="@Model.Details"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center form-group" style="margin-bottom: 0px;">
+                                        <button type="button" class="btn btn-primary btn-submit" onclick="ConfirmSubmit();">Submit</button>
+                                        <button type="Button" class="btn btn-default" onclick="window.location.href='@Url.Action("ManageAccounts")';">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <br /> <br /> <br /> <br />
+
+</div>
+<input type="hidden" id="Otype" value="@Model.OwnerType" />
+<input type="hidden" id="Htype" value="@Model.Hometown" />
+<input type="hidden" id="Ptype" value="@Model.ParentAccount" />
+<script>
+
+            $(document).ready(function () {
+                //var home = "";
+                //home = $("#TextHomeTown").val();
+                //$("#searchString").val(home);
+                //$(".ii").show();
+                //$("#TextHomeTown").hide();
+                //var AccountName = "";
+                //AccountName = $("#TextParentAccount").val();
+                //$("#searchAccount").val(AccountName);
+                //$(".jj").show();
+                //$("#TextParentAccount").hide();
+                //$(".btn-1").click(function () {
+                //    $(this).hide();
+                //});
+            });
+            function ConfirmSubmit() {
+                var Mobno=$("#Mobileno").val();
+                if (Mobno != 0 && Mobno != "null" && Mobno != "undefined" && Mobno != ""){
+            var b = $("#homeTown").val();
+            var b1 = $("#Htype").val();
+            var c = $("#AccountName").val();
+            var c1 = $("#Ptype").val();
+            if (b == 0 || b == "null" || b == "undefined" || b == "") {
+                $("#homeTown").val(b1);
+            }
+            if (c == 0 || c == "null" || c == "undefined" || c == "") {
+                $("#AccountName").val(c1);
+            }
+         $("#AccountsForm").submit();
+
+                }else{
+                    $("#error").text("Please Enter valid Mobile number");
+                }
+        }
+
+</script>
+

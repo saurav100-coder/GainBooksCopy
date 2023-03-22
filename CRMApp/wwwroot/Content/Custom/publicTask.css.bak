@@ -1,0 +1,287 @@
+
+select {
+    width:210px;
+    border-color: #ddd;
+    font-size:13px;
+    border: 1px solid #ddd;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+    select option {
+        border: 1px solid #ddd;
+        padding: 3px;
+        border-radius: 4px;
+       
+    }
+
+
+.task-title{
+  margin-top: 2%;
+  padding-bottom: 16px;
+
+}
+.task-title h3{
+  color:#3c8dbc;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+textarea {
+    width: 100%;
+    border-color: #ddd;
+    color: #3c8dbc;
+   
+ 
+    height: 90px;
+    border-radius: 4px;
+}
+
+.task-id span{
+  font-weight: bold;
+  font-size: 16px;
+  color: #4f5250;
+}
+
+
+.task-desc{
+  color: #4f5250;
+  font-size: 14px;
+  margin-top: 2%;
+}
+ .task-cap{
+  color:#3c8dbc;
+  font-size: 16px;
+  font-weight:bold;
+
+}
+.col-md-6 .task-cap .dates{
+  padding: 20px;
+
+}
+
+.dates{
+  margin-top: 4%;
+  font-size: 16px;
+  font-weight: bold;
+ /* font-family: 'Montserrat', sans-serif;
+*/
+}
+
+.dates p{
+  font-weight: bold;
+  color: #3c8dbc;
+
+}
+.dates p span{
+  float: right;
+  font-weight: lighter;
+  color: #4f5250;
+ /* word-spacing: 105px;*/
+  font-size: 13px;
+}
+
+
+
+.AddRemarkDetailView {
+}
+
+.remarklabel {
+    color: #3c8dbc;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.tabSection{
+    margin-top:2%;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px #ddd solid;
+    padding-bottom: 15px;
+}
+    .tabs-nav .tab-active a {
+        background: #0F5FAF;
+        /*border-bottom-color: hsla(0, 0%, 0%, 0);*/
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+        /*border: 1px solid hsl(210, 6%, 79%);
+        -webkit-border-radius: 6px 0 0 0;
+        -moz-border-radius: 6px 0 0 0;
+        -ms-border-radius: 6px 0 0 0;
+        -o-border-radius: 6px 0 0 0;
+        border-radius: 6px 0 0 0;
+        */
+    }
+
+    .tabs-nav a {
+        background: hsl(120, 11%, 96%);
+        border-radius: 50px;
+        color: #3c8dbc;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 600;
+        height: auto;
+        /*line-height: 44px;*/
+        padding: 4px;
+        text-align: center;
+        width: 130px;
+        padding-left:10px;
+        padding-right:10px;
+        margin-right:20px !important;
+    }
+        .tabs-nav a:last-child {
+            margin-right: 0px !important;
+        }
+
+
+        .tabs-nav li {
+            float: left;
+        }
+
+.tabs-stage {
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #ddd solid;
+    border-top: 0;
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+    top: 1px;
+    width: auto;
+}
+.tabs-stage p {
+    margin: 0;
+    padding: 5px;
+    color: #3c8dbc;
+}
+
+.line2 span {
+    font-size: 12px;
+}
+
+.line1 span {
+    padding-right: 15px;
+}
+
+.line1 i {
+    padding-right: 3px;
+}
+
+.line2, .line3 {
+    margin-top: 8px;
+    margin-left: 24px;
+}
+
+.Collaborators{
+  margin-top: 3%;
+}
+
+.Collaborators span{
+  font-size: 16px;
+  font-weight: bold;
+  color: #3c8dbc;
+  padding: 7px;
+
+
+}
+.Collaborators .box{
+  padding: 30px;
+  color: white
+}
+.task-classification{
+  margin-top: 3%;
+}
+.task-classification span{
+  font-size: 16px;
+  font-weight: bold;
+  color: #3c8dbc;
+  padding: 7px;
+ 
+}
+
+.boxx .tag-container{
+  background-color:  #e6f6fc;
+  padding: 5px;
+  height: 100px;
+  margin-top: 2%;
+  width: 100%;
+}
+
+
+.dashfolio-tag {
+  cursor:pointer;
+  padding: 10px 15px 15px 15px;
+  display: inline-block;
+  margin-top: 3px; /*incase tags go in next line, will space */
+  color:#fff;
+  padding-right: 20px; /* adds space inside the tags for the 'x' button */
+}
+
+.dashfolio-tag:hover{
+  opacity:0.7;
+}
+
+.dashfolio-tag:after {
+ position:absolute;
+ content:"×";
+ padding:2px 2px;
+ margin-left:2px;
+ font-size:11px;
+}
+
+#add-tag-input {
+  background:transparent;
+  border:0;
+  padding:5px;
+  width:100%;
+  margin-top: auto;
+
+}
+
+
+@media only screen and (max-width: 600px){
+    .chooseDate input[type=date] {
+        max-width: 150px;
+    }
+
+  .dates p span{
+
+    word-spacing: 65px;
+
+  }
+ 
+  .task-title{
+    margin-top: 30px;
+  }
+    .container {
+        margin: 0px 0px 0px 0px;
+        padding:5px;
+    }
+    .tabs-nav a {
+        font-size: 13px;
+        padding: 4px;
+        width: auto;
+        padding-left: 8px;
+        padding-right: 8px;
+       
+    }
+  
+        select {
+            width: 150px;
+        }
+
+   
+}

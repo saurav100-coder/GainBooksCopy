@@ -1,0 +1,472 @@
+﻿@model CRMApp.Models.ShopControlModel
+
+@{
+    ViewData["Title"] = "ShopDetail";
+    string  shopFormShow  = "";
+    string shopDetailDivShow = "";
+}
+
+@if (ViewBag.ViewType == "show") {
+    shopFormShow = "display:none";
+    shopDetailDivShow = "display:block";
+}
+else{
+     shopFormShow = "display:block";
+    shopDetailDivShow = "display:none";
+}
+<script>
+    $("nav").find(".newTitle").remove();
+    var s = "<p class='newTitle' >Shop Detail</p>";
+    $("nav").find(".titleName").append(s);
+</script>
+
+<div id = "shopForm"  style="@shopFormShow">
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model=> model.shopcontrol_key)
+            @Html.HiddenFor(model=> model.p_shopcontrol)
+            @Html.HiddenFor(model=> model.corpid)
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Shop Code</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.shopcode, new {@class = "form-control", @required = "required"})
+                    @Html.ValidationMessageFor(model=> model.shopcode, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6 ">
+                <label class="control-label col-md-4">Shop Name</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.shopname, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.shopname, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Licensee Code</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.licenseecode, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.licenseecode, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Licensee Name</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.licenseename, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.licenseename, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Shop Address</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.shopaddress, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.shopaddress, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Excise District</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.excisedistrict, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.excisedistrict, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Circle Office</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.circleoffice, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.circleoffice, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Locality</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.locality, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.locality, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">CL Guarantee Value</label>
+                <div class="col-md-8">
+                    <input type="number" id="clguaranteevalue" name="clguaranteevalue" value="@Model.clguaranteevalue" class="form-control" onkeypress="return isNumberKey(event)" min="0"/>
+                    @Html.ValidationMessageFor(model=> model.clguaranteevalue, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">FL Guarantee Value</label>
+                <div class="col-md-8">
+                    <input type="number" id="flguaranteevalue" name="flguaranteevalue" value="@Model.flguaranteevalue" class="form-control" onkeypress="return isNumberKey(event)" min="0"/>
+                    @Html.ValidationMessageFor(model=> model.flguaranteevalue, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">FY Start Date</label>
+                <div class="col-md-8">
+                    @*@Html.EditorFor(model=> model.fystartdate, new {@class = "form-control"})*@
+                    <input type="date" class="form-control" iTextBoxFord="fystartdate" name="fystartdate" value="@Model.fystartdate.ToString("yyyy-MM-dd")" />
+                    @Html.ValidationMessageFor(model=> model.fystartdate, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">FY End Date</label>
+                <div class="col-md-8">
+                    @*@Html.EditorFor(model=> model.fyenddate, new {@class = "form-control"})*@
+                    <input type="date" class="form-control" id="fyenddate" name="fyenddate" value="@Model.fyenddate.ToString("yyyy-MM-dd")" />
+                    @Html.ValidationMessageFor(model=> model.fyenddate, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">CL Cumulative</label>
+                <div class="col-md-8">
+                    <input type="number" id="clcumulative" name="clcumulative" value="@Model.clcumulative" class="form-control"  onkeypress="return isNumberKey(event)" min="0"/>
+                    @Html.ValidationMessageFor(model=> model.clcumulative, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">FL Cumulative</label>
+                <div class="col-md-8">
+                    <input type="number" id="flcumulative" name="flcumulative" value="@Model.flcumulative" class="form-control"  onkeypress="return isNumberKey(event)" min="0"/>
+                    @Html.ValidationMessageFor(model=> model.flcumulative, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Printing Phone</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.printingphone, new {@class = "form-control", @onkeypress = "return isNumberKey(event)"})
+                    @Html.ValidationMessageFor(model=> model.printingphone, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Registered Phone</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.registeredphone, new {@class = "form-control", @onkeypress = "return isNumberKey(event)"})
+                    @Html.ValidationMessageFor(model=> model.registeredphone, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Bill Paper Size</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model=> model.billpapersize, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model=> model.billpapersize, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group  col-md-6">
+                <label class="control-label col-md-4">Default Quantity</label>
+                <div class="col-md-8">
+                    <input type="number" id="defaultquantity" name="defaultquantity" value="@Model.defaultquantity" class="form-control" onkeypress="return isNumberKey(event)" min="0"/>
+                    @Html.ValidationMessageFor(model=> model.defaultquantity, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Upload Type</label>
+                 <div class="col-md-8">
+                     @*<input type="number" id="uploadtype" name="uploadtype" value="@Model.uploadtype" class="form-control" onkeypress="return isNumberKey(event)" min="0" />*@
+                     @Html.List_Search("uploadtype", "70", "-Select Upload Type -", Model.uploadtype,"", new {@class = "form-control", @style = "padding-left:1px"}, false)
+                     @Html.ValidationMessageFor(model=> model.uploadtype, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Sale Sync Type</label>
+                 <div class="col-md-8">
+                     @*<input type="number" id="salesynctype" name="salesynctype" value="@Model.salesynctype" class="form-control" onkeypress="return isNumberKey(event)" min="0" />*@
+                     @Html.List_Search("salesynctype", "71", "-Select SaleSync Type -", Model.salesynctype,"", new {@class = "form-control", @style = "padding-left:1px"}, false)
+                     @Html.ValidationMessageFor(model=> model.salesynctype, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Service Type</label>
+                 <div class="col-md-8">
+                     @*<input type="number" id="servicetype" name="servicetype" value="@Model.servicetype" class="form-control" onkeypress="return isNumberKey(event)" min="0" />*@
+                     @Html.List_Search("servicetype", "72", "-Select Service Type -", Model.servicetype,"", new {@class = "form-control", @style = "padding-left:1px"}, false)
+                     @Html.ValidationMessageFor(model=> model.servicetype, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Sync When</label>
+                 <div class="col-md-8">
+                     @*<input type="number" id="syncwhen" name="syncwhen" value="@Model.syncwhen" class="form-control" onkeypress="return isNumberKey(event)" min="0" />*@
+                     @Html.List_Search("syncwhen", "73", "-Select Sync When -", Model.syncwhen,"", new {@class = "form-control", @style = "padding-left:1px"}, false)
+                     @Html.ValidationMessageFor(model=> model.syncwhen, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Start DateTime</label>
+                 <div class="col-md-8">
+                     <input type="date" class="form-control" id="startdatetime" name="startdatetime" value="@Model.startdatetime.ToString("yyyy-MM-dd")" />
+                     @Html.ValidationMessageFor(model=> model.startdatetime, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Next DateTime</label>
+                 <div class="col-md-8">
+                     <input type="date" class="form-control" id="nextdatetime" name="nextdatetime" value="@Model.nextdatetime.ToString("yyyy-MM-dd")" />
+                     @Html.ValidationMessageFor(model=> model.nextdatetime, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Next Service</label>
+                 <div class="col-md-8">
+                     @Html.TextBoxFor(model=> model.nextservice, new {@class = "form-control"})
+                     @Html.ValidationMessageFor(model=> model.nextservice, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Test Url</label>
+                 <div class="col-md-8">
+                     @Html.TextBoxFor(model=> model.testurl, new {@class = "form-control"})
+                     @Html.ValidationMessageFor(model=> model.testurl, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Url Live</label>
+                 <div class="col-md-8">
+                     @Html.TextBoxFor(model=> model.urllive, new {@class = "form-control"})
+                     @Html.ValidationMessageFor(model=> model.urllive, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+             <div class="form-group  col-md-6">
+                 <label class="control-label col-md-4">Print Shop No.</label>
+                 <div class="col-md-8">
+                     @Html.TextBoxFor(model=> model.printshopno, new {@class = "form-control"})
+                     @Html.ValidationMessageFor(model=> model.printshopno, "", new {@class = "text-danger"})
+                 </div>
+             </div>
+
+            <div class="form-group">
+               <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="createbtn" value="Add" class="btn btn-success" style="width: 80px;"/>
+                    <input type="reset"  id="resetbtn" value="Reset" class="btn btn-default" style="margin-left:10px; width: 80px;" />
+                    <input type="button" id="canclebtn" class="btn btn-default" style="display:none; margin-left:10px; width: 80px;"  value="Cancle" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div id="shopDetailDiv" style="@shopDetailDivShow">
+    <div id="shopDetails" class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Shop Code :</label>
+                <span>@Model.shopcode</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Shop Name :</label>
+                <span>@Model.shopname</span>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Licensee Code :</label>
+                <span>@Model.licenseecode</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Licensee Name :</label>
+                <span>@Model.licenseename</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Shop Address :</label>
+                <span>@Model.shopaddress</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Excise District :</label>
+                <span>@Model.excisedistrict</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Circle Office :</label>
+                <span>@Model.circleoffice</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Locality :</label>
+                <span>@Model.locality</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">CL Guarantee Value :</label>
+               <span>@Model.clguaranteevalue</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">FL Guarantee Value :</label>
+                <span>@Model.flguaranteevalue</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Financial Year Start Date :</label>
+                <span>@Model.fystartdate.ToString("dd/MM/yyyy")</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Financial Year End Date :</label>
+                <span>@Model.fyenddate.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">CL Cumulative :</label>
+               <span>@Model.clcumulative</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">FL Cumulative :</label>
+               <span>@Model.flcumulative</span>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Printing Phone :</label>
+                <span>@Model.printingphone</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Registered Phone :</label>
+                <span>@Model.registeredphone</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Bill Paper Size :</label>
+                <span>@Model.billpapersize</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Default Quantity :</label>
+               <span>@Model.defaultquantity</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Upload Type :</label>
+                <span>@Model.textuploadtype</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Sale Sync Type :</label>
+                <span>@Model.textsalesynctype</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Service Type :</label>
+                <span>@Model.textservicetype</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Sync When :</label>
+                <span>@Model.textsyncwhen</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Start DateTime :</label>
+                <span>@Model.startdatetime.ToString("dd/MM/yyyy")</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Next DateTime :</label>
+                <span>@Model.nextdatetime.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Next Service :</label>
+                <span>@Model.nextservice</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Test URL :</label>
+                <span>@Model.testurl</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">URL Live :</label>
+                <span>@Model.urllive</span>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 15px;">
+                <label style="margin-right: 5px;">Print Shop No. :</label>
+                <span>@Model.printshopno</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <input type="button" id="editbtn" value="Edit" class="btn btn-success" style="width: 80px" />
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $("#editbtn").click(function () {
+            $("#createbtn").val("Update")
+            $("#shopDetails").hide();
+            $("#shopForm").show();
+            $("#canclebtn").show();
+            $("#editbtn").hide();
+            $("#resetbtn").hide();
+        });
+        $("#canclebtn").click(function () {
+            $("#shopDetails").show();
+            $("#shopForm").hide();
+            $("canclebtn").hide();
+            $("#editbtn").show();
+            $("#createbtn").val("Add")
+            $("#resetbtn").show();
+        });
+    });
+
+    //For accept only numbers in input box
+    function isNumberKey(evt) {
+        evt = evt ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+
+    }
+</script>

@@ -1,0 +1,1666 @@
+﻿.quickSearch {
+    width: 160px;
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+}
+
+.css-checkbox {
+    height: 15px;
+}
+
+.move {
+    width: 70% !important;
+}
+
+.mov {
+    margin-left: 30px !important;
+}
+
+.mobileDetailPane {
+    width: 100%!important;
+    margin-right: 0px;
+}
+
+.setStyle {
+    width: 100% !important;
+}
+
+.content {
+    padding-top: 0px;
+}
+
+.content-wrapper {
+    height: auto !important;
+}
+
+.content {
+    height: auto !important;
+}
+
+.upload {
+    font-size: 12px;
+}
+
+
+.icon-image {
+width:20px;
+}
+
+.bgImage {
+    background: url(/images/BGcollab5.png);
+    /*background: url(/images/Bg.png);*/
+    background-size: cover;
+    background-position: inherit;
+}
+
+.circle {
+    width:20px;
+    height:20px;
+    border-radius:50%;
+}
+
+.myTaskBtn {
+    margin-left: 40px;
+    margin-top: 5px;
+    padding: 2px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    border: 3px solid #F8C851 !important;
+    background-color: #337ab7!important;
+    color:white!important;
+}
+
+
+
+/*select all Rows Start*/
+#subDiv {
+    padding: 0px 6px;
+    font-family: verdana, arial, sans-serif;
+}
+
+#subDivLable {
+    vertical-align: baseline;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 2px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    color: #337ab7;
+    text-decoration: underline;
+}
+/*select all Rows End*/
+
+
+/*loader Css Start */
+.loader, .loader:after {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.loader {
+    font-size: 10px;
+    text-indent: -9999em;
+    border-top: 3px solid rgba(0,0,0, 0.2);
+    border-right: 3px solid rgba(0,0,0, 0.2);
+    border-bottom: 3px solid rgba(0,0,0, 0.2);
+    border-left: 3px solid #1DA3E6;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/*loader Css End */
+
+/*Left bottom side Message Start*/
+.RemarkMessage {
+    display: none;
+    color: white !important;
+    padding: 15px 9px !important;
+    border-radius: 3px;
+    position: absolute;
+    position:fixed;
+    bottom: 50px;
+    left: 10px;
+    z-index: 1000;
+    font-size: 14px;
+}
+
+.RemarkMessage #Content {
+    margin-right:20px;        
+}
+/*Left bottom side Message End*/
+
+.mainWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+/*Left Side Section Start*/
+.left {
+    width: 100%;
+    display: inline-block;
+    transition-duration: 0.5s;
+    transition-timing-function: ease, linear, ease;
+    /*transition-delay: 0.7s;*/
+    padding-top: 0px;
+    position: relative;
+    border-right:1px solid black;
+}
+
+.calHeightIcon {
+    margin: 0;
+    padding: 0;
+}
+
+.icon-div {
+    margin-top: 5px;
+    padding-left: 0px;
+    /*padding-right: 20px;*/
+    padding-right: 34px;
+    width: 85%;
+
+}
+
+
+.SumoSelect > .optWrapper {
+    color: black;
+}
+
+.SumoSelect.open > .optWrapper {
+    top:27px;    
+}
+
+.SumoSelect > .optWrapper.multiple > .options li.opt.selected span i {
+    background-color: #0075ff!important;
+}
+
+.SumoSelect > .CaptionCont {
+    color: black;
+    font-weight: bold;
+}
+
+/*Top Icons Section Start*/
+.search2 {
+    margin-bottom: 0px;
+    padding: 10px 10px 0px 10px!important;
+    color: #3c8dbc;
+    display: inline-block;
+    position: relative;
+}
+
+.search2 a {
+    padding-right: 11px;
+}
+
+.search2 a:first-child {
+    padding-left: 10px;
+}
+.top {
+    cursor:pointer;
+}
+.top img {
+    width: 22px;
+    cursor:pointer;
+}
+
+
+.MultiClose {
+    width: 70% !important;
+    right: -30% !important;
+    top: 36px !important;
+}
+
+#MultiTagsAddModal {
+    background-color: transparent;
+    border: none;
+    text-align:left!important;
+}
+
+#MultiTagsAddModal::before {
+    border-bottom-color: transparent;
+}
+
+/*Top Icons Section End*/ 
+
+
+/*Pagination Icon Css Start*/
+.search1 {
+    border: none;
+    padding-right: 10px;
+}
+.g {
+    position: absolute;
+    left: auto;
+    top: 3px;
+    right: 15px;
+    z-index: 100;
+}
+.g #info {
+    font-size: 14px;
+    color: #808080;
+    padding-right: 10px;
+}
+.g a {
+    margin-top: 10px;
+    width: 27px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+    color: #3c8dbc;
+    border-radius: 0px;
+}
+/*Pagination Icon Css End*/
+
+/*Basic filter css Start*/
+.basicfilterDiv {
+
+    display:none;
+    position: absolute;
+    top: 40px;
+    background: white;
+    z-index: 140;
+    border: 1px solid lightgray;
+    padding: 10px 15px 10px 10px;
+    width: 450px;
+    max-width: 550px;
+}
+.basicFilterTitle {
+    border:none;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    margin:0px!important;
+    padding-bottom:1px;
+
+}
+
+    .basicFilterTitle span {
+        font-style: italic;
+        margin-right: 10px;
+    }
+
+#basicFilterTable { font-size: 10px!important;}
+
+#basicFilterTable tr td{
+    padding:2px!important;
+    max-width:275px;
+    display: table-cell!important;
+}
+
+    #basicFilterTable .min ,
+    #basicFilterTable .max{
+        height: 25px;
+        margin-top: 1px;
+        margin-bottom: 0px;
+        margin-left: 10px;
+    }
+
+    #basicFilterTable .filterDropdown {
+        height: 22px!important;
+        width: 90%!important;
+        margin:5px 0px 5px 10px!important;
+    }
+    #basicFilterTable .filterText {
+        height: 25px;
+        width: 90%;
+        margin-right: 0px;
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+
+    #basicFilterTable .modalbutton {
+        font-size: 10px;
+        background-color: #337ab7;
+        width: auto;
+        color: #F8C851 !important;
+        border-radius: 50px;
+        padding: 5px 15px;
+        font-weight: bold;
+        margin-right: 20px;
+        margin-top: 30px;
+    }
+    #basicFilterTable .modalbuttonsecondary {
+        font-size: 10px;
+        background-color: #efefef;
+        border: 1px solid black;
+        width: auto;
+        color: #555;
+        border-radius: 50px;
+        padding: 5px 15px;
+        font-weight: bold;
+        margin-right: 3px;
+        margin-top: 30px;
+    }
+
+    #basicFilterTable .bootstrap-select > .dropdown-toggle {
+        margin: 0px;
+        outline: none;
+        border: none;
+    }
+
+    #basicFilterTable .dropdown-menu {
+    font-size:11px!important;
+    }
+/*Basic filter css Start*/
+
+
+/*Search Criteria section Css Start*/
+.resultDiv {
+    display:none;
+}
+.resultContent {
+    padding-left:10px;
+    display:flex;
+    flex-wrap: wrap;
+}
+.resultContent p {
+    margin: 0px !important;
+    font-size:11px;
+}
+.clearFilter {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
+
+.result-msg {
+margin-right:15px;
+}
+
+/*Search Criteria section Css End*/
+
+/*Grid Css Start*/
+.Table-Dive {
+    width: 100%;
+    margin-top: 8px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    color: #3c8dbc;
+    border: none;
+    overflow: hidden;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+.calHeightTaskBar {
+    margin: 0;
+    padding: 0;
+    display: grid;
+}
+.TaskBar {
+    padding-left: 6px;
+    text-transform: capitalize;
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    color: #337ab7;
+    width: 100%;
+    /*border-bottom: 3px solid white;*/
+    font-family: open sans,sans-serif;
+    font-size: 13px;
+    background-color: #105faf;
+}
+
+.tbHead {
+    color: white;
+    text-align: left;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+#example {
+    width: 100%;
+    overflow-x: hidden;
+    margin-left: 0px;
+    padding: 0px;
+    background-color: white;
+    margin-bottom: 0px;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    /*background: url(/images/Bg.png);*/
+    background: url(/images/Bgimg6.png);
+    background-size: cover;
+    background-position: bottom;
+}
+
+/*Tags Css Start*/
+.tags-row {
+    padding-left: 1px;
+    width: 100%;
+    background-color: transparent;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    text-align: start;
+    color: black;
+}
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.tag-item {
+    background: lightgrey;
+    padding: 0px 3px;
+    margin: 1px 2px;
+    border-radius: 3px;
+    font-size: 10px;
+}
+/*Tags Css End*/
+
+.maindiv {
+    display: inline-flex;
+    /*border-bottom: 1px solid black;*/
+    height:42px;
+    margin:5px 5px 0px 5px;
+    background:white;
+    padding-left: 5px;
+    padding-right: 0px;
+    width: 100%;
+    align-items: center;
+}
+
+.maindiv:hover {
+    background-color: #cce6ff;
+}
+
+.submaindiv {
+    margin-left: 0px;
+    padding-left: 2px;
+}
+
+.rowChecked {
+    background-color: #b3b3ff !important;
+}
+
+.rowActive {
+    background-color: #66b5ff !important;
+}
+
+.checkboxall {
+    height: 15px;
+    margin-bottom: 0px!important;
+    /*margin-top: 2px!important;*/
+    margin-top:-1px!important;
+}
+
+.submaindiv .checkboxall {
+    height: 15px;
+    margin-right: 0px;
+}
+
+.subCarate {
+    font-size: 17px;
+    padding-left: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 1;
+    padding-right: 0px;
+    transition: transform .5s ease;
+}
+.MainTr {
+    padding: 0px 2px 3px 2px!important;
+    height: auto;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+.basicTr {
+    text-align: left;
+    font-size: 13px;
+    color: black;
+}
+.clampTr {
+    width: 20%;
+    font-size: 14px!important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.SubtaskBox {
+    display: none;
+    /*background-color: white;*/
+    border-left: 3px solid #367fa9;
+    background: url(/images/Bg.png);
+    background-position: left;
+    margin-left:5px;
+}
+
+.combineCol {
+display:flex;
+flex-direction:column;
+}
+.combineCol div {
+width:100%!important;
+}
+
+.combineCol .Tasktitle,
+.combineCol .SubTasktitle  {
+    /*color:#337ab7;*/
+    color:#105faf;
+    font-weight:700;
+}
+
+.setCreatedBy {
+    width:20%!important;
+    padding-left: 6px!important;
+}
+.setTaskPriority {
+    width:10%!important;
+}
+
+.setCombineCol {
+    width:50%!important;
+    padding-right:10px!important;
+}
+.setTaskTitle {
+    width:47%!important;
+}
+
+/*Grid Css End*/
+
+/*Left Side Section End*/
+
+
+
+/*Right side Detailpane css start*/
+.right {
+    justify-content: space-between;
+    position: relative;
+    width: 30%;
+    float: right;
+    background-color: white;
+    padding-left: 0%;
+    padding-right: 3px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: none;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    height: auto;
+    margin-left:5px;
+}
+
+    .right i {
+        color: #337ab7;
+    }
+
+    .right::-webkit-scrollbar,
+    .right .detailPane::-webkit-scrollbar {
+        display: none;
+    }
+
+.detailPane {
+    /*scroll-behavior: smooth;*/
+    width: 93%;
+    overflow-y: auto;
+}
+
+
+.asidenav {
+    width: 7%;
+    position: sticky;
+    top: 0;
+}
+
+.detailpaneIconrow {
+    align-self: flex-start;
+    /*padding-top: 5px;*/
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background-color: white;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding:11px 0;
+    /*padding-bottom: 5px;*/
+}
+
+#RightShift {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+    #RightShift:hover {
+        color: #246399;
+    }
+
+.save {
+    float: right;
+    display: inline-flex;
+    margin-bottom: 0px;
+}
+
+.detailpaneIcon {
+    float: right;
+    margin-right: 17px;
+    cursor: pointer;
+}
+
+.detailpaneIconrow img {
+width:20px;
+}
+
+.asidenav img {
+width:20px;
+}
+
+.btnSave {
+    display: none;
+    margin-right: 10px;
+    float: right;
+    background-color: #3C8DBC;
+    width: auto;
+    color: white!important;
+    border-radius: 50px;
+    padding: 2px 10px;
+    border: none;
+    font-size: 10px;
+    margin-top: -1px;
+}
+
+.confirmationBox {
+    display: none;
+    padding: 4px 7px 10px 7px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    position: absolute;
+    right: 10%;
+    z-index: 1;
+    top: 30px;
+    background-color: white;
+    width: 55%;
+    font-size: 11px !important;
+    text-align: center !important;
+}
+
+    /*.confirmationBox::before {
+        content: " ";
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-bottom-color: #ddd;
+        top: -20px;
+        position: absolute;
+        right: 65px;
+    }*/
+
+    .confirmationBox .btnYes {
+        background-color: #105faf;
+        margin-right: 8px;
+        padding: 0px 10px;
+        font-size: 11px;
+    }
+
+    .confirmationBox .btnNo {
+        padding: 0px 10px;
+        font-size: 11px;
+    }
+
+.ShareBox {
+    display: none;
+    padding: 4px 7px 10px 7px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    right: 0px;
+    z-index: 10;
+    background-color: white;
+    width: 90%;
+}
+
+.closebn {
+    float: right;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    padding:0!important;
+}
+
+    .closebn:hover {
+        background-color: #ddd;
+        border-radius: 50%;
+        color: #246399;
+    }
+
+.ShareBox .Box {
+    display: flex;
+}
+
+.shareLinkTextBox {
+    width: 83%;
+    border: 1px solid #ddd;
+    margin-right: 0px;
+    outline: none;
+}
+
+.copyBtn {
+    float: right;
+    font-size: 13px;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: inline-flex;
+    border-radius: 0px;
+    margin-left: 0px;
+}
+
+.right .topnavbar {
+    width: 100%;
+    /*background-color: #eeeeee;*/
+    background-color: white!important;
+    overflow: auto;
+    position: sticky;
+    top: 41px;
+    align-self: flex-start;
+    cursor: pointer;
+    /*z-index:1;*/
+}
+
+    .right .topnavbar .unactive {
+        color: black;
+    }
+
+    .right .topnavbar a {
+        float: left;
+        /*padding: 6px 8px;*/
+        padding: 8px ;
+        text-decoration: none;
+        /*font-size: 12px;*/
+        font-size: 10px;
+        border-radius:5px;
+        color:#F8C851!important;
+        font-weight:bold;
+        background:#337ab7!important;
+        margin: 0px 2px;
+    }
+
+        .right .topnavbar a:hover {
+            /*background-color: #dddddd;*/
+            /*border-bottom: solid 3px #105faf;*/
+            /*color: #105faf;*/
+            color:white!important;
+
+        }
+
+    .right .topnavbar .active {
+        /*background-color: #dddddd;*/
+        /*color: #105faf;*/
+        /*border-bottom: solid 3px #105faf;*/
+        color:white!important;
+    }
+
+.editSection {
+    margin-top: 0px;
+    padding-bottom: 10px;
+    padding: 10px 15px;
+    margin-left: 2px;
+    margin-right: 2px;
+    box-shadow: 0px 1px 4px 0px #33333359;
+    border-radius: 0px 0px 5px 5px;
+    background-image: url(/images/Bg-43.png);
+    background-size:cover;
+    /*background-position-x: right;*/
+    /*background-position-y: center;*/
+    /*background-position:center;*/
+    margin-top: 2px;
+}
+#tasktitle{
+    font-weight:600;
+    font-size:14px;
+}
+
+.x-id {
+    /*margin-top: 2%;*/
+    margin-bottom: 5px;
+    color: #337ab7;
+}
+
+
+
+    .x-id span {
+        /*font-weight: normal;*/
+        font-weight:bolder;
+        font-size: 14px;
+        /*color: #4f5250;*/
+    }
+
+.x-title {
+    /*margin-top: -10px;*/
+}
+
+    .x-title h3 {
+        color: black;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+.x-TextArea {
+    display: none;
+    resize: none;
+    font-size: 13px;
+}
+
+.x-desc {
+    color: #4f5250;
+    font-size: 13px;
+    /*margin-top: 1%;*/
+    /*padding:3px 0 5px 0;*/
+    padding: 2px 0;
+    font-weight: 600;
+}
+
+.x-desc #spc {
+    font-weight: 600;
+    color: #337ab7;
+    font-size: 16px;
+}
+.x-desc p {
+    padding-top: 0px;
+}
+
+.dates {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: #337ab7;
+    font-size: 12px;
+    font-weight: 600;
+    padding-right: 7px;
+}
+
+.dates p {
+    margin-top:6px;
+    width:100%;
+    font-weight:700;
+}
+
+.dates span {
+    float: right;
+    font-weight: lighter;
+    color: #4f5250;
+    word-spacing: 2px;
+    font-weight:700;
+    font-size: 11px;
+}
+
+.x-datePicker {
+    display: none;
+    width: 165px;
+    outline: none;
+    padding: 2px;
+    font-size: 11px;
+    cursor:pointer;
+    border-style: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.x-select {
+    padding-left: 2px;
+    display: none;
+    width: 165px;
+    font-size: 10px;
+    font-weight: lighter;
+    cursor: pointer;
+    border-style: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.AddRemarkDetailView {
+    margin-bottom: 20px;
+    /*padding-top: 30px;*/
+    padding-top: 20px;
+}
+
+.remarklabel {
+    color: #337ab7;
+    font-size: 16px;
+    /*font-weight: 600;*/
+    font-weight: bold;
+}
+
+#frmRemarkRight {
+    font-size: 12px;
+    color: black;
+}
+
+    #frmRemarkRight textarea {
+        width: 99%;
+        margin-bottom: 2px;
+        margin-top: 1px;
+        padding: 7px;
+        background-color: #f9eed2;
+    }
+
+
+#frmRemarkRight .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 8px;
+ 
+}
+
+.x-fileInput {
+    display: inline-block !important;
+    color: #0F5FAF;
+    outline: none;
+    font-size: 10px;
+    cursor: pointer;
+    /*color: rgba(0, 0, 0, 0)*/
+}
+input::file-selector-button {
+    font-weight: bold;
+    padding: 5px 10px;
+    border: thin solid grey;
+    background-color: #337ab7;
+    color: #F8C851 !important;
+    border-radius:50px;
+    width:80px;
+    text-align:center;
+ 
+}
+/*.attach {
+    position: absolute;
+    top: 6px;
+    left: 70px;
+    color: #F8C851 !important;
+}*/
+
+
+.btnAddRemark {
+    float: right;
+    font-size: 10px;
+    background-color: #337ab7;
+    width: auto;
+    /*color: white!important;*/
+    color:#F8C851!important;
+    border-radius: 50px;
+    padding: 5px 10px;
+    text-align:right;
+    font-weight:bold;
+    margin-right:3px;
+}
+
+.btnAddRemark:hover,
+.btnAddRemark:active {
+    color: white !important;
+}
+
+.tabs-navWeb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /*border-bottom: 1px #ddd solid;
+    padding-bottom: 10px;*/
+    width:100%;
+}
+
+.tabs-navWeb li {
+    padding:2px;
+}
+
+.tabs-navWeb .tab-activeWeb a {
+    /*background: #337ab7;*/
+    color: white!important;
+    cursor: pointer;
+    /*font-weight: 500;*/
+}
+
+.tabs-navWeb a {
+    background: hsl(120, 11%, 96%);
+    /*border-radius: 50px;*/
+    border-radius: 5px;
+    /*color: #337ab7;*/
+    color:#F8C851!important;
+    background: #337ab7;
+    display: block;
+    font-size: 11px;
+    /*font-weight: 600;*/
+    font-weight: bold;
+    height: auto;
+    /*padding: 4px 8px;*/
+    padding:8px;
+    text-align: center;
+    width: auto;
+}
+
+.tabs-navWeb li {
+    float: left;
+}
+
+#edithead {
+    display: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #337ab7;
+}
+
+.tabs-stageWeb {
+    height: auto;
+    /*border-bottom: 1px #ddd solid;*/
+    border:none;
+    /*border-top: 0;*/
+    border-radius:5px;
+    clear: both;
+    /*position: relative;*/
+    /*top: 1px;*/
+    width: auto;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    /*background: url(/images/Bg.png);*/
+    padding: 5px;
+}
+
+.tabs-stageWeb::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.SectionCollaborators {
+    padding-top: 14px;
+}
+
+.SectionCollaborators span {
+    /*font-weight: 600;*/
+    font-weight: bold;
+    color: #337ab7;
+    padding-left:7px;
+}
+.SectionCollaborators .fa-user-plus:hover {
+    cursor:pointer;
+    color: #246399;
+}
+
+.SectionCollaborators .row {
+    margin-bottom: 3px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 10px;
+}
+.x-icon{
+    font-size:14px;
+}
+
+.x-heading {
+    display: inline-flex;
+    font-size: 16px!important;
+}
+
+.closeAdd{
+    display: none;
+    margin-top: 4px;
+    margin-right: 12px;
+}
+
+.task-classification {
+    margin-top: 4%;
+    margin-bottom:3px;
+}
+
+.task-classification .row {
+    margin-bottom: 12px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.task-classification span {
+    /*font-weight: 600;*/
+    font-weight: bold;
+    color: #337ab7;
+    padding-left:7px;
+}
+
+.addIcon {
+    float: right;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+
+
+.HistoryItem {
+    border-radius: 5px;
+    /*background-color: #f3f8fa;*/
+    background-color: white;
+    padding: 10px;
+    margin-bottom:3px;
+    position:inherit;
+}
+
+.line1 {
+    display: flex;
+    overflow: hidden;
+}
+
+.line1 span {
+    padding-right: 15px;
+    width:20px;
+    font-size:13px;
+}
+
+.line1 i {
+    padding-right: 8px;
+    font-size:12px!important;
+}
+.line1 .text {
+font-size:13px;
+}
+
+.line1 p {
+    padding: 10px;
+    font-size:12px!important;
+}
+
+.line2 span {
+    font-size: 12px;
+}
+
+.line2, .line3 {
+    /*margin-top: 8px;*/
+    margin-top: 5px;
+    /*margin-left: 24px;*/
+    margin-left: 19px;
+}
+
+.line2 i {
+    padding-right: 7px;
+    font-size:12px!important;
+}
+
+.line2 img {
+    width:15px;
+    vertical-align: text-top;
+}
+
+
+
+.filenam {
+    /*color: #3c8dbc;*/
+    padding-left: 5px;
+    cursor: pointer;
+    /*font-size: 12px;*/
+    font-size: 13px;
+    font-weight: 700;
+    color: #105faf;
+}
+
+.boxx {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    height: auto;
+     margin-top:5px;
+}
+
+.boxx::-webkit-scrollbar {
+    display: none;
+}
+
+.CollaboratorsBoxx {
+    padding-top: 2px;
+}
+.CollaboratorsBoxx:first-child {
+    padding-top: 12px;
+}
+.CollaboratorsBoxx:last-child {
+    padding-bottom: 12px;
+}
+
+.deleteCollabIcon {
+    width: 13px;
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
+}
+
+.boxx .tag-container {
+    padding: 5px;
+    height:auto!important;
+    width: 100%;
+    /*display:grid;*/
+    display:flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tag-container .TagsBoxx {
+    display:flex;
+    align-items: center;
+    border: 2px solid #337ab7;
+    border-radius: 5px;
+    margin: 3px;
+    background-color: #f8e7bb;
+    padding-right: 2px;
+}
+
+.tagDeleteIcon {
+    width: 13px;
+    margin-left: 6px;
+    /*visibility:hidden;*/
+    cursor: pointer;
+}
+/*.TagsBoxx:hover .tagDeleteIcon {
+    visibility:visible!important;
+}*/
+
+.iconAddTag {
+    width:25px;
+}
+
+.boxx .text {
+    padding-left: 7px;
+    display: inline-flex;
+    font-weight: 500;
+    color: black;
+    font-size: 12px;
+}
+.boxx .collabIcon {
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+
+/*aside nav menu Css Start*/
+.menu {
+    margin-top: 41px;
+    height: 100%;
+    background: #eeeeee;
+    font-size: 16px;
+    font-family: sans-ferif;
+}
+
+.menu__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background 0.3s;
+}
+
+.menu__item > i {
+    font-size: 14px;
+    color: #5a5454;
+}
+
+.menu__item--active {
+    background:#c2bebe; /*#dddddd;*/
+    /*border-left: #105faf solid 3px;*/
+}
+
+.menu__item--active > i {
+    color: #105faf;
+}
+
+.menu__item:hover {
+    /*background: #dddddd;*/
+    background:#c2bebe;
+    color: #105faf;
+    /*border-left: #105faf solid 3px;*/
+}
+
+.menu__item:hover i {
+    color: #105faf;
+}
+/*aside nav menu Css End*/
+
+/*Right side Detailpane css End*/
+
+
+
+/*Media Queries*/
+
+@media screen and (max-width:480px) {
+    .mobileDetailPane {
+        padding: 0 !important;
+    }
+
+    .css-checkbox {
+        margin-top: 1px !important;
+    }
+
+    .checkboxall {
+        margin-top: 1px !important;
+    }
+
+    /*Left Side Section Start*/
+    .Table-Dive{
+        padding-right:4px !important;
+    }
+
+    /*Top Icons Section Start*/ 
+    .search2 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .search2 a{
+        padding-right: 8px !important;
+    }
+
+    .search2 a i{
+        font-size:13px !important;
+    }
+    .search2 a:first-child{
+        padding-left:10px;
+    }
+
+    .top img {
+        /*width: 20px;*/
+        width: 17px;
+    }
+
+    /*Top Icons Section End*/ 
+
+    /*Pagination Icon Css Start*/
+     .g label{
+        font-size:13px !important;
+    }
+    .g a{
+        width:20px !important;
+    }
+    .g a i{
+        font-size:16px !important;
+    }
+    /*Pagination Icon Css End*/
+
+    /*Grid Css Start*/
+    .TaskBar {
+        font-size: 11px !important;
+    }
+    /*Grid Css End*/
+
+    /*Left Side Section End*/
+
+
+
+    /*Right side details pane Start*/
+    .AddRemarkDetailView {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    .tabs-stageWeb {
+        padding-left: 5px !important;
+    }
+
+    .SectionCollaborators {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+    .task-classification {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+    /*Right side details pane End*/
+}
+
+
+@media only screen and (max-width:600px) {
+    /*BasicFilter css*/
+    .basicfilterDiv {
+        width:400px;
+    }
+
+   /*Loader css Start*/
+     .loader {
+        margin: 60px auto;
+    }
+     /*Loader css End*/
+
+    /*Left Side Section Start*/
+    /*Top Icons Section Start*/ 
+    .search2{
+        padding-top:5px !important;
+        padding-left: 0px !important;
+        padding-bottom: 15px;
+        margin-bottom: 0px;
+    }
+    .search2 a {
+        padding-right: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .MultiClose {
+        width: 90%!important;
+    }
+    /*#MultiClose::before {
+        right: 60px;
+    }*/
+    /*Top Icons Section End*/
+
+    /*Pagination Icon Css Start*/
+    .search1 {
+        margin-top: 10px;
+        margin-right: 0px !important;
+        padding-right: 10px;
+    }
+    /*Pagination Icon Css Start*/
+
+
+
+    /*Grid Css Start*/
+    /*.TaskBar {
+        font-size: 11px;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-right: 0px;
+        width: 100%;
+        color: #337ab7;
+        background-color: #f3f8fa;
+        margin-left: 0px;
+        border-bottom: 3px solid white;
+        margin-bottom: 3px;
+        font-family: open sans,sans-serif;
+    }*/
+
+    .h {
+     display:none!important;
+    }
+
+    .TaskBar .TaskPriority,
+    .maindiv .TaskPriority   {
+        display:none!important
+    }
+
+    .combineCol {
+        width:40%!important;
+    }
+       /*Grid Css End*/
+    /*Left Side Section End*/
+
+
+    /*Right side details pane Start*/
+    .right {
+        display: none;
+        border-left:none;
+        margin-right:0px;
+    }
+
+    .right .detailPane {
+        padding-left: 10px;
+    }
+
+    .HistoryItem i {
+        color: #0F5FAF;
+    }
+    .filename {
+        margin-left: 25px;
+    }
+
+    /*Right side details pane End*/
+
+}
+/*detailpane tooltip css start*/
+
+.tooltips {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltiptext {
+    width: auto;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 3px 8px;
+    /* Position the tooltip */
+    z-index: 1;
+    font-size: 12px;
+}
+
+.closetask {
+    visibility: hidden;
+    position: absolute;
+    top: 70%;
+    left: 51%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.share {
+    visibility: hidden;
+    position: absolute;
+    top: 70%;
+    right: 19%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.createsub {
+    visibility: hidden;
+    position: absolute;
+    top: 70%;
+    right: 2%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.edit {
+    visibility: hidden;
+    position: absolute;
+    top: 70%;
+    left: 88%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.saveedit {
+    visibility: hidden;
+    position: absolute;
+    top: 70%;
+    left: 79%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.cancel {
+    visibility: hidden;
+    position: absolute;
+    top: 70%;
+    right: 0%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+    .edit::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 72% !important;
+    }
+   .cancel::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 80% !important;
+}
+
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+
+
+#CloseTask:hover .closetask {
+    visibility: visible;
+    opacity: 1;
+}
+
+#ShareLink:hover .share {
+    visibility: visible;
+    opacity: 1;
+}
+
+#addSubTask:hover .createsub {
+    visibility: visible;
+    opacity: 1;
+}
+
+#editIcon:hover .edit {
+    visibility: visible;
+    opacity: 1;
+}
+#SaveTask:hover .saveedit {
+    visibility: visible;
+    opacity: 1;
+}
+#CancleEdit:hover .cancel {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*detailpane tooltip css end*/

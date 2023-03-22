@@ -1,0 +1,593 @@
+﻿@{
+    ViewData["Title"] = "ManageProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="~/Content/Custom/manageProducts.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageProducts.js"></script>
+<script src="~/scripts/Custom/BasicFilter.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+
+<style>
+    .maindiv .accordion-toggle:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e114";
+        float: right;
+        color: grey;
+    }
+
+    .maindiv .accordion-toggle.collapsed:after {
+        content: "\e080";
+    }
+
+
+    .BatchBox {
+    border-left: 3px solid #367fa9;
+    background: url(/images/Bg.png);
+    background-position: left;
+    margin-left:5px;
+    display:flex;
+    overflow-x:auto;
+    
+}
+
+
+    .bootstrap-select > .dropdown-toggle {
+        margin: 10px 0px 0px 2px;
+        font-size: 11px;
+        outline: none;
+        border: none;
+    }
+
+    .mainpanel {
+        width: auto;
+    }
+
+    .close {
+        opacity: 0.8;
+    }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+    .SubTask {
+        color: #333;
+    }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    /*[data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';*/
+    /* hides the tooltip when not hovered*/
+    /*display: none;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 4px 25px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 1.55em;
+            height: 28px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;*/
+    /*place-items: start;*/
+    /*}
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }*/
+
+        
+.select-btn.select-filterDropdown, .select-filterDropdown ~ .list-items{
+    width: auto;
+    margin: 0px 17px;
+    margin-left: 10px;
+}
+
+/*.select-filterDropdown ~ .list-items {
+    width: auto;
+    margin: 0px 17px;
+    margin-left: 10px;
+}*/
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+
+    tr:hover:not(.highlight) td {
+        background-color: transparent;
+    }
+
+    /*.sub:hover {
+        background-color: #3c8dbc;
+        color: white;
+    }*/
+
+    .u {
+        padding: 18px;
+        padding-right: 20px;
+    }
+
+    .collapse {
+        background-color: transparent;
+        width: 100%;
+        /*padding-top: 10px;*/
+        /*padding: 10px;*/
+        margin-right: 0px;
+        margin-right: 3px;
+        padding-right: 10px;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+    .arrowicon .fa-caret-up{
+        height:12px;
+        margin-top:-2px;
+    }
+
+    .asidenav {
+        height: 87%;
+    }
+
+    .menu {
+        height: 106%;
+    }
+
+    					   
+/*.select-btn{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1) !important;
+    width:260px;*/
+    /*margin:0 auto;*/
+/*}
+.select-btn .btn-text{
+    font-size: 17px;
+    font-weight: 400;
+    color: #333;
+}
+.select-btn .arrow-dwn{
+    display: flex;
+    height: 21px;
+    width: 21px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50%;
+    background: #6e93f7;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.select-btn.open .arrow-dwn{
+    transform: rotate(-180deg);
+}*/
+/*.list-items{
+    height:260px;
+    overflow-y:scroll;
+    position: relative;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    width:260px;
+}
+.select-btn.open ~ .list-items{
+    display: block;
+}
+.list-items .item{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 40px;
+    cursor: pointer;
+    transition: 0.3s;*/
+  /*  padding: 0 15px;*/
+   /* border-radius: 8px;
+}
+.list-items .item:hover{
+    background-color: #e7edfe;
+}
+.item .item-text{
+    font-size: 15px;
+    font-weight: 400;
+    color: #333;
+    width: 100%;
+    height: 100%;
+    padding-top: 9px;
+    padding-left: 20px;
+}
+.item .checkbox {*/
+       /* display: flex;
+        align-items: center;*/
+        /* justify-content: center; */
+        /* height: 16px; */
+        /*height: 100%;*/
+        /* width: 16px; */
+        /*border-radius: 4px;*/
+        /* margin-right: 12px; */
+        /* border: 1.5px solid #c0c0c0; */
+      /*  transition: all 0.3s ease-in-out;
+        padding-left: 30px;
+        margin-top:7px;
+}
+
+    .main-item {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        height: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 0 10px;
+        border-radius: 8px;
+    }
+
+.button-list{
+    list-style: none;
+    text-align: center;
+     margin-top: 10px;
+}
+.applybtn{
+    background-color:#6e93f7;
+    color: white;
+    border: none;
+    padding: 4px 30px;
+    border-radius: 5px;
+}
+.cancelbtn{
+    background-color:#f24c6d;
+    color: white;
+    border: none;
+    padding: 4px 30px; 
+    border-radius: 5px;
+    margin:5px;
+}*/
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .DateBtn {
+        height: 26px;
+        margin-top: 10px;
+        border-radius: 0px;
+        padding: 3px 6px 6px 6px;
+        width: 29px;
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+
+    .content {
+        height: 480px;
+        padding:0 !important;
+
+    }
+
+    .subSelected {
+        background-color: orange !important;
+    }
+
+    option {
+        transform: translateY(1);
+        transition: transform 0.5s ease;
+    }
+
+    /*tr:hover:not(.highlight, .subSelected) td {
+        background-color: lightblue;
+    }*/
+
+    .arrowicon {
+    display: flex;
+    flex-direction: column;
+}
+/*.sorting {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 32px;
+    align-items: center;
+    width: 110px;
+    margin-top: 0px !important;
+    padding: 2px 8px !important;
+    margin-left: 30px;
+}
+*/
+</style>
+
+<input type="hidden" value="@ViewBag.showscheme"  id="showscheme" />
+
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+<div class="con">
+    <div class="row mainWrapper">
+        <div class="left">
+            <div class="calHeightIcon">
+                <div class="icon-div">
+                    <div class="search2">
+                        @if (ViewBag.allowAddProduct)
+                        {
+                            <a class="top btn-AddProduct" title="Add Product" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" style="text-align:left;">
+                                <img src="~/images/icon-plus.png" />
+                            </a>
+                        }
+                        
+                        <a class="top" title="Refresh" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" onclick="reloadGrid()">
+                            <img src="~/images/icon-refresh.png" />
+                        </a>
+                        <a class="top" title="Filter" data-placement="bottom" data-toggle="tooltip" data-trigger="hover"  onclick="ShowFilters();">
+                            <img src="~/images/icon-filter.png" />
+                        </a>
+                       @* <a class="top" title="Delete" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" >
+                            <img src="~/images/icon-delete.png" />
+                        </a>*@
+                    </div>
+                   
+                  
+                      @*back color 428bca1f   V-nav-color-#0a243e *@
+                    <div id="dropdown" class="search" style="display: inline-flex;margin-left: 0px; padding-left:10px; position:relative;align-items: center;margin-right:50px;">
+                        <p class="basicFilterTitle"  onclick="ShowCloseBasicFilter();"><span>Select Filter</span> <i class="fa fa-caret-down"></i></p>
+                        <div id="filterDiv" class="basicfilterDiv">
+                            <table id="basicFilterTable">
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                    <td colspan="3" style="text-align:center">
+                                        <div id="search1" onclick="ApplyBasicFilters();" class="btn modalbutton ">Apply<i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                                        <button type="button" class="btn modalbuttonsecondary" onclick="ShowCloseBasicFilter();">Close</button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                       
+                      
+                        <div id="FilterText" class="" style="float:left; display:none; margin-top: 10px;margin-left:15px;font-size:13px;border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+
+                            <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                            <a class='' id='' onclick='ReloadGrid();'>
+                                <i class='glyphicon glyphicon-remove'></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <input type="text"  id="prodnameFilter" class="prodnameFilter" onkeyup="searchByProdName();" style="width:40%; margin-right:8px; margin-left:10px; margin-top: 5px;border: none;border-bottom: 1px solid;outline: none;" placeholder="Search for product name">
+
+                    <div class="search1">
+                        <div class="g">
+                            <label id="info">0-00 of 00 </label>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Previous" id="Prev" data-original-title="Newer" >
+                                <i class="fa fa-angle-left" style="font-size:23px"></i>
+                            </a>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Next" id="Next" data-original-title="Older" >
+                                <i class="fa fa-angle-right" style="font-size:23px"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="resultDiv" style="display:none;">
+                    <div class="resultContent">
+                        <div class="result-msg">
+                        </div>
+                        <p class="clearFilter" onclick="removeFilter();">Clear Filter</p>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <input type="hidden" name="Logintype" id="Logintype" value="@httpContextAccessor.HttpContext?.Session.GetString("Logintype")" />
+                <input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+            </div>
+           
+            
+            <div class="col-md-12 text-center Table-Dive">
+                <div class="calHeightTaskBar">
+                    <div class="TaskBar tr bg-primary" id="taskb">
+                        <div class="SNo td tbHead" style="width: 6%; text-align: right; padding: 0 10px 0 8px;"><b>SNo.</b></div>
+                        <div class="TaskTitle td tbHead" style="width: 23%;padding: 0 8px 0 13px;"><b>Product Name</b></div>
+                        <div class="TaskTitle td tbHead" style="width: 23%;padding: 0 8px 0 13px;"><b>Product Code</b></div>
+                        <div class="TaskTitle td tbHead" style="width: 23%;padding: 0 8px 0 13px;"><b>Manufacturer</b></div>
+                        <div class="DueDate td h tbHead" style="width: 8%; padding: 0 8px 0 8px;"><b>MRP</b></div>
+                        <div class="DueDate td h tbHead" style="width: 8%; padding: 0 8px 0 8px;"><b>PTR</b></div>
+                        <div class="DueDate td h tbHead" style="width: 8%; padding: 0 8px 0 8px;"><b>Total Qty</b></div>
+                    </div>
+                </div>
+                <div id="loading" style="padding:10px; margin-top:10%;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div></div>
+                <div class="" id="example" role="tablist" aria-multiselectable="true"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="type2" value="@ViewBag.Message" />
+<input type="hidden" id="allowEditProduct" value="@ViewBag.allowEditProduct" />
+
+
+<div class="modal fade" id="addProduct">
+    <div class="modal-dialog" role="form" style="width:30%">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 class="modal-title"> </h4>
+
+                <div id="addProductDiv" class="col-md-12" style="padding-left:0px">
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+
+<!--new design-->
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 2px; width: 670px;">
+            <div class="modal-body" style="height: 400px;  overflow-y:scroll;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            <div id="addfilter" onclick="AddFilters();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer;">New Filter <i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            <div id="addsortOptions" onclick="AddSortingOptions();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer; ">New Sort Option<i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                @*<div id="clearFilters" onclick="removeFilter2();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>*@
+                <div id="clearFilters" onclick="removeFilter();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>
+                <div id="search1" onclick="ApplyFilters2();" class="btn modalbutton ">Apply <i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal">Close</button> @*close modal popup*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="AddProductModal">
+    <div class="modal-dialog" role="form" style="width:30%">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 class="modal-title"> </h4>
+                <div id="AddProductDiv" class="col-md-12" style="padding-left:0px">
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+              

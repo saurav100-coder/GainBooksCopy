@@ -1,0 +1,304 @@
+﻿
+
+<script src="~/Scripts/FrameWork/jquery-1.10.2.js" type="text/javascript"></script>
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+
+<link rel="stylesheet" href="~/Content/Custom/ManagePendingTasks.css" />
+<style>
+    .content-wrapper {
+        background-color: white;
+        height: 400px;
+    }
+
+    .row {
+        margin-bottom: 30px;
+    }
+
+    .main_block {
+        background-color: white;
+        height: auto;
+        width: 100%;
+    }
+
+
+
+    [data-tip] {
+        position: relative;
+    }
+
+        [data-tip]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 35px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-tip]:after {
+            display: none;
+            content: attr(data-tip);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 8px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-tip]:hover:before,
+        [data-tip]:hover:after {
+            display: block;
+        }
+
+    tr:hover:not(.highlight) td {
+        background-color: lightblue;
+        color: #666;
+    }
+
+    .highlight {
+        background-color: #568CA7;
+        color: white;
+    }
+
+    #P_CustSearch {
+        width: 34px;
+        height: 25px;
+        padding-left: 5px;
+        padding-top: 2px;
+        padding-right: 5px;
+        border-radius: 0px;
+    }
+
+    .form-horizontal .control-label {
+        padding-top: 2px;
+    }
+
+    .form-control.input-sm {
+        padding-left: 5px;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+
+      var P_Customers = '@TempData["PCustomer"]';
+        //Calling GetEmployeeData function
+        GetEmployeeData(P_Customers);
+        sessionStorage.setItem("PCustomer", P_Customers)
+        //location.href = '/CustomerDetails/Index?P_Customers=' + P_Customers
+        $("#GoBack").click(function () {
+            location.href = '/CustomerDetails/Index?P_Customers=' + P_Customers
+        });
+        sessionStorage.setItem("search", null);
+
+        $("#example tbody tr").remove();
+        //var table = $("#example").DataTable();
+        var counter = 0;
+
+        $("#Prev").on("click", function () {
+            var key = $("#example").find('tr:nth-child(1) td:first input').val();
+            var a = sessionStorage.getItem("PageSize");
+            var b = sessionStorage.getItem("search");
+            var d = sessionStorage.getItem("start");
+            var o = sessionStorage.getItem("order");
+            if (a != null) { d = (parseInt(d) - a) - 1; } else { parseInt(d) = (d - 20) - 1; }
+            $("#example tbody tr").remove();
+            $('#loading').show();
+            $('#loadingmessage').show();
+            $('#Msg').hide();
+            if (key != 1) {
+                $.post('/CRM/GetRegistrationData', { P_Customers: P_Customers, start: d, pSize: a, search: b, order: o }, function (data) {
+                    loadData(data);
+                })
+            }
+
+
+        });
+        $("#Next").on("click", function () {
+            var b = sessionStorage.getItem("Total");
+            var key = $("#example").find('tr:last td:first input').val();
+            var a = sessionStorage.getItem("PageSize");
+            var c = sessionStorage.getItem("search");
+            var d = sessionStorage.getItem("start");
+            var o = sessionStorage.getItem("order");
+            if (a != null) { d = parseInt(d) + parseInt(a) - 1; } else { d = parseInt(d) + 20 - 1; }
+            $("#example tbody tr").remove();
+            $('#loading').show();
+            $('#loadingmessage').show();
+            $('#Msg').hide();
+            if (key != b) {
+                $.post('/CRM/GetRegistrationData', { P_Customers: P_Customers, start: d, pSize: a, search: c, order: o }, function (data) {
+                    loadData(data);
+                })
+            }
+        });
+    });
+    function GetEmployeeData(P_Customers) {
+            $('#loading').show();
+            $('#loadingmessage').show();
+            var a = 1;
+            sessionStorage.setItem("start", 1);
+            var t = sessionStorage.getItem("PageSize");
+            if (t == null) { t = 20 }           
+            $.post('/CustomerDetails/GetRegistrationData', { P_Customers: P_Customers, start: 1, pSize: t }, function (data) {
+                sessionStorage.setItem("Total", data.recordsTotal);
+                loadData(data);
+            });
+        }
+
+
+
+    //This Function load the Registration data of related customer
+        function loadData(data) {
+            var tblEmployee = $("#example");
+            $("#example tbody tr").remove();
+            var a = data.draw;
+            var d = sessionStorage.getItem("PageSize");
+            if (d == null || d == 0 || d == "undefined") { d = 20; sessionStorage.setItem("PageSize", d); };
+            var b;
+            if (a == 1) { b = d; } else { b = parseInt(a) + parseInt(d); a = parseInt(a) + 1 }
+            sessionStorage.setItem("start", a);
+            sessionStorage.setItem("Total", data.recordsTotal);
+            var c = data.recordsTotal;
+            $.each(data.data, function (index, item) {
+                var m = (a) + index;
+                var tr = $("<tr id='" + item.Issuesfilegstkey + "' class='clickable' data-toggle='collapse' data-target='." + item.Issuesfilegstkey + "'+ ></tr>");
+                tr.html(("<td style='width:5%'><input type='checkbox' id='" + item.Issuesfilegstkey + "' value='" + item.Issuesfilegstkey + "'style='margin-top:2px; float:left'/>&nbsp;" + m + "</td>")
+                       + " " + ("<td style=' padding-right:7px;'>" + item.textRegsendDate + "</td>")
+                        + " " + ("<td >" + item.Regtype + "</td>")
+                     + " " + ("<td >" + item.textOpenedupto + "</td>")
+                     + " " + ("<td >" + item.Regtype2 + "</td>")
+                     + " " + ("<td >" + item.Lan + "</td>")
+
+                          + " " + ("<td style='width:1%'>" + item.Node + "</td>")
+                     );
+                tblEmployee.append(tr);
+            })
+            if (data.Array == 0) {
+                $('#loading').show();
+                $('#loadingmessage').hide();
+                $("#Msg").show();
+                $("#Msg").text("No record found");
+                $('#loading').addClass('clickable');
+            } else {
+                $('#loading').hide();
+                $('#loadingmessage').hide();
+                $('#Msg').hide();
+            }
+        }
+
+        function PageSize(value) {
+            var a = $("#size").val();
+            sessionStorage.setItem("PageSize", a);
+            var P_Customers = sessionStorage.getItem("PCustomer")
+            $(".yy").hide();
+            var b = sessionStorage.getItem("search");
+            var key = $("#example").find('tr:nth-child(1) td:first input').val();
+            $("#example tbody tr").remove();
+            $('#loading').show();
+            $('#loadingmessage').show();
+            $('#Msg').hide();
+            $.post('/CRM/GetRegistrationData', { P_Customers: P_Customers, start: 1, pSize: a, search: b }, function (data) {
+                loadData(data);
+            })
+        }
+
+</script>
+
+
+
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:500px; margin-bottom:50px; display:none "></div>
+</div>
+
+
+<h2 class="text-center text-primary" style="margin-top: 0px; padding-top:20px; padding-bottom:10px">Registration Details</h2>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="main" class="col-md-12" style="padding-right:25px">
+            <div id="dropdown" class="col-md-4 search ">
+                <select class="col-md-2" id="filter" style="height:26px">
+                    <option value="0">Filter</option>
+                </select>
+                <div id="TextC" style="display:none">
+                    <input type="text" id="filterText" class="col-md-3" placeholder="Type to search" style="height:26px" /><div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" style="color:#337ab7; margin-left:10px; width:30px; height:25px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; border-radius:0px; margin-top:10px">
+                    <p id="popover1" data-placement="bottom" style="margin-top:0px;"><i class="fa fa-gear xx" style="font-size:20px; margin-top:2px"></i></p>
+                    <div id="popover_content_wrapper1" style="display: none">
+                        <ul style="list-style:none; padding-left:0px">
+                            <li id="popover2" data-placement="left" style="left:-90px; width:90px;">Set Page Size</li>
+                        </ul>
+                    </div>
+                    <div id="popover_content_wrapper2" style="display:none; width:148px">
+                        <input type="number" id="size" style="padding:2px 2px 3px 5px; width:70%;height:25px" /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px;border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>
+                    </div>
+                </div>
+                @*<div class="yy">
+                        <br />
+                        <ul style="padding:0px">
+                            <li class="t1" rel="popover" data-content='<input type ="number" id="size" style="padding:2px 2px 3px 5px; width:70%; height:25px"  /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px; border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px; margin-bottom: 2.5;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>' data-placement="left" style="list-style:none"> <label>Set Page Size </label></li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<form action="@Url.Action("ManageAccounts")" method="post" id="customer">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="grid1" id="grid1" value="">
+    <hr />
+    <div class="col-md-12" style="height:400px;">
+        <table id="example" class="table row-border" cellspacing="0">
+            <thead>
+                <tr style="text-align:center;">
+                    <th>Sno.</th>
+                    <th>Reg Send Date</th>
+                    <th>Reg Type</th>
+                    <th> Opened Upto</th>
+                    <th>Reg Type2</th>
+                    <th>Lan</th>
+                    <th>Nodes</th>
+                </tr>
+                <tr id="loading"><td colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</form>
+<input type="hidden" id="type3" value="@ViewBag.Message" />
+
+<div class="col-md-12 text-right" style="margin-top:20px;">
+    <button class="btn btn-primary" id="GoBack">Go Back</button>
+</div>

@@ -1,0 +1,118 @@
+﻿@model CRMApp.Models.CRMTasksMaster
+@{
+    ViewData["Title"] = "CreateTask";
+    string CalledFrom = ViewBag.calledfrom;
+    if (CalledFrom == "managependingtasks"){
+        Layout = "";
+    }
+    if( CalledFrom == "edit"){
+        Layout = "";
+    }
+
+}
+
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>*@
+
+@if (CalledFrom != "managependingtasks")
+{
+    <link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+    <script src="~/Scripts/Custom/dropdown.js"></script>
+
+}
+@*<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>*@
+<script>
+    function submitTaskForm(formId, btn) {
+        var title = $("#" + formId + " #TaskTitle").val();
+        if ($.trim(title) == "") {
+            $("#" + formId + " #taskTitleMsg").text("Task Title is required!");
+            return false;
+        }
+
+        $("#" + formId).submit();
+        $(btn).attr("disabled", true);
+    }
+</script>
+
+<style>
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+</style>
+
+<h2 class="text-center text-primary Task" style="color: #105faf;">Task</h2>
+<div class="hr"></div>
+<div class="panel panel-default PanelForm" style="width:300px; margin:0px auto">
+    <div class="panel-body">
+        <form action="@Url.Action("CRMTasksForm")" method="post" id="frmCreateTask">
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessage("0", new {@class = "text-danger"})
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model=> model.CRMTasks_Key)
+            @Html.HiddenFor(model=> model.Under)
+            <div class="col-md-12 mainpanel" style="margin-left:20px">
+
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Task Title<strong style="color:red">*</strong> </label>
+                    @*<input type="text" id="TaskTitle" name="TaskTitle"/>*@
+                    @Html.TextBoxFor(model=> model.TaskTitle, new {@class = "form-control input-sm", @style = "width:202px; border-radius:0px"})
+                    <span id="taskTitleMsg" style="color:red"></span>
+                </div>
+
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Task Description </label>
+                    @*<textarea id="TaskDesc" name="TaskDescription"></textarea>*@
+                    @Html.TextAreaFor(model=> model.TaskDescription, new {@class = "form-control input-sm", @style = "width:202px;border-radius:0px"})
+                </div>
+
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Due Date</label>
+                    @*<input type="date" id="DueDate" name="DueDate"/>*@
+                    @*<input type='date' value=@Model.FrmtDueDate class="form-control input-sm" id='duedate' name='duedate' style="width:202px;border-radius:0px" />*@
+                    <input type='datetime-local' value=@Model.FrmtDueDate class="form-control input-sm" id='duedate' name='duedate' style="width:202px;border-radius:0px" />
+                    @*   @Html.TextBoxFor(model=> model.FrmtDueDate, new {.class = "form-control input-sm", .id = "Duedate", .style = "width:202px;border-radius:0px", .type = "Date"})*@
+                </div>
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Task Status</label>
+                    @*<input type="date" id="NextDate" name="NextDate" />*@
+                    @Html.List_Search("Taskstatus", "49", "Select Status", Model.Taskstatus,"", new {@class = "form-control input-sm", @onChange = "ShowText(this.id)", @style = "padding-left:2px;border-radius:0px; width:202px"}, false)
+                </div>
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Assigned To</label>
+                    @*<input type="date" id="NextDate" name="NextDate" />*@
+                    @Html.List_Search("Assignedto", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y'", Model.Assignedto, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:202px"})
+                </div>
+
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Priority</label>
+                    @Html.List_Search("priority", "78", "Select Priority", Model.priority,"", new {@class = "form-control input-sm", @onChange = "ShowText(this.id)", @style = "padding-left:2px;border-radius:0px; width:202px"}, false)
+                </div>
+
+               <div class="forminput">
+                    <label class="text-info labeltext" style="color: #105faf;">Tags</label>
+                        @Html.List_Search_Multi("multiTags", "68", "-Select Tags-", 0,"",new {@class=""},false)
+                     
+                </div>
+               
+
+               
+
+                <div style="margin:20px 0px 10px 30px" class="mainbutton">
+                    @*<input type="submit" name="Submit" value="Submit" class="btn btn-primary" id="Load" />*@
+                    <input type="button" name="Submit" value="Submit" class="btn btn-primary" id="Load" onclick="submitTaskForm('frmCreateTask',this);" />
+                    @*<input type="button" name="Cancel" value="Cancel" class="btn btn-default" style="margin-left:20px" data-dismiss="modal" />*@
+                    <input type="button" name="Cancel" value="Cancel" class="btn btn-default" style="margin-left:20px" onclick="window.location.href = '/CRM/Home';" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    
+
+
+

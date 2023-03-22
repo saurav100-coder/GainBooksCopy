@@ -1,0 +1,205 @@
+﻿@{
+    ViewData["Title"] = "UpdateDatabse";
+}
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<script src="~/scripts/Custom/UpdateDatabase.js"></script>
+
+<style>
+    .modalbutton {
+    background-color: #337ab7;
+    color: white;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+    .modalbutton:hover {
+        color: white;
+    }
+
+.modalbuttonsecondary {
+    background-color: #efefef;
+    color: #555;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+</style>
+
+<div class="form-group">
+   <lable>Enter User Database</lable>
+   <input type="text" placeholder="User Database" class="form-control" id="destserverdb" name="destserverdb">
+
+    <input type="checkbox" placeholder="User Database"  id="wineyesno" name="wineyesno"  />Wine Business
+    <input type="checkbox" placeholder="User Database"  id="rewritemaster" name="rewritemaster" /> Rewrite Masters
+
+</div>
+<button class="btn btn-primary" onclick="showUpdateDbCtrl();">Update Database</button>
+
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:400px; margin-bottom:50px; display:none"></div>
+</div>
+
+
+<div Class="modal fade" id="updateDbModel">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div style="text-align: center;font-size:15px;">
+                <p>Do you want to Update Database?</p>
+            </div>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">               
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="button" Class="btn modalbutton" onclick="UpdateDatabse()" style="margin-right:25px; margin-top:20px">Update </Button>
+                    <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal" style="margin-right:50px; margin-top:20px">Cancel </button>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<hr />
+
+
+<div class="form-group">
+    <lable>Enter Folder Name (you can separate folders name using comma)*</lable>
+    <input type="text" placeholder="Folder Name" class="form-control" id="foldername" name="foldername">
+</div>
+<button class="btn btn-primary" onclick="showCreateFolderCtrl();">Create Folders</button>
+
+<div Class="modal fade" id="CreateFolderModel">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div style="text-align: center;font-size:15px;">
+                <p>Do you want to create folders on server?</p>
+            </div>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="button" Class="btn modalbutton" onclick="CreateFolder()" style="margin-right:25px; margin-top:20px">Create</Button>
+                    <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal" style="margin-right:50px; margin-top:20px">Cancel </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div Class="modal fade" id="InfoModel">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div style="text-align: center;font-size:15px;">
+                <p class="msg"></p>
+            </div>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    @*<button type="button" class="btn modalbutton" data-dismiss="modal" style="margin-right:50px; margin-top:20px">OK</button>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br />
+<br />
+<hr />
+
+<div class="form-group">
+    <lable>Enter Database</lable>
+    <input type="text" placeholder="User Database" class="form-control" id="userdb" name="userdb">
+    <input type="checkbox" id="wineBusiness" name="wineBusiness" />Wine Business
+    <textarea type="text" name="sqlQuery" id="sqlQuery" placeholder="Sql Query" class="form-control" rows="4" style="resize:none"></textarea>
+</div>
+<button class="btn btn-primary" onclick="showRunQueryCtrl();">Run Query</button>
+
+<div Class="modal fade" id="runQueryModel">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div style="text-align: center;font-size:15px;">
+                <p>Do you want to Run SQL Query?</p>
+            </div>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="button" Class="btn modalbutton" onclick="RunSqlQuery()" style="margin-right:25px; margin-top:20px">Run </Button>
+                    <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal" style="margin-right:50px; margin-top:20px">Cancel </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+<hr />
+
+<div class="form-group">
+    <lable>Enter Database</lable>
+    <input type="text" placeholder="User Database" class="form-control" id="uDb" name="uDb">
+</div>
+<button class="btn btn-primary" onclick="showDeleteDatabaseCtrl();">Delete Database</button>
+
+
+<div Class="modal fade" id="deleteDbModel">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div style="text-align: center;font-size:15px;">
+                <p>Do you want to Delete Database?</p>
+            </div>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="button" Class="btn modalbutton" onclick="DeleteDatabase()" style="margin-right:25px; margin-top:20px">Delete </Button>
+                    <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal" style="margin-right:50px; margin-top:20px">Cancel </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+<hr />
+
+
+<button class="btn btn-danger" onclick="showClearWineDatabaseCtrl();">Clear Wine Database</button>
+
+
+<div Class="modal fade" id="clearWineDatabaseModel">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div style="text-align: center;font-size:15px;">
+                <p>Do you want to Clear Wine Databases?</p>
+            </div>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="button" Class="btn modalbutton" onclick="ClearWineDatabase()" style="margin-right:25px; margin-top:20px">Clear </Button>
+                    <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal" style="margin-right:50px; margin-top:20px">Cancel </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

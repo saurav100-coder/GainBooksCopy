@@ -1,0 +1,24 @@
+﻿@model CRMApp.Models.PaytmResponse
+@{
+    ViewData["Title"] = "PaytmResponse";
+}
+
+<h2>PaytmResponse</h2>
+
+<div style="margin-top:120px;height:200px;" class="text-center">
+
+    
+	@if (Model.STATUS == "TXN_SUCCESS")
+	{
+		<h3 Class="text-center text-info">Transaction Successful !!<br />Thank you</h3>
+		<input type="button" Class="btn btn-primary" value="Ok" style="margin-top:20px; width:76px" onclick="window.location = '@Url.Action("CustomerReg")'" />
+	}
+	else
+	{
+		<h3 Class="text-center text-info">An error Occured! @Model.RESPMSG .Please try again <br />Thank you</h3>    
+	}
+    
+        
+    
+
+</div>

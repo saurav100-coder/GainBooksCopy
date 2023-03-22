@@ -1,0 +1,865 @@
+﻿@{
+    ViewData["Title"] = "ManageRegCallsMV1";
+}
+
+
+@*<link rel="stylesheet" href="~/Content/Custom/ManageRegCalls.css" />*@
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" href="~/Content/Custom/ManageRegCallsMV2.css" />
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageRegCallsMV1.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+@*@Optimization.Scripts.Render("~/Scripts/Link_Customer")*@
+@*@*@Optimization.Scripts.Render("~/Scripts/Msg_To_Customer")*@*@*@
+
+<script src="~/Scripts/Custom/LinkCustomer.js"></script>
+
+<style>
+    .content-wrapper{
+        background-color:white;
+    }
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .loader {
+        margin: auto;
+        border: 0.625em solid #f3f3f3; /* Light grey */
+        border-top: 0.625em solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 4.375em;
+        height: 4.375em;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    .accordionBlue {
+        background-color: white;
+        color: #444;
+        cursor: pointer;
+        width: 0%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+        .accordionBlue:after {
+            /*content: '\002B';*/
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+            font-size: 30px;
+        }
+
+    .accordionRed {
+        background-color: white;
+        color: #444;
+        cursor: pointer;
+        width: 0%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+        .accordionRed:after {
+            /*content: '\002B';*/
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+            font-size: 30px;
+        }
+
+    .accordionGrey {
+        background-color: white;
+        color: #444;
+        cursor: pointer;
+        width: 0%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+        .accordionGrey:after {
+            /*content: '\002B';*/
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+            font-size: 30px;
+        }
+
+    .HiddenRed:hover {
+        background-color: #ffd4d1;
+    }
+
+    .panelRed {
+        padding: 0 0px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0s ease-out;
+        margin-top: 0px;
+        margin-left: 0px;
+        width: 346px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        z-index: 10;
+    }
+
+    .panelGrey {
+        padding: 0 0px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0s ease-out;
+        margin-top: 0px;
+        margin-left: 0px;
+        width: 346px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        z-index: 10;
+    }
+
+    #rcorners1 {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        background-color: white;
+        border-radius: 12px;
+        /*border-top: 3px solid #3c8dbc;*/
+        /*border-left: 3px solid #3c8dbc;*/
+        /*border-right: 3px solid #3c8dbc;*/
+        border-bottom: 0px;
+        width: 346px;
+    }
+
+    #rcorners2 {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        background-color: white;
+        padding-top: 0px;
+        border-radius: 12px;
+        /*border-top: 3px solid #7c888e;
+            border-left: 3px solid #7c888e;
+            border-right: 3px solid #7c888e;*/
+        border-bottom: 0px;
+        width: 346px;
+        min-height: 40px;
+        border-left-width: 0px;
+        padding-top: 0px;
+    }
+
+    #rcorners3 {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        background-color: white;
+        padding-top: 0px;
+        border-radius: 12px;
+        border-top: 0px solid #e64945;
+        border-left: 3px solid #e64945;
+        border-right: 0px solid #e64945;
+        border-bottom: 0px;
+        width: 346px;
+        min-height: 40px;
+        border-left-width: 0px;
+        padding-top: 0px;
+    }
+
+    .content {
+        min-height: 250px;
+        padding: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: white;
+    }
+
+    #rcorners_inner {
+        z-index: 20;
+        padding-bottom: 0px;
+        padding-left: 5px;
+        padding-right: 22px;
+        padding: 20px;
+        padding: 2px 5px 0px 5px;
+        margin-right: 20px;
+        background-color: white;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top: 2px solid #d8d8d8;
+        border-right: 3px solid #3c8dbc;
+        border-left: 3px solid #3c8dbc;
+        border-bottom: 1px solid #3c8dbc;
+        width: 346px;
+    }
+
+    #rcorners_innerRed {
+        z-index: 20;
+        padding-bottom: 0px;
+        padding-left: 5px;
+        padding-right: 22px;
+        padding: 20px;
+        padding: 2px 5px 0px 5px;
+        margin-right: 20px;
+        background-color: white;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top: 2px solid #d8d8d8;
+        border-right: 3px solid #e64945;
+        border-left: 3px solid #e64945;
+        border-bottom: 1px solid #e64945;
+        width: 346px;
+    }
+
+    #rcorners_innerGrey {
+        z-index: 20;
+        padding-bottom: 0px;
+        padding-left: 5px;
+        padding-right: 22px;
+        padding: 20px;
+        padding: 2px 5px 0px 5px;
+        margin-right: 20px;
+        background-color: white;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-top: 2px solid #d8d8d8;
+        border-right: 3px solid #7c888e;
+        border-left: 3px solid #7c888e;
+        border-bottom: 1px solid #7c888e;
+        width: 346px;
+    }
+
+    .numberCircle {
+        border-radius: 50%;
+        width: 18px;
+        height: 17px;
+        padding: 3px 1px 1px 0px;
+        margin-right: 5px;
+        background: #e64945;
+        border: 0.5px solid #e64945;
+        color: white;
+        text-align: center;
+        font: 10px Arial, sans-serif;
+        margin-left: 0px;
+        bottom: 0px;
+        margin-top: 2px;
+    }
+
+    .hover:hover {
+        box-shadow: 20px 21px 20px -20px gray, 0px -11px 8px -10px gray;
+    }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+    TopBlue .MoreDetails:hover i:hover .MoreDetails {
+        background: #8f1fe7;
+    }
+
+    .HiddenBlue:hover {
+        background-color: #ecf0f5;
+    }
+
+
+
+    .HiddenGrey:hover {
+        background-color: #eae9e9;
+    }
+
+    .TopGrey {
+        display: inline-flex;
+        height: 26px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-left: 2px solid #7c888e;
+        border-right: 2px solid #7c888e;
+        border-top: 2px solid #7c888e;
+        width: 346px;
+        background-color: #eae9e9;
+        padding-right: 5px;
+    }
+
+    .HiddenRed:hover {
+        background-color: #ffd4d1;
+    }
+
+    .TopRed {
+        display: inline-flex;
+        height: 26px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-left: 2px solid #e64945;
+        width: 346px;
+        background-color: #ffd4d1;
+        border-top: 2px solid #e64945;
+        border-right: 2px solid #e64945;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            display: none;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: -11px;
+            left: 130px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 30px;
+            left: 0px;
+            padding: 0 5px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .MoreDetails {
+        position: absolute;
+        display: none;
+        width: 375px;
+        height: 35px;
+        padding-left: 10px;
+        padding-top: 8px;
+        margin-left: 700px;
+        top: 156px;
+        background-color: white;
+    }
+
+     .context-menu-list {
+        width: 185px;
+    }
+      .context-menu-list li{
+        margin-top:6px;
+        margin-bottom:6px;
+    }
+
+</style>
+
+
+
+<div class="container" style="width:100%;"></div>
+<input type="hidden" name="grid1" id="grid1" value="">
+<input type="hidden" name="LoggedIn" id="LoggedUser" value="@httpContextAccessor.HttpContext?.Session.GetString("loginname")" />
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+@*<p class="text-center text-success">@ViewContext.TempData("Message")</p>*@
+<div class="panel panel-default" style="margin-bottom: 0.75em;">
+    <div class="panel-body" style="padding:0px;">
+        <div id="main" class="col-md-12">
+            <a id="RegisterCalls" href='/CRM/RegisterCalls' title="" data-placement="bottom" data-toggle="Register New Call" style="text-align:left">
+                <i class="glyphicon glyphicon-plus" style="font-size:1.0625em; margin-right:1.25em;top: 0.3125em;"></i>
+            </a>
+            <a class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh" style="top: 0.25em;">
+                <i class="fa fa-refresh" style="font-size:1.1875em; padding-top:0.75em; padding-right:0.75em; padding-bottom:0.3125em;"></i>
+            </a>
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info" style="font-size:12px; color:#808080; padding-right:10px;"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:0.75em; width:1.875em; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:0.75em; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:1.5em"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:0.75em; width:1.875em; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:0.75em;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:1.5em"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading">
+    <div colspan="5">
+        <div id="loadingmessage" class="loader overlay col-md-offset-6" style="margin-top:1.25em;position: absolute;left: 43%; top:50%;">
+        </div><p id="Msg"></p>
+    </div>
+</div>
+<div id="example"></div>
+
+<div class="modal fade" id="Remark">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:16.5px; margin-top:0px; padding-top:30px; padding-left:30px;" class="modal-title"> Add Remark </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px; height: 190px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <div id="myRemark" class="col-md-12" style="padding-right: 75px;">
+                    <form Class="form-horizontal" role="form" method="post" id="RegForm" style="margin-top:0px;">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <div Class="form-group">
+                            <input type="hidden" name="issueId" id="issueId" />
+                            <input type="hidden" name="calledfrom" id="calledfrom" />
+                            <Label for="inputEmail1" class="col-sm-4 control-label">Remark</Label>
+                            <textarea id="Remarktextarea" cols="30" rows="4" name="Remark" value=""></textarea>
+                            <Button type="button" id="SubmitRemarkBtn" onclick="SubmitCallRemark(this.id);" class="btn btn-primary" style="padding:0px; width:102px; height:26px; margin-top:100px; position:absolute; left:35%;">Submit</Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EngageStatus">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:16.5px; margin-top:0px; padding-top:30px; padding-left:30px;" class="modal-title"> Add Remark </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px; height: 160px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <div id="myRemark" class="col-md-12" style="padding-right: 75px;">
+                    <form Class="form-horizontal" role="form" method="post" style="margin-top:0px;">
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <div Class="form-group">
+                            <input type="hidden" name="callId" id="callId" />
+                            <Label for="inputEmail1" class="control-label" @*style="margin-left: 100px;margin-top: 5px;"*@>Call Engage Status</Label>
+                            @Html.List_Search("callEngageStatus", "56", "- Select status -",0,"", new {@class = "form-control", @style = "padding-left:0px; top:10px;"}, false)  @*height:26px; width:30%;*@
+                            <Button type="button" onclick="SubmitCallEngage(this);" id="popup" class="btn btn-primary" style="/*padding:0px;height:26px;*/ width:102px;  margin-top:30px; position:absolute; left:35%;">Submit</Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="MsgCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left: 30px;" class="modal-title"> Message To Customer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <div id="msg">
+                    <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                    <div id="myMsgCustomer" class="col-md-12">
+                        <form Class="form-horizontal" role="form" method="post">
+                            <div Class="form-group">
+                                <input type="hidden" name="P_issuesfilegst" id="PCallMsgToCustomer" />
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Customer Name</label>
+                                <div class="col-sm-5">
+                                    <input type="text" id="firmNameMsgtoCustomer" name="FirmName" style="width:230px" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Phone No</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="Phoneno" id="Mobileno" style="width:230px" maxlength="10" placeholder="Enter 10 digit number only" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Template</label>
+                                <div class="col-sm-5">
+                                    @Html.List_Search("Template", "- Select a template -", "msgTemplate", "Title", "P_MsgTemplate", "rowstatus=0 and Templatetype in (3120,3121,3122,3124) and active='Y'", 0, "", new {@onChange = "onTemplateChange(this.value,this.id)", @style = "width:230px; height:26px; padding-bottom:1px; padding-top:1px; font-size:inherit"})
+                                    @*<select id="Template" name="" class="" style="width:230px; height:26px; padding-bottom:1px; padding-top:1px; font-size:inherit" onchange="myFunction(this.value,this.id);">
+                                            <option value="0">Select an template</option>
+                                            <option value="1">Customer Unavailable</option>
+                                            <option value="2">Off in office</option>
+                                            <option value="3">Mail to dealer</option>
+                                            @*<option value="4">For Rajasthan Parties</option>
+                                                <option value="5"> For Outside Rajasthan Parties</option>
+                                            <option value="4"> Saral Softtech Pvt. Ltd. (SBI)</option>
+                                            <option value="5"> TECHNOPINCH SOLUTIONS PVT LTD.</option>
+                                            <option value="6"> Saral liaisoning and maintenance services</option>
+                                            <option value="7"> Saral Softech Pvt.ltd. (ICICI)</option>
+                                        </select>*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label">Message</label>
+                                <div class="col-sm-5">
+                                    <textarea rows="4" cols="35" id="T" name="msg" style="width:230px" value=""></textarea>
+                                </div>
+                            </div>
+                            <div Class="text-center" style="margin:20px 0px 10px 50px">
+                                <Button type="button" id="MsgToCustomerSubmitBtn" Class="btn btn-primary" onclick="SubmitMsgToCustomer(this.id)" style="margin-right:15px">Submit</Button>
+                                <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MailToCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left:30px;" class="modal-title"> Mail To Customer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <div id="MailCustomerContent" class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="P_issuesfilegst" id="PCallMailToCustomer" />
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Customer Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="firmNameMailtoCustomer" name="FirmName" style="width:230px" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Email Id</label>
+                            <div class="col-sm-5">
+                                <input type="email" id="emailMailtoCustomer" name="EmailId" style="width:230px" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label">Email Content</label>
+                            <div class="col-sm-5">
+                                <textarea rows="4" cols="35" name="msg" id="msgMailToCustomer" value="" style="width:230px"></textarea>
+                            </div>
+                        </div>
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button" id="MailtoCustomerSubmitBtn" onclick="SubmitMailToCustomer(this.id);" Class="btn btn-primary" style="margin-right:15px">Submit</Button>
+                            <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="LoaderOverlay">
+    <div class="loaderspin" id="loadspin" style="text-align:center; margin-left:43.75em; margin-bottom:3.125em; margin-top:18.75em"></div>
+</div>
+
+<div class="modal fade" id="FollowUpCall">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true">&times;</span></a>
+            <h4 style="text-align:center; font-size:1.125em; margin-top:0px; padding-top:1.25em" class="modal-title">  </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:0.625em; margin-bottom:1.875em; width:80%" />
+                <div id="IssueDescription" class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="padding-top:1.25em; text-align:right">Issue :</label>
+                        <div class="col-sm-5" style="padding-left:0px">
+                            <textarea rows="4" cols="35" name="msg" style="width:14.375em" id="description" value=""></textarea><br />
+                        </div>
+                    </div>
+                    <div class="form-group text-center" style="clear:both; margin:0px 0px 0.625em 3.125em">
+                        <input type="submit" Class="btn btn-primary" style="margin-right:0.9375em; margin-top:1.25em" value="Submit" />
+                        <a data-dismiss="modal" Class="btn btn-default" style="margin-top:1.25em">Cancel</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:1.25em">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Assignedto">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size: 25px;">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px;padding-top:20px;padding-left: 50px;" class="modal-title">Select Team Member</h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="AssignedtoForm">
+                    <input type="hidden" name="PCall" id="PCall" value="">
+                    <input type="hidden" name="CalledFrom" value="ManageRegCall">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="padding-top:0px">Select Employee</label>
+                        @Html.List_Search("Employee", "- Select Employee -", "AccMaster", "AccName", "P_acccode", "rowstatus=0 and acctype = 3042 and status='Y'", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = " border-radius:3px;  margin-left:5%; width:90%;"})
+                    </div>
+                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="button" id="AssigntoSubmitBtn" Class="btn btn-primary" onclick="SubmitCallAssignTo(this.id);" style="margin-right:15px; margin-top:20px">Submit</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="OnsiteModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left: 50px;" class="modal-title" id="Onsitevisit"></h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="OnsiteForm">
+                    <input type="hidden" name="PCall" id="PCall1" value="">
+                    <div class="text-center"><p style="font-size:17px"> Do you want to register Onsite Service </p></div>
+                    <div Class="text-center" style="margin:10px 0px 10px 50px">
+                        <Button type="button" id="onsiteVisitSubmitBtn" Class="btn btn-primary" onclick="submitOnsiteVisit(this.id);" style="margin-right:15px; margin-top:20px; width:76px">Yes</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="NoRow"></div>
+
+<div class="modal fade" id="CallClosed">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" class="modal-title"> Call Closed Successfully </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div id="CallClosedContent" class="col-md-6"></div>
+                <div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CallCollaborators">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:20px;padding-top:20px; padding-left: 40px;" class="modal-title"> Add Collaborators </h4>
+            <hr style="width:70%; margin-top:10px" />
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <div id="myCollaborators" class="col-md-12">
+                    <form Class="form-horizontal" action="@Url.Action("AddCallCollaborators")" role="form" method="post">
+                        <input type="hidden" name="PCall" id="PCall" value="">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="padding-top:0px">Add Collaborator</label>
+                            @Html.List_Search("collaboratorId", "- Select Employee -", "Accmaster", "accname", "p_acccode", "rowstatus = 0 and acctype=3042", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:300px"})
+                        </div>
+                        <div @*Class="text-center"*@ style="margin:20px 0px 10px 50px">
+                            <Button type="button" id="CallCollabSubmitBtn" Class="btn btn-primary" onclick="submitCallCollaborator(this.id)" style="margin-right:25px; margin-top:20px">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="LinkCustomer">
+    <div class="modal-dialog" role="form" @*style="width:800px;"*@>
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-top: 10px;padding-left: 20px;padding-bottom: 20px;padding-right: 15px;">
+                <span aria-hidden="true" style="font-size:24px">&times;</span>
+            </button>
+            <h4 class="modal-title" style="text-align:center; padding-top:20px">Link Customer</h4>
+            <hr style="width:70%; margin-top:10px" />
+            <div class="modal-body" id="LinkCustomerContent">
+                <div>
+                    <form Class="form-horizontal" action="@Url.Action("LinkCustomer")" role="form" method="post">
+                        <div Class="form-group">
+                            <input type="hidden" id="P_Customers" name="P_Customers" />
+                            <input type="hidden" id="LinkCustomerCallId" name="LinkCustomerCallId" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Firm Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="FirmName1" name="FirmName1" style="border-radius:0px; padding-left:4px; width:300px" value="" />
+                            </div>
+                        </div>
+                        <div id="CustContainer" style="display:none; width:360px; background-color:white; font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px;overflow:scroll;">
+                            <table id="tblCustomers" class="table table-bordered" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align:center;">
+                                        <th>S.No</th>
+                                        <th style="width:174px">CustName</th>
+                                        <th style="width:85px">Mobile No</th>
+                                        <th style="width:128px">BusinessType</th>
+                                        <th style="width:110px">HomeTown</th>
+                                        <th style="width:134px">Address</th>
+                                        <th style="width:134px">BilledUpto</th>
+                                        <th style="width:134px">OpenedUpto</th>
+                                        <th style="width:90px">onsiteflag</th>
+                                    </tr>
+                                    @*<tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>*@
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div @*Class="text-center"*@ style="margin:20px 0px 10px 50px">
+                            <Button type="button" id="SubmitLinkCustomerBtn" Class="btn btn-primary" onclick="SubmitLinkCustomer(this.id);" style="margin-right:15px">Submit</Button>
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ViewCollaborator">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="/*width:400px; margin-left:100px;*/min-height:210px;">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:15px; padding-top:20px; padding-left:45px;" class="modal-title">Collaborators </h4>
+            <hr style="width:70%; margin-top:10px" />
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;min-height:150px">
+                <div class="col-md-12" style="height:30px; margin-bottom:8px">
+                    <div class="col-md-3 col-sm-3 col-xs-3" style="margin-top:5px;/*width: 110px;*/"><b>Sno.</b></div>
+                    <div class="col-md-7 col-sm-7 col-xs-7" style="padding-left: 0px;/*width: 170px;*/margin-top:5px;text-align:left;padding-right: 30px;"><b>Employee Name</b></div>
+                </div>
+                <div id="loading1">
+                    <div colspan="8" style="padding:0px"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div>
+                </div>
+                <div id="ShowCollaborators" class="col-md-12"></div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade ShowRemark" id="ViewRemarks">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width: 775px;height: 250px; overflow-y:scroll;">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; font-size:18px;  margin-top:0px; margin-bottom:15px" class="modal-title">Remarks</h4>
+                <div class="col-sm-12 col-md-12" style="display:flex; position:absolute; padding-right: 0px; z-index:10; margin-bottom:40px; width:665px; color:#325faf; padding-left:0px; background-color:white; width:730px;">
+                    <div class="col-sm-1 col-md-1 " style="text-align:center; padding-top:10px; margin-bottom:5px; padding-left: 0px;"><b>Sno.</b></div>
+                    <div class="col-sm-3 col-md-3" style="padding-left: 0px;padding-top: 10px;margin-bottom: 5px;padding-right: 50px; text-align:center;"><b>Remark</b></div>
+                    <div class="col-sm-3 col-md-3" style="text-align: center;padding-top: 10px;margin-bottom: 5px;padding-right: 0px;padding-left: 0px;width: 100px;"><b>Comm. type</b></div>
+                    <div class="col-sm-3 col-md-3" style="text-align: center;padding-top: 10px;margin-bottom: 5px;"><b>Date</b></div>
+                    <div class="col-sm-2 col-md-2" style="padding-left: 0px; text-align:right; padding-top: 10px; margin-bottom: 5px;padding-right:10px;"><b>Created by</b></div>
+                </div>
+                <div class="ShowRemark col-md-12" id="ShowRemarkContent" style="margin-top:50px;"></div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*For filtering on Hometown *@
+<div class="modal fade" id="ModelHomeTownFilter">
+    <div class="modal-dialog" role="form" style="left:auto; right:auto">
+        <div class="modal-content" style="width:500px;">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Hometown</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <form Class="form-horizontal" role="form" method="post" id="HomeTownfilter">
+                <div class="form-group">
+                    @*<label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">HomeTown</label>*@
+                    @*<div class="col-sm-6">*@
+                    <input type="text" class="form-control input-sm" id="searchString" name="searchString" style="border-radius:0px; padding-left:4px; width:226px;margin:auto;" />
+                    @*</div>*@
+                </div>
+                <input type="hidden" name="homeTown" id="homeTown" />
+                <div id="search" style="display:none; width:420px; background-color:white; margin:auto;font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px;">
+                    <table id="htexample" class="table table-bordered">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>SNo</th>
+                                <th>HomeTown</th>
+                                <th style="width:25px;">District</th>
+                                <th style="width:25px;">State</th>
+                                <th style="width:25px;">Country</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="submit" Class="btn btn-primary" style="margin-right:15px; margin-top:20px">Submit</Button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default">Cancel</a>*@
+                </div>
+            </form>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

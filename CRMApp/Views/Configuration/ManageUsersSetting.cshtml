@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "UserSettings";
+    var cc1 = new CustomerControl.Variables("WebGodaddy");
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var gf1 = new GlobalFunction1.GlobalFunction1(ref cc1);
+    var cfc1 = new CommonFunctionsCloud.CommonFunctionsCloud(ref cc1);
+}
+
+<link rel="stylesheet" href="~/Content/Custom/GridSearchControl.css" />
+<script src="~/scripts/Custom/GridSearchControl.js"></script>
+<link href="~/Content/Custom/userSetting.css" rel="stylesheet" />
+<script src="~/Scripts/Custom/usersSetting.js"></script>
+
+<style>
+    .panel-heading .accordion-toggle:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e114";
+        float: right;
+        color: grey;
+    }
+
+    .panel-heading .collapsed .accordion-toggle:after {
+        content: "\e080";
+    }
+
+    .material-select {
+        width: 90px;
+        outline: none;
+        border: 1px solid #afafaf;
+        border-radius:3px;
+    }
+    .material-select:focus{
+        border: 1px solid #105faf;
+    }
+    .Ino {
+        width: 15%;
+        padding-left: 30px !important;
+    }
+
+    .Ikey {
+        width: 65%;
+        /*padding-left: 30px !important;*/
+    }
+
+    .value {
+        width: 20%;
+        padding-right: 30px;
+    }
+
+</style>
+
+@*@if(ViewBag.isAdmin) {
+     @Html.List_Search("ddEmp", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)",(int) ViewBag.p_acccode,"",new {@class = "", @style = "width:230px;height:30px; outline:none; border-style:none; border-bottom:1px solid #ddd;margin-bottom:15px;", @onchange = "empChange();"},true)
+     <br />
+     <div id = "startingView" style="color: #818181;display:none"><h5>Please Select an Employee from above dropdown.</h5></div>
+}*@
+   
+@if (ViewBag.isAdmin)
+{
+    <input type="hidden" id="isAdmin" value="Y" />
+    <input type="hidden" id="adminPCode" value="@ViewBag.p_acccode" />
+    <input type="hidden" id="adminName" value="@ViewBag.name" />
+    @*customer Table*@
+    var dtCustomer = cfc1.CreateDataTableForGridSearchControl();
+    dtCustomer = cfc1.AddRowInGridSearchControlDataTable(ref dtCustomer, "p_acccode", "p_acccode", false, width: "10%");
+    dtCustomer = cfc1.AddRowInGridSearchControlDataTable(ref dtCustomer, "Customer Name", "accname", true, false, false, width: "35%");
+    dtCustomer = cfc1.AddRowInGridSearchControlDataTable(ref dtCustomer, "Mobile No", "mobile", true, false, false, width: "15%");
+    dtCustomer = cfc1.AddRowInGridSearchControlDataTable(ref dtCustomer, "Address", "PostalAddress1", true, false, false, width: "30%");
+    @*Employee Table*@
+    var dtEmployee = cfc1.CreateDataTableForGridSearchControl();
+    dtEmployee = cfc1.AddRowInGridSearchControlDataTable(ref dtEmployee, "p_acccode", "p_acccode", false, width: "10%");
+    dtEmployee = cfc1.AddRowInGridSearchControlDataTable(ref dtEmployee, "Employee Name", "accname", true, false, false, width: "35%");
+    dtEmployee = cfc1.AddRowInGridSearchControlDataTable(ref dtEmployee, "Mobile No", "mobile", true, false, false, width: "15%");
+    dtEmployee = cfc1.AddRowInGridSearchControlDataTable(ref dtEmployee, "Address", "PostalAddress1", true, false, false, width: "30%");
+
+    @*Radio Buttons*@
+    <div class="form-group">
+        <label class="radio-inline">
+            <input type="radio" name="user-type" value="employee" checked> Employee
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="user-type" value="customer"> Customer
+        </label>
+    </div>
+    @*Controls*@
+    <div class="form-group">
+        @*Employee Control*@
+        <div class="empCtrl">
+            <label for="employee-input-box">Search Employee</label>
+            <div class="input-group">
+                @Html.Grid_Search_Control("employee","accname","p_acccode",dtEmployee,"Accmaster",""," rowstatus=0 and acctype=3042","accname asc",new{@class="form-control empCtrl",@placeholder=" Type employee name"},new{@style="position:absolute;z-index:1;max-height:300px;display:none;overflow: auto; background-color: white; font-family: verdana, arial, sans-serif; font-size: 11px; margin-bottom: 10px;max-width:95%; width:100%;"},new {@class="table table-bordered table-customer",@style="width:100%; border:none;"},false)
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="GetEmpSettings();"><i class="glyphicon glyphicon-search"></i> Search</button>
+                </span>
+            </div>
+        </div>
+        @*Customer Control*@
+        <div class="custCtrl" style="display:none;">
+            <label for="customer-input-box">Search Customer</label>
+            <div class="input-group">
+                @Html.Grid_Search_Control("customer","accname","p_acccode",dtCustomer,"Accmaster",""," rowstatus=0 and acctype=3041","accname asc",new{@class="form-control custCtrl",@placeholder=" Type customer name", @style="display:none;"},new{@style="position:absolute;z-index:1;max-height:300px;display:none;overflow: auto; background-color: white; font-family: verdana, arial, sans-serif; font-size: 11px; margin-bottom: 10px;max-width:95%; width:100%;"},new {@class="table table-bordered table-customer",@style="width:100%; border:none;"},false)
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="GetCustSettings();"><i class="glyphicon glyphicon-search"></i> Search</button>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div id="startingView" style="color: #818181;display:none"><h5>Please Select an Employee/Customer from above search list.</h5></div>
+}
+else
+{
+    <input type="hidden" id="isAdmin" value="N" />
+}
+
+
+
+
+<div class="loader" style="display: none; border-style: none !important; background-color: transparent; position: absolute; top: 50%; left: 55%;"><img src="~/Images/loader.gif" /></div>
+
+
+
+<div id="alertMsgDiv" style="padding-top:7px;">
+</div>
+
+<div id="divUsersSettings">
+   @* <div class="tblDiv" style="overflow-y: auto; max-height: 70vh; box-shadow: 0px 1px 4px 0px #33333359; border-radius:5px; ">
+        <table class="table table-striped " id="tbl">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th class="Ikey">Setting</th>
+                    <th class="value">Value</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>*@
+
+    <div class="panel-group" id="settingaccordion" role="tablist" aria-multiselectable="true">
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn" id="btnUpdate" onclick="updateSettings();" style="outline: none; background-color: #105faf; border-radius:25px; color:white;">Update Settings</button>
+    </div>
+</div>
+
+
+
+

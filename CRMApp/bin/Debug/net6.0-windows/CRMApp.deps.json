@@ -1,0 +1,1434 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "CRMApp/1.0.0": {
+        "dependencies": {
+          "System.Data.SqlClient": "4.8.3",
+          "Accmaster": "1.0.0.0",
+          "AllCallsReg": "1.0.0.0",
+          "billheader": "1.0.0.0",
+          "billitems": "1.0.0.0",
+          "callEngaged": "1.0.0.0",
+          "CallFreq": "1.0.0.0",
+          "Callrecordings": "1.0.0.0",
+          "CallsLibrary": "1.0.0.0",
+          "ClosedXML": "0.76.0.0",
+          "CommonFunctionsCloud": "1.0.0.0",
+          "CRMAccounts": "1.0.0.0",
+          "CRMAutoTaskConfig": "1.0.0.0",
+          "CRMCollaborator": "1.0.0.0",
+          "CRMCommunication": "1.0.0.0",
+          "CRMContacts": "1.0.0.0",
+          "CRMDocumentsLink": "1.0.0.0",
+          "CRMLead": "1.0.0.0",
+          "CRMPhone": "1.0.0.0",
+          "CRMStagesMaster": "1.0.0.0",
+          "CRMTasks": "1.0.0.0",
+          "CRMTasksLibrary": "1.0.0.0",
+          "CustomerControl": "1.0.0.0",
+          "CustomerFeatureLib": "1.0.0.0",
+          "Customers": "1.0.0.0",
+          "DataFunctions": "1.0.0.0",
+          "DataSynchStatus": "1.0.0.0",
+          "DataTypeConversionLib": "1.0.0.0",
+          "DocumentFormat.OpenXml": "2.5.5631.0",
+          "EmployeeLib": "1.0.0.0",
+          "Employees": "1.0.0.0",
+          "Enquiry": "1.0.0.0",
+          "finalattendance": "1.0.0.0",
+          "GlobalControl": "1.0.0.0",
+          "GlobalFunction1": "1.0.0.0",
+          "GlobalFunction2": "1.0.0.0",
+          "GoggleApiFunction": "1.0.0.0",
+          "Google.Apis.Auth": "1.40.2.0",
+          "Google.Apis.Calendar.v3": "1.40.2.1643",
+          "Google.Apis.Core": "1.40.2.0",
+          "Google.Apis": "1.40.2.0",
+          "Google.Apis.Drive.v3": "1.40.2.1649",
+          "Google.Apis.Gmail.v1": "1.40.2.1635",
+          "IemsClassLibrary": "1.0.0.0",
+          "iemsgroups": "1.0.0.0",
+          "ImageFile": "1.0.0.0",
+          "InfoTable": "1.0.0.0",
+          "infotableuser": "1.0.0.0",
+          "infotypedes": "1.0.0.0",
+          "Issuesfilegst": "1.0.0.0",
+          "locationupdates": "1.0.0.0",
+          "mastersynchcontrol": "1.0.0.0",
+          "MenuMaster": "1.0.0.0",
+          "MobileNotificationLib": "1.0.0.0",
+          "MobNotification": "1.0.0.0",
+          "Msgqueue": "1.0.0.0",
+          "msgtemplate": "1.0.0.0",
+          "Newtonsoft.Json": "13.0.0.0",
+          "Notification": "1.0.0.0",
+          "Notificationcontrol": "1.0.0.0",
+          "NotificationLib": "1.0.0.0",
+          "paytm": "1.0.0.0",
+          "Printlibrary": "1.0.0.0",
+          "RegisterDllClass": "1.0.0.0",
+          "RegistrationLib": "1.0.0.0",
+          "ReimbVisit": "1.0.0.0",
+          "saleiems": "1.0.0.0",
+          "SalesOrderLibrary": "1.0.0.0",
+          "SaralAuthLib": "1.0.0.0",
+          "SetPropertyClass": "1.0.0.0",
+          "shopcontrol": "1.0.0.0",
+          "srl_bch": "1.0.0.0",
+          "srl_ord": "1.0.0.0",
+          "srl_pro": "1.0.0.0",
+          "stdole": "7.0.3300.0",
+          "tags": "1.0.0.0",
+          "tasktemplate": "1.0.0.0",
+          "Tripinfo": "1.0.0.0",
+          "TripLog": "1.0.0.0",
+          "UserLogin": "1.0.0.0",
+          "UserNotification": "1.0.0.0",
+          "Userroles": "1.0.0.0",
+          "UserSettings": "1.0.0.0",
+          "ValidateMachine": "1.0.0.0",
+          "variabletable": "1.0.0.0",
+          "ViewSettings": "1.0.0.0",
+          "WebGrease": "1.5.2.14234",
+          "WebSessions": "1.0.0.0"
+        },
+        "runtime": {
+          "CRMApp.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Platforms/3.1.0": {},
+      "Microsoft.Win32.Registry/4.7.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "4.7.0",
+          "System.Security.Principal.Windows": "4.7.0"
+        }
+      },
+      "runtime.native.System.Data.SqlClient.sni/4.7.0": {
+        "dependencies": {
+          "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
+          "runtime.win-x64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
+          "runtime.win-x86.runtime.native.System.Data.SqlClient.sni": "4.4.0"
+        }
+      },
+      "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/sni.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "runtime.win-x64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/sni.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+        "runtimeTargets": {
+          "runtimes/win-x86/native/sni.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "System.Data.SqlClient/4.8.3": {
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.7.0",
+          "System.Security.Principal.Windows": "4.7.0",
+          "runtime.native.System.Data.SqlClient.sni": "4.7.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "assemblyVersion": "4.6.1.3",
+            "fileVersion": "4.700.21.41603"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "rid": "unix",
+            "assetType": "runtime",
+            "assemblyVersion": "4.6.1.3",
+            "fileVersion": "4.700.21.41603"
+          },
+          "runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.6.1.3",
+            "fileVersion": "4.700.21.41603"
+          }
+        }
+      },
+      "System.Security.AccessControl/4.7.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0",
+          "System.Security.Principal.Windows": "4.7.0"
+        }
+      },
+      "System.Security.Principal.Windows/4.7.0": {},
+      "Accmaster/1.0.0.0": {
+        "runtime": {
+          "Accmaster.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "AllCallsReg/1.0.0.0": {
+        "runtime": {
+          "AllCallsReg.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "billheader/1.0.0.0": {
+        "runtime": {
+          "billheader.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "billitems/1.0.0.0": {
+        "runtime": {
+          "billitems.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "callEngaged/1.0.0.0": {
+        "runtime": {
+          "callEngaged.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CallFreq/1.0.0.0": {
+        "runtime": {
+          "CallFreq.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Callrecordings/1.0.0.0": {
+        "runtime": {
+          "Callrecordings.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CallsLibrary/1.0.0.0": {
+        "runtime": {
+          "CallsLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ClosedXML/0.76.0.0": {
+        "runtime": {
+          "ClosedXML.dll": {
+            "assemblyVersion": "0.76.0.0",
+            "fileVersion": "0.76.0.0"
+          }
+        }
+      },
+      "CommonFunctionsCloud/1.0.0.0": {
+        "runtime": {
+          "CommonFunctionsCloud.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMAccounts/1.0.0.0": {
+        "runtime": {
+          "CRMAccounts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMAutoTaskConfig/1.0.0.0": {
+        "runtime": {
+          "CRMAutoTaskConfig.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMCollaborator/1.0.0.0": {
+        "runtime": {
+          "CRMCollaborator.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMCommunication/1.0.0.0": {
+        "runtime": {
+          "CRMCommunication.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMContacts/1.0.0.0": {
+        "runtime": {
+          "CRMContacts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMDocumentsLink/1.0.0.0": {
+        "runtime": {
+          "CRMDocumentsLink.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMLead/1.0.0.0": {
+        "runtime": {
+          "CRMLead.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMPhone/1.0.0.0": {
+        "runtime": {
+          "CRMPhone.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMStagesMaster/1.0.0.0": {
+        "runtime": {
+          "CRMStagesMaster.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMTasks/1.0.0.0": {
+        "runtime": {
+          "CRMTasks.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CRMTasksLibrary/1.0.0.0": {
+        "runtime": {
+          "CRMTasksLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CustomerControl/1.0.0.0": {
+        "runtime": {
+          "CustomerControl.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CustomerFeatureLib/1.0.0.0": {
+        "runtime": {
+          "CustomerFeatureLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Customers/1.0.0.0": {
+        "runtime": {
+          "Customers.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DataFunctions/1.0.0.0": {
+        "runtime": {
+          "DataFunctions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DataSynchStatus/1.0.0.0": {
+        "runtime": {
+          "DataSynchStatus.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DataTypeConversionLib/1.0.0.0": {
+        "runtime": {
+          "DataTypeConversionLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DocumentFormat.OpenXml/2.5.5631.0": {
+        "runtime": {
+          "DocumentFormat.OpenXml.dll": {
+            "assemblyVersion": "2.5.5631.0",
+            "fileVersion": "2.5.5631.0"
+          }
+        }
+      },
+      "EmployeeLib/1.0.0.0": {
+        "runtime": {
+          "EmployeeLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Employees/1.0.0.0": {
+        "runtime": {
+          "Employees.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Enquiry/1.0.0.0": {
+        "runtime": {
+          "Enquiry.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "finalattendance/1.0.0.0": {
+        "runtime": {
+          "finalattendance.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "GlobalControl/1.0.0.0": {
+        "runtime": {
+          "GlobalControl.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "GlobalFunction1/1.0.0.0": {
+        "runtime": {
+          "GlobalFunction1.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "GlobalFunction2/1.0.0.0": {
+        "runtime": {
+          "GlobalFunction2.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "GoggleApiFunction/1.0.0.0": {
+        "runtime": {
+          "GoggleApiFunction.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Google.Apis.Auth/1.40.2.0": {
+        "runtime": {
+          "Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.40.2.0",
+            "fileVersion": "1.40.2.0"
+          }
+        }
+      },
+      "Google.Apis.Calendar.v3/1.40.2.1643": {
+        "runtime": {
+          "Google.Apis.Calendar.v3.dll": {
+            "assemblyVersion": "1.40.2.1643",
+            "fileVersion": "1.40.2.1643"
+          }
+        }
+      },
+      "Google.Apis.Core/1.40.2.0": {
+        "runtime": {
+          "Google.Apis.Core.dll": {
+            "assemblyVersion": "1.40.2.0",
+            "fileVersion": "1.40.2.0"
+          }
+        }
+      },
+      "Google.Apis/1.40.2.0": {
+        "runtime": {
+          "Google.Apis.dll": {
+            "assemblyVersion": "1.40.2.0",
+            "fileVersion": "1.40.2.0"
+          }
+        }
+      },
+      "Google.Apis.Drive.v3/1.40.2.1649": {
+        "runtime": {
+          "Google.Apis.Drive.v3.dll": {
+            "assemblyVersion": "1.40.2.1649",
+            "fileVersion": "1.40.2.1649"
+          }
+        }
+      },
+      "Google.Apis.Gmail.v1/1.40.2.1635": {
+        "runtime": {
+          "Google.Apis.Gmail.v1.dll": {
+            "assemblyVersion": "1.40.2.1635",
+            "fileVersion": "1.40.2.1635"
+          }
+        }
+      },
+      "IemsClassLibrary/1.0.0.0": {
+        "runtime": {
+          "IemsClassLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "iemsgroups/1.0.0.0": {
+        "runtime": {
+          "iemsgroups.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ImageFile/1.0.0.0": {
+        "runtime": {
+          "ImageFile.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "InfoTable/1.0.0.0": {
+        "runtime": {
+          "InfoTable.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "infotableuser/1.0.0.0": {
+        "runtime": {
+          "infotableuser.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "infotypedes/1.0.0.0": {
+        "runtime": {
+          "infotypedes.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Issuesfilegst/1.0.0.0": {
+        "runtime": {
+          "Issuesfilegst.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "locationupdates/1.0.0.0": {
+        "runtime": {
+          "locationupdates.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "mastersynchcontrol/1.0.0.0": {
+        "runtime": {
+          "mastersynchcontrol.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MenuMaster/1.0.0.0": {
+        "runtime": {
+          "MenuMaster.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MobileNotificationLib/1.0.0.0": {
+        "runtime": {
+          "MobileNotificationLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MobNotification/1.0.0.0": {
+        "runtime": {
+          "MobNotification.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Msgqueue/1.0.0.0": {
+        "runtime": {
+          "Msgqueue.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "msgtemplate/1.0.0.0": {
+        "runtime": {
+          "msgtemplate.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "Notification/1.0.0.0": {
+        "runtime": {
+          "Notification.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Notificationcontrol/1.0.0.0": {
+        "runtime": {
+          "Notificationcontrol.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "NotificationLib/1.0.0.0": {
+        "runtime": {
+          "NotificationLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "paytm/1.0.0.0": {
+        "runtime": {
+          "paytm.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Printlibrary/1.0.0.0": {
+        "runtime": {
+          "Printlibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "RegisterDllClass/1.0.0.0": {
+        "runtime": {
+          "RegisterDllClass.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "RegistrationLib/1.0.0.0": {
+        "runtime": {
+          "RegistrationLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ReimbVisit/1.0.0.0": {
+        "runtime": {
+          "ReimbVisit.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "saleiems/1.0.0.0": {
+        "runtime": {
+          "saleiems.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SalesOrderLibrary/1.0.0.0": {
+        "runtime": {
+          "SalesOrderLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SaralAuthLib/1.0.0.0": {
+        "runtime": {
+          "SaralAuthLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SetPropertyClass/1.0.0.0": {
+        "runtime": {
+          "SetPropertyClass.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "shopcontrol/1.0.0.0": {
+        "runtime": {
+          "shopcontrol.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "srl_bch/1.0.0.0": {
+        "runtime": {
+          "srl_bch.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "srl_ord/1.0.0.0": {
+        "runtime": {
+          "srl_ord.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "srl_pro/1.0.0.0": {
+        "runtime": {
+          "srl_pro.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "stdole/7.0.3300.0": {
+        "runtime": {
+          "stdole.dll": {
+            "assemblyVersion": "7.0.3300.0",
+            "fileVersion": "7.0.9466.1"
+          }
+        }
+      },
+      "tags/1.0.0.0": {
+        "runtime": {
+          "tags.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "tasktemplate/1.0.0.0": {
+        "runtime": {
+          "tasktemplate.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Tripinfo/1.0.0.0": {
+        "runtime": {
+          "Tripinfo.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "TripLog/1.0.0.0": {
+        "runtime": {
+          "TripLog.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "UserLogin/1.0.0.0": {
+        "runtime": {
+          "UserLogin.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "UserNotification/1.0.0.0": {
+        "runtime": {
+          "UserNotification.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Userroles/1.0.0.0": {
+        "runtime": {
+          "Userroles.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "UserSettings/1.0.0.0": {
+        "runtime": {
+          "UserSettings.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ValidateMachine/1.0.0.0": {
+        "runtime": {
+          "ValidateMachine.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "variabletable/1.0.0.0": {
+        "runtime": {
+          "variabletable.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ViewSettings/1.0.0.0": {
+        "runtime": {
+          "ViewSettings.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "WebGrease/1.5.2.14234": {
+        "runtime": {
+          "WebGrease.dll": {
+            "assemblyVersion": "1.5.2.14234",
+            "fileVersion": "1.5.2.14234"
+          }
+        }
+      },
+      "WebSessions/1.0.0.0": {
+        "runtime": {
+          "WebSessions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CloudSMS/1.0.0.0": {
+        "runtime": {
+          "CloudSMS.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EnvDTE/8.0.0.0": {
+        "runtime": {
+          "EnvDTE.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.50727.932"
+          }
+        }
+      },
+      "EnvDTE80/8.0.0.0": {
+        "runtime": {
+          "EnvDTE80.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.50727.932"
+          }
+        }
+      },
+      "MimeKit/2.5.0.0": {
+        "runtime": {
+          "MimeKit.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CRMApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.NETCore.Platforms/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
+      "path": "microsoft.netcore.platforms/3.1.0",
+      "hashPath": "microsoft.netcore.platforms.3.1.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.Registry/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
+      "path": "microsoft.win32.registry/4.7.0",
+      "hashPath": "microsoft.win32.registry.4.7.0.nupkg.sha512"
+    },
+    "runtime.native.System.Data.SqlClient.sni/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9kyFSIdN3T0qjDQ2R0HRXYIhS3l5psBzQi6qqhdLz+SzFyEy4sVxNOke+yyYv8Cu8rPER12c3RDjLT8wF3WBYQ==",
+      "path": "runtime.native.system.data.sqlclient.sni/4.7.0",
+      "hashPath": "runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512"
+    },
+    "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LbrynESTp3bm5O/+jGL8v0Qg5SJlTV08lpIpFesXjF6uGNMWqFnUQbYBJwZTeua6E/Y7FIM1C54Ey1btLWupdg==",
+      "path": "runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "runtime.win-x64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-38ugOfkYJqJoX9g6EYRlZB5U2ZJH51UP8ptxZgdpS07FgOEToV+lS11ouNK2PM12Pr6X/PpT5jK82G3DwH/SxQ==",
+      "path": "runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
+      "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "System.Data.SqlClient/4.8.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yERfVLXAY0QbylAgaGLByYN0hFxX28aeEQ0hUgJO+Ntn1AfmWl5HHUoYJA0Yl9HhIUUJHVaS/Sw/RLZr5aaC+A==",
+      "path": "system.data.sqlclient/4.8.3",
+      "hashPath": "system.data.sqlclient.4.8.3.nupkg.sha512"
+    },
+    "System.Security.AccessControl/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JECvTt5aFF3WT3gHpfofL2MNNP6v84sxtXxpqhLBCcDRzqsPBmHhQ6shv4DwwN2tRlzsUxtb3G9M3763rbXKDg==",
+      "path": "system.security.accesscontrol/4.7.0",
+      "hashPath": "system.security.accesscontrol.4.7.0.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
+      "path": "system.security.principal.windows/4.7.0",
+      "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "Accmaster/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AllCallsReg/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "billheader/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "billitems/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "callEngaged/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CallFreq/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Callrecordings/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CallsLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ClosedXML/0.76.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CommonFunctionsCloud/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMAccounts/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMAutoTaskConfig/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMCollaborator/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMCommunication/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMContacts/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMDocumentsLink/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMLead/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMPhone/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMStagesMaster/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMTasks/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CRMTasksLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CustomerControl/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CustomerFeatureLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Customers/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DataFunctions/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DataSynchStatus/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DataTypeConversionLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DocumentFormat.OpenXml/2.5.5631.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EmployeeLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Employees/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Enquiry/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "finalattendance/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GlobalControl/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GlobalFunction1/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GlobalFunction2/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GoggleApiFunction/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Apis.Auth/1.40.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Apis.Calendar.v3/1.40.2.1643": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Apis.Core/1.40.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Apis/1.40.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Apis.Drive.v3/1.40.2.1649": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Apis.Gmail.v1/1.40.2.1635": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IemsClassLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "iemsgroups/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ImageFile/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InfoTable/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "infotableuser/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "infotypedes/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Issuesfilegst/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "locationupdates/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "mastersynchcontrol/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MenuMaster/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MobileNotificationLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MobNotification/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Msgqueue/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "msgtemplate/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Notification/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Notificationcontrol/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NotificationLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "paytm/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Printlibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RegisterDllClass/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RegistrationLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ReimbVisit/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "saleiems/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SalesOrderLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SaralAuthLib/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SetPropertyClass/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "shopcontrol/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "srl_bch/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "srl_ord/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "srl_pro/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "stdole/7.0.3300.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "tags/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "tasktemplate/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Tripinfo/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TripLog/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UserLogin/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UserNotification/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Userroles/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UserSettings/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ValidateMachine/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "variabletable/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ViewSettings/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WebGrease/1.5.2.14234": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WebSessions/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CloudSMS/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EnvDTE/8.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EnvDTE80/8.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MimeKit/2.5.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

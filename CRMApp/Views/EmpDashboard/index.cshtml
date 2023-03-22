@@ -1,0 +1,280 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridLoader.css" />
+<script src="~/Scripts/Custom/EmpDashboardIndex.js" type="text/javascript"></script>
+<style>
+    .content-wrapper {
+        background-color: white;
+    }
+
+    .row {
+        margin-bottom: 30px;
+    }
+
+    .main_block {
+        background-color: white;
+        height: auto;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border: 2px solid #f5f2f2;
+        box-shadow: 5px 5px 5px #aaaaaa;
+        border-radius: 5px;
+    }
+
+    .accordion {
+        color: #444;
+        cursor: pointer;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        border: none;
+        float: left;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+
+
+        .accordion:after {
+            color: #777;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+
+
+    .panel {
+        padding: 0px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+        margin-bottom: 0px;
+        margin-top: 50px;
+        background-color: #d5e9fb;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        document.getElementById("loadspin").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+        $.post('/EmpDashboard/GetPendingCalls',
+            success = function (Data) {
+                loadPendingCalls(Data);
+
+            });
+        $.post('/EmpDashboard/GetPendingTasksOfEmp',
+           success = function (data) {
+               loadPendingTasks(data);
+               document.getElementById("loadspin").style.display = "none";
+               document.getElementById("overlay").style.display = "none";
+           })
+        $.post('/EmpDashboard/GetDueRegCustData',
+           success = function (Data) {
+               loadDueRegCustData(Data);
+
+           });
+   });
+    function loadPendingTasks(data) {
+        var parentTaskDiv = $("#ParentTasksDiv");
+        parentTaskDiv.text('');
+    //if there is no data
+    if (data.data.length == 0) {
+        var containerDiv = document.createElement('h4');
+        containerDiv.className = 'text-center';
+        containerDiv.style = "color:gray; margin-bottom:20px; margin-top:20px";
+        containerDiv.innerHTML = 'No Call Registered'
+        parentTaskDiv.append(containerDiv);
+        //$("#CallsSeeMore").hide();
+    } else {
+        $.each(data.data, function (index, item) {
+            var containerDiv = document.createElement('div');
+            containerDiv.className = 'col-md-12 ';
+            containerDiv.style = "padding:0px; height:auto; margin-top:20px;border-bottom: 2px solid #eeeeee;";
+            parentTaskDiv.append(containerDiv);
+            var SnoDiv = document.createElement('div');
+            SnoDiv.className = 'col-md-1';
+            SnoDiv.innerHTML = index + 1;
+            containerDiv.append(SnoDiv);
+            var TaskTitleDiv = document.createElement('div');
+            TaskTitleDiv.className = 'col-md-11';                      
+            containerDiv.append(TaskTitleDiv);
+
+            var TaskTitleLabel = document.createElement('label');
+            TaskTitleLabel.style = '';
+            TaskTitleLabel.innerHTML = 'Task Title:  ';
+            TaskTitleDiv.append(TaskTitleLabel);
+            var TaskTitlespan = document.createElement('span');
+            //TaskTitlespan.style = 'font-size:15px;';
+            TaskTitlespan.innerHTML = item.TaskTitle;
+            TaskTitleDiv.append(TaskTitlespan);
+
+            var TaskDescDiv = document.createElement('div');
+            TaskDescDiv.className = 'col-md-8';
+            TaskDescDiv.style = "margin-top:5px";
+            containerDiv.append(TaskDescDiv);
+
+            var TaskDescLabel = document.createElement('label');
+            TaskDescLabel.style = 'margin-bottom:0px';
+            TaskDescLabel.innerHTML = 'Task Description:  ';
+            TaskDescDiv.append(TaskDescLabel);
+            var TaskDescspan = document.createElement('span');
+            TaskDescspan.innerHTML = item.TaskDescription;
+            TaskDescDiv.append(TaskDescspan);
+                     
+            var CreationdateDiv = document.createElement('div');
+            CreationdateDiv.className = 'col-md-4';
+            CreationdateDiv.innerHTML = item.FrmtStartDate;
+            CreationdateDiv.style = "margin-top:5px; text-align:right";
+            containerDiv.append(CreationdateDiv);
+
+           
+            
+         
+            var Taskaccordiondiv = document.createElement('div');
+            Taskaccordiondiv.id = item.P_CRMTasks;
+            Taskaccordiondiv.className = 'accordion col-md-12 ';
+            Taskaccordiondiv.style = "margin-top:5px; text-align:right;";
+            containerDiv.append(Taskaccordiondiv);
+            var Taskaccordioni = document.createElement('i')
+            Taskaccordioni.className = 'glyphicon glyphicon-plus';
+            Taskaccordiondiv.append(Taskaccordioni);
+            var paneldiv = document.createElement('div')
+            paneldiv.className = 'panel col-md-12';
+            paneldiv.style = "margin-top:40px;overflow-y:scroll";
+            paneldiv.id = 'panel-' + item.P_CRMTasks;
+            containerDiv.append(paneldiv);
+        });
+        //Code to dynamically create Call remarks accordion
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    $(this).children('i').removeClass();
+                    $(this).children('i').addClass('glyphicon glyphicon-plus');
+
+                } else {
+                    var P_CRMTasks = this.id;
+                    var panelDivId = "#panel-" + P_CRMTasks;
+                    var paneldiv = $(panelDivId);
+
+                    //$(panelDivId).html('');
+                    if ($(panelDivId).html().length) {
+                        panel.style.maxHeight = 88 + "px";
+                        $(this).children('i').removeClass();
+                        $(this).children('i').addClass('glyphicon glyphicon-minus');
+                    } else {
+                        $.post('/EmpDashboard/GetTasksRemarkData', { P_CRMTasks: this.id }, function (CallRemarkdata) {
+                            console.log(CallRemarkdata.data.length);
+                            if (CallRemarkdata.data.length == 0) {
+                                var remarkContainerDiv = document.createElement('div');
+                                remarkContainerDiv.className = 'col-md-12';
+                                remarkContainerDiv.style = "height:20px; margin-bottom:10px";
+                                paneldiv.append(remarkContainerDiv);
+                                var RemarkDiv = document.createElement('div');
+                                RemarkDiv.className = 'col-md-7';
+                                RemarkDiv.innerHTML = 'Remarks not available';
+                                remarkContainerDiv.append(RemarkDiv);
+                            } else {
+                                $.each(CallRemarkdata.data, function (index, item) {
+                                    var remarkContainerDiv = document.createElement('div');
+                                    remarkContainerDiv.className = 'col-md-12';
+                                    remarkContainerDiv.style = "margin-bottom:10px";
+                                    paneldiv.append(remarkContainerDiv);
+                                    var RemarkSnoDiv = document.createElement('div');
+                                    RemarkSnoDiv.className = 'col-md-1';
+                                    RemarkSnoDiv.innerHTML = (index + 1) + '.';
+                                    remarkContainerDiv.append(RemarkSnoDiv);
+                                    var RemarkDiv = document.createElement('div');
+                                    RemarkDiv.className = 'col-md-6';
+                                    RemarkDiv.style = '';
+                                    RemarkDiv.innerHTML = item.Commtext;
+                                    remarkContainerDiv.append(RemarkDiv);
+                                    //var RemarkByDiv = document.createElement('div');
+                                    //RemarkByDiv.className = 'col-md-4';
+                                    //RemarkByDiv.innerHTML = item.FrmtCreationDate;
+                                    //remarkContainerDiv.append(RemarkByDiv);
+                                    var RemarkByDiv = document.createElement('div');
+                                    RemarkByDiv.className = 'col-md-4';
+                                    RemarkByDiv.style = '';
+                                    RemarkByDiv.innerHTML = item.TextLogincode;
+                                    remarkContainerDiv.append(RemarkByDiv);
+                                    var RemarkCreationDiv = document.createElement('div');
+                                    RemarkCreationDiv.className = 'col-md-6 RemarkCreationDiv';
+                                    RemarkCreationDiv.style = '';
+                                    RemarkCreationDiv.innerHTML = item.FrmtCreationDate;
+                                    remarkContainerDiv.append(RemarkCreationDiv);
+                                    var hr = document.createElement('hr');
+                                    hr.className = 'col-md-12';
+                                    remarkContainerDiv.append(hr);
+                                });
+                                panel.style.maxHeight = 88 + "px";
+                                $(panel).parent().find('i').removeClass();
+                                $(panel).parent().find('i').addClass('glyphicon glyphicon-minus');
+                            }
+                        });
+
+                    }
+                }
+            });
+
+        }
+        $("#CallsSeeMore").show();
+    }
+    return false;
+    }
+</script>
+
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:500px; margin-bottom:50px; display:none "></div>
+</div>
+
+<div class="row" data-aos="fade" style="margin-top:30px; padding:0px; margin-left:20px">
+    <div class="col-md-6">
+        <div>
+            <div class="col-sm-11 main_block">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white"> Pending Call Records</h4>
+                    <div class="col-md-12" style="height:350px; overflow-y:auto; padding:0px">
+                        <div id="ParentPendingCallDiv"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div>
+            <div class="col-sm-11 main_block">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white"> Pending Tasks</h4>
+                    <div id="ParentTasksDiv" style="height:350px; overflow-y:auto;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div>
+            <div class="col-md-11 main_block">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">
+                        Registration Due in  @DateTime.Now.ToString("MMMM")  @*@MonthName(Date.Now.Month)*@
+                    </h4>
+                    <div id="ParentDueRegDiv" style="height:350px; overflow-y:auto; padding:0px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>

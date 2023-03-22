@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewData["Title"] = "PendingOTP";
+}
+
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/Custom/ManageContacts.css" />
+<link rel="stylesheet " href="~/Content/Custom/ManagePayments.css" />
+<link rel="stylesheet " href="~/Content/Custom/PendingOTP.css" />
+
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+<script src="~/Scripts/Custom/PendingOTP.js"></script>
+<style>
+    .table > tbody > tr > td {
+        border-bottom: 1px solid grey;
+    }
+    .content{
+        padding:0;
+    }
+    table.text-center td{
+        text-align:left;
+    }
+</style>
+
+<div Class="container">
+    <div Class="icon-bar">
+        @*<a class="top" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Create New" onclick="window.location = '@Url.Action("PaymentDetails", New With {.exitmode = "create", .CalledFrom = "ManagePayments"})'">
+                <i class="glyphicon glyphicon-plus"></i>
+            </a>*@
+        @*<a class="top" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Create New">
+                <i class="glyphicon glyphicon-plus"></i>
+            </a>
+            <a Class="top btn-edit" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Edit" onclick="dd();">
+                <i Class="glyphicon glyphicon-pencil"></i>
+            </a>
+            <a Class="top btn-delete" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete" onclick="deleteRow();">
+                <i Class="glyphicon glyphicon-trash"></i>
+            </a>*@
+    </div>
+</div>
+
+
+<div class="calHeightIcon">
+    <div class="" style="padding:0;">
+        <div id="main" class="col-md-12" style="padding-right:25px">
+            @*<div id="dropdown" class="col-md-4 search ">
+                    <select class="col-md-2" id="filter" style="height:26px">
+                        <option value="0">Filter</option>
+                        <option value="1">Reset Filter</option>
+                    </select>
+                    <div id="dateC" style="display:none">
+                        <div class="col-md-1">
+                            <label class="ee">   From: </label>
+                        </div>
+                        <input type="date" id="min" class="col-md-9" style="height:26px" />
+
+                        <div class="col-md-1">
+                            <label class="ww">  To: </label>
+                        </div>
+                        <input type="date" id="max" class="col-md-9" style="height:26px" />
+                        <div id="search2" onclick="DateSearch();" class="btn btn-primary col-md-3 date"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <div id="TextC" style="display:none">
+                        <input type="text" id="filterText" class="col-md-3" placeholder="Type to search" style="height:26px; margin-top:10px; margin-left:20px" /><div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <div id="DrpDown1" style="display:none">
+                        <select name="Status" class="col-md-3" style="height:26px; margin-top:10px; margin-left:20px" id="filterdd1">
+                            <option value="0" class="">Select status</option>
+                            <option value="U">UnAdjusted</option>
+                            <option value="F">Fully Adjusted</option>
+                            <option value="P">Partially Adjusted</option>
+                        </select><div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <div id="DrpDown2" style="display:none">
+                        <select name="VerifyCode" class="col-md-3" style="height:26px; margin-top:10px; margin-left:20px" id="filterdd2">
+                            <option value="0" class="">Select status</option>
+                            <option value="V">Verified</option>
+                            <option value="P">Pending</option>
+                            <option value="R">Rejected</option>
+                        </select>
+                        <div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <div id="DrpDown3" style="display:none">
+                        @Html.List_Search("PaymentMode", "1", "SELECT", 0,, New With {.class = "col-md-3", .style = "height:26px; margin-top:10px; margin-left:20px", .id = "filterdd3"})<div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <p class="text-danger" id="message" style="text-align:right; font-size:13px">@TempData("Message")</p>
+                </div>*@
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" style="color:#337ab7; margin-left:10px; width:30px; height:25px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; border-radius:0px; margin-top:10px">
+                    <p id="popover1" data-placement="bottom" style="margin-top:0px;"><i class="fa fa-gear xx" style="font-size:20px; margin-top:2px"></i></p>
+                    <div id="popover_content_wrapper1" style="display: none">
+                        <ul style="list-style:none; padding-left:0px">
+                            <li id="popover2" data-placement="left" style="left:-90px; width:90px;">Set Page Size</li>
+                        </ul>
+                    </div>
+                    <div id="popover_content_wrapper2" style="display:none; width:148px">
+                        <input type="number" id="size" style="padding:2px 2px 3px 5px; width:70%;height:25px" /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px;border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+@*<div class="col-md-12" style="height:475px;overflow:auto">*@
+    <table class="col-md-12 text-center Table-Dive" id="examples" style="margin-top:0;">
+    <thead class="calHeightTaskBar" style="padding-left:5px; padding-right:3px;">
+        <tr class="TaskBar tr bg-primary" style="padding-right:0; text-align:center;">
+            <th class="tbHead Sno" style="width: 5%;text-align: left;">SNo.</th>
+            <th class="tbHead Custcode" style="width:10%;text-align: left;">CustomerCode</th>
+            <th class="tbHead Custname" style="width:28%;text-align: left;">CustomerName</th>
+            <th class="tbHead Customer" style="width:10%;text-align: left;">Customers</th>
+            <th class="tbHead Mobno" style="width:9%;text-align: left;">MobNo</th>
+            <th class="tbHead Hometown" style="width:15%;text-align: left;">HomeTown</th>
+            <th class="tbHead Otp" style="width:8%;text-align: left;">OTP</th>
+            <th class="tbHead Timestamp" style="width:15%;text-align: left;">Timestamp</th>
+            </tr>
+            <tr id="loading"><td colspan="10"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+        </thead>
+        <tbody id="example" style="display: inline-block; margin-left: 5px; font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif; margin-right: 10px; width: 99%;" ></tbody>
+    </table>
+@*</div>*@
+
+
+
+
+
+
+
+
+

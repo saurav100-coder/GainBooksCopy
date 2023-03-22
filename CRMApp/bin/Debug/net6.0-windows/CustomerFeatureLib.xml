@@ -1,0 +1,449 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CustomerFeatureLib
+</name>
+</assembly>
+<members>
+<member name="T:CustomerFeatureLib.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CustomerFeatureLib.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CustomerFeatureLib.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getCloudMsgFromCloud(System.String,System.String,System.String)">
+ <summary>
+ Returns cloudsms rows  based on particular custcode and sentstatus
+ </summary>
+ <param name="custcode"></param>
+ <param name="serverdatabase"></param>
+ <param name="sentstatus"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getCustomerRowFromP_customers(System.Int32,System.String,System.String)">
+ <summary>
+ to get customer row from P_customer
+ </summary>
+ <param name="p_customers"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getAccMasterDtbyAccName(System.String,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ functions returns dt containing rcords of accMaster by AccName
+ </summary>
+ <param name="AccName">string</param>
+ <param name="DtInfoTable">dt containing infotable</param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getCustomerRowFromcustomers_key(System.Int32,System.String,System.String)">
+ <summary>
+  to get customer row from customers_key
+ </summary>
+ <param name="customers_key"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.FindContactPersonFromPCustomers(System.Int32,System.String)">
+ <summary>
+ to find contactperson from p_customers
+ </summary>
+ <param name="p_customers"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getcustomersDataTableCombinedAddress(System.String,System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ to get customers DataTable with CombinedAddress
+ </summary>
+ <param name="lcond"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getCustomerRowFromp_acccode(System.Int32,System.String,System.String)">
+ <summary>
+ to get Customer Row From p_acccode
+ </summary>
+ <param name="p_acccode"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.updateSentStatusMsg(System.String,System.Int32,System.String)">
+ <summary>
+ update cloudsms's sentstatus field
+ </summary>
+ <param name="p_cloudsms"></param>
+ <param name="websessions_key"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.CheckDuplicateCustCode(System.String,System.String)">
+ <summary>
+ Return true=> if custcode already available in db on rowstatus=0
+ Return false => if custcode not available in db on rowstatus=0
+ </summary>
+ <param name="custcode"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.PostCloudSMS(System.Data.DataTable,System.String)">
+ <summary>
+ add row in cloudsms table
+ </summary>
+ <param name="CloudSMSDt"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getFcmTokenfromcustcode(System.String,System.String)">
+ <summary>
+ get FcmToken 
+ </summary>
+ <param name="custcode"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getCustomerRowFromCustcode(System.String,System.String,System.String)">
+ <summary>
+ Get customer row  using custcode
+ </summary>
+ <param name="Custcode"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.InsertUpdateInTripLog(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert/ updates TripLog table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.InsertUpdateInTripInfo(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert/ updates TripInfo table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getTripLogRowFromDistance(System.Int32,System.String,System.Double,System.String)">
+ <summary>
+  get TripLog row data  by passing distance  
+ </summary>
+ <param name="TripId"></param>
+ <param name="serverdatabase"></param>
+ <param name="Distance"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getoveralldistanceFromTripId(System.Int32,System.String)">
+ <summary>
+  get overall distance of a trip by  passing tripid 
+ </summary>
+ <param name="TripId"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getTripLogDataFromTripId(System.Int32,System.String,System.String)">
+ <summary>
+ get TripLog table data by  passing tripid 
+ </summary>
+ <param name="TripId"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getCustomerRowFromMobNo(System.String,System.String,System.String)">
+ <summary>
+ Get customer Row for a particular registered mobile number
+ </summary>
+ <param name="MobNo"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getcustomersDatatable(System.String,System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ return customers data table 
+ </summary>
+ <param name="lcond"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getcustomersdatatableFullname(System.String,System.String)">
+ <summary>
+ return customers data table  with related fullname from crmcontacts table
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GeneratePin">
+ <summary>
+ for generate pin
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.SendOTP(System.Data.DataTable,System.Data.DataRow,System.String,System.String,System.String)">
+ <summary>
+ To send OTP on a registered mobilenumber for mobile verification
+ </summary>
+ <param name="dtCust">Datatable containing row of customers from customers table</param>
+ <param name="sessionRow"></param>
+ <param name="serverdatabase"></param>
+ <param name="byApp"></param>
+ <param name="CalledFrom">string to determine from where this function is called Ex:regmobnochange for RegMobileNoChange functionality</param>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.CreateTempContactsDt(System.String,System.String,System.Int32,System.String,System.String)">
+ <summary>
+ Create datatable of tempcontacts to insert into Tempcontacts
+ </summary>
+ <param name="email"></param>
+ <param name="mobno"></param>
+ <param name="p_customers"></param>
+ <param name="otp"></param>
+ <param name="status"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.AddRowIntoTempContacts(System.Data.DataTable,System.Data.DataRow,System.String)">
+ <summary>
+ Insert row in tempcontacts for otp purpose
+ </summary>
+ <param name="dttempContacts"></param>
+ <param name="sessionrow"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.InsertUpdateInCustomers(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ function to insert/update rows in Customers table
+ </summary>
+ <param name="id">-1 for insert and Customers_key for update</param>
+ <param name="ChangedFieldsValuesPair">hashtable containing cgange values and columns</param>
+ <param name="sessionrow">SessionRow of Current Loggedin user</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getDistinctCustcodedt(System.String,System.String)">
+ <summary>
+ create datatable of distinct custcode based on sent status of CloudSMS
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="sentstatus"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getTokenFromP_Customers(System.Int32,System.String)">
+ <summary>
+ to get fcmtoken corresponding to a particular P_Customers
+ </summary>
+ <param name="P_Customers">Represents P_Customers field</param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getTokenFromEmpId(System.Int32,System.String)">
+ <summary>
+ Returns the token based on the particular P_emoplyee
+ </summary>
+ <param name="EmpId"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetEmployeeRowbyEmployee_key(System.Int32,System.String,System.String)">
+ <summary>
+ to get employee row by employee_key
+ </summary>
+ <param name="EmpId"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.getEmpIdsFromDepartment(System.Int32,System.String)">
+ <summary>
+ To get list of p_employees as per value of Department
+ </summary>
+ <param name="Department"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetEmployeeRowbyP_Employees(System.Int32,System.String,System.String)">
+ <summary>
+ to get employee row by p_employees
+ </summary>
+ <param name="P_Employees"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.ValidateAndReturnCorrectCustcode(System.String,System.String,System.String,System.String)">
+ <summary>
+ this function validate custcode pattern[4char4integer].If custcode not in correct pattern then generate new custcode otherwise retun custcode.
+ </summary>
+ <param name="Custcode"></param>
+ <param name="CustName"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetCRMContactsDatatable(System.String,System.String,System.String)">
+ <summary>
+ Get CrmContacts datatable for condition
+ </summary>
+ <param name="condition"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetCRMPhoneDatatable(System.String,System.String,System.String)">
+ <summary>
+ Get CrmPhone datatable for condition
+ </summary>
+ <param name="condition"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.SearchCustomerDetails(System.String,System.String,System.Data.DataTable,System.Data.DataTable,System.String,System.Int32)">
+ <summary>
+ A function will search customer details from columan name or value 
+ </summary>
+ <param name="Colname">Column name from the customers table "CustCode" or P_Customers</param>
+ <param name="value">Value according to the Column.</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <returns>dt Containing customers record according to search.</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetRegistrationData(System.Int32,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ function to get RegistrationTran data according to the P_Customer provided.
+ </summary>
+ <param name="P_Customers">P_Customers from Customers table</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <param name="NoOfRecord">No of record to bring "3","4".Default ="*" bring all records.</param>
+ <returns> dt containing RegistrationTran data.</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetCallData(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ function to get call registered according to the P_Customers.
+ </summary>
+ <param name="P_Customers">P_Customers of the Customer</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <param name="NoOfRecord">No of record to bring "3","4".Default ="*" bring all records.</param>
+ <returns>dt containing call related data of a customer</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetOrderData(System.Int32,System.Data.DataTable,System.String,System.String)">
+ <summary>
+function to get Charging header data according to P_Customers.
+ </summary>
+ <param name="P_Customers">P_Customers of the Customers</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <param name="NoOfRecord">No of record to bring "3","4".Default ="*" bring all records.</param>
+ <returns>dt containing data</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetCallCount(System.Int32,System.String)">
+ <summary>
+ function to get the no of call registered by a particular customer.
+ </summary>
+ <param name="P_Customers">P_Customers of the Customers</param>
+ <returns>TotalCalls as integer</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetOnsiteVisitCount(System.Int32,System.String)">
+ <summary>
+ function to get Number of onsite visits of a particular customer from all calls.
+ </summary>
+ <param name="P_Customers">P_Customers of the Customers</param>
+ <returns>TotalOnsiteVisits</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.InsertUpdateInCrmPhone(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert/ updates CrmPhone table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.InsertUpdateInCrmContacts(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert/ updates CrmContacts table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetPendingOtpData(System.Data.DataTable,System.Data.DataTable,System.String,System.Int32,System.Int32)">
+ <summary>
+ Get Data for pending otp
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="dtinfotableuser"></param>
+ <param name="serverdatabase"></param>
+ <param name="start"></param>
+ <param name="pSize"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.InsertUpdateInTempcontacts(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ 'InsertUpdate into tempcontacts
+ </summary>
+ <param name="p_tempcontacts"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetPaymentData(System.Int32,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ function will return payment data according P_Customers
+ </summary>
+ <param name="P_Customers">P_Customers of the Customers</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <param name="NoOfRecord">No of record to bring "3","4".Default ="*" bring all records.</param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetChargingItemsbyChargingHeader(System.Int32,System.Data.DataTable,System.String)">
+ <summary>
+ function to get data from ChargingItems table accordind to HeaderNo.
+ </summary>
+ <param name="HeaderNo">HeaderNo from ChargingHeader table.</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <returns>dt containing data.</returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetBalanceFromPaymentVoucher(System.Int32,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="P_payment"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CustomerFeatureLib.CustomerFeatureFunctions.GetCustomerGenDataByP_customer(System.String,System.String)">
+ <summary>
+ Get data for GeneralTab in CallsDetails Pane
+ </summary>
+ <param name="p_customers"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

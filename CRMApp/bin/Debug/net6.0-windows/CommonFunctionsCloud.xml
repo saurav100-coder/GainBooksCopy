@@ -1,0 +1,327 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CommonFunctionsCloud
+</name>
+</assembly>
+<members>
+<member name="T:CommonFunctionsCloud.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CommonFunctionsCloud.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CommonFunctionsCloud.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.SaveIntodb(System.Object[],System.Int32)">
+ <summary>
+ Take ClassObject and mtypeCode as parameter and save into database and return true if transaction is successful or false if transaction is failed.
+ </summary>
+ <param name="aClsObject">aClsObject can contain multiple tables.</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.WriteToFile(System.String,System.String)">
+ <summary>
+ Function to write a text to a file programmetically.
+ </summary>
+ <param name="text">Text to be written on file</param>
+ <param name="FilePath">Full path with file name on which text is to be written</param>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetSearchString(System.String)">
+ <summary>
+ generalized function to create search string for grid
+ </summary>
+ <param name="Search"></param>
+ <returns></returns>     
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetTimeStringfromSeconds(System.Int64)">
+ <summary>
+ Convert seconds to HH:MM:SS formate
+ </summary>
+ <param name="seconds"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GeneratePin">
+ <summary>
+ function to generate 5-digit random pin.
+ </summary>
+ <returns>5-digit random number as string.</returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.convertAmrTomp3(System.String,System.String,System.String)">
+ <summary>
+ function to convert amr file to mpe file from ffmpeg library
+ </summary>
+ <param name="amrFullFileName">amr filename with fullpath</param>
+ <param name="mp3FullFileName">mp3 filename with full path</param>
+ <param name="ffmpeg_file_path">ffmpeg.exe filename with full path</param>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.InsertIntoMsgQueue(System.Data.DataTable,System.Data.DataRow,System.String)">
+ <summary>
+ Inserts rows in msgqueue and returns p_msgqueue
+ </summary>
+ <param name="msgQueueDt"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetSortStringFromFrontEndForManageRegCalls(System.String,System.String)">
+ <summary>
+ Creates the sort/order string which is used in paging method in grid
+ </summary>
+ <param name="orderString">string in the format-OrderofcolumnOnGrid:Columnname:asc/desc</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.UnixToIST(System.String)">
+ <summary>
+ Convert Unix timestamp to IST DateTime
+ </summary>
+ <param name="timestampStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CloudSMS(System.String,System.String,System.String,System.Int32,System.String)">
+ <summary>
+ To send message from Android app from fixed custcode eg 'NEHA8587'
+ </summary>
+ <param name="txtmsgcontent"></param>
+ <param name="txttomobile"></param>
+ <param name="txtcustcode"></param>
+ <param name="intwebkey"></param>
+ <param name="txtsentstatus"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CloudSMS(System.String,System.String,System.String,System.Int32,System.String,System.Int32)">
+ <summary>
+ To send message from Android app from fixed custcode eg 'NEHA8587'
+ </summary>
+ <param name="txtmsgcontent"></param>
+ <param name="txttomobile"></param>
+ <param name="txtcustcode"></param>
+ <param name="intwebkey"></param>
+ <param name="txtsentstatus"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.SendMsg_old(System.String,System.String)">
+ <summary>
+ Send SMS to a particular phone no by bhashsms api
+ </summary>
+ <param name="PhoneNo">Number on which message is sent</param>
+ <param name="Message">Message to be sent</param>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.SendMsg_oldAsync(System.String,System.String,System.Threading.CancellationToken)">
+ <summary>
+ Send Msg as Async Task
+ </summary>
+ <param name="PhoneNo"></param>
+ <param name="Message"></param>
+ <param name="cancelToken">CancellationToken to cancel await Task</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.getLastSynchRowFromDataSynchStatus(System.Int32,System.String,System.String,System.String)">
+ <summary>
+ To get LastSynch row from DataSynchStatus table. Will be used to get time when the data was last synched from server last
+ </summary>
+ <param name="userkey">userlogin_key field</param>
+ <param name="calledFrom">calledform field</param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr">required column fields</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.getStringFixedSize(System.String,System.Int32)">
+ <summary>
+ takes a string nad give a fixed size substring from it starting form 0 index
+ </summary>
+ <param name="InputStr">whole string</param>
+ <param name="len">length as in no of characters</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.ExportDataToExcel(System.Data.DataTable,System.String)">
+ <summary>
+ Function creates the excel file from the datatable in the provided filepath with file name mentioned in the path.
+ </summary>
+ <param name="dt">datatable from which excel is to be created</param>
+ <param name="filepath">Fullfile path with file name on which file is to be created.</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.getRowFromDataSynchStatus(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Get DataSynchStatus Row for a particular Userkey,FuncName,calledFrom,lastsyncdate
+ </summary>
+ <param name="userkey"></param>
+ <param name="FuncName"></param>
+ <param name="calledFrom"></param>
+ <param name="lastsyncdate"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.SendMsg(System.String,System.String)">
+ <summary>
+ Send SMS to a particular phone no from new api 
+ </summary>
+ <param name="PhoneNo">Number on which message is sent</param>
+ <param name="Message">Message to be sent</param>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.InsertUpdateDataSynchStatus(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ function to insert/update rows in DataSynchStatus table
+ </summary>
+ <param name="id">-1 for insert and DataSynchStatus_key for update</param>
+ <param name="ChangedFieldsValuesPair">hashtable containing cgange values and columns</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CreateMsgQueueDt(System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Creates data table of msgquesue table to insert row in the datatable
+ </summary>
+ <param name="msgtype">E or M. E-> Email, M-> Mobile SMS</param>
+ <param name="msgcontent">Content of message</param>
+ <param name="msgattachement">Any attachment to be sent with mail</param>
+ <param name="tofield">To field. Phone no in case of msgtype M. Comma separated email ids in case of msgtype E</param>
+ <param name="toname"></param>
+ <param name="sentstatus">If to be sent then N, otherwise Y </param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.SaveIntodbGetKey(System.Object[],System.String,System.String)">
+ <summary>
+  Take ClassObject and mtypeCode as parameter and save into database and return key value as per the name of table and column of row which is inserted.
+ </summary>
+ <param name="aClsObject">aClsObject can contain multiple tables.</param>
+ <param name="tablename"></param>
+ <param name="fieldname"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetNameOfInfoFromInfotableFromP_infotable(System.Int32,System.String,System.Data.DataTable,System.Data.DataTable)">
+ <summary>
+ Returns name of info corresponding to a infotable_key
+ </summary>
+ <param name="p_infotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="dtinfotable"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CheckAndCreateFileName(System.String,System.String)">
+ <summary>
+ This function checks if file on particular path exists and if file exists it returns name of file which can be created on that path.
+ </summary>
+ <param name="FileName">Name of the file with extension. </param>
+ <param name="filepath">path of directory in which file to be check and create. </param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetSearchStringFromFrontEnd(System.String,System.String)">
+ <summary>
+ Creates the search string which is used in paging method in grid 
+ </summary>
+ <param name="search"></param>
+ <param name="lcondition"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CreateFolder(System.Data.DataTable,System.String,System.String)">
+ <summary>
+ Create folder on server 
+ </summary>
+ <param name="customerdt"></param>
+ <param name="folderpath"></param>
+ <param name="foldername"></param>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.RemoveCorpid(System.String)">
+ <summary>
+ Remove database and dbFiles from server for Corpid
+ </summary>
+ <param name="CorpId">Comma separate string </param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetDataFromSqlTable(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+ <summary>
+ Get Data from Sql Table with pagination
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="tableName"></param>
+ <param name="columns"></param>
+ <param name="joinCondition"></param>
+ <param name="condition"></param>
+ <param name="order"></param>
+ <param name="start"></param>
+ <param name="pSize"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.GetRowsCountForDataFromSqlTable(System.String,System.String,System.String,System.String)">
+ <summary>
+ Count rows for GetDataFromSqlTable method datatable
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="tableName"></param>
+ <param name="joinCondition"></param>
+ <param name="condition"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.AddValueToHashTableIfNotEmptyOrNull(System.Collections.Hashtable@,System.String,System.Data.DataRow@,System.String,System.String)">
+ <summary>
+ Add value in hashtable from datarow 
+ </summary>
+ <param name="mHashTable"></param>
+ <param name="mHashTableKey"></param>
+ <param name="mRow"></param>
+ <param name="mRowColumnName"></param>
+ <param name="mDataType"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.StringToDataTable(System.String,System.String,System.String,System.Data.DataTable)">
+ <summary>
+ To make a datatable object from a string protocol,string starts with chrw(248),if header exists
+ </summary>
+ <param name="InputString">Input string from which data is to be converted into datatable</param>
+ <param name="mColumnsSeparator" >Separator used to separate different column values.Default is |</param>
+ <param name="mRowsSeparator" >Separator used to separate different column values.Default is chrw(13)</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CreateMsgQueueDtNew(System.Data.DataTable@,System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ Create and add Rows in MsgQueueDt
+ </summary>
+ <param name="dtmsg"></param>
+ <param name="msgtype"></param>
+ <param name="msgcontent"></param>
+ <param name="msgattachement"></param>
+ <param name="tofield"></param>
+ <param name="toname"></param>
+ <param name="sentstatus"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.DataTableToString(System.Data.DataTable,System.String,System.String,System.Boolean)">
+ <summary>
+ Convert DataTable to string using given Separator
+ </summary>
+ <param name="mDataTable"></param>
+ <param name="mColumnsSeparator"></param>
+ <param name="mRowsSeparator"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.DataRowToString(System.Data.DataRow,System.String)">
+ <summary>
+ Convert DataRow to string using given Separator
+ </summary>
+ <param name="mDataRow"></param>
+ <param name="mColumnsSeparator"></param>
+ <returns></returns>
+</member>
+<member name="M:CommonFunctionsCloud.CommonFunctionsCloud.CreateWhatsAppShareLink(System.String,System.String)">
+ <summary>
+ Create Whats app share link
+ </summary>
+ <param name="mobilenumber">10 digit mobile number</param>
+ <param name="encodedMessage">Encoded text message</param>
+ <returns></returns>
+</member>
+</members>
+</doc>

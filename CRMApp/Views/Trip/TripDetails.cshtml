@@ -1,0 +1,144 @@
+﻿@model  CRMApp.Models.TripInfoModel
+@{
+    ViewData["Title"] = "TripDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Custom/TripDetails.css" />
+
+<style>
+    #map {
+  height: 100%;
+}
+</style>
+
+<div Class="row googlemap" style="margin-right: 0px; margin-left: 0px; height: 60vh /*490px*/; box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; border-radius: 4px; background-color: #f3f8fa; margin-bottom:15px;">
+    <div id="map"></div>
+</div>
+<input type="hidden" id="tripid" name="tripid" value="@Model.tripid"/>
+<input type="hidden" id="startloc" name="startloc" value="@Model.startloc" />
+<input type="hidden" id="endloc" name="endloc" value="@Model.endloc" />
+<div class="row" style="margin-right:0px; margin-left:0px;">
+    <div class="col-md-3 TripDiv" style="padding-left:0px; padding-right:15px;">
+        <div class="Trip" style="box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; border-radius: 4px; background-color: #f3f8fa; height: 75px; font-size: 18px; color: #337ab7; ">
+            <img src="~/images/TripName.png" width="38" />
+            @Model.triplbl 
+        </div>
+    </div>
+    <div class="col-md-3 DurationDiv" style="padding-left:0px; padding-right:15px;">
+        <div class="Duration" style="box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; padding-top: 15px; border-radius: 4px; background-color: #f3f8fa; height: 75px; font-size: 18px; color: #337ab7; ">
+            <img src="~/images/timer.png" width="35" />
+            @Model.FrmtDuration
+        </div>
+    </div>
+    <div class="col-md-3 avgSpeedDiv" style="padding-left:0px; padding-right:15px;">
+        <div class="avgSpeed" style="box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; border-radius: 4px; background-color: #f3f8fa; height: 75px; font-size: 18px; color: #337ab7; ">
+            <img src="~/images/speed.png" width="38" />
+            @Model.avgspeed km/hr
+        </div>
+    </div>
+    <div class="col-md-3 CoverDistanceDiv" style="padding-left:0px; padding-right:0px;">
+        <div class="CoverDistance" style="box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; padding-top: 15px; border-radius: 4px; background-color: #f3f8fa; height: 75px; font-size: 18px; color: #337ab7; ">
+            <img src="~/images/location 2.png" width="35" />
+            @Model.covereddistance km
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-right:0px; margin-left:0px; margin-top:15px;">
+    <div class="col-md-6 startTimeDiv" style="padding-left:0px; padding-right:15px;">
+        <div class="startTime" style="box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; border-radius: 4px; background-color: #f3f8fa; height: 85px; font-size: 18px; display: flex;">
+            <img src="~/images/clock.png" width="35" height="35" /><div>
+                Start Time :
+                @Model.FrmtStartTime
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 endTimeDiv" style="padding-left:0px; padding-right:0px;">
+        <div class="endTime" style="box-shadow: 0px 2px 5px 0px #33333359; padding: 20px; border-radius: 4px; background-color: #f3f8fa; height: 85px; font-size: 18px; display:flex;">
+            <img src="~/images/clock.png" width="35" height="35" /><div>
+                End Time :
+                @Model.FrmtEndTime
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/scripts/Custom/TripDetails.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNc-dLXFshVqtVJ0k3XOQy7KBd7SYUiKk&callback=initMap"></script>
+
+@*<script>
+    
+    var startLoc ="@Model.startloc";
+    var endLoc = "@Model.endloc";
+    var startLat = 0
+    var startLng = 0
+    var endLat = 0
+    var endLng = 0
+
+    if ((startLoc).trim() !=="") {
+        var startLocArr = startLoc.split(",");
+        startLat =parseFloat(startLocArr[0]);
+        startLng = parseFloat(startLocArr[1]);
+
+    }
+
+    if ((endLoc).trim() !== "") {
+        var endstartLocArr = endLoc.split(",");
+        endLat = parseFloat(startLocArr[0]);
+        endLng = parseFloat(startLocArr[1]);
+    }
+
+    let directionsService;
+    let directionsDisplay;
+
+    function initMap() {
+        var options = {
+            zoom: 16,
+            center: { lat: startLat, lng: startLng }
+        }
+        var map = new google.maps.Map(document.getElementById("map"), options);
+        //addMarker({ lat: startLat, lng: startLng });
+        //addMarker({ lat: endLat, lng: endLng });
+
+        //function addMarker(coords) {
+        //    var marker = new google.maps.Marker({
+        //        position: coords,
+        //        map: map
+        //    });
+        //}
+
+      
+
+        directionsService = new google.maps.DirectionsService();
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsDisplay.setMap(map);
+      
+
+        calcRoute(startLoc, endLoc);
+        
+        function calcRoute(start,destination) {
+            let request = {
+                origin: start,
+                destination: destination,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function (result, status) {
+                if (status=="OK") {
+                    directionsDisplay.setDirections(result);
+                   
+                }
+            })
+        }
+    }
+
+    
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNc-dLXFshVqtVJ0k3XOQy7KBd7SYUiKk&callback=initMap"></script>*@
+
+
+
+
+

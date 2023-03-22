@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<script src="~/scripts/Custom/UpdateOpeningStock.js"></script>
+
+<style>
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+
+    .container {
+        max-width: 700px;
+    }
+
+    .formfield {
+        position: relative;
+        box-sizing: border-box;
+        margin: auto;
+        padding: 0px;
+        border: 0px;
+        font-size: 1em;
+    }
+
+        .formfield * {
+            box-sizing: border-box;
+        }
+
+    @@media only screen and (max-width:600px) {
+        .ChangePasswordContainer {
+            width: 90% !important;
+        }
+    }
+</style>
+
+<h2 class="text-info text-center" style="color:#105faf;">Update Opening Stock</h2>
+<p class="login-box-msg text-primary text-center" style="color:#105faf;">(Please choose only .xlsx file)</p>
+<p class="login-box-msg1  text-center" id="TempMsg"></p>
+<br />
+
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:500px; margin-bottom:50px; display:none"></div>
+</div>
+
+<form method="post" id="UpdateOpeningStockForm" enctype="multipart/form-data">
+    <div class="container  ChangePasswordContainer" style="width:30%; background-color:white; padding:0px">
+        <div class="panel panel-default" style="margin-bottom:0px">
+            <div class="panel-body" style="border-top:3px solid #3c8dbc">
+                <div Class="formfield form-group" id="" style="margin-top:30px; margin-bottom:35px; ">
+                    <input type="file" name="file1" id="file1" Class="form-control" style="border: none; outline:none">
+                </div>
+                <div Class="text-center" style="margin-top:20px; margin-bottom:30px;">
+                    <input type="button" id="Sub" Class="btn btn-primary" onclick="UpdateOpeningStock();" value="Submit" style="width:40%; border-radius:25px;" />
+                    <input type="Reset" value="Reset" style="margin-left: 20px; width: 40%; border-radius: 25px;" class="btn btn-default" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+

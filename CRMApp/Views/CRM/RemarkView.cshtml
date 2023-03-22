@@ -1,0 +1,95 @@
+﻿
+@*@Optimization.Styles.Render("~/Content/Remark_View")*@
+@*@Optimization.Scripts.Render("~/Scripts/Remark_View")*@
+
+<div Class="container">
+    <h3 class="text-center">All Calls Activity Log</h3>
+    @*<div Class="icon-bar">
+        <a Class="top btn-edit" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Edit" onclick="dd();">
+            <i Class="glyphicon glyphicon-pencil"></i>
+        </a>
+        <a Class="top btn-delete" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete" onclick="dd();">
+            <i Class="glyphicon glyphicon-trash"></i>
+        </a>
+        <a Class="top btn-reg" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Open Registration" onclick="pp();" id="yy">
+            <i Class="fa fa-file-text" style="font-size:24px">  </i>
+        </a>
+    </div>*@
+</div>
+
+
+
+<div class="panel panel-default disabledbutton" >
+    <div class="panel-body">
+        <div id="main" class="col-md-12" style="padding-right:25px">
+            <div id="dropdown" class="col-md-4 search ">
+                <select class="col-md-2" id="filter" style="height:26px">
+                    <option value="0">Filter</option>
+                </select>
+                <div id="dateC" style="display:none">
+                    <div class="col-md-1">
+                        <label class="ee">   From: </label>
+                    </div>
+                    <input type="date" id="min" class="col-md-9" style="height:26px" />
+                    <div class="col-md-1">
+                        <label class="ww">  To: </label>
+                    </div>
+                    <input type="date" id="max" class="col-md-9" style="height:26px" />
+                    <div id="search2" onclick="DateSearch();" class="btn btn-primary col-md-3 date"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+                <div id="TextC" style="display:none">
+                    <input type="text" id="filterText" class="col-md-3" placeholder="Type to search" style="height:26px" /><div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:24px"></i>
+                </div>
+                <div class="btn btn-default" style="color:#337ab7; margin-left:10px; width:30px; height:25px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; border-radius:0px; margin-top:10px">
+                    <p id="popover1" data-placement="bottom" style="margin-top:0px;"><i class="fa fa-gear xx" style="font-size:20px; margin-top:2px"></i></p>
+                    <div id="popover_content_wrapper1" style="display: none">
+                        <ul style="list-style:none; padding-left:0px">
+                            <li id="popover2" data-placement="left" style="left:-90px; width:90px;">Set Page Size</li>
+                        </ul>
+                    </div>
+                    <div id="popover_content_wrapper2" style="display:none; width:148px">
+                        <input type="number" id="size" style="padding:2px 2px 3px 5px; width:70%;height:25px" /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px;border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="@Url.Action("ManageAccounts")" method="post" id="customer">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="grid1" id="grid1" value="">
+    <hr />
+    <div class="col-md-12" style="height:450px; overflow:auto">
+        <table id="example" class="table row-border" cellspacing="0">
+            <thead>
+                <tr style="text-align:center;">
+                    <th style="width:82px;padding-right:0px">Select</th>
+                    <th style="width:100px;padding-right:0px">CallId</th>
+                    <th style="width:100px;padding-right:0px">Date</th>
+                    <th style="width:120px;text-align:center;">Firm Name </th>
+                    <th style="width:250px;text-align:center;">Remark</th>
+                    <th style="width:250px;text-align:center;">Issue Description</th>
+                    <th style="width:105px;">Location</th>
+                </tr>
+                <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+            </thead>
+        </table>
+    </div>
+</form>
+ <input type="hidden" id="fValue" value="@ViewBag.filter" />
+
+
+
+
+
+
+

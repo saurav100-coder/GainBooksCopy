@@ -1,0 +1,49 @@
+﻿@{
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+}
+
+@*@Optimization.Scripts.Render("~/bundles/jquery")*@
+
+<script src= "~/Scripts/FrameWork/jquery.min.js"></script>
+<style>
+    .btn-primary {
+        background-color: #105faf;
+    }
+    @@media only screen and (max-width:600px) {
+        .con {
+            width: 100% !important;
+            margin-left: 0px !important;
+        }
+    }
+</style>
+<h2 class="text-center text-primary" style="color:#105faf;">Tasks Report</h2>
+<p class="text-center text-primary" style="color:#105faf;">Click directly on Send to get Reports as of Today</p>
+<p class="text-center text-success" style="color:#105faf;">@TempData["Message"]</p>
+<br />
+<div class="col-md-12 con" style=" width: 40%; margin-left: 30%;">
+
+    <div class="panel panel-default">
+        <div class="panel-body" style="padding:40px;">
+            <form action="@Url.Action("SendCompTeamTasks")" method="post">
+                <div Class="form-group" style="margin-bottom:33px;margin-top:15px;">
+                    <Label for="inputEmail1" class=" control-label" style="text-align: right; margin-bottom: 8px;">From Date</Label>
+                    <input type="date" value="@D" id="CompTasksDate" name="FromDate" placeholder="Set Date" style="width: 100%; border: none; border-bottom: 1px solid #ddd; outline: none;" />
+                </div>
+                <div Class="form-group" style="margin-bottom:33px;margin-top:15px;">
+                    <Label for="inputEmail1" class=" control-label" style="text-align: right; margin-bottom: 8px;">To Date</Label>
+                    <input type="date" value="@D" id="CompTasksDate" name="ToDate" placeholder="Set Date" style="width: 100%; border: none; border-bottom: 1px solid #ddd; outline: none;" />
+                </div>
+                <div Class="form-group" style="margin-bottom: 35px;">
+                    <Label class=" control-label" style="text-align:right; margin-bottom:8px;">Select Employees</Label>
+                    @Html.List_Search("EmployeeId", "- All Employees -", "Employees", "EmpName", "Employees_Key", "", 0, "",new {@onChange = "", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:100%; height:24px; border: none; border-bottom: 1px solid #ddd; outline: none;"})
+                </div>
+                <div Class="form-group" style=" text-align:center">
+                    <input type="Submit" id="SendCompTasks" class="btn btn-primary" name="SendCompTasks" value="Send" style="border-radius: 25px;width: 100px; height: 32px;padding: 0px 5px; " />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

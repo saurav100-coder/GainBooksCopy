@@ -1,0 +1,470 @@
+﻿@{
+    ViewData["Title"] = " Service Request Recordings";
+    var cc1 = new CustomerControl.Variables("WebGodaddy");
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+}
+
+@*@Optimization.Scripts.Render("~/bundles/ManageRegCalls")*@
+@*@Optimization.Styles.Render("~/Content/ManageRegCalls")*@
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Custom/CallRecordingOfCalls.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/CallRecordingOfRegCalls.js"></script>
+<script src="~/scripts/Custom/BasicFilter.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+
+
+<style>
+    audio {
+        width: 260px;
+        height: 40px;
+       /* position: absolute;
+        right: 45px;*/
+        z-index:1;
+    }
+
+    .MoreDetails {
+        position: absolute;
+        display: none;
+        width: 100px;
+        min-height: 37px;
+        padding-left: 10px;
+        padding-top: 8px;
+        right: 20px;
+        background:#cce6ff;
+    }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #2e2e2e;
+            position: absolute;
+            top: 30px;
+            left: 10px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 5px;
+            background: #2e2e2e;
+            color: #fff;
+            z-index: 9;
+            font-size: 11px;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+            .MoreDetails:hover i:hover .MoreDetails {
+                background: #8f1fe7;
+            }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .xdsoft_datetimepicker {
+        height: 212px;
+    }
+
+    td.xdsoft_date div {
+        padding: 0px 9px 0px 9px;
+    }
+
+    div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 8px 23.4px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .content-wrapper {
+        height: 580px;
+        background-color: white;
+    }
+
+
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+        .sticky + .ShowRemarksValues {
+            padding-top: 102px;
+        }
+
+    .numberCircle {
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        padding: 1px;
+        margin-right: 5px;
+        background: #FF0000;
+        border: 0.5px solid #FF0000;
+        color: #fff;
+        text-align: center;
+        font: 11px Arial, sans-serif;
+    }
+
+    .context-menu-item {
+        padding-left: 30px;
+        padding-right: 20px;
+    }
+
+    .context-menu-list {
+        width: 200px !important;
+    }
+
+    .context-menu-item labels context-menu-visible {
+        padding-left: 15px;
+    }
+    .searchButton {
+    color: #337ab7;
+    border-radius: 0px;
+    padding-left: 9px;
+    padding-right: 9px;
+    margin-left: 8px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 12px;
+}
+    .searchButton:hover {
+        background-color: #337ab7;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+    }
+   /*  .resultContent {
+    border: #d9d5d0 1px solid;
+    margin: 15px 0px 15px 0px;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+        .resultContent p {
+            margin: 0px !important;
+            padding: 6px;
+            font-size: 12px;
+        }*/
+
+
+    .closebn:hover {
+    background-color: #ddd;
+    border-radius: 50%;
+    color: #246399;
+}
+
+    #Msg{
+    margin-left:45%;
+}
+</style>
+
+<div class="container" style="width: 100%;"></div>
+<input type="hidden" name="grid1" id="grid1" value="">
+
+<p class="text-center text-success">@TempData["Message"]</p>
+
+<div class="calHeightIcon"> 
+    <div class="row icon-div">
+        <div class="search2 ">
+
+            <a class="top" href='/CRM/RegisterCalls' title="" data-placement="bottom" data-toggle="Register New Call" data-trigger="hover" style="text-align:left;cursor:pointer;">
+                 <img src="/images/icon-plus.png">
+            </a>
+            <a class="top" title="" data-placement="bottom" data-toggle="Refresh" data-trigger="hover" style="cursor:pointer;" onclick="ReloadGrid()">
+                 <img src="/images/icon-refresh.png">
+            </a>
+            <a class="top" title="" data-placement="bottom" data-toggle="download calls recording" data-trigger="hover" style="cursor:pointer;" onclick="DownloadMultipleFiles()">
+                <img src="~/images/icon-export.png" />
+                @*<i class="fa fa-download" style="font-size: 16px; "></i>*@
+            </a>
+
+            <a class="top" title="" data-placement="bottom" data-toggle="Advance Filter" data-trigger="hover" style="cursor:pointer;" onclick="ShowFilters();">
+                <img src="/images/icon-filter.png">
+            </a>
+        </div>
+
+        <input type="text" id="firmNameFilter" class="quickSearch" onkeyup="searchByFirmName();" placeholder="Search by FirmName">
+
+        <div id="dropdown" class="search" style="display: inline-flex;   margin-left: 0px; padding-left:10px; width:68%;position: relative; ">
+            @*<select class="" id="filter" style="height: 26px; top: 10px; padding-left: 5px; width: auto; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 13px;  ">
+                <option value="0">Filter By</option>
+            </select>
+            <div id="DateC" style="display:none;" class="filterDiv">
+                <div class="datedisplay" style="display: flex; align-items: baseline;">
+                    <div class="" style="">
+                        <label class="ee" style="margin-left: 15px; margin-right: 10px; font-size: 11px; color: #337ab7; ">   From </label>
+                    </div>
+                    <input type="date" id="min" class="" style="display: inline-flex; height: 26px;  border: none; outline: none; border-bottom: 1px solid #ddd;" value="@D" max="@D" />
+
+                    <div class="" style="">
+                        <label class="ww" style="margin-left: 15px; margin-right: 10px; font-size: 11px; color: #337ab7;">  To </label>
+                    </div>
+                    <input type="date" id="max" class="" style="display: inline-flex; height: 26px;  border: none; outline: none; border-bottom: 1px solid #ddd;" value="@D" max="@D" />
+                    <div id="search2" onclick="DateSearch();" class="searchButton date" style="margin-left:5px;"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+            </div>
+            <div id="TextC" class="filterDiv" style="display:none;">
+                <div class="t" style="display: flex; align-items: baseline;">
+                    <input type="text" id="filterText" class="" placeholder="Type to search" style="display: inline-flex; height: 26px; padding-left: 5px; margin-left: 20px; width: 120px; border: none; outline: none; border-bottom: 1px solid #ddd;" />
+                    <div id="search1" onclick="DoSearch();" class="searchButton"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+
+            </div>
+            <div id="assignedtoC" class="filterDiv" style="display:none;">
+                @Html.List_Search("assignedto", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px; border:none; outline:none; border-bottom:1px solid #ddd;"}, true)
+            </div>*@
+            <p class="basicFilterTitle" onclick="ShowCloseBasicFilter();" style="height:20px"><span>Select Filter</span> <i class="fa fa-caret-down"></i></p>
+                        <div id="filterDiv" class="basicfilterDiv">
+                            <table id="basicFilterTable">
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;">
+                                            <div id="search1" onclick="ApplyBasicFilters();" class="btn modalbutton ">Apply<i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                                            <button type="button" class="btn modalbuttonsecondary" onclick="ShowCloseBasicFilter();">Close</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+            <div id="FilterText" class="" style="float:left; display:none; margin-top: 10px;margin-left:15px; font-size:13px; border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+
+                <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                <a class='' id='' onclick='ReloadGrid();'>
+                    <i class='glyphicon glyphicon-remove'></i>
+                </a>
+
+            </div>
+        </div>
+        <span class="closebn filterclose" onclick="removeFilter()" title="" data-placement="bottom" data-toggle="Clear Filter" data-trigger="hover" data-original-title="Remove Filter" style="display:none;margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;margin-top: 9px;">&times;</span>
+        <div class="search1">
+            <div class="g" style="top:50px;">
+                <label id="info">0-00 of 00 </label>
+                <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Previous" id="Prev" data-original-title="Newer">
+                    <i class="fa fa-angle-left" style="font-size:19px"></i>
+                </a>
+                <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Next" id="Next" data-original-title="Older">
+                    <i class="fa fa-angle-right" style="font-size:19px"></i>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="resultDiv" style="display:none;margin-top:5px;">
+                    <div class="resultContent">
+                        <div class="result-msg">
+                        </div>
+                        <p class="clearFilter" onclick="removeFilter();">Clear Filter</p>
+                    </div>
+                </div>
+</div>
+<div id="subDiv" style="display:none;">
+    <label id="subDivLable" onclick="Allselection();"></label>
+</div>
+<div class="col-md-12 Table-Dive">
+    <div class="TaskBar tr calHeightTaskBar" style="padding-left:13px;">
+        <div class="col-md-1 SNo tbHead" style="width: 6%; padding: 0px; display: flex;"><input type="checkbox" id="selectall" class="css-checkbox " name="selectall" style="margin-right:4px;" /><b style="vertical-align: super;">SNo.</b></div>
+        <div class="col-md-1 CallId tbHead" style="width: 7%; "><b>Call Id</b></div>
+        <div class="col-md-1 Date tbHead" style="width: 8%;margin-left: 0px;padding:0;"><b>Date</b></div>
+        <div class="col-md-1 Firm tbHead" style="width: 13%;text-align: left;"><b>Firm</b></div>
+        <div class="col-md-1 Name tbHead" style="width: 7%;text-align: left;margin-right: 0px; padding:0;"><b>Mobile</b></div>
+        <div class="col-md-1 Location tbHead" style="width: 11%;"><b>Location</b></div>
+        <div class="col-md-1 Issue tbHead" style="width: 12%; padding:0;"><b>Issue</b></div>
+        <div class="col-md-1 Description tbHead" style="width: 14%;text-align: left; padding:0;"><b>Description</b></div>
+        <div class="col-md-1 Status tbHead" style="width: 10%;text-align: left;"><b>Status</b></div>
+        <div class="col-md-1 LastCallTime tbHead Source" style="width: 12%;text-align: left;padding:0;"><b>Source</b></div>
+        <div class="col-md-1 LastCallTime tbHead Employee" style="width: 11%;text-align: left; padding:0;"><b>Employee</b></div>
+    </div>
+    <div id="loading" style ="padding:10px; margin:10% auto;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6" style=""></div><p id="Msg"></p></div></div>
+    <div class="" id="example"></div>
+</div>
+
+<div class="LoaderOverlay">
+    <div class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px"></div>
+</div>
+
+
+<div class="modal fade" id="TaskClose">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                @*<h4 style="text-align:center; font-size:18px; margin-top:0px;" class="modal-title"></h4>*@
+                <div id="TaskClosedContent" class="col-md-12"></div>
+                @*<div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                        <a  Class="btn btn-primary" data-dismiss="modal" style="margin-top:20px; width:66px; margin-right:30px">Ok</a>
+                    </div>*@
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:15px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 2px; width: 670px;">
+            <div class="modal-body" style="height: 400px;  overflow-y:scroll;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            <div id="addfilter" onclick="AddFilters();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer;">New Filter <i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            <div id="addsortOptions" onclick="AddSortingOptions();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer; ">New Sort Option<i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div id="clearFilters" onclick="removeFilter2();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>@*clear filter values*@
+                <div id="search1" onclick="ApplyFilters2();" class="btn modalbutton ">Apply <i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal">Close</button> @*close modal popup*@
+
+            </div>
+        </div>
+    </div>
+</div>

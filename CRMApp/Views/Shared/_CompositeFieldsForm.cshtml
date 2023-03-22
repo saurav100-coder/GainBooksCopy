@@ -1,0 +1,70 @@
+﻿<div id="divFields" style="display:none;">
+    <table id="tblFields" class="table" >
+        <thead>
+            <tr>
+                <th>Field Label</th>
+                <th>Field Type</th>
+                <th>Field Name</th>
+                <th>Infotype</th>
+                <th>Default value</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" onclick="AddNewRow();">Add Row</button>
+    <button class="btn btn-success" onclick="SaveCompositeString();">Save</button>
+</div>
+
+
+
+
+@*Proptype Row for cloning purpose*@
+<table id="tblprototype" class="table" style="display:none">
+    <tbody>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <input type="text" id="FieldLabel" name="FieldLabel" class="form-control" />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <select id="FieldType" name="FieldType" class="form-control">
+                        <option value="text">Text</option>
+                        <option value="dropdown">DropDown</option>
+                        <option value="radio">Radio Button</option>
+                        <option value="checkbox">Checkbox</option>
+                        <option value="date">Date</option>
+                        <option value="password">Password</option>
+                        <option value="email">Email</option>
+                        <option value="number">Number</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="text" id="FieldName" name="FieldName" class="form-control"  />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    @*<select id="infotype" name="infotype" class="form-control">
+                    </select>*@
+                    @Html.List_Search("infotype", "- Select infotype -", "infotypemaster", "nameofinfo", "infotype", "rowstatus=0",0,"",new {@class = "form-control"},true)
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="text" id="Defaultvalue" name="Defaultvalue" class="form-control" />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                   <button class="btn btn-danger" onclick="RemoveRow(this);">X</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

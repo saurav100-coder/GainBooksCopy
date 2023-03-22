@@ -1,0 +1,184 @@
+﻿tr.GSCSelectedRow {
+    background-color: cornsilk !important;
+    /*background-color: #b3b3ff !important;*/
+}
+
+.GSCCheckbox {
+font-size:13px;
+}
+
+
+
+.table-fixed {
+    width: 100%;
+    background-color: #f3f3f3;
+    margin-bottom:0;
+}
+    .table-fixed tbody{
+
+    height: 220px;
+    overflow-y: auto;
+    width: 100%;
+    /*margin-bottom:10px;*/
+}
+
+    .table-fixed thead {
+        display: block;
+        overflow:hidden;
+    }
+    .table-fixed tbody {
+        display: block;
+    }
+    .table-fixed tr {
+        display: block;
+    }
+    .table-fixed td {
+        display: block;
+    }
+    .table-fixed th {
+        display: block;
+    }
+
+    .table-fixed tbody  td{
+    float: left;
+}
+
+
+    .table-fixed thead tr th{
+    float: left;
+    border:none;
+    /*background-color: #f39c12;
+    border-color: #e67e22;*/
+}
+
+.table-customer tbody tr {
+    overflow: hidden;
+    border-bottom: 1px solid rgb(242 199 121);
+}
+.table-customer {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+    font-size:13px;
+}
+
+.table-customer tbody tr:hover {
+    background: cornsilk;
+}
+
+    .table-card tbody tr:hover {
+        background: cornsilk;
+    }
+
+.table{
+    margin-bottom:0;
+}
+
+thead {
+    background-color: rgb(242 199 121) !important;
+    /*background: #f7c05a  #f0c77de6;*/
+}
+
+.Clamptr {
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.Date {
+    float: right;
+    padding: 0 15px;
+    color: #105faf;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.checked {
+    background: cornsilk !important;
+}
+
+@media only screen and (max-width: 500px) {
+    .panel{
+        width:90% !important;
+    }
+    .col-md-12{
+        padding:0 !important;
+    }
+    .col-md-6{
+        padding:0 !important;
+    }
+    #orderItemsDiv{
+        margin:0 !important;
+    }
+    #orderItemsDiv .table {
+        width: 680px !important;
+        max-width:initial;
+    }
+    .Date{
+        padding:0;
+        margin-top:15px;
+    }
+
+    #cardsDiv{
+        width:100%!important;
+        overflow:scroll;
+    }
+
+    .table-card {
+        width: 680px !important;
+        max-width: initial;
+    }
+
+    .sno{
+        width:7% !important;
+    }
+
+    .name {
+        width: 25% !important;
+    }
+
+    .packing {
+        width: 8% !important;
+    }
+
+    .price {
+        width: 10% !important;
+    }
+
+    .itemPrice{
+        margin-left:0 !important;
+    }
+
+    .quantity{
+        padding:0 !important;
+    }
+
+    .totstock {
+        width: 10% !important;
+    }
+
+    .manuname {
+        width: 16% !important;
+        word-wrap:break-word;
+    }
+
+    .Sno {
+        width: 9% !important;
+    }
+
+    .Name {
+        width: 23% !important;
+    }
+
+    .Packing {
+        width: 9% !important;
+    }
+
+    .Price {
+        width: 9% !important;
+    }
+
+    .Manuname{
+        padding-left:4px !important;
+    }
+
+}

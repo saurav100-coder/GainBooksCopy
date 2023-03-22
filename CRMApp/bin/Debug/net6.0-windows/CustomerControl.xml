@@ -1,0 +1,602 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CustomerControl
+</name>
+</assembly>
+<members>
+<member name="T:CustomerControl.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CustomerControl.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CustomerControl.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:CustomerControl.Variables.ControlsWorkingScreenFactor">
+ <summary>
+ correction in control size after oledb connection
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.InterFaceValues">
+ <summary>
+ Changeable properties on form level and do not reset to original when exit form
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.PublicHashValues">
+ <summary>
+ Not Changeable properties Set by FirmSettings or in global settings
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LSWFactor">
+ <summary>
+ Width correction ratio of control on local machine.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LSHFactor">
+ <summary>
+ Height correction ratio of control on local machine.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.StackTraceList">
+ <summary>
+  Gets or Sets  wether error -stack - log enabled.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.BreakPointOnError">
+ <summary>
+  Sets  debug point automatically before one line when error occurred .
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.SuppressKeyPressBeep">
+ <summary>
+  Sets  flag if beep sound on keypress.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.QuitOnError">
+ <summary>
+  Sets  flag if beep sound on keypress.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ConsoleWriteFlag">
+ <summary>
+  Sets  flag if beep sound on keypress.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.StackTraceFlag">
+ <summary>
+  Gets or Sets  wether error -stack - log enabled.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.IsLocalServer">
+ <summary>
+  Gets or Sets  servertype flag
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ParamValues">
+ <summary>
+  Gets or Sets HashTable  where key=Method name and value is other hashtable with key=parametername,and value is parameter value.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.CustomKeyBoardValues">
+ <summary>
+  Gets or Sets HashTable of values of custom keyboard. where key is e.keycode and value is string corressponding to this keycode ,Values are set or get in ApplicationControlData.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ObjectsHashTable">
+ <summary>
+ A hashtable having values are different objects and keys are object names.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.NatureOfSchedules">
+ <summary>
+ A hashtable having values as  comma separated schedule's keys and hashtable keys are nature of schedule from masteroption=106
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.TypesHashTable">
+ <summary>
+ A hashtable having values are different System.Types and keys are type names.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ConversionTypeHashTable">
+ <summary>
+ A hashtable having values are conversion codes and keys are  fullname of types.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.NavigationHashTable">
+ <summary>
+ A hashtable having values are conversion codes and keys are  fullname of types.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.AllowDate">
+ <summary>
+  Allowdate for dll class
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.DemoDate">
+ <summary>
+  Demodate for dll class
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.SaralType">
+ <summary>
+  SaralType acceptable values are WebLocal,WebGodaddy,Local
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.VirtualPadSwitch">
+ <summary>
+  Default Virtual Keyboard Switch (ON/OFF)
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.VirtualPadFlag">
+ <summary>
+  Default Virtual Keyboard flag (True/False)
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.VirtualTextPad">
+ <summary>
+  Define Text KeyBoard Type Querty/Alphabetic  MasterOptionKey=163
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.VirtualPadLocation">
+ <summary>
+ Permissible KeyPad Location TopLeft,TopCenter,TopRight,MiddleLeft,MiddleCenter,MiddleRight,BottomLeft,BottomCenter,BottomRight,ControlRight,ControlBottom,ControlImpose and Left~Top (Integers) optional [,[Screen],[Caller],[Parent]].[AllowChange=Y][InputControlType=UserComboDialog][KeyOfValues=164]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.PhoneticSwitch">
+ <summary>
+ Switch for phonetic entry 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.PhoneticSwitchFlag">
+ <summary>
+  Phonetic Switch  Activation 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.PhoneticType">
+ <summary>
+ Set PhoneticType  permissible valuse are Alphabetic/Pronounced.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.StartLocation">
+ <summary>
+ 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MinimumValue">
+ <summary>
+ Gets or Sets the minimum value of the control.[AllowChange=Y][InputControlType=NumericRangeDialog][ConversionMethod=DCC0][PropertyTypeCode=MinValueProperty]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MaximumValue">
+ <summary>
+ Gets or Sets the maximum value of the control.[AllowChange=Y][InputControlType=NumericRangeDialog][ConversionMethod=DCC0][PropertyTypeCode=MaxValueProperty]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.DigitsAfterDecimal">
+ <summary>
+ Gets or Sets the digits after decimal.[[AllowChange=Y][InputControlType=NumericUpDownDialog]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.NumericFormat">
+ <summary>
+ Gets or Sets the format of the numeric control.[AllowChange=Y][InputControlType=NumericFormatDialog][PropertyTypeCode=FormatProperty]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MaximumLength">
+ <summary>
+ Gets or Sets the maximum number of characters the user can type or paste into the textbox control.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MinimumLength">
+ <summary>
+ Gets or Sets the minimum number of characters the user can type or paste into the textbox control.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MaximumHistoryWords">
+ <summary>
+ Gets or Sets the total number of history words.(0 = if words history disable.)
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MinimumDate">
+ <summary>
+ Gets or Sets the minimum value of the control.[ConversionMethod=DTP0]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MaximumDate">
+ <summary>
+ Gets or Sets the maximum value of the control.[ConversionMethod=DTP0]
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.DateFormat">
+ <summary>
+ Gets or Sets the format of the numeric control.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.FocusFont">
+ <summary>
+ Gets or Sets the font of control.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.FocusBackColor">
+ <summary>
+ Gets or Sets the  FocusBackColor of control.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.FocusForeColor">
+ <summary>
+ Gets or Sets the  FocusBackColor of control.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LocalMTPServerEnableSsl">
+ <summary>
+ Option is true if website is running on local computer.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ProcNAmeFile">
+ <summary>
+ This datatable contains controls of all the forms 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.WebSMTPServerEnableSsl">
+ <summary>
+ Option is false if website is running on web computer.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.RunningAtWeb">
+ <summary>
+ True if RunningAtWeb.Txt found on web server.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.WebSMTPServerHost">
+ <summary>
+  WebSMTPServerHost used as sending email id in WebServer website application default "relay-hosting.secureserver.net".
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.WebEmailPwd">
+ <summary>
+ Email id  Password used as sending email id in WebServer website application.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.WebEmailId">
+ <summary>
+ Email id  used as sending email id in WebServer website application default is "info@saralerp.com".
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LocalSMTPServerPort">
+ <summary>
+ Gmail emailid SMTPSERVERport used in sending email id in Local website application default is 587.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.WebSMTPServerPort">
+ <summary>
+ Gmail emailid SMTPSERVERport used in sending email id in Local website application default is 587.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LocalSMTPServerHost">
+ <summary>
+ Gmail emailid SMTP SERVER HOST NAME used as sending email id in Local website application default is smtp.gmail.com. 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.EmailPassword">
+ <summary>
+ Gmail emailid password used as sending email id in local website application.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.EmailId">
+ <summary>
+ Gmail emailid  used as sending email id in local website application. default is saraluser2012@gmail.com
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LocalHostNo">
+ <summary>
+ Local Host no. used in local website application.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.DelayImage">
+ <summary>
+Gif image control used in delay loop 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MasterOptions">
+ <summary>
+ A datatable having the rows of ~ separated fixed values, columns are FixedValues_Key,ValuesSet
+ 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ParentMdi">
+ <summary>
+ Application Main MDI-Form.
+ 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.MenusList">
+ <summary>
+ A datatable having the rows of  ContextMenu  details of  all controls
+ 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ErrorString">
+ <summary>
+ Containing error string of exception thrown
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ApplicationStartupPath">
+ <summary>
+ Testing ApplicationStartupPath  
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.VisualStudioProjectId">
+ <summary>
+ Containing string of visualstudio project id eg for vs2008 it is VisualStudio.DTE.9.0 and for vs2015 it is VisualStudio.DTE.15.0
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LastProcessingData">
+ <summary>
+ Containing processing row or  data  of exception thrown
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ActiveColorFontScheme">
+ <summary>
+ A datatable of active color scheme used in application
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ERPControls">
+ <summary>
+ A datatable having the informations of all controls used in ERPapplication
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.ERPProperties">
+ <summary>
+ A datatable having the informations of all controls used in ERPapplication
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.AppControlHashTable">
+ <summary>
+ Keys are Client,LastDt,NoDays,SaralKeyExists,SaralProduct,SaralVersion,NoOfVouch,
+ AddlPCNos,HomePCNos,RemoteNos,NodeNos,MainClientCode,AllowBusinessType,ServicePhone,
+ AppFolder,DataFolder,ImageFolder,ResourceFile,ComputerType(Server/Node),DemoType
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CustomerControl.Variables.LoginAccno">
+ <summary>
+ Linkcode of liginid in accmaster
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:CustomerControl.Variables.CorpidAccno">
+ <summary>
+ Linkcode of corpid in accmaster
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:CustomerControl.Variables.InitializeAppControl">
+ <summary>
+ Available keys in HashTable are Client,
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CustomerControl.Variables.SearchSchedulesByNature(System.String)">
+ <summary>
+ Comma separated keys of schedules which belongs to given nature-indexes(masteroption=106)
+ </summary>
+ <param name="NatureIndexes">Comma separated nature-indexes which schedules to be searched</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

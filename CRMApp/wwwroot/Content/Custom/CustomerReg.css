@@ -1,0 +1,79 @@
+﻿.container{width:70%}
+#CodeName{height:24px; padding-left:6px}
+/*.or{padding-right:39px; border-left:2px solid; height:120px}*/
+    body {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+    p{font-family: 'Source Sans Pro',sans-serif; margin-bottom:15px}
+label{margin-top:10px; margin-bottom:0px}
+.imp{color:black; margin-bottom:20px}
+.but{margin-top:60px; margin-bottom:15px}
+.can{margin-left:10px; margin-right:50px; width:15%; padding:6px 0px 6px 0px}
+.sub{width:15%; margin-right:15px; padding:6px 0px 6px 0px}
+.or{ width:calc(50% - 1px); border-right:1px solid #E1E1E1; height:120px; position: relative;}
+.or p{position: absolute;right:0; top:45%; margin-right:-10px; background: white;}
+.col-md-2{padding-right:58px}
+
+
+/*.uf{padding-left:70px}*/
+.col-md-12.uf{text-align:center}
+
+
+.uf{padding-left:70px}
+
+/*#f{width:200px; padding:0px; color:cornflowerblue}*/
+/*#fileLabel{margin-top:0px; padding:0px; color:cornflowerblue}*/
+
+   /*loader*/
+    .loader, .loader:after {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+
+    .loader {
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 3px solid rgba(0,0,0, 0.2);
+        border-right: 3px solid rgba(0,0,0, 0.2);
+        border-bottom: 3px solid rgba(0,0,0, 0.2);
+        border-left: 3px solid #1DA3E6;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+    }
+
+    @-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+@media screen and (max-width:800px) {
+    .container{width:100%; padding:0px}
+   input[type=text]{}
+   .panel-body{padding:0px}
+   .col-md-12{padding:0px}
+   .sub{width:40%; margin-right:5px}
+   .can{width:40%; margin-right:0px;margin-left:5px;}
+   .uf{padding-left:15px}
+   .or{ width:calc(50% - 1px); border-right:1px solid #E1E1E1; height:120px; position: relative; margin-top:5px}
+} 

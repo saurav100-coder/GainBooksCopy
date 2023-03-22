@@ -1,0 +1,548 @@
+﻿@{
+    ViewData["Title"] = "UpdateMenumaster";
+}
+<link rel="stylesheet" href="~/Content/Custom/UpdateMenumaster.css" />
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/UpdateMenumaster.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+
+<style>
+    .close {
+        opacity: 0.8;
+    }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 5px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+            .MoreDetails:hover i:hover .MoreDetails {
+                background: #8f1fe7;
+            }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .xdsoft_datetimepicker {
+        height: 212px;
+    }
+
+    td.xdsoft_date div {
+        padding: 0px 9px 0px 9px;
+    }
+
+    div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 8px 23.4px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .content-wrapper {
+        height: 580px;
+    }
+
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+        .sticky + .ShowRemarksValues {
+            padding-top: 102px;
+        }
+
+    .numberCircle {
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        padding: 1px;
+        margin-right: 5px;
+        background: #FF0000;
+        border: 0.5px solid #FF0000;
+        color: #fff;
+        text-align: center;
+        font: 11px Arial, sans-serif;
+    }
+
+    .context-menu-item {
+        padding-left: 30px;
+        padding-right: 20px;
+    }
+
+    .context-menu-list {
+        width: 220px;
+    }
+
+    .context-menu-item labels context-menu-visible {
+        padding-left: 15px;
+    }
+
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+</style>
+
+<div Class="container" style="width: 100%;"></div>
+<input type="hidden" name="grid1" id="grid1" value="">
+<p Class="text-center text-success">@TempData["Message"]</p>
+<div  id="databaseDiv" style="display:inline-flex">
+    <select id="ddlDatabase" name="ddlDatabase" style="margin-right:10px;margin-left:10px;height: 35px;width: 165px;cursor:pointer;">
+        <option value="0">-Select Database-</option>
+        <option value="crmtemplate">CRMTemplate</option>
+        <option value="pharmatemplate">PharmaTemplate</option>
+        <option value="WineTemplate">WineTemplate</option>
+        <option value="GenWineTemplate">GenWineTemplate</option>
+        <option value="userdefined">User Defined</option>
+    </select>
+    <div style="display:none" id="userdefinedDiv">
+        <input type="text" name="databaseName" id="databaseName" placeholder="Enter Database Name" style="height:34px;width:165px; margin-right:8px;" />
+        <button onclick="ReloadGrid()" class="btn btn-primary" style="margin-top:-3px">Get Data</button>
+    </div>
+</div>
+<div Class="LoaderOverlay">
+    <div Class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px; "></div>
+</div>
+
+<div id="containerDiv" style="display:none;margin-top:10px;">
+    <hr/>
+    <div Class="row calHeightIcon">
+        <div id="main" Class="icon-div">
+            <div Class="search2" style="padding: 0px 10px 4px 10px!important;">
+                <a data-toggle="Add Menu" class="top" onclick="AddMenuCtrls()" style="cursor: pointer;">
+                    <img src="/images/icon-plus.png">
+                </a>
+                @*<a Class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh">
+                    <i Class="fa fa-refresh" style="font-size: 16px; margin-right: 10px; padding: 5px; cursor: pointer; "></i>
+                </a>*@
+            </div>
+            <div class="search1">
+              <div class="g" style="top:93px;">
+                <label id="info">0-00 of 00 </label>
+                <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer">
+                    <i class="fa fa-angle-left" style="font-size:23px"></i>
+                </a>
+                <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older">
+                    <i class="fa fa-angle-right" style="font-size:23px"></i>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div Class="col-md-12 text-center Table-Dive">
+       <div class="calHeightTaskBar">
+         <div class="TaskBar tr">
+            <div Class="Sno tbHead" style="width:5%;  padding:0px 0px 0px 0px;text-align:left;"><b>SNo.</b></div>
+            <div Class="P_menumaster tbHead" style="width:7%;  padding:0px 8px 0px 0px;text-align:left;"><b>Menumaster</b></div>
+            <div Class="Prgname tbHead" style="width:11%; padding:0px 0px 0px 0px;text-align:left;"><b>Prgname</b></div>
+            <div Class="Text tbHead" style="width:10%; padding:0px 0px 0px 0px;text-align:left;"><b>Text</b></div>
+            <div Class="Usedin tbHead" style="width:7%;  padding:0px 5px 0px 0px;text-align:right;"><b>Usedin</b></div>
+            <div Class="Under tbHead" style="width:6%;  padding:0px 0px 0px 0px;text-align:right;"><b>Under</b></div>
+            <div Class="Menuitemyn tbHead" style="width:10%; padding:0px 0px 0px 0px;text-align:center;"><b>Menu Item Y/N</b></div>
+            <div Class="Menulabelweb tbHead" style="width:12%; padding:0px 0px 0px 0px;text-align:center;"><b>Menu Label web</b></div>
+            <div Class="Menulabelapp tbHead" style="width:12%; padding:0px 0px 0px 0px;text-align:center;"><b>Menu Label App</b></div>
+            <div Class="Synchstatus tbHead" style="width:7%;  padding:0px 0px 0px 0px;text-align:left;"><b>Status</b></div>
+            <div Class="Webmenuorder tbHead" style="width:9%;  padding:0px 0px 0px 0px;text-align:left;"><b>WebOrder</b></div>
+            <div Class="Appmenuorder tbHead" style="width:9%;  padding:0px 0px 0px 0px;text-align:left;"><b>AppOrder</b></div>
+            <div Class="Webicon tbHead" style="width:11%; padding:0px 0px 0px 0px;text-align:left;"><b>WebIcon</b></div>
+            <div Class="Appicon tbHead" style="width:11%; padding:0px 0px 0px 0px;text-align:left;"><b>AppIcon</b></div>
+            <div Class="Webmenuurl tbHead" style="width:10%; padding:0px 0px 0px 0px;text-align:left;"><b>WebURL</b></div>
+            <div Class="Show_on_home tbHead" style="width:8%;  padding:0px 0px 0px 0px;text-align:center;"><b>Show On Home</b></div>
+            <div Class="Apphomeorder tbHead" style="width:9%;  padding:0px 0px 0px 0px;text-align:center;"><b>App Home Order</b></div>
+         </div>
+       </div>
+        <div id="loading" style="margin: 10% auto; padding-bottom: 0px; "><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6" style="padding-top: 10px; margin-bottom: 0px; padding-bottom: 0px; "></div><p id="Msg"></p></div></div>
+        <div class="col-md-12 " id="example"></div>
+    </div>
+</div>
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+
+
+<div Class="modal fade" id="NoRow"></div>
+<div Class="modal fade" id="CallClosed">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div Class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div id="CallClosedContent" Class="col-md-6"></div>
+                <div Class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MenuMasterAddModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:20px;padding-top:20px; padding-left: 40px;" class="modal-title"> Add Menu </h4>
+            <hr style="width:95%; margin-top:10px; margin-bottom:10px;" />
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <div class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post" id="MenumasterAddForm">
+                        <input type="hidden" name="p_menumaster" id="p_menumaster" value="" />
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label>Prgname</label>
+                            <input type="text" name="prgname" id="prgname" value="" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">Text</label>
+                            <input class="form-control " name="text" id="text" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="padding-top:0px">Used In</label>
+                            <select id="usedin" name="usedin" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="A">A</option>
+                                <option value="W">W</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">Menu Label Web</label>
+                            <input class="form-control " name="menulabelweb" id="menulabelweb" />
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">Menu Label App</label>
+                            <input class="form-control " name="menulabelapp" id="menulabelapp" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="padding-top:0px">Menu Item YN</label>
+                            <select id="menuitemyn" name="menuitemyn" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Under</label>
+                            <input type="number" name="under" id="under" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">SyncStatus</label>
+                            <select id="synchstatus" name="synchstatus" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">Web Icon</label>
+                            <input class="form-control " name="webicon" id="webicon" />
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">App Icon</label>
+                            <input class="form-control " name="appicon" id="appicon" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Web Menu Order</label>
+                            <input type="number" name="webmenuorder" id="webmenuorder" value="" class="form-control" />
+                        </div>
+                        <div class="form-group" id="appmenuorderDiv">
+                            <label>App Menu Order</label>
+                            <input type="number" name="appmenuorder" id="appmenuorder" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">Web Menu URL</label>
+                            <input class="form-control " name="webmenuurl" id="webmenuurl" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="padding-top:0px">Show On Home</label>
+                            <select id="show_on_home" name="show_on_home" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>App Home Order</label>
+                            <input type="number" name="apphomeorder" id="apphomeorder" value="" class="form-control" />
+                        </div>
+                        
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button"  Class="btn btn-primary" onclick="SubmitAddManumaster()" style="margin-right:25px; margin-top:20px">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="MenuMasterEditModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:20px;padding-top:20px; padding-left: 40px;" class="modal-title">Edit Menu  </h4>
+            <hr style="width:95%; margin-top:10px; margin-bottom:10px;" />
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <div class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post" id="MenumasterEditForm">
+                        <input type="hidden" name="p_menumaster" id="p_menumaster" value="" />
+                        <input type="hidden" name="menumaster_key" id="menumaster_key" value="" />
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label>Prgname</label>
+                            <input type="text" name="prgname" id="prgname" value="" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">Text</label>
+                            <input class="form-control " name="text" id="text" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="padding-top:0px">Used In</label>
+                            <select id="usedin" name="usedin" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="A">A</option>
+                                <option value="W">W</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">Menu Label Web</label>
+                            <input class="form-control " name="menulabelweb" id="menulabelweb" />
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">Menu Label App</label>
+                            <input class="form-control " name="menulabelapp" id="menulabelapp" />
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">Menu Item YN</label>
+                            <select id="menuitemyn" name="menuitemyn" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Under</label>
+                            <input type="number" name="under" id="under" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">SyncStatus</label>
+                            <select id="synchstatus" name="synchstatus" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">Web Icon</label>
+                            <input class="form-control " name="webicon" id="webicon" />
+                        </div>
+                        <div class="form-group">
+                            <label style="padding-top:0px">App Icon</label>
+                            <input class="form-control " name="appicon" id="appicon" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Web Menu Order</label>
+                            <input type="number" name="webmenuorder" id="webmenuorder" value="" class="form-control" />
+                        </div>
+                        <div class="form-group" id="appmenuorderDiv">
+                            <label>App Menu Order</label>
+                            <input type="number" name="appmenuorder" id="appmenuorder" value="" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label style="padding-top:0px">Web Menu URL</label>
+                            <input class="form-control " name="webmenuurl" id="webmenuurl" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="padding-top:0px">Show On Home</label>
+                            <select id="show_on_home" name="show_on_home" class="form-control">
+                                <option value="0">-Select-</option>
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>App Home Order</label>
+                            <input type="number" name="apphomeorder" id="apphomeorder" value="" class="form-control" />
+                        </div>
+                        
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button" Class="btn btn-primary" onclick="SubmitEditManumaster()" style="margin-right:25px; margin-top:20px">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div Class="modal fade" id="deleteMenumaster">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title">Delete Menu</h4>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <form Class="form-horizontal" role="form" method="post" id="deleteMenumasterForm">
+                    <input type="hidden" id="p_menumaster" name="p_menumaster" value="" />
+                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="button" Class="btn btn-primary" onclick="DeleteMenumaster()" style="margin-right:25px; margin-top:20px">Delete</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

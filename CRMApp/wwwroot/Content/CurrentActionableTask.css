@@ -1,0 +1,43 @@
+﻿table td {border-bottom: 1px solid grey;border-style: none;overflow-x: auto;}
+table th {border-style: none;padding: 2px;}
+table tr td {border-bottom: 1px solid grey;border-top: 1px solid black;border-collapse: collapse; padding: 2px;}
+table thead tr th {border-bottom: 1px solid grey;border-top: 1px solid black;border-collapse: collapse;padding: 2px;}
+tr:hover:not(.highlight) td { background-color:lightblue;}
+.highlight {background-color: #568CA7;color: white;}
+select {height: 30px;font-family: verdana,arial,sans-serif;font-size: 11px;}
+#filterText {height:30px;font-family: verdana,arial,sans-serif;font-size: 11px;margin-left: 4px;margin-top: 10px;height: 20px;margin-bottom: 5px;}
+#dropdown {width: 60%;}
+.content {padding: 0px;}
+.container {width: 60%;}
+h4 {margin: 0px;padding: 0px;}
+a {text-decoration: none;}
+#drop {width: 35%;margin: 0px auto;text-align: left;float: right;}
+.col-md-3 #main1 {text-align: center;}
+.content-wrapper, .right-side {background-color: white;}
+.panel-default {width: 100%;height: auto;}
+.panel-body {font-family: verdana,arial,sans-serif;font-size: 11px;padding: 0px;height: auto;}
+input[type=date] {width: 20%;padding: 0px;}
+#filter {height: 20px;padding: 0px;width: 18%;margin-top: 10px;margin-bottom: 5px;}
+.panel {margin-bottom: 0px;}
+#min {margin-top: 10px;height: 20px;margin-left: 10px;margin-bottom: 5px;}
+#max {margin-top: 10px;height: 20px;margin-bottom: 5px;}
+.ee, .ww {margin-top: 15px;}
+.search {padding: 0px;}
+.bb {padding: 0px;height: auto;margin: 0px auto;text-align: center;}
+hr {margin: 0px auto;padding: 0px;width: 97%;color: grey;}
+.icon-bar {width: 100%;   overflow: auto;}
+.icon-bar a {float: left;width: 15%;text-align: center;padding: 12px 0px;transition: all 0.3s ease;font-size: 20px;}
+.icon-bar a:hover {background-color:#EAEDEF;}
+@media screen and (max-width:800px) {    
+.container {width: 100%;}
+#filter {height: 20px; padding: 0px; width: 75%; margin-top: 10px; margin-bottom: 5px;}
+input[type=date] {width: 100%;padding: 0px;}
+#max {margin-top: 0px;height: 20px;margin-bottom: 0px;}
+#min {margin-top: 0px;height: 20px;margin-left: 0px;margin-bottom: 0px;}
+.ee, .ww {margin-top: 0px;padding:0px}  
+.col-md-1{padding:0px}
+#filterText {font-family: verdana,arial,sans-serif;font-size: 11px;margin-top: 5px;height: 20px;padding:0px;margin:5px 0px 5px 0px}
+input[type=text] {width: 100%;}
+.col-md-3{padding:0px}       
+}
+

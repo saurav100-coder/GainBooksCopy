@@ -1,0 +1,213 @@
+﻿@{
+    ViewData["Title"] = "LeadCallDashboard";
+}
+<script src="~/Scripts/FrameWork/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+<script src="~/Scripts/Custom/LeadCallDashboard.js" type="text/javascript"></script>
+<link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/CallDashboard.css" />
+<style>
+    body {
+        font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .loader {
+        margin: auto;
+        border: 1em solid #f3f3f3; /* Light grey */
+        border-top: 1em solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 7em;
+        height: 7em;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".NoRecord").hide();
+
+        var CallId = '@TempData["CallId"]'
+        if (CallId != '' && CallId != 'undefined' && CallId != 'null' && CallId!='0') {
+            $("#CallDetails").hide();
+            $("#SearchPanel").css("display","none");
+            document.getElementById("loadspin").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+
+            GetLeadCallData(CallId)
+            GetRemarkData(CallId)
+            GetAssignData(CallId);
+            GetPrevCallData(CallId)
+        } else {
+            $("#SearchPanel").css("display","block");
+        }
+
+        });
+
+</script>
+@*Loader*@
+<div id="overlay">
+
+    <div class="loading" id="loadspin" style="text-align:center;margin-left:500px; top:150px; margin-bottom:50px; display:none "></div>
+</div>
+@*Search Bar*@
+<form Class="form-horizontal" action="@Url.Action("SearchByCallId")" role="form" method="post" id="SerachCustForm">
+    <div class="col-md-12 SearchPanel" id="SearchPanel">
+        <div class="col-md-4 CallIdDiv" style="padding-left: 25px;">
+            <input type="hidden" id="calltype" name="calltype" value="L" />
+            <input type="text" id="CallId" name="CallId" class="col-sm-10" placeholder="Type Call Id" style="height:30px; padding:5px 0px 5px 5px; width:200px; border:1px solid #d2d6de" /><div class="btn btn-primary btn-Submit"><i class="glyphicon glyphicon-search"></i></div>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="CallClosed">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width: 600px;">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 class="NoRecord text-center text-danger modal-title" style="color:black;text-align:center; font-size:18px; padding-left: 10px; margin-top:0px;padding-top: 35px;height: 60px;">Unable to fetch record. Call Id does not exist.</h4>
+            <Button type="button" Class="btn btn-primary" data-dismiss="modal" style="margin-right: 25px; margin-top: 30px;text-align: center;margin-left: 255px;margin-bottom: 25px;width: 74px;">OK</Button>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CallDetails" style="display:none">
+    <div class="row" data-aos="fade" style="margin-top:60px; padding:0px; margin-left:20px;margin-bottom: 60px;">
+        <div class="col-md-6">
+            <div>
+                @*Call Details block*@
+                <div class="col-md-11 main_block">
+                    <div class="col-md-12" style="padding:0px">
+                        <h4 style="font-size:22px; text-align:center;margin-bottom: 0px; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">
+                            Lead Details
+                        </h4>
+                        <div id="CallDetails" style="height:350px; overflow: auto;">
+                            <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Topic:</label>
+                                    <span class="col-md-8" id="topic" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Contact Person:</label>
+                                    <span class="col-md-8" id="contactperson" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Mobie No:</label>
+                                    <span class="col-md-8" id="MobNo" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Assigned To:</label>
+                                    <span class="col-md-8" id="Assignedto" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Collaborators:</label>
+                                    <span class="col-md-8" id="Collab" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Call Time:</label>
+                                    <span class="col-md-8" id="callTime" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto; color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Call Duration:</label>
+                                    <span class="col-md-8" id="callDuration" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                                <div class="col-md-12" style="height:auto; overflow:auto;  color:#222d32;margin-top:20px;">
+                                    <label class="col-md-4" style="font-weight:600;font-size: 14px;">Account Name:</label>
+                                    <span class="col-md-8" id="AccountCode" style="font-size: 13px;padding-top: 3px;"></span>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Call Assigned History Block*@
+            <div class="col-md-11 main_block" style="margin-top:20px">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size:22px; text-align:center;margin-bottom: 0px; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">
+                         Assigned History
+                    </h4>
+                    <div id="List" style="height:215px;overflow: auto;">
+                        <div class="col-md-12" style="display:inline-flex">
+                            <div class="col-md-2" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;padding-left: 0px;">SNo</div>
+                            <div class="col-md-7" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;text-align:center;padding-left: 0px;">Assigned Employee</div>
+                            <div class="col-md-3" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;text-align: center;padding-left: 0px;">Date</div>
+                        </div>
+                        <div id="AssignList"></div>
+
+                    </div>
+                </div>
+            </div>
+            @*Call Engage Status Block*@
+            @*<div class="col-md-11 main_block" style="margin-top:20px">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size:22px; text-align:center;margin-bottom: 0px; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">
+                        Call Engage Status
+                    </h4>
+                    <div id="List" style="height:275px;">
+                        <div class="col-md-12" style="bottom: 8px;height:40px; top:0px;padding-left: 0px;padding-right: 0px;">
+
+                            <div id="dropdown" class="col-md-5" style="bottom: 10px;height: 30px;padding:0px; ">
+                                <label class="col-md-6" style="width: 200px;top: 22px;font-size: 14px;">Add Engage Status:</label>
+                                @Html.List_Search("callEngageStatus", "56", "- Select status -",,, New With {.style = "height:26px; width:96%; padding-left:5px;margin-left: 140px;"}, False)
+                                <div class="col-md-3 btn btn-primary btn-Submit" style="height: 25px;left: 330px;bottom: 26px;width: 80px;padding-left: 5px;padding-right: 5px;font-size: 16px;padding-top: 0px;padding-bottom: 6px;">Submit</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" style="display:inline-flex;height: 25px;margin-top:7px;background: #3c8dbc;color: white;">
+                            <div class="col-md-1" style="font-weight:600; font-size:14px;margin-top:2px;padding: 0px; width: 15%;">S. No</div>
+                            <div class="col-md-3" style="font-weight:600; font-size:14px;margin-top:2px;">Status</div>
+                            <div class="col-md-4" style="font-weight:600; font-size:14px;margin-top:2px;padding: 0px;">Employee Name</div>
+                            <div class="col-md-4" style="font-weight:600; font-size:14px;margin-top:2px;">Start Time</div>
+                        </div>
+                        <div id="CallEngageList" style="height:185px;overflow: auto;"></div>
+
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        @*Remark List Block*@
+        <div class="col-md-6 SecondBlock">
+            <div class="col-md-11 main_block" style="">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size:22px; text-align:center;margin-bottom: 0px; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">
+                        Remark List
+                    </h4>
+                    <div style="height:350px;overflow: auto;">
+                        <div class="col-md-12" style="display: inline-flex;">
+                            <div class="col-md-2" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;padding-left: 0px;">SNo.</div>
+                            <div class="col-md-3" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;padding-left: 0px;">Type</div>
+                            <div class="col-md-5" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;text-align:center;">Remark</div>
+                            <div class="col-md-2" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;padding-left: 0px;">Remark By</div>
+                            <div class="col-md-2" style="font-weight:600; font-size:14px; color:#222d32;margin-top:25px;">Date</div>
+                        </div>
+                        <div id="RemarkList"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @* Previous Call List Module*@
+            <div class="col-md-11 main_block" style="margin-top:20px;">
+                <div class="col-md-12" style="padding:0px;">
+                    <h4 style="font-size:22px; text-align:center; margin-bottom: 0px;margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">
+                        Previous lead
+                    </h4>
+                    <div id="ParentCallDiv" style="height:215px;overflow: auto;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

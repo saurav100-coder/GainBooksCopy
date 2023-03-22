@@ -1,0 +1,255 @@
+﻿var count = 0;
+var Timeout;
+
+$(document).ready(function () {
+    fillEmployees();
+});
+
+function fillEmployees() {
+    $.get('/Configuration/GetEmployees', "", function (response) {
+        //console.log(data);
+        var ddEmp = $('#ddEmp');
+        var data = JSON.parse(response)
+        ddEmp.append('<option value="0">--Select Employee--</option>')
+        $.each(data, function (index, item) {
+            ddEmp.append($('<option>', {
+                value: item.P_acccode,
+                text: item.AccName
+            }));
+        })
+    })
+}
+
+function empChange() {
+    
+    if ($("#ddEmp").val() != 0) {
+        $("#startingView").css("display", "none");
+    }
+    else {
+        $("#startingView").css("display", "");
+    }
+
+    loadData();
+}
+
+function loadData() {
+    
+    $(".loader").show();
+    var p_acccode = $("#ddEmp").val();
+    if (p_acccode != 0) {
+        $.post('/Configuration/GetMenuMasterForEmp', { P_acccode: p_acccode }, function (response) {
+            
+            var webRolesData = JSON.parse(response[0])
+            var appRolesData = JSON.parse(response[1])
+            var errorMsg = response[2]
+            var webRolehtml = "";
+            var appRolehtml = "";
+
+            $("#tblWebRole").find('tbody').remove();
+            $("#tblAppRole").find('tbody').remove();
+
+            if (webRolesData.length > 0 || appRolesData.length > 0) {
+
+                //Fill data into WEBROLES Table
+                $.each(webRolesData, function (index, item) {
+                    count += 1;
+                    webRolehtml += "<tr><td class='key'>" + item.MenuMaster_key + "</td><td class='item'>" + item.Text + "</td><td class='action'>";
+                    webRolehtml += '<div class="material-switch ">'
+
+                    if (item.TxtEnabled == "Y") {
+                        webRolehtml += '<input class="switchValue" id="switch' + count + '" name="switch' + count + '" type="checkbox" checked="checked"/>'
+                    }
+                    else {
+                        webRolehtml += '<input class="switchValue" id="switch' + count + '" name="switch' + count + '" type="checkbox"/>'
+                    }
+                    webRolehtml += '<label for="switch' + count + '" class="label-primary"></label></div>';
+                    webRolehtml += "</td></tr>"
+                });
+
+                $("#tblWebRole").append("<tbody></tbody>");
+                $("#tblWebRole tbody").append(webRolehtml);
+
+                //Fill data into APPROLES Table
+                $.each(appRolesData, function (index, item) {
+                    count += 1;
+                    appRolehtml += "<tr><td class='key'>" + item.MenuMaster_key + "</td><td class='item'>" + item.Text + "</td><td class='action'>";
+                    appRolehtml += '<div class="material-switch">'
+
+                    if (item.TxtEnabled == "Y") {
+                        appRolehtml += '<input class="switchValue" id="switch' + count + '" name="switch' + count + '" type="checkbox" checked="checked"/>'
+                    }
+                    else {
+                        appRolehtml += '<input class="switchValue" id="switch' + count + '" name="switch' + count + '" type="checkbox"/>'
+                    }
+                    appRolehtml += '<label for="switch' + count + '" class="label-primary"></label></div>';
+                    appRolehtml += "</td></tr>"
+                });
+                $("#tblAppRole").append("<tbody></tbody>");
+                $("#tblAppRole tbody").append(appRolehtml);
+                
+                $("#divRole").css("display", "");
+                //$("#alertMsgDiv").empty();
+
+                //Make Webrole tab active 
+                $("ul.nav-tabs li").removeClass("active"); //Remove any "active" class
+                $("ul.nav-tabs li:first").addClass("active"); //Activate first tab
+                $(".tab-pane").removeClass("active"); 
+                $(".tab-content div:first").addClass("active"); 
+
+            }
+            else {
+                if (errorMsg != "") {
+                    $("#alertMsgDiv").empty();
+                    showAlert(errorMsg, "alert-info");
+                }
+                $("#divRole").css("display", "none");
+            }
+            $(".loader").hide();
+        })
+    }
+    else {
+        $("#tblWebRole").find('tbody').remove();
+        $("#tblAppRole").find('tbody').remove();
+        $("#alertMsgDiv").empty();
+        $("#divRole").css("display", "none");
+        $(".loader").hide();
+    }
+}
+
+function updateWebRoles() {
+    var disableWebRoles = "";
+    var enableWebRoles = "";
+    var p_acccode = "";
+
+    $("#tblWebRole tbody tr").each(function () {
+        var toggleSwitch = $(this).find(".switchValue")
+        if (toggleSwitch.is(":checked")) {
+            enableWebRoles += enableWebRoles == "" ? $(this).find("td:eq(0)").text() : "," + $(this).find("td:eq(0)").text();
+        }
+        if (!toggleSwitch.is(":checked")) {
+            disableWebRoles += disableWebRoles == "" ? $(this).find("td:eq(0)").text() : "," + $(this).find("td:eq(0)").text();
+        }
+    });
+
+    p_acccode = $("#ddEmp").val();
+
+    $.post('/Configuration/UpdateUserRoles', { P_acccode: p_acccode, Type: "Web", EnableRoles: enableWebRoles, DisableRoles: disableWebRoles }, function (response) {
+        
+        loadData();
+        
+        $("#alertMsgDiv").empty();
+        var alertClass = response[0] == 0 ? "alert-info" : "alert-success";
+        showAlert(response[1], alertClass);
+    });
+
+
+}
+
+function updateAppRoles() {
+    
+    var disableAppRoles = "";
+    var enableAppRoles = "";
+    var p_acccode = "";
+
+    $("#tblAppRole tbody tr").each(function () {
+        var toggleSwitch = $(this).find(".switchValue")
+        if (toggleSwitch.is(":checked")) {
+            enableAppRoles += enableAppRoles == "" ? $(this).find("td:eq(0)").text() : "," + $(this).find("td:eq(0)").text();
+        }
+        if (!toggleSwitch.is(":checked")) {
+            disableAppRoles += disableAppRoles == "" ? $(this).find("td:eq(0)").text() : "," + $(this).find("td:eq(0)").text();
+        }
+    });
+
+    p_acccode = $("#ddEmp").val();
+    
+    $.post('/Configuration/UpdateUserRoles', { P_acccode: p_acccode, Type: "App", EnableRoles: enableAppRoles, DisableRoles: disableAppRoles }, function (response) {
+        
+        loadData();
+        $("#alertMsgDiv").empty();
+        var alertClass = response[0]==0?"alert-info":"alert-success";
+        showAlert(response[1], alertClass);
+    });
+    
+
+}
+
+function showAlert(msg, classname) {
+    clearTimeout(Timeout);
+
+    var alertdiv = '<div id="alert" class="alert ' + classname + '  show " >';
+    alertdiv += '<button type="button" class="close" onClick="closeAlert();" >&times;</button>';
+    alertdiv += msg + '</div>';
+    $("#alertMsgDiv").append(alertdiv);
+
+    Timeout = setTimeout(function () {
+             closeAlert();
+            }, 5000);
+}
+
+function closeAlert() {
+    $("#alert").addClass("hide_alert");
+    setTimeout(function () {
+        $("#alertMsgDiv").empty();
+    }, 1000);
+}
+
+
+
+//var alertDiv = '<div id="alert" class="alert ' + classname + '">';
+//alertDiv += '<span class="msg">' + msg + '</span>';
+//alertDiv += '<div class="close-btn"><span>&times;</span></div>';
+
+//var alertdiv = '<div class="alert ' + classname + ' alert-dismissible" role="alert">';
+//alertdiv += '<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>';
+//alertdiv += msg + '</div>';
+
+
+//var alertMsg = "";
+//alertMsg += '<div class="alert alert-danger alert-dismissible" role="alert">';
+//alertMsg += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+//alertMsg += errorMsg + '</div>'
+//$("#alertMsg").empty();
+//$("#alertMsg").fadeOut(3000);
+//$(".alert-danger").fadeTo(3000, 500).slideUp(500, function () {
+//    $(".alert-danger").slideUp(500);
+//});
+
+
+
+
+
+
+//fillEmployees();
+
+
+//function fillEmployees() {
+//    $.get('/UserRoles/GetActiveEmployeeofCS', "", function (data) {
+//        //console.log(data);
+//        var ddEmp = $('#ddEmp');
+//        ddEmp.append('<option value="0">-Select Employee-</option>')
+//        $.each(data.data, function(index,item) {
+//            ddEmp.append($('<option>', {
+//                value: item.P_acccode,
+//                text: item.AccName
+//            }));
+//        })
+//    })
+//}
+
+
+
+//function btnClick(elm) {
+//    $(elm).toggleClass("btn-danger");
+//}
+
+//if ($(this).find("#btnDisable").hasClass("btn-danger")) {
+//    if ($(this).find("td:eq(1)").text() == "W") {
+//        disableWebRoles += disableWebRoles == "" ? $(this).find("td:eq(0)").text() : "," + $(this).find("td:eq(0)").text();
+//    }
+//    if ($(this).find("td:eq(1)").text() == "A") {
+//        disableAppRoles += disableAppRoles == "" ? $(this).find("td:eq(0)").text() : "," + $(this).find("td:eq(0)").text();
+//    }
+//}
+
+//<button class='btn btn-default' id='btnDisable' onclick=btnClick(this);>Disable</button>

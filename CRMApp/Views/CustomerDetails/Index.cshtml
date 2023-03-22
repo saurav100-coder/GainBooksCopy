@@ -1,0 +1,480 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<script src="~/Scripts/FrameWork/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+<script src="~/Scripts/Custom/CustomerDetailsIndex.js" type="text/javascript"></script>
+<link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/CustomerDetailsIndex.css" />
+
+<style>
+.closebttn {
+    cursor: pointer;
+    text-align: center;
+}
+    .closebttn:hover {
+        background-color: gainsboro;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $(".NoRecord").hide();
+        $("#FirmName").removeClass("disabled");
+        $("PCust_Text").removeClass("disabled");
+        $(".CustCodeDiv").hide();
+        $("#SharableLink").css("display", "none");
+        var P_Customers = '@TempData["P_Customers"]'
+        if (P_Customers == '' || P_Customers == 'undefined' || P_Customers == 'null' || P_Customers=='0') {
+
+        } else {
+            LoadCustomerData("P_Customers", P_Customers)
+        }
+
+        $("input[type='radio']").on("click", function (e) {
+            if ($("input[name='SearchRadio']:checked").val() == 'P_Customers') {
+                $(".FirmNameDiv").show();
+                $(".CustCodeDiv").hide();
+            }
+            else {
+                $(".FirmNameDiv").hide();
+                $(".CustCodeDiv").show();
+            }
+        });
+
+        $("#FirmName").on('keyup ', function () {
+            var firmname = $("#FirmName").val();
+            if (firmname.length >= 3) {
+                $('#loading').show();
+                $('#loadingmessage').show();
+                $('#Msg').hide();
+                $("#CustContainer").css("display", "");
+                $.post('/CRM/FindCustomersCombinedAddress', { firmname: firmname }, function (data) {
+                    var tblEmployee = $("#tblCustomers");
+                    $("#tblCustomers tbody tr").remove();
+                    if (data != "error") {
+                        $.each(data.data, function (index, item) {
+                            var m = index + 1;
+                            var tr = $("<tr id='" + item.P_Customers + "'></tr>");
+                            tr.html(("<td>" + m + "</td>")
+                                  + " " + ("<td>" + item.CustCode + "</td>")
+                               + " " + ("<td><input type='hidden' id='Email' class='Email' value='" + item.Email + "'/>" + item.CustName + "</td>")
+                                + " " + ("<td>" + item.MobNo + "</td>")
+                               + " " + ("<td><input type='hidden' id='MainBussCode' class='MainBusscode' value='" + item.MainBussCode + "'/>" + item.TextMainBussCode + "</td>")
+                                  + " " + ("<td>" + item.TextHomeTown + "</td>")
+                                   + " " + ("<td>" + item.CombinedAddress + "</td>")
+                                   + " " + ("<td>" + item.TxtBilledUpto + "</td>")
+                                    + " " + ("<td>" + item.OnsiteFlag + "</td>")
+                                );
+                            tblEmployee.append(tr);
+                        })
+                        $('#loading').hide();
+                        $('#loadingmessage').hide();
+                        $('#Msg').hide();
+                    } else {
+                        $('#loading').show();
+                        $('#loadingmessage').hide();
+                        $("#Msg").show();
+                        $("#Msg").text("No record found");
+                        //setTimeout($('#CustContainer').css("display", "none"), 5000)
+                        $('#CustContainer').css("display", "none");
+                    }
+                });
+            }
+            else {
+                $('#CustContainer').css("display", "none");
+                return;
+            }
+        });
+        //click on see more button of call Module
+        //$("#CallsSeeMore").click(function () {
+        //    location.href = '/CustomerDetails/CallDetails/'
+        //});
+        
+        $('#tblCustomers').on('click', 'tr', function () {
+            //$(this).addClass("highlight");
+            $("#CustContainer").css("display", "none");
+            var rowid = this.id;
+            var rid = "#" + rowid;
+            var fname = $(this).find("td:nth-child(3)").text();
+            $('#FirmName').val(fname);
+            if (rowid != 0 || rowid != undefined || rowid != null) {
+                document.getElementById("loadspin").style.display = "block";
+                document.getElementById("overlay").style.display = "block";
+                LoadCustomerData("P_Customers", rowid)
+                $("#P_Customers").val(rowid);
+            } else {
+                $("#P_Customers").val(0);
+            }
+        });
+
+        //click on Register Calls button of call Module
+        $("#RegCallModelOpenBtn").click(function () {
+            var options = {
+                "backdrop": "static",
+                keyboard: true
+            };
+            $('#RegCallsModal').modal(options);
+            $('#RegCallsModal').modal('show');
+        });
+        //Click of search button
+        $(".btn-Submit").click(function () {
+            document.getElementById("loadspin").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+            $("#CustContainer").css("display", "none");
+            var PCustomers = $("#P_Customers").val();
+            $("#ParentCallDiv").html('');
+            var SearchBy = $("input[name=SearchRadio]:checked").val();
+            LoadCustomerData(SearchBy, PCustomers)
+        });
+
+
+    });
+    function LoadCustomerData(SearchBy, value) {
+        document.getElementById("loadspin").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+        var data;
+        if (SearchBy == 'CustCode') {
+            data = { Colname: "CustCode", value: $("#PCust_Text").val() }
+        } else {
+            data = { Colname: "P_Customers", value: value }
+        }
+        $.post('/CustomerDetails/SearchCustomerDetails',
+            data = data,
+            success = function (data) {
+                if (data != "Error") {
+                    $(".NoRecord").hide();
+                    $("#P_Customers").val(data.data[0].P_Customers);
+                    $(".CustomerId").text(data.data[0].P_Customers);
+                    $(".Name").text(data.data[0].CustName)
+                    $(".CustCode").text(data.data[0].CustCode)
+                    $("#AmcMonth").text(data.data[0].amcmonth)
+                    $("#OnsiteFlag").text(data.data[0].OnsiteFlag)
+                    $(".MobileNo").text(data.data[0].MobNo)
+                    $(".Email").text(data.data[0].Email)
+                    $(".dealer").text(data.data[0].TxtEmpAssigned)
+                    $("#Address").text(data.data[0].PostalAddress1)
+                    $("#City").text(data.data[0].TextHomeTown)
+                    $("#BusType").text(data.data[0].TextMainBussCode)
+                    $("#Website").text(data.data[0].website)
+                    $("#Website").parent().attr("href", (data.data[0].website))
+                    $("#FacebookId").text(data.data[0].Facebookid)
+                    $("#FacebookId").parent().attr("href", (data.data[0].Facebookid))
+                    $("#TwitterId").text(data.data[0].Twitterid)
+                    $("#TwitterId").parent().attr("href",(data.data[0].Twitterid))
+                    $("#Linkedin").text(data.data[0].Linkedin)
+                    $("#Linkedin").parent().attr("href",(data.data[0].Linkedin))
+                   
+                    var SharableLink = document.getElementById('SharableLink');
+
+                    SharableLink.href = '/CustomerDetails/SharableCustomerDetails?CustCode=' + data.data[0].CustCode;
+                    $("#SharableLink").css("display", "");
+
+
+                    //Fill controls needed for RegisterCalls
+                    $("#pcustomers").val(data.data[0].P_Customers);
+                    $("#CustName").val(data.data[0].CustName)
+                    $("#EmailId").val(data.data[0].Email)
+                    $("#Mobileno").val(data.data[0].MobNo)
+                    $("#BusinessTypes").val(data.data[0].MainBussCode)
+                    $("#Location").val(data.data[0].TextHomeTown)
+                    $.post('/CustomerDetails/GetCallData', { P_Customers: data.data[0].P_Customers }, function (Calldata) {
+                        loadCallData(Calldata);
+                        document.getElementById("loadspin").style.display = "none";
+                        document.getElementById("overlay").style.display = "none";
+                        document.getElementById("CustomerDetails").style.display = "block"
+                    });
+                    $.post('/CustomerDetails/GetNoOfCalls', { P_Customers: data.data[0].P_Customers }, function (NoOfCalls) {
+                        $("#NoOfRegCalls").text(NoOfCalls);
+                    });
+                    $.post('/CustomerDetails/GetNoOfOnsiteVisits', { P_Customers: data.data[0].P_Customers }, function (TotalOnsiteVisits) {
+                        $("#NoOfOnsiteVisit").text(TotalOnsiteVisits);
+                    });
+                    
+                    $("#ActivationDateText").text(data.data[0].TxtActivationDate);
+
+                    if (data.data[0].OnsiteFlag == "" || data.data[0].OnsiteFlag == undefined || data.data[0].OnsiteFlag == null) {
+                        $("#OnsiteFlag").text("Not Available")
+
+                    }
+                } else {
+                    var options = {
+                        "backdrop": "static",
+                        keyboard: true
+                    };
+                    $(".NoRecord").show();
+                    $('#CallClosed').modal(options);
+                    $('#CallClosed').modal("show");
+
+                    $("#CustomerDetails").hide();
+                    document.getElementById("loadspin").style.display = "none";
+                    document.getElementById("overlay").style.display = "none";
+                }
+            });
+    }
+    function closetable(button) {
+        $(button).parents("#CustContainer").hide();
+    }
+</script>
+<div id="overlay" >
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:35%; margin-bottom:50px; display:none "></div>
+</div>
+
+<form Class="form-horizontal" action="@Url.Action("SearchCustomerDetails")" role="form" method="post" id="SerachCustForm">
+    <input type="hidden" name="P_Customers" id="P_Customers" value="0" />
+    @*<input type="hidden" name="CustCode" id="CustCode" value="" />*@
+    <div class="col-md-12 SearchPanel">
+        <div class="col-md-3" style="padding-left:0;padding-right:0;">
+            <input type="radio" id="SearchFirmName" name="SearchRadio" value="P_Customers" checked style="vertical-align: top; margin-right: 5px;" />
+            <label style="font-size:15px; font-weight:600">Search by FirmName</label>
+        </div>
+        <div class="col-md-3" style="padding-left:0;padding-right:0;">
+            <input type="radio" name="SearchRadio" value="CustCode" style="vertical-align:top; margin-right:5px;" />
+            <label style="font-size:15px;font-weight:600">Search by CustCode</label>
+        </div>
+        <div class="col-md-4 FirmNameDiv  col-xs-12" style="padding-left:0;padding-right:0;">
+            <input type="text" name="FirmName" id="FirmName" placeholder="Type firmName" class="col-md-10 " style="height: 25px; padding: 5px 0px 5px 5px; border-bottom: 1px solid #105faf !important; width: 80%; outline: none; border-style: none;" />
+            @*<div id="P_CustSearch" class="btn btn-primary btn-Submit"><i class="glyphicon glyphicon-search" style="background-color:#105faf;"></i></div>*@
+            <div id="P_CustSearch" class="btn btn-Submit"><i class="glyphicon glyphicon-search"></i></div>
+        </div>
+        <div class="col-md-4 CustCodeDiv col-xs-12" style="padding-left:0;padding-right:0;">
+         @* <input type="text" id="PCust_Text" name="PCust_Text" class="col-sm-10" placeholder="Type Customer Code" style="height:25px; padding:5px 0px 5px 5px; border:1px solid #105faf;" /><div id="P_CustSearch" class="btn btn-primary btn-Submit"><i class="glyphicon glyphicon-search"></i></div>*@
+            <input type="text" name="PCust_Text" id="PCust_Text" placeholder="Type Customer Code" class="col-md-10"  style="height: 25px; padding: 5px 0px 5px 5px; border-bottom: 1px solid #105faf !important; width: 80%; outline: none; border-style: none; "  />
+            <div id="P_CustSearch" class="btn  btn-Submit"><i class="glyphicon glyphicon-search"></i></div>
+        </div>
+        <div class="col-md-4 col-xs-6" style="padding-left:0;padding-right:0;">
+            <a href="#" target="_blank" id="SharableLink">Create Sharable Link</a>
+        </div>
+    </div>
+    <div id="CustContainer" style="display:none; overflow:auto; /*width:850px; height:400px;*/ background-color:white;  font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px">
+        <table id="tblCustomers" class="table table-bordered" cellspacing="0">
+            <thead>
+                <tr style="text-align:center;">
+                    <th>S.No</th>
+                    <th>CustCode</th>
+                    <th>CustName</th>
+                    <th>Mobile No</th>
+                    <th>BusinessType</th>
+                    <th>HomeTown</th>
+                    <th>Address</th>
+                    <th>BilledUpto</th>
+                    <th>OnsitFlag</th>
+                    <th class="closebttn" onclick="closetable(this)">&times;</th>
+                </tr>
+                <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</form>
+@*<div><p ></p></div>*@
+<div class="modal fade" id="CallClosed">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width: 600px;">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 class="NoRecord text-center text-danger modal-title" style="color:black;text-align:center; font-size:18px; padding-left: 10px; margin-top:0px;padding-top: 35px;height: 60px;">Unable to fetch record. Customer does not exist or is not assigned to you.</h4>
+            <Button type="button" Class="btn btn-primary" data-dismiss="modal" style="margin-right: 24px; margin-top: 30px;text-align: center;margin-left: 255px;margin-bottom: 25px;width: 74px;">OK</Button>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+
+                @*<div id="CallClosedContent" class="col-md-6"></div>*@
+                <div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CustomerDetails" style="display:none">
+    <div class="col-md-12" style="height: auto; font-size: 30px; margin-top: 20px; overflow: auto; background-color: white; border-radius: 5px; box-shadow: 0px 0px 5px 0px #aaaaaac7; padding-bottom: 10px;">
+        <div class="col-md-3 col-xs-6">
+            <label style="font-weight:800;">Name:</label>
+            <span class="Name" id="Name"></span>
+        </div>
+        <div class="col-md-3 col-xs-6">
+            <label  style="font-weight:800;">Customer Id:</label>
+            <span class="CustomerId" id="CustomerId" ></span>
+        </div>
+        <div class="col-md-3 col-xs-6">
+            <label  style="font-weight:800;">CustCode:</label>
+            <span class="CustCode" id="CustCode"></span>
+        </div>
+        <div class="col-md-3 col-xs-6">
+            <label style="font-weight:800;">Mobile No:</label>
+            <span class="MobileNo" id="MobileNo" ></span>
+        </div>
+         <div class="col-md-3 col-xs-6">
+            <label style="font-weight:800;">Dealer:</label>
+            <span class="dealer"></span>
+        </div>
+        <div class="col-md-3 col-xs-6">
+            <label style="font-weight:800;">Email Id:</label>
+            <span class="Email"></span>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 0;">
+        <div class="col-md-3 col-xs-6" style="margin-top: 20px; margin-bottom: 0;">
+            <div class="TotalCallRegister" style="height: auto; overflow: auto; background-color: white; border-radius: 5px; border: 0px solid brown; box-shadow: 0px 0px 5px 0px #aaaaaac7;">
+                @*<div class="TotalCallRegister" style="height:auto; overflow:auto; background-color:white; border-radius:5px; border:2px solid #f5f2f2; box-shadow: 5px 5px 5px #aaaaaa;">*@
+                <div class="col-md-4" style="background-color:brown; text-align:center"><i class="fa fa-phone" style="font-size:35px; line-height:90px; color:white"></i></div>
+                <div class="col-md-8" style="padding-left:10px; padding-right:5px;">
+                    <h5 style="font-size:15px; color:#606667">Total Calls Registered</h5>
+                    <h4 style="font-size:17px; font-weight:bold" id="NoOfRegCalls"></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-6" style="margin-top:20px">
+            <div class="TotalCallRegister" style="height: auto; overflow: auto; background-color: white; border-radius: 5px; border: 0px solid black; box-shadow: 0px 0px 5px 0px #aaaaaac7;">
+                <div class="col-md-4" style="background-color:black; text-align:center"><i class="fa fa-suitcase" style="line-height:90px; font-size:35px; color:white"></i></div>
+                <div class="col-md-8" style="padding-left:10px; padding-right:5px;">
+                    <h5 style="font-size:15px;color:#606667;">Total Onsite Visits</h5>
+                    <h4 style="font-size:17px; font-weight:bold" id="NoOfOnsiteVisit">0</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-6" style="margin-top:20px">
+            <div class="TotalCallRegister" style="background-color: white; height: auto; overflow: auto; border-radius: 5px; border: 0px solid forestgreen; box-shadow: 0px 0px 5px 0px #aaaaaac7;">
+                <div class="col-md-4" style="background-color:forestgreen; text-align:center"><i class="fa fa-calendar" style="font-size:35px; line-height:90px; color:white"></i></div>
+                <div class="col-md-8" style="padding-left:10px; padding-right:5px;">
+                    @*<h5 style="font-size:17px; font-weight:bold">Billed Upto Date</h5>*@
+                    <h5 style="font-size:15px;color:#606667">Activation Date</h5>
+                    <h4 style="font-size:17px; font-weight:bold" id="ActivationDateText"></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-6" style="margin-top:20px">
+            <div class="TotalCallRegister" style="height: auto; overflow: auto; background-color: white; border-radius: 5px; border: 0px solid midnightblue; box-shadow: 0px 0px 5px 0px #aaaaaac7; ">
+                <div class="col-md-4" style="background-color:midnightblue; text-align:center"><i class="fa fa-download" style="font-size:35px; line-height:90px; color:white"></i></div>
+                <div class="col-md-8" style="padding-left:10px; padding-right:5px;">
+                    <h5 style="font-size:15px; color:#606667">Next Action Date</h5>
+                    <h4 style="font-size:17px; font-weight:bold" id="OpenedUptoText"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*RegCalls Block*@
+    <div class="row main_block" data-aos="fade" style="margin-top: 20px; padding: 0px; margin-left: 5px; margin-right: 0; margin-bottom: 0; box-shadow: 0px 0px 5px 0px #aaaaaac7; ">
+        <h4 class="register-head" style="font-size: 18px; text-align: left; margin-top: 125px; margin-bottom: 0; padding-bottom: 10px; padding-top: 10px; padding-left: 19px; background-color: #f3f8fa; color: #105faf; ">
+            Register Calls Details <i class="fa fa-plus" style="float:right;cursor:pointer;margin-right:15px;" id="RegCallModelOpenBtn"></i>
+        </h4>
+        
+        <div id="ParentCallDiv" style="padding:10px;">
+        </div>
+        @*<div class="col-xs-12 text-right seeMoreDiv" style="margin-top:20px; margin-bottom:20px">
+            <button class="btn btn-primary " id="CallsSeeMore" style="background-color:#105faf;">See More</button>
+        </div>*@
+    </div>
+
+    @*Other details*@
+    <div class="row main_block" data-aos="fade" style="margin-top: 20px; padding: 0px; margin-left: 5px; margin-right: 0; box-shadow: 0px 0px 5px 0px #aaaaaac7;">
+        <h4 style="font-size: 18px; text-align: left; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; padding-left: 19px; background-color: #f3f8fa; color: #105faf; "> Other Details</h4>
+        <div class="col-md-12 other-head" style="padding:10px;line-height:2;height:220px;">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">Name:</label>
+                <span class="Name" id="Name"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">CustomerId:</label>
+                <span class="CustomerId" id="CustomerId"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">CustCode:</label>
+                <span class="CustCode" id="CustCode"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">AMC Month:</label>
+                <span id="AmcMonth"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">BusType:</label>
+                <span id="BusType"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">OnSite Flag:</label>
+                <span id="OnsiteFlag"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">Mobile No:</label>
+                <span class="MobileNo" id="MobileNo"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">Address:</label>
+                <span id="Address"></span>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <label style="margin-right: 5px;">City:</label>
+                <span id="City"></span>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-11 ">
+                <label style="margin-right: 5px;">Website:</label>
+                <a href=""><span id="Website"></span></a>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-11">
+                <label style="margin-right: 5px;">Facebook Id:</label>
+                <a href=""><span id="FacebookId"></span></a>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-11">
+                <label style="margin-right: 5px;">Twitter Id:</label>
+                <a href=""><span id="TwitterId"></span></a>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-11">
+                <label style="margin-right: 5px;">Linkedin:</label>
+                <a href=""><span id="Linkedin"></span></a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+@*RegisterCalls Modal*@
+<div class="modal fade" id="RegCallsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close">*@@*<span class="close">&times;</span>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px">
+                <h3 style="text-align:center; margin-top:10px;">Register Call</h3>
+                <hr style="margin-top:10px; width:100%" />
+                <form Class="form-horizontal" action="@Url.Action("RegisterCalls")" role="form" method="post" id="RegForm">
+                    <input type="hidden" name="pcustomers" id="pcustomers" />
+                    <input type="hidden" name="CustName" id="CustName" />
+                    <input type="hidden" name="Emailid" id="EmailId" />
+                    @*<input type="hidden" name="p_dealers" id="p_dealers" />*@
+                    <input type="hidden" name="Businesstype" id="BusinessTypes" />
+                    <input type="hidden" name="Location" id="Location" />
+                    <div class="col-md-12" style="height:auto; overflow:auto; margin-top:40px">
+                        <div Class="form-group col-md-12">
+                            <Label for="inputEmail1" class="col-md-4 col-sm-4 col-xs-4 control-label" style="text-align:right">Issue Type</Label>
+                            <div Class="col-md-8 col-sm-8 col-xs-8">
+                                @Html.List_Search("Issuetype", "38", "-Select Issue Types-", 0, "", new {@class = "form-control input-sm", @style = "padding-left:1px"})
+                            </div>
+                        </div>
+                        <div Class="form-group col-md-12">
+                            <Label for="inputEmail1" class="col-md-4 col-sm-4 col-xs-4 control-label" style="text-align:right">Contact No<strong style="color:red;">*</strong></Label>
+                            <div Class="col-md-8 col-sm-8 col-xs-8">
+                                <input type="text" class = "form-control input-sm" id="Mobileno" name="Mobileno" maxlength="10" required />
+                                @*@Html.TextBoxFor(Function(model) model.Mobileno, New With {.class = "form-control input-sm", .maxlength = "10", .placeholder = "Enter 10 digit number Only"})*@
+                            </div>
+                        </div>
+                        <div Class="form-group col-md-12">
+                            <Label for="inputEmail1" class="col-md-4 col-sm-4 col-xs-4 control-label" style="text-align:right">Issue description</Label>
+                            <div Class="col-md-8 col-sm-8 col-xs-8">
+                                <textarea class="form-control input-sm" name="Issuedescription" id="IssueDescription"></textarea>
+                                <a href="/CRM/RegisterCalls" style="margin-top:5px;display:block;text-decoration:underline; font-size:11px;">Want to Add More Details?</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center" style="margin:20px 0px 20px 0px;">
+                        <button type="submit" id="ConfirmButton" class="btn btn-primary"> Submit </button>
+                        <button type="button" data-dismiss="modal" class="btn btn-default" style="margin-left:20px"> Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>

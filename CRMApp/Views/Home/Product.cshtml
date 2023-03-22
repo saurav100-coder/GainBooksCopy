@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "~/Views/Shared/_Nav.cshtml";
+    ViewData["Title"] = "Product";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .main_product {
+            background-color: white;
+            text-align: center;
+            width: 180px;
+            height: 160px;
+            padding-top: 15px;
+            margin-left: 70px;
+            box-shadow: 10px 10px 5px #aaaaaa;
+            border-radius:30px;
+        }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .footer {
+        position: relative;
+    }
+
+    @@media all and (min-width: 768px) {
+        .footer {
+            position: absolute ;
+        }
+
+        .content {
+            background-color: white;
+        }
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#navProduct").addClass("navActive");
+        $("#navProduct").css("padding-top", "5px");
+        $("#navProduct").css("padding-bottom", "5px");
+        $("#navProduct").css("margin-top", "10px");
+    });
+
+</script>
+
+<div class="row" style="background:#fff; margin-left:10%; margin-right:10%; margin-top:60px; padding:20px;box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);border-radius: 15px;">
+    <div class="topic_section col-md-12 col-sm-12">
+        <h3 class="text-center text-primary" style="margin:0px 20px 60px 20px">Our Products</h3>
+        <div class="row" id="allproductmain">
+            <a href="http://gainbooks.com/">
+                <div class="col-sm-3 col-xs-6 product_block main_product" style="margin-bottom: 20px;">
+                    <img src="~/images/t9_150px.png" class="img_pro" style="width:70px; margin-left:0px;margin-top: 10px;">
+                    <h3 class="product_text" style="font-size: 18px;margin-top: 19px;"> Gainbooks </h3>
+                </div>
+            </a>
+            <a href="http://www.saralerp.com/Home/gst">
+                <div class="col-sm-3 col-xs-6 product_block main_product" style="margin-bottom: 20px;">
+                    <img src="~/images/icons8-shopping-cart-100 (2).png" class="img_pro" style="width:70px; margin-left:0px;margin-top: 20px;">
+                    <h3 class="product_text" style="font-size:17px;margin-top: 15px;"> Saral Hybrid EPL </h3>
+                </div>
+            </a>
+            <a href="http://www.saralerp.com/Home/gst">
+                <div class="col-sm-3 col-xs-6 product_block main_product" style="margin-bottom: 20px;">
+                    <img src="~/images/egr.png" class="img_pro" style="width: 93px;margin-left: 0px;margin-top: 30px;">
+                    <h3 class="product_text" style="font-size: 17px;margin-top: 28px;"> Saral Hybrid EGR </h3>
+                </div>
+            </a>
+            <a href="http://www.saralerp.com/Home/gst">
+                <div class="col-sm-3 col-xs-6 product_block main_product" style="margin-bottom: 20px;">
+                    <img src="~/images/shopping-cart (3).png" class="img_pro" style="width:70px; margin-left:0px;margin-top: 10px;">
+                    <h3 class="product_text" style="font-size:17px;margin-top: 25px;"> Saral Hybrid EAA </h3>
+                </div>
+            </a>
+            
+        </div>
+
+    </div>
+</div>
+
+    
+
+    
+
+

@@ -1,0 +1,59 @@
+﻿.alert-info{padding:5px;}
+.closebttn{
+    cursor:pointer;
+    text-align:center;
+}
+.closebttn:hover{
+    background-color:gainsboro;
+}
+    @media screen and (min-width:702px) {
+        .cont {margin-left: 25%;margin-right: 25%;}
+label {margin-bottom: 0;font-weight: 600;font-size: 12px;}
+.form-control {width: 250px;height: 25px;margin-right: 0;}
+.form-group {margin-bottom: 0.8%;}
+select.input-sm {/*height: 20px;*/}
+.input-sm {padding: 5px 0;}
+.btn{padding:4px 11px;}
+}
+@media screen and (max-width:800px) {
+.cont{margin-left:5px;margin-right:5px;}
+.form-control {height: 25px;margin-right: 0;}
+.input-sm {padding: 5px 0;}
+div #mar .form-group{margin-bottom:30px;}
+}
+hr{margin-top: 5px;margin-bottom: 5px;}
+.mytext{width:250px;border-radius:2px;}
+@media screen and (max-width:600px) {
+    .firname, #PCust_Text {
+        width: 100% !important;
+    }
+    #PCust_Text{
+        margin-left:15px !important;
+    }
+    .firname{
+        padding-right:15px !important;
+    }
+    .ordive{
+        padding:8px;
+        padding-left:15px;
+    }
+    #RegFormDiv{
+        width:90%;
+        margin:0 auto;
+    }
+    .contact {
+        flex-direction: column;
+    }
+   .contact p{
+       padding-left:0 !important;
+   }
+
+   .logo-div{
+       width:30% !important;
+       padding:0 !important;
+   }
+   .detail-div{
+       width:70% !important;
+   }
+   
+}

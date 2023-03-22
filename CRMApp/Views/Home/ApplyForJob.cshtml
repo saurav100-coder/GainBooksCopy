@@ -1,0 +1,76 @@
+@{
+    Layout = "~/Views/Shared/_Navbar.cshtml";
+    ViewData["Title"] = "Apply For Job";
+}
+
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Custom/ApplyForJob.css">
+
+</head>
+<body>
+
+    <div class="apply-container">
+        <div class="row main-container">
+            <form class="JobApplyForm" method="post" action="@Url.Action("ApplyForJob","Home")" enctype="multipart/form-data">
+                <h3>Work With Us !</h3>
+                <p style="font-weight:bold; text-align:center; color:green; font-family:'IBM Plex Sans Arabic';">@ViewBag.msg</p>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <div class="input-group">
+                        <span class="input-group-icon">
+                            <i class="fa fa-user" style="font-size:16px; color:rgb(16,108,200);"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Full Name" value="" name="name" id="name" required>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <div class="input-group">
+                        <span class="input-group-icon" style="padding-top:7.5px;">
+                            <i class="fa fa-phone" style="font-size:18px; color:rgb(16,108,200);"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Mobile No." value="" name="mobno" id="mobno" required>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <div class="input-group">
+                        <span class="input-group-icon" style="padding-top:7.5px;">
+                            <img src="/images/main/map.png" style="height: 24px;padding-bottom: 5px;padding-left:1px;">
+                        </span>
+                        <input type="text" class="form-control" placeholder="Location" value="" name="location" id="location" required>
+                    </div>
+                </div>
+                <select id="position" name="position" class="form-select" required style="margin-bottom:15px; border:2px solid rgb(16,108,200);">
+                    <option value="0" selected="selected" disabled="disabled"> Position </option>
+                    <option value="developer profile (back end)">Developer Profile (Back end)</option>
+                    <option value="developer profile (front end)">Developer Profile (Front end)</option>
+                    <option value="graphic designer">Graphic Designer</option>
+                    <option value="customer support">Customer Support</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="sales">Sales</option>
+                </select>
+                <select id="info" name="info" class="form-select" required style="margin-bottom:15px; border:2px solid rgb(16,108,200);">
+                    <option value="0" selected="selected" disabled="disabled"> How did you hear about us</option>
+                    <option value="linkedin">Linkedin</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="intagram">Instagram</option>
+                    <option value="youtube">Youtube</option>
+                    <option value="other">Other</option>
+                </select>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <label style="color:rgb(16,108,200); font-size:17px;">Resume</label>
+                    <input class="custom-file-input" type="file" style="width:100%; margin-top:10px;" name="resume">
+                    <p style="font-weight:bold">@ViewBag.Text</p>
+                </div>
+                <div class="form-group" style="text-align: center;">
+                    <button type="submit" class="submit-btn"> Submit </button>
+                </div>
+
+            </form>
+          
+           
+
+        </div>
+    </div>
+
+</body>

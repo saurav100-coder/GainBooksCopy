@@ -1,0 +1,65 @@
+﻿$(document).ready(function () {
+
+   getAllNotifications(); 
+
+});
+
+function UpdateNoficationStatus(p_notification,ctrl) {
+    $.post('/Notifications/UpdateNotificationStatusRead', { p_notification: p_notification }, function (data) {
+        //getAllNotifications();
+        //getUnseenNotifications();
+        if (data=="") {
+            window.location.href = "/Home/LogOut";
+        }
+        else if(data=="True") {
+            $("#notifications_container-body #notification_card-" + p_notification).removeClass("unseen-notification");
+            $(ctrl).attr("onClick", "").unbind("click");
+        }
+    });
+}
+
+function getAllNotifications() {
+    $.get('/Notifications/AllNotifications', {}, function (data) {
+        if (data=="") {
+            window.location.href = "/Home/LogOut";
+        }
+        else {
+            var html = "";
+            var notificationsData = data[0]
+            if (notificationsData.length > 0) {
+                $.each(notificationsData, function (index, item) {
+                    if (item.NotificationStatus_Web == 0 || item.NotificationStatus_Web == 1) {
+                        html += '<div class="notification_card unseen-notification" id="notification_card-' + item.P_notification + '">'
+                    }
+                    else {
+                        html += '<div class="notification_card" id="notification_card-' + item.P_notification + '">'
+                    }
+                    html += '<div class="row">'
+                    html += ' <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2 col-2 text-center">'
+                    html += ' <img src="/Images/avatar5.png" class="img-circle img-responsive">'
+                    html += ' </div>'
+                    html += '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">'
+                    html += '<strong class="text-info">' + item.NotificationSubject + '</strong>'
+                    if (item.NotificationStatus_Web == 0 || item.NotificationStatus_Web == 1) {
+                        html += '<div onClick="UpdateNoficationStatus(' + item.P_notification + ', this )"> <a href="' + item.NotificationURL + '" target="_blank">' + item.NotificationText + '</a></div>'
+                    }
+                    else {
+                        html += '<div> <a href="' + item.NotificationURL + '" target="_blank">' + item.NotificationText + '</a></div>'
+                    }
+
+
+                    html += '<small>' + item.FrmNotificationDateTime + '</small>'
+                    html += '</div></div></div>'
+
+                    //html += '<strong>' + item.NotificationSubject + '</strong><p style="float:right;font-size:12px;">' + item.FrmNotificationDateTime + '</p><br /><small>' + item.NotificationText + '</small></div>'
+                });
+            }
+            else {
+                html += '<div class="notification_card">No Notifications</div>';
+            }
+            $("#notifications_container-body").empty();
+            $("#notifications_container-body").append(html);
+        }
+              
+    });
+}

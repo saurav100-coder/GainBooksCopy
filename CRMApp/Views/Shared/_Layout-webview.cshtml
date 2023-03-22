@@ -1,0 +1,50 @@
+﻿@inject IHttpContextAccessor httpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewData["Title"] - GainBooks</title>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+
+     @*Need bundling from *@
+    <link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/AdminLTE.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/skin-blue.min.css" />
+    
+
+    <script src="~/scripts/FrameWork/jquery.min.js"></script>
+    <script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+    <script src="~/Scripts/FrameWork/fastclick.js"></script>
+    <script src="~/Scripts/FrameWork/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/FrameWork/adminlte.min.js"></script>
+    <script src="~/Scripts/FrameWork/modernizr-2.6.2.js"></script>
+    @*Need bundling to *@
+
+    
+
+    <style></style>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <div class="content-wrapper" style="margin-left: auto;">
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)*@
+</body>
+</html>

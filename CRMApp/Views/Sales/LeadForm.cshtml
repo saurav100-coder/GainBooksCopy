@@ -1,0 +1,443 @@
+﻿@model CRMApp.Models.CRMLeadMaster
+@{
+    ViewData["Title"] = "LeadForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #searchAccount {
+        width: 300px;
+    }
+
+    .box {
+        margin-left: 15%;
+        margin-right: 15%;
+        width: auto;
+    }
+
+    .input-sm {
+        width: 300px;
+    }
+
+    .form-control {
+        width: 300px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        if ("@Model.InfoString" != "null" && "@Model.InfoString" != "undefined" && "@Model.InfoString" != ""){
+            createControls("@Model.InfoString");
+
+            @*if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != ""){
+                setCompositeFieldValue("@Model.Compositefield");
+            }*@
+        }
+
+
+
+        @*if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != ""){
+            var ctrlsArr ="@Model.Compositefield".split("#");
+            for(i=0;i<ctrlsArr.length;i++){
+
+                var ctrlarr=ctrlsArr[i].split("~");
+
+
+                var container=$("<div></div>");
+                if (ctrlarr[1]=="text"||ctrlarr[1]=="date"||ctrlarr[1]=="password"||ctrlarr[1]=="email"||ctrlarr[1]=="number"){
+                    container.html("<div class='form-group' style='width:300px;'><Label class='text-info'>"+ ctrlarr[0] + "</Label><div class='row input-sm'>"
+                                  +"<input type='"+ ctrlarr[1] +"' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' value='"+ ctrlarr[5] +"' class='form-control input-sm' style='width:300px;' />"
+                                   + "</div>"
+                                   + "</div>");
+                    if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+                }else if(ctrlarr[1]=="dropdown"){
+                    container.html("<div class='form-group' style='width:300px;'><Label class='text-info'>"+ ctrlarr[0] + "</Label><div class='row input-sm'>"
+                             +"<select type='"+ ctrlarr[1] +"' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' value='"+ ctrlarr[6] +"' class='form-control input-sm' style='width:300px;' />"
+                              + "</div>"
+                              + "</div>");
+                    if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+                    var ddlvaluearr=ctrlarr[3].split(",");
+                    var ddltextarr=ctrlarr[4].split(",");
+                    var ddloptions="";
+                    for (j=0;j<ddlvaluearr.length;j++){
+                        ddloptions+="<option value='" + ddlvaluearr[j] +"'>" + ddltextarr[j] +"</option>"
+                    }
+                    var ddid="#"+ctrlarr[2] ;
+                    $(ddid).append(ddloptions);
+                    $(ddid).val(ctrlarr[6])
+                    if (ctrlarr[6]=""){ $(ddid).val(ctrlarr[5])}
+
+
+                }else if(ctrlarr[1]=="radio"){
+                    container.html("<div class='form-group' style='width:300px;'><Label class='text-info'>"+ ctrlarr[0] + "</Label><div class='row input-sm' id='radio-"+i+"'>"
+                             +"<select type='"+ ctrlarr[1] +"'  value='"+ ctrlarr[6] +"' class='form-control input-sm' style='width:300px;' />"
+                              + "</div>"
+                              + "</div>");
+                    if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+                    var ddlvaluearr=ctrlarr[3].split(",");
+                    var ddltextarr=ctrlarr[4].split(",");
+                    var radiooptions="";
+                    for (j=0;j<ddlvaluearr.length;j++){
+                        radiooptions+= "<div class='col-md-6'><input class='form-check-input' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' style='margin-right:5px;' type='radio' value='" + ddlvaluearr[j] +"' "
+                        if(ctrlarr[6]==ddlvaluearr[j]){radiooptions+=" checked "};
+                        radiooptions+= "/>"+ ddltextarr[j] +"</div>"
+                    }
+                    var divid="#radio-"+i ;
+                    $(divid).append(radiooptions);
+
+                }
+
+
+
+            }
+
+        }*@
+        if ("@ViewBag.ExitMode"=="edit"){
+            $("#Status").css("hidden","false")
+
+            if (@Model.AccountCode!=0){
+                $("#searchAccount").val("@Model.TextAccountCode.ToString().Trim()")
+                $("#AccountCode").val("@Model.AccountCode");
+            }
+           
+
+        }
+    })
+
+    function setCompositeFieldValue(fieldarr) {
+            if (fieldarr[0]=="text"||fieldarr[0]=="date"||fieldarr[0]=="password"||fieldarr[0]=="email"||fieldarr[0]=="number"||fieldarr[0]=="dropdown"){
+                $("#"+fieldarr[1]).val($.trim(fieldarr[2]));
+            }
+            else if(fieldarr[0]=="radio"){
+                $("input[type="+fieldarr[0]+"][name="+ fieldarr[1] +"][value="+$.trim(fieldarr[2])+"]").attr("checked",true);
+            }
+            else if(fieldarr[0]=="checkbox"){
+                $("input[type="+fieldarr[0]+"][name="+ fieldarr[1] +"]:checked").attr("checked",false);
+                var valArr = $.trim(fieldarr[2]).split(",");
+                $.each(valArr,function(index,item){
+                    $("input[type="+fieldarr[0]+"][name="+fieldarr[1]+"][value="+item+"]").attr("checked",true);
+                });
+            }
+        }
+
+    function createControls(infostring) {
+        var ctrlsArr = infostring.split("#");
+        var fieldsArr="";
+        if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != ""){
+            var CompositeFieldString = "@Model.Compositefield";
+            fieldsArr= CompositeFieldString.split("#");
+        }
+        for (var i = 0; i < ctrlsArr.length; i++) {
+            var ctrlarr=ctrlsArr[i].split("~");
+            var container=$("<div></div>");
+            if (ctrlarr[1]=="text"||ctrlarr[1]=="date"||ctrlarr[1]=="password"||ctrlarr[1]=="email"||ctrlarr[1]=="number"){
+                container.html("<div class='form-group'><Label class='text-info'>"+ ctrlarr[0] + "</Label><div class='row input-sm'>"
+                                  +"<input type='"+ ctrlarr[1] +"' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' value='"+ $.trim(ctrlarr[4]) +"' class='form-control input-sm' style='width:300px;' />"
+                                  + "</div>"
+                                  + "</div>");
+                if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+
+                if (fieldsArr.length>0){
+                    $.each(fieldsArr,function(index,item){
+                        var fieldarr= item.split("~")
+                        if (fieldarr[0]==ctrlarr[1]) {
+                            setCompositeFieldValue(fieldarr);
+                        }
+                    });    
+                }
+            }
+            else if(ctrlarr[1]=="dropdown"){
+                container.html("<div class='form-group'><Label class='text-info'>"+ ctrlarr[0] + "</Label>"
+                         +"<select type='"+ ctrlarr[1] +"' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"'  class='form-control input-sm' style='width:300px;'></select>"
+                          + "</div>");
+                if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+
+                var ddid="#"+ctrlarr[2] ;
+                var ddvalue = $.trim(ctrlarr[4]);
+                var ddType = ctrlarr[1];
+                $.post('/sales/AjaxGetdataFromInfotableByInfotype',{infotype:ctrlarr[3]},function(data) {
+                    var ddloptions="<option value=0>--Select--</option>";
+                    if (data != "error") {
+                        $.each(data.data,function(index, item){
+                            ddloptions +="<option value="+ item.P_infotable +">"+ item.NameOfInfo +"</option>";
+                        });
+                    }
+                    $(ddid).append(ddloptions);
+                    if (ddvalue!="") {
+                        $(ddid).val(ddvalue);
+                    }
+                    else{
+                        $(ddid).val(0);
+                    }
+
+                    if (fieldsArr.length>0){
+                        $.each(fieldsArr,function(index,item) {
+                            var fieldarr= item.split("~")
+                            if (fieldarr[0]==ddType) {
+                                setCompositeFieldValue(fieldarr);
+                            }
+                        });
+                    }
+
+                });
+
+            }
+            else if(ctrlarr[1]=="radio"){
+                container.html("<div class='form-group' style='width:300px;'><Label class='text-info'>"+ ctrlarr[0] + "</Label><div class='row input-sm' style='padding:0;' id='radio-"+i+"'>"
+                              + "</div>"
+                              + "</div>");
+                if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+                var radioname =ctrlarr[2];
+                var defval = $.trim(ctrlarr[4]);
+                var radiotype= ctrlarr[1];
+                var radiodivid="#radio-"+i ;
+                $.post('/sales/AjaxGetdataFromInfotableByInfotype',{infotype:ctrlarr[3]},function(data) {
+                    var radiooptions="";
+                    if (data!='error') {
+                        $.each(data.data,function(index,item){
+                            radiooptions+= "<div class='col-md-6'><input class='form-check-input' name='" + radioname +"' id='"+ radioname +"' style='margin-right:5px;' type='"+ radiotype +"' value='" + item.P_infotable +"' "
+                            if (defval==item.P_infotable){
+                                radiooptions+="checked"
+                            };
+                            radiooptions+= "/>"+ item.NameOfInfo +"</div>"
+                        });
+                        $(radiodivid).append(radiooptions);
+                    }
+
+                   if (fieldsArr.length>0){
+                       $.each(fieldsArr,function(index,item) {
+                           var fieldarr= item.split("~")
+                           if (fieldarr[0]==radiotype) {
+                               setCompositeFieldValue(fieldarr);
+                           }
+                       });
+                    }
+                });
+            }
+            else if (ctrlarr[1]=="checkbox") {
+                container.html("<div class='form-group' style='width:300px;'><Label class='text-info'>"+ ctrlarr[0] + "</Label><div class='row input-sm' style='padding:0;' id='checkbox-"+i+"'>"
+                               + "</div>"
+                               + "</div>");
+                if (i%2==0){ $("#R1").append(container);}else{$("#R2").append(container);}
+
+                var checkboxname = ctrlarr[2];
+                var checkboxtype = ctrlarr[1];
+                var checkboxdivid="#checkbox-"+i;
+                var valueArr =$.trim(ctrlarr[4]).split(",");
+                $.post('/sales/AjaxGetdataFromInfotableByInfotype',{infotype:ctrlarr[3]},function(data){
+                    var checkoptions="";
+                    if (data!="error") {
+                        $.each(data.data,function(index,item){
+                            checkoptions+="<label class='checkbox-inline'><input class='form-check-input' type='"+ checkboxtype +"' id='"+checkboxname+"' name='"+ checkboxname +"' value='"+ item.P_infotable +"' />"+ item.NameOfInfo +"</label>";
+                        });
+                        $(checkboxdivid).append(checkoptions);
+
+                        $.each(valueArr,function(index,item) {
+                            $("input[type="+checkboxtype+"][name="+ checkboxname +"][value="+item+"]").attr("checked",true);
+
+                        });
+                    }
+                    if (fieldsArr.length>0){
+                        $.each(fieldsArr,function(index,item) {
+                            var fieldarr= item.split("~")
+                            if (fieldarr[0]==checkboxtype) {
+                                setCompositeFieldValue(fieldarr);
+                            }
+                        });
+                    }
+
+                });
+            }
+        }
+
+    }
+
+    function ConfirmSubmit() {
+        var c = $("#AccountCode").val();
+        var Mobno=$("#Mobileno").val();
+        if (Mobno != 0 && Mobno != "null" && Mobno != "undefined" && Mobno != ""){
+            var c1 = $("#Ptype").val();
+            if (c == 0 || c == "null" || c == "undefined" || c == "") {
+                $("#AccountCode").val(c1);
+
+            }
+            if ( $("#AccountCode").val() == "null" || $("#AccountCode").val() == "undefined" || $("#AccountCode").val() == ""){
+                $("#AccountCode").val(0);
+            }
+
+            $("#CRMLeadForm").submit();
+
+        }else{
+            $("#error").text("Please Enter valid Mobile number");
+        }
+
+    }
+</script>
+<div class="cont">
+    <div class="row">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header" style="text-align: center;font-size: 30px;">
+                Lead Form
+
+                <div class="rr">
+                    <div class="panel uu col-md-12">
+                    </div>
+                </div>
+            </div>
+            <form action="@Url.Action("LeadForm")" method="post" id="CRMLeadForm">
+                <p id="error" class="text-danger text-center"></p>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.", new {@class = "text-danger text-center"})
+                @Html.HiddenFor(model=> model.CRMLead_key)
+                @Html.HiddenFor(model=> model.P_CRMLead)
+                @Html.HiddenFor(model=> model.Registerdate)
+                @Html.HiddenFor(model=> model.source)
+                @Html.HiddenFor(model=> model.Compositefield)
+                <input type="hidden" name="exitmode" id="exitmode" value="@ViewBag.ExitMode" />
+                <div class="row" id="top-menu">
+                    <div class="col-md-12" style="bottom: 40px;">
+                        <div class="panel-group" id="accordion">
+                            <div id="collapseOne">
+                                <div class="panel-body" style="padding-left:55px;">
+                                    <p class="text-center extra" style="margin-bottom:0px; font-size:20px;  margin-top:10px"></p>
+                                    <br />
+
+                                    <div class="row" id="gen">
+                                        <div class="col-sm-12 col-md-12" style="">
+                                            <div Class="form-group" style="margin-bottom: 45px;">
+                                                <Label Class="text-info">Account Name</Label>
+
+                                                @*@Html.TextBoxFor(model=> model.TextAccountCode, new {.class = "form-control input-sm", .style = "width:240px;"})*@
+                                                <div class="jj">
+                                                    @*Aslam_ Commented at this time, but need to update it after*@
+                                                    @*@Html.Action("AccountsGrid", "CRM", new {.id = "AccountsGrid"})*@
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6" id="R1">
+
+
+
+                                            <div Class="form-group  form-group-sm">
+                                                <Label for="inputEmail" class="text-info">Topic</Label>
+                                                @Html.TextBoxFor(model=> model.Topic, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Purchase Time</Label>
+                                                @Html.TextBoxFor(model=> model.PurchaseTime, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">BusinessType</Label>
+                                                @Html.List_Search("BusinessType", "7", "-Select Business Type-", Model.BusinessType,"", new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Budget</Label>
+                                                @Html.TextBoxFor(model=> model.Budget, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">AnnualRevenue</Label>
+                                                @Html.TextBoxFor(model=> model.AnnualRevenue, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Daily Sales Bill</Label>
+                                                @Html.TextBoxFor(model=> model.SalesBillDaily, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Monthly Sales Bill</Label>
+                                                @Html.TextBoxFor(model=> model.SalesBillMonthly, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group  form-group-sm">
+                                                <Label for="inputEmail" class="text-info">AccountingSoftUsed</Label>
+                                                @Html.List_Search("AccountingSoftUsed", "9", "-Select AccountingSoftware-", Model.AccountingSoftUsed,"", new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 " id="R2">
+                                            @*<div class="form-group">*@
+
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Contact Person</Label>
+                                                @Html.TextBoxFor(model=> model.Contactperson, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Mobile No<strong style="color:red;">*</strong></Label>
+                                                @Html.TextBoxFor(model=> model.Mobileno, new {@class = "form-control input-sm", @style = "width:300px;", @minlength = "10"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Email</Label>
+                                                @Html.TextBoxFor(model=> model.email, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Daily Transaction Entry</Label>
+                                                @Html.TextBoxFor(model=> model.TransEntryDaily, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group">
+                                                <Label for="inputEmail" class="text-info">Monthly Transaction Entry</Label>
+                                                @Html.TextBoxFor(model=> model.TransEntryMonthly, new {@class = "form-control input-sm", @style = "width:300px;"})
+                                            </div>
+                                            <div Class="form-group" style="width:300px;">
+                                                <Label Class="text-info">Internet Present</Label>
+                                                <div class="row input-sm">
+                                                    <div class="col-md-6">@Html.RadioButtonFor(model=> model.InternetYN, "Y", new {@class = "form-check-input", @style = "margin-right: 5px;"})Yes</div>
+                                                    <div class="col-md-6">@Html.RadioButtonFor(model=> model.InternetYN, "N", new {@class = "form-check-input", @style = "margin-right: 5px;"})No</div>
+                                                </div>
+                                            </div>
+                                            <div Class="form-group" style="width:300px;">
+                                                <Label for="inputEmail" class="text-info">Is Computer present in office</Label>
+                                                <div class="row input-sm">
+                                                    <div class="col-md-6">@Html.RadioButtonFor(model=> model.ComputerYN, "Y", new {@class = "form-check-input", @style = "margin-right: 5px;"})Yes</div>
+                                                    <div class="col-md-6">@Html.RadioButtonFor(model=> model.ComputerYN, "N", new {@class = "form-check-input", @style = "margin-right: 5px;"})No</div>
+                                                </div>
+                                            </div>
+
+                                            <div Class="form-group">
+                                                <Label Class="text-info">Status</Label>
+                                                @Html.List_Search("Status", "60", "-Select Status-", Model.Status,"", new {@class = "form-control input-sm", @style = "width:300px;", @hidden = true})
+                                            </div>
+
+                                            @*</div>*@
+
+
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <hr />
+                                        <div Class="text-center">
+                                            <Button type="button" Class="btn btn-info" style="width: 100px;" onclick="ConfirmSubmit();">Submit</Button>
+                                            <Button type="Button" Class="btn btn-default" style="width: 100px;background-color:gainsboro">Cancel</Button>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <br /> <br /> <br /> <br />
+
+</div>
+<input type="hidden" id="Ptype" value="@Model.AccountCode" />
+
+

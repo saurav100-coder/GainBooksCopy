@@ -1,0 +1,402 @@
+﻿@{
+    ViewData["Title"] = "NewDashboard";
+}
+
+<link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/CustomerDetailsIndex1.css" />
+<link rel="stylesheet" href="~/Content/Custom/CustomerDetailsIndex.css" />
+<link rel="stylesheet" href="~/Content/Custom/ConfigDashboard.css" />
+
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ConfigDashboard.js"></script>
+
+<input type="hidden" value="" id="Exitmode" />
+<input type="hidden" value="" id="Key" />
+<input type="hidden" value="" id="pid" />
+
+<style>
+    body {
+        font-family: Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+    }
+   .modal-content p{
+        font-size:15px;
+        margin-top:10px;
+    }
+    .context-menu-item {
+        padding-left: 30px;
+        padding-right: 20px;
+    }
+    .context-menu-list {
+        width: 220px;
+    }
+    .context-menu-item labels context-menu-visible {
+        padding-left: 15px;
+    }
+    table td {
+        border-style: none;
+    }
+    .context-menu-list {
+        width: 185px;
+    }
+    .context-menu-list li{
+        margin-top:6px;
+        margin-bottom:6px;
+    }
+
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+
+    .Box {
+    display: flex;
+}
+
+.shareLinkTextBox {
+    width: 100%!important;
+    border: 1px solid #ddd;
+    margin-right: 0px;
+    outline: none;
+}
+
+.copyBtn {
+    float: right;
+    font-size: 13px;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: inline-flex;
+    border-radius: 0px;
+    margin-left: 0px;
+}
+
+</style>
+@*IssueType Block*@
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:40%; margin-bottom:50px; display:none"></div>
+</div>
+<div class="row mainrow" data-aos="fade" style="margin-top:30px; padding:0px; margin-left:20px">
+    <div class="col-md-6" style="padding-right:0px;">
+        <div>
+            <div class="col-md-11 main_block">
+                <div class="col-md-12" style="padding:0px">
+                    <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;  border-radius:5px 5px 0px 0px;">
+                        Issue Type
+                        <a id="myPlusBtn" onclick="AddIssueType()" style="bottom: 15px; padding-right: 11px; top: 0px; float: right; font-size: 24px; font-weight: 600;cursor:pointer">
+                            +
+                        </a>
+                    </h4>
+                    <div id="IssueTypeDiv" style="height:215px;overflow: auto;"></div>
+                    <div id="loading1" class="col-md-12"><div colspan="5"><div id="loadingmessageIssue" class="loader overlay col-md-offset-6" style="margin-top:20px;"></div><p id="IssueMsg"></p></div></div>
+                </div>
+            </div>
+        </div>
+
+        @*Work Flow Status Block*@
+        <div class="col-md-11 main_block" style="margin-top:45px">
+            <div class="col-md-12" style="padding:0px">
+                <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;">
+                    Work Flow Status
+                    <a id="myPlusBtn" onclick="AddWorkFlowStatus()" style="bottom: 15px; padding-right: 11px; top: 0px; float: right; font-size: 24px; font-weight: 600;cursor:pointer ">
+                        +
+                    </a>
+                </h4>
+                <div id="WorkFlowStatusDiv" style="height:215px;overflow: auto;"></div>
+            </div>
+        </div>
+
+        @*Tags Block*@
+        <div class="col-md-11 main_block" style="margin-top:45px">
+            <div class="col-md-12" style="padding:0px">
+                <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;">
+                    Tags
+                    <a id="myPlusBtn" onclick="AddTags()" style="bottom: 15px; padding-right: 11px; top: 0px; float: right; font-size: 24px; font-weight: 600;cursor:pointer ">+</a>
+                </h4>
+                <div id="TagsDiv" style="height:300px;overflow: auto;"></div>
+            </div>
+        </div>
+
+        @*Public URL Generate Block*@
+        @if(ViewBag.showPublicUrlDiv)
+        {
+            <div class="col-md-11 main_block" style="margin-top:45px">
+			    <div class="col-md-12" style="padding:0px">
+				    <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;">
+					    Generate Public URL
+				    </h4>
+				    <div id="PublicURLDiv" style="height:250px;margin:10px;">
+                        <form>
+                            <div class="form-group" style="margin-bottom:20px;">
+                            <label for="corpid" style="padding-left:12px;">CorpId</label>
+                            <input type="text" class="form-control" id="corpid" name="corpid" style="width: 80%;" placeholder="Enter CorpId">
+                            </div>
+                            <div class="form-group">
+                            <label for="urlType" style="padding-left:12px;">URL Type</label>
+					        <select class="form-control" id="urlType" name="urlType" style="height: 30px;width: 80%;border:none;border-bottom:1px solid #ddd">
+						        <option value="0">- Select URL Type -</option>>
+						        <option value="ServiceRequest">ServiceRequest</option>
+                                <option value="CreateOrder">CreateOrder</option>
+				            </select>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="GeneratePublicURL();" style="margin-top:10px;">Generate</button> 
+                            <p id="erMsg" style="margin:left:5px;color:red;display:none">Please fill all fields.</p>
+                        </form>
+                        
+                        <div style="margin-top:20px;display:none;" class="Box">
+                            <input type="text" class="shareLinkTextBox" />
+                            <button id="copylinkbtn" class="btn btn-primary copyBtn" type="button" data-clipboard-target="#downloadlink">Copy link</button>
+                        </div>
+				    </div>
+			    </div>
+		    </div>
+        }
+		
+    </div>
+
+
+    @*Number Of Departments Block*@
+    <div class="col-md-6 SecondBlock" style="padding-left:0px;">
+        <div class="col-md-11 main_block">
+            <div class="col-md-12" style="padding:0px">
+                <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;">
+                    Number of Departments
+                    <a id="myPlusBtn" onclick="AddDepartments()" style="bottom: 15px; padding-right: 11px; top: 0px; float: right; font-size: 24px; font-weight: 600;cursor:pointer">
+                        +
+                    </a>
+                </h4>
+                <div id="DepartmentsDiv" style="height:215px;overflow: auto;"></div>
+            </div>
+        </div>
+
+
+
+        @*Customer Groups Module*@
+        <div class="col-md-11 main_block" style="margin-top:45px">
+            <div class="col-md-12" style="padding:0px">
+                <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;">
+                    Customer groups
+                    <a id="myPlusBtn" onclick="AddCustomerGroups()" style="bottom: 15px; padding-right: 11px; top: 0px; float: right; font-size: 24px; font-weight: 600;cursor:pointer ">
+                        +
+                    </a>
+                </h4>
+                <div id="CustomerGroupsDiv" style="height:215px;overflow: auto;"></div>
+            </div>
+        </div>
+
+        @*Task Priority Block*@
+        <div class="col-md-11 main_block" style="margin-top:45px">
+            <div class="col-md-12" style="padding:0px">
+                <h4 style="font-size: 22px; text-align: center; margin-bottom: 0px; margin-top: 0px; padding-bottom: 10px; padding-top: 10px; background-color: #f3f8fa; color: #105faf;">
+                    Task Priority
+                    <a id="myPlusBtn" onclick="AddTaskPriority()" style="bottom: 15px; padding-right: 11px; top: 0px; float: right; font-size: 24px; font-weight: 600;cursor:pointer ">
+                        +
+                    </a>
+                </h4>
+                <div id="TaskPriorityDiv" style="height:300px;overflow: auto;"></div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- The Modal -->
+    <div id="issueTypeModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height:210px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: left !important; padding-top: 10px; padding-left: 30px;"></h4>
+            <div style="text-align: left; padding-top: 40px; text-align: center;"><input type="text" id="IssueTypeTxt" /></div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em; float:right;">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="SubmitIssueType()"> Submit </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style=" margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="WorkFlowStatusModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height: 200px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: left !important; padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="padding-top: 40px; text-align: center;"><input type="text" id="WorkFlowStatusTxt" /></div>
+            <div Class="text-center" style="margin: 1.25em 0px 0.625em 3.125em; float: right;">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="SubmitWorkFlowStatus()"> Submit </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style=" margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="TagsModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height: 230px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;padding-top: 40px;">
+                <input type="text" id="TagsTxt" placeholder="Enter Tag Name" />
+                @*@Html.List_Search("infotype", "83", "-Select Type-", 0,"", new {@class = "", @style = "margin-top: 16px;border: none;border-bottom: 1px solid #ddd;outline: none;width: 80%"})*@
+                @Html.List_Search("infotype","-Select Type-","infotable","nameofinfo","infodes"," rowstatus=0 and (updateflag<>'D' or updateflag is null) and infotype=83 ",0,"",new {@class = "", @style = "margin-top: 16px;border: none;border-bottom: 1px solid #ddd;outline: none;width: 80%"})
+            </div>
+            <div Class="text-center" style="margin: 1.25em 0px 0.625em 3.125em; float: right;">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="SubmitTags()"> Submit </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="TaksPriorityModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height: 200px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;padding-top: 40px;"><input type="text" id="TaskPriorityTxt" /></div>
+            <div Class="text-center" style="margin: 1.25em 0px 0.625em 3.125em; float: right;">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="SubmitTaskPriority()"> Submit </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="DepartmentsModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height:210px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: left !important; padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="padding-top: 40px; text-align: center;"><input type="text" id="departmentTxt" /></div>
+            <div Class="text-center" style="margin: 1.25em 0px 0.625em 3.125em; float: right;">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="SubmitDepartment()"> Submit </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style=" margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="CustomerGroupsModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height:210px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: left;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="padding-top: 40px; text-align: center;"><input type="text" id="CustomerGroupTxt" /></div>
+            <div Class="text-center" style="margin: 1.25em 0px 0.625em 3.125em; float: right;">
+                <Button type="button" Class="btn btn-primary" style="background-color:#105faf; margin-right: 8px; margin-top: 1.25em" onclick="SubmitCustomerGroup()"> Submit </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style=" margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+
+    </div>
+    <div id="Result" class="modal fade">
+        <div class="modal-dialog" role="form">
+            <div class="modal-content text-center" style="width: 600px;">
+                <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+                <h4 class="text-center text-danger modal-title" style="color:black;text-align:center; font-size:18px; padding-left: 10px; margin-top:0px;padding-top: 35px;height: 60px;"></h4>
+                <Button type="button" Class="btn btn-primary" data-dismiss="modal" style="background-color: #105faf; margin-right: 25px; margin-top: 30px; text-align: center; margin-bottom: 25px; width: 74px;">OK</Button>
+                <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteIssueTypeModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+            <p>Do you want to delete IssueType?</p>
+            <input type="hidden" id="delId" />
+            </div>
+            <div Class="text-center" style="margin: 1.25em 0px 0.625em 3.125em; ">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em; " onclick="DeleteIssueType()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteWorkFlowStatusModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to delete Work Flow Status?</p>
+                <input type="hidden" id="delId" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="DeleteWorkFlowStatus()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteTagsModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height:210px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to delete this Tag?</p>
+                <input type="hidden" id="delId" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="DeleteTags()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteTaskPriorityModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="height:210px;">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to delete this Task Priority?</p>
+                <input type="hidden" id="delId" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="DeleteTaskPriority()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteDepartmentsModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" style="">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to delete Department?</p>
+                <input type="hidden" id="delId" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="DeleteDepartments()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteCustomerGroupsModal" class="modal fade">
+        <!-- Modal content -->
+        <div class="modal-content modal-body" >
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to delete Customer Group?</p>
+                <input type="hidden" id="delId" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="DeleteCustomerGroup()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

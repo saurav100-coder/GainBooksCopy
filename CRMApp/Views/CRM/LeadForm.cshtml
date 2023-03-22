@@ -1,0 +1,124 @@
+﻿@model CRMApp.Models.LeadMaster
+@{
+    ViewData["Title"] = "LeadForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<link rel="stylesheet" href="~/Content/bootstrap.css" />*@
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+@*<script src="~/Scripts/bootstrap.js" type="text/javascript"></script>*@
+<link rel="stylesheet" href="~/Content/CompactForm.css" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+<script src="~/Scripts/DealerRegForm.js" type="text/javascript"></script>
+<div Class="cont">
+    <div>
+        <h3 Class="text-info">Lead Form</h3>
+        <hr />
+        <form action="@Url.Action("LeadForm")" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.", new{@class = "text-danger"})
+            @Html.HiddenFor(model=> model.Lead_Key)
+            <div Class="row">
+                <div Class="col-sm-6 ">
+                    <div Class="form-group  form-group-sm">
+                        <Label for="inputEmail" class="text-info">Topic</Label>
+                        @Html.TextBoxFor(model=> model.Topic, new{@class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Purchase Time</Label>
+                        <select class="form-control input-sm">
+                            <option selected="selected" value="- Select HomeTown -">- Select -</option>
+                            <option>Allowed</option>
+                            <option>Not Allowed</option>
+                        </select>
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Contact Name</Label>
+                        @Html.List_Search("ContactCode", "- Select Contact Name -", "Contacts", "FullName", "Contact_Key","", Model.ContactCode,"" , new{@onChange = "ShowText(this.id)", @class = "form-control input-sm"})
+                    </div>
+                </div>
+                <div Class="col-sm-6 ">
+                    <div Class="form-group">
+                        <Label for="inputPassword" class="text-info">Decision Maker</Label>
+                        @Html.List_Search("DecisionMaker", "- Select Decision Maker Name -", "Contacts", "FullName", "Contact_Key","", Model.DecisionMaker,"", new{@onChange = "ShowText(this.id)", @class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Budget</Label>
+                        @Html.TextBoxFor(model=> model.Budget, new{@class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Purchase Process</Label>
+                        @Html.TextBoxFor(model=> model.PurchaseProcess, new{@class = "form-control input-sm"})
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div Class="row">
+                <div Class="col-sm-6">
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">BusinessType</Label>
+                        @Html.List_Search("BussType", "F", "Select Business Type", 0,"", new{@class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Daily Transaction Entry</Label>
+                        @Html.TextBoxFor(model=> model.TransEntryDaily, new{@class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Monthly Transaction Entry</Label>
+                        @Html.TextBoxFor(model=> model.TransEntryMonthly, new{@class = "form-control input-sm"})
+                    </div>
+                </div>
+                <div Class="col-sm-6">
+                    <div Class="form-group">
+                        <Label Class="text-info">Accounting Software Used</Label>
+                        @Html.List_Search("BussType", "H", "Select Software",0 ,"", new{@class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Daily Sales Bill</Label>
+                        @Html.TextBoxFor(model=> model.SalesBillDaily, new{@class = "form-control input-sm"})
+                    </div>
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Monthly Sales Bill</Label>
+                        @Html.TextBoxFor(model=> model.SalesBillMonthly, new{@class = "form-control input-sm"})
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div Class="row">
+                <div Class="col-sm-6">
+                    <div Class="form-group">
+                        <Label Class="text-info">Account Name</Label>
+                        @Html.List_Search("AccountCode", "- Select Account Name -", "Accounts", "AccountName", "Account_Key", "", Model.AccountCode,"", new{@onChange = "ShowText(this.id)", @class = "form-control input-sm"})                                                                                                                           @*@Html@TextBoxFor(model=> model@SpouseName, new{@class = "form-control input-sm"})*@
+                    </div>
+                </div>
+                <div Class="col-sm-6">
+                    <div Class="form-group">
+                        <Label for="inputEmail" class="text-info">Is Computer present in office</Label>
+                        <div class="row input-sm">
+                            <div class="col-md-6">@Html.RadioButtonFor(model=> model.ComputerYN, "1", new{@class = "form-check-input"})Yes</div>
+                            <div class="col-md-6">@Html.RadioButtonFor(model=> model.ComputerYN, "0", new{@class = "form-check-input"})No</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div Class="row">
+                <div Class="col-sm-6">
+                    <div Class="form-group">
+                        <Label Class="text-info">Internet Present</Label>
+                        <div class="row input-sm">
+                            <div class="col-md-6">@Html.RadioButtonFor(model=> model.InternetYN, "1", new{@class = "form-check-input"})Yes</div>
+                            <div class="col-md-6">@Html.RadioButtonFor(model=> model.InternetYN, "0", new{@class = "form-check-input"})No</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div Class="text-center">
+                <Button type="submit" Class="btn btn-info">Submit</Button>
+                <Button type="Button" Class="btn btn-default">Cancel</Button>
+            </div>
+           
+        </form>
+    </div>
+</div>

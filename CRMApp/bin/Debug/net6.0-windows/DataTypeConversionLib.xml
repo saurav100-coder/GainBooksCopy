@@ -1,0 +1,122 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DataTypeConversionLib
+</name>
+</assembly>
+<members>
+<member name="T:DataTypeConversionLib.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:DataTypeConversionLib.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:DataTypeConversionLib.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.GetModelFromDataRow``1(System.Data.DataRow)">
+ <summary>
+ Get Model from datarow
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="dr"></param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.ConvertFCToHashTable(System.Object,System.Object)">
+ <summary>
+ Converts all keys of formcollection object to hashtable as per their datatypes mentioned in tableclass
+ </summary>
+ <param name="fc">FormCollection object to be converted</param>
+ <param name="tableCls">Corresponding tableclass object from which datatypes has to be extracted</param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.GetDataRowFromModel``1(System.Object)">
+ <summary>
+ get data row from model object 
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="mdl"></param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.ConvertDTtoModal``1(System.Data.DataTable,System.Int32,System.Int32,System.Int32)">
+ <summary>
+ convert datatable to model 
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="dt"></param>
+ <param name="draw"></param>
+ <param name="recordsTotal"></param>
+ <param name="recordsFiltered"></param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.ConvertJSONToDataTablePk(System.String,System.String)">
+ <summary>
+ convert json into datatable with removing speces from row's values
+ </summary>
+ <param name="jsonString"></param>
+ <param name="primary_Key"></param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.ConvertJSONToDataTableNew(System.String,System.String)">
+ <summary>
+ convert json into datatable without removing speces from row's values
+ </summary>
+ <param name="jsonString"></param>
+ <param name="primary_Key"></param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.ConvertJSONToDataTable(System.String,System.Object)">
+ <summary>
+ convert json to datatable
+ </summary>
+ <param name="jsonString"></param>
+ <param name="tblclsobj"></param>
+ <returns></returns>
+</member>
+<member name="M:DataTypeConversionLib.DataTypeConversionFunctions.ConvertJSONToDataTable(System.String,System.String)">
+ <summary>
+ convert json to datatable
+ </summary>
+ <param name="jsonString"></param>
+ <param name="dataTypeList"></param>
+ <returns></returns>
+</member>
+<member name="T:DataTypeConversionLib.DTResult`1">
+ <summary>
+ A full result, as understood by jQuery DataTables.
+ </summary>
+ <typeparam name="T">The data type of each row.</typeparam>
+</member>
+<member name="P:DataTypeConversionLib.DTResult`1.draw">
+ <summary>
+ The draw counter that this object is a response to - from the draw parameter sent as part of the data request.
+ Note that it is strongly recommended for security reasons that you cast this parameter to an integer, rather than simply echoing back to the client what it sent in the draw parameter, in order to prevent Cross Site Scripting (XSS) attacks.
+ </summary>
+</member>
+<member name="P:DataTypeConversionLib.DTResult`1.recordsTotal">
+ <summary>
+ Total records, before filtering (i.e. the total number of records in the database)
+ </summary>
+</member>
+<member name="P:DataTypeConversionLib.DTResult`1.recordsFiltered">
+ <summary>
+ Total records, after filtering (i.e. the total number of records after filtering has been applied - not just the number of records being returned for this page of data).
+ </summary>
+</member>
+<member name="P:DataTypeConversionLib.DTResult`1.data">
+ <summary>
+ The data to be displayed in the table.
+ This is an array of data source objects, one for each row, which will be used by DataTables.
+ Note that this parameter's name can be changed using the ajaxDT option's dataSrc property.
+ </summary>
+</member>
+</members>
+</doc>

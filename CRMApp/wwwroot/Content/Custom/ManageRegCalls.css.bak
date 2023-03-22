@@ -1,0 +1,141 @@
+﻿table td {border-bottom: 1px solid grey;border-style: none;overflow-x: auto;}
+table th {border-style: none;padding: 2px;}
+table tr td {border-bottom: 1px solid grey;border-top: 1px solid black;border-collapse: collapse; padding: 2px;}
+table thead tr th {border-bottom: 1px solid grey;border-top: 1px solid black;border-collapse: collapse;padding: 2px;}
+tr:hover:not(.highlight) td { background-color:lightblue;}
+.highlight {background-color: #568CA7;color: white;}
+select {height: 30px;font-family: verdana,arial,sans-serif;font-size: 11px;}
+#filterText {height:30px;font-family: verdana,arial,sans-serif;font-size: 11px;margin-left: 4px;margin-top: 10px;height: 20px;margin-bottom: 5px;}
+#dropdown {width: 50%;}
+.content {padding: 0px;}
+.container {width: 60%;}
+h4 {margin: 0px;padding: 0px;}
+a {text-decoration: none;}
+#drop {width: 35%;margin: 0px auto;text-align: left;float: right;}
+.col-md-3 #main1 {text-align: center;}
+.content-wrapper, .right-side {background-color: white;}
+.panel-default {width: 100%;height: auto;}
+.panel-body {font-family: verdana,arial,sans-serif;font-size: 11px;padding: 0px;height: auto;}
+input[type=date] {max-width: 23%;padding: 0px;}
+input[type=datetime-local] {max-width: 22%;padding: 0px;}
+#filterTable tr td input[type=datetime-local] {max-width: 34%;padding: 0px;}
+#filterTable tr td input[type=date] {max-width: 40%;padding: 0px;}
+#filter {height: 20px;padding: 0px;width: 18%;margin-top: 10px;margin-bottom: 5px;}
+.panel {margin-bottom: 0px;}
+#min {margin-top: 10px;height: 20px;margin-left: 10px;margin-bottom: 5px;}
+#max {margin-top: 10px;height: 20px;margin-bottom: 5px;}
+
+#minDT {margin-top: 10px;height: 20px;margin-left: 10px;margin-bottom: 5px;}
+#maxDT {margin-top: 10px;height: 20px;margin-bottom: 5px;}
+
+.ee, .ww {margin-top: 15px;}
+.search {padding: 0px;}
+.bb {padding: 0px;height: auto;margin: 0px auto;text-align: center;}
+hr {margin: 0px auto;padding: 0px;width: 97%;color: grey;}
+.icon-bar {width: 100%;   overflow: auto;}
+.icon-bar a {float: left;width: 12%;text-align: center;padding: 12px 0px;transition: all 0.3s ease;font-size: 20px;}
+.icon-bar a:hover {background-color:#EAEDEF;}
+@media screen and (max-width:800px) {    
+.container {width: 100%;}
+#filter {height: 20px; padding: 0px; width: 75%; margin-top: 10px; margin-bottom: 5px;}
+input[type=date] {width: 100%;padding: 0px;}
+#max {margin-top: 0px;height: 20px;margin-bottom: 0px;}
+#min {margin-top: 0px;height: 20px;margin-left: 0px;margin-bottom: 0px;}
+.ee, .ww {margin-top: 0px;padding:0px}  
+.col-md-1{padding:0px}
+#filterText {font-family: verdana,arial,sans-serif;font-size: 11px;margin-top: 5px;height: 20px;padding:0px;margin:5px 0px 5px 0px}
+input[type=text] {width: 100%;}
+.col-md-3{padding:0px}       
+}
+
+
+ #example1 {width: 500px;border-collapse: collapse;}
+    #example1 thead.TableHead{display: block; overflow: auto;}
+    #example1 tbody.TableBody{display: block; overflow: auto; height:150px;
+                              word-wrap: break-word; word-break: break-all;  
+    }
+    #example1{border:none}
+    #example1 tr{border-right:1px solid #ddd}
+
+      .main-footer {
+        border-top: 0px;
+    }
+    .tablewrap{height:460px;overflow-y:scroll;}
+       table
+   table
+{
+width: 500px;
+border-collapse: collapse;
+}
+
+thead
+{
+display: block;
+overflow: auto;
+}
+
+tbody
+{
+display: block;
+height: 400px;
+
+overflow: auto;
+
+}
+.table>tbody>tr>td{
+   border-bottom: 1px solid grey;
+} 
+
+/*loader*/
+    .loader, .loader:after {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+
+    .loader {
+        /*margin: 60px auto;*/
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 3px solid rgba(0,0,0, 0.2);
+        border-right: 3px solid rgba(0,0,0, 0.2);
+        border-bottom: 3px solid rgba(0,0,0, 0.2);
+        border-left: 3px solid #1DA3E6;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+    }
+
+    @-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    /*loader done*/
+
+
+   .MoreDetails{ position:absolute; display:none;width:510px; min-height:53px; padding-left:10px; padding-top:8px; margin-left:580px;}
+   @media only screen and (max-width:1160px) {
+       .MoreDetails{margin-left:560px;}
+}

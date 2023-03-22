@@ -1,0 +1,42 @@
+﻿@{
+    Layout = ""; 
+}
+
+
+
+<script src="~/Scripts/Custom/AddCallCollaborators.js"></script>
+
+
+<div class="container-fluid ">
+    <div class="row">
+        <div>
+            <table id="example1" class="table table-bordered" cellspacing="0" style="width:100%;">
+                <thead class="TableHead">
+                    <tr style="text-align:center;">
+                        @*<th style="width:2%">No</th>
+                            <th style="width:12%">Collaborator Name</th>*@
+                    </tr>
+                </thead>
+                <tbody class="TableBody"></tbody>
+            </table>
+        </div>
+        <div>
+            <form Class="form-horizontal" action="@Url.Action("AddCallCollaborators")" role="form" method="post" id="RegForm">
+                <input type="hidden" name="PTask" id="PTask" value="">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.",new {@class = "text-danger"})
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding-top:0px">Add Collaborator</label>
+                    @Html.List_Search("collaboratorId", "- Select Employee -", "Accmaster", "accname", "p_acccode", "rowstatus = 0 and acctype=3042 and status='Y'", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:202px"})
+                </div>
+
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="submit" Class="btn btn-primary" style="margin-right:25px; margin-top:20px">Submit</Button>
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default" style="margin-right:50px; margin-top:20px">Cancel</a>*@
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

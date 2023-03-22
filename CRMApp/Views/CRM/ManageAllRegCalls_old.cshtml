@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewData["Title"] = "ManageAllRegCalls";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+   var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+
+}
+
+@*@Optimization.Styles.Render("~/Content/Manage_All_Calls")
+@Optimization.Scripts.Render("~/Scripts/Manage_All_Calls")*@
+
+<link rel="stylesheet" href="~/Content/Custom/ManageRegCalls.css" />
+<link rel="stylesheet" href="~/Content/Custom/ManageAllRegCalls.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageAllRegCalls.js"></script>
+<style >
+
+    .content-wrapper {
+        background-color: white;
+    }
+</style>
+
+<div Class="iconrow" style="">
+
+    <div id="main" Class="" style="width: 100%; display: flex; margin-bottom: 10px; ">
+        <div Class=" icons" style=" margin-right: 8px; margin-left: 15px; padding-top: 10px; display: inline-block; width: auto; margin-right: 28px;  padding-left: 0px;">
+
+            <a id="CreateCustomer" href='/Configuration/CustomerForm' title="" data-placement="bottom" data-toggle="Create New Customer" style="text-align:left">
+                <i Class="glyphicon glyphicon-plus" style="font-size: 14px; margin-right: 10px; padding: 5px;"></i>
+            </a>
+            <a Class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh">
+                <i Class="fa fa-refresh" style="font-size: 16px; margin-right: 10px; padding: 5px;"></i>
+            </a>
+            <a class="top btn-Filter" title="" data-placement="bottom" data-toggle="Advance Filter" style="text-align:left" id="filterIcon" onclick="ShowFilters();">
+                <i class="glyphicon glyphicon-filter" id="filterIcon" style="font-size: 14px; margin-right: 10px; padding: 5px;"></i>
+            </a>
+            <a data-toggle="Download format file" href='@Url.Action("downloadImportCustomerFormatFile", "Home")' data-original-title="" title="">
+                <i class="glyphicon glyphicon-download-alt" style="font-size: 14px; margin-right: 10px; padding: 5px; "></i>
+            </a>
+            <a data-toggle='Import Cusomers' onclick='OpenImportModal();'>
+                <i class='glyphicon glyphicon-import' style="font-size: 14px; margin-right: 10px; padding: 5px; "></i>
+            </a>
+        </div>
+
+        <div id="dropdown" class=" search " style="height:40px; display:flex;">
+            <select class="" id="filter" style="height: 26px; top: 10px; padding-left: 5px; width: auto; border-style: none; border: none; outline: none; border-bottom: 1px solid #ddd; cursor: pointer; ">
+                <option value="0">Filter By</option>
+                <option value="1">No filter</option>
+            </select>
+            <div id="dateC" style="display:none" class="filterDiv">
+                <div style="display:flex;">
+                    <div class="" style="top: 10px; margin-left:10px;">
+                        <label class="ee" style="top: 10px;">   From: </label>
+                    </div>
+                    <input type="date" id="min" class="" style="width: auto; height: 26px; top: 10px; border-style: none; border: none; outline: none; border-bottom: 1px solid #ddd; cursor: pointer; " value="@D" max="@D" />
+                    <div class="" style="top: 10px; margin-left:10px;">
+                        <label class="ww" style="top: 10px;">  To: </label>
+                    </div>
+                    <input type="date" id="max" class="" style="margin-left:10px; width:auto; height: 26px; top: 10px; border-style: none; border: none; outline: none; border-bottom: 1px solid #ddd; cursor: pointer;" value="@D" max="@D" />
+                    <div id="search2" onclick="DateSearch();" class="btn searchButton  date" style=" margin-top:10px; "><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+            </div>
+            <div id="TextC" class="filterDiv" style="display:none;">
+                <input type="text" id="filterText" class="" placeholder="Type to search" style="height: 26px; padding-left: 5px; margin-left: 20px; width: auto; border-style: none; border: none; outline: none; border-bottom: 1px solid #ddd; cursor: pointer;" />
+                <div id="search1" onclick="DoSearch();" class="btn searchButton" style=""><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+            <div id="IssueC" class="filterDiv" style="display:none;">
+                @Html.List_Search("IssueFilter", "38", "-Select Issue-",0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border-style:none; border:none; outline:none; border-bottom:1px solid #ddd; cursor:pointer;"}, true)
+            </div>
+            <div id="DealerC" class="filterDiv" style="display:none;">
+                @Html.List_Search("P_dealers", "-Select Dealer-", "Accmaster", "AccName", "p_acccode", "acctype = 3040 and rowstatus = 0 and status = 'Y'", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border-style:none; border:none; outline:none; border-bottom:1px solid #ddd; cursor:pointer;"}, true)
+            </div>
+            <div id="assigntoC" class="filterDiv" style="display:none;">
+                @Html.List_Search("assignto", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y'", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border-style:none; border:none; outline:none; border-bottom:1px solid #ddd; cursor:pointer;"}, true)
+            </div>
+            <div id="FilterText" class="" style="float:left; display:none; margin-top: 10px;margin-left:15px; font-size:13px; border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+                <b>
+                    <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                    <a class='' id='' onclick='ReloadGrid();'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>
+                </b>
+            </div>
+            @*<form class="col-md-7 search-container" style="display:inline-block; padding-left:0px; bottom:9px;">
+            <div id="Text" class="SearchDiv" style=" width: 100%; position: relative; display: flex;">
+                <input type="text" id="SearchText" class="" placeholder="Type to search" style=" " />
+                <div id="search1" onclick="DoSearch();" class="searchButton1"><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+        </form>*@
+        </div>
+            <div class="pagi" style="text-align:right; padding:0px; float:right;top: 35px;padding-top:18px; position:absolute; right:15px; ">
+                <label id="info" style="font-size:12px; padding-right:8px; color:#808080;"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:19px"></i>
+                </div>
+                <div Class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i Class="fa fa-angle-right" style="font-size:19px"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="grid1" id="grid1" value="">
+    <input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+    <div class=" col-md-12" style="">
+        @*<table id="example" class="table row-border" cellspacing="0" style="margin-bottom:0px">
+                <thead>
+                    <tr style="text-align:center;">
+                        <th style='width:8%;'>Select</th>
+                        <th style='width:7%;padding-left:20px;'><input type="hidden" id="head1" value="2:Creationdate:none" />Date <i class="glyphicon glyphicon-sort sortable none" id="sort-2" style="color:#C7C7C7"></i></th>
+                        <th style='width:13%;padding-left:40px;'><input type="hidden" id="head2" value="3:Firmname:none" />FirmName<i class="glyphicon glyphicon-sort sortable none" id="sort-3" style="color:#C7C7C7"></i></th>
+                        <th style='width:12%;padding-left:50px;'><input type="hidden" id="head3" value="4:Contactperson:none" />Name<i class="glyphicon glyphicon-sort sortable none" id="sort-4" style="color:#C7C7C7"></i></th>
+                        <th style='width:10%;padding-left:30px;'>MobileNo</th>
+                        <th style='width:10%;padding-left:30px;'><input type="hidden" id="head4" value="6:Location:none" />Location<i class="glyphicon glyphicon-sort sortable none" id="sort-6" style="color:#C7C7C7"></i></th>
+                        <th style='width:10%;padding-left:35px;'>Issuetype</th>
+                        <th style='width:20%;padding-left:80px;'>Description</th>
+                        <th style='width:10%;padding-left:40px;'>Status</th>
+                    </tr>
+                    <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+                </thead>
+                <tbody></tbody>
+            </table>*@
+      <div style="display:grid;">  <div class="col-md-12  TaskBar" style=" font-size: 11px; letter-spacing: .1em; text-transform: capitalize; display: flex; padding-right: 2px; padding-top: 15px; padding-bottom: 22px; width: 100%; color: #337ab7; background-color: #f3f8fa; width: 100%; border-bottom: 7px solid white; margin-top: 0px; font-family: open sans,sans-serif;">
+            <div class="col-md-1 SNo." style="width:3%; text-align:center; padding-right:0px; padding-left:0px;margin-left:0px;padding-top:8px;"><b>SNo.</b></div>
+            <div class="col-md-1 CallId" style="width:5%; text-align:left;   padding-right:0px; padding-left:0px; margin-left: 5px;padding-top: 8px;"><b>Call Id</b></div>
+            <div class="col-md-1 Date" style="width:5%; margin-left:0px;   padding-top:8px;   padding-left:0px;"><b>Date</b></div>
+            <div class="col-md-1 Firm" style="width:6%; text-align:left;   padding-top:8px;   padding-left:10px; padding-right: 10px;"><b>Firm</b></div>
+            <div class="col-md-1 Name" style="width:6%; text-align:center; padding-top:8px;   padding-left:0px;  padding-right: 0px;margin-right: 0px;"><b>Name</b></div>
+            <div class="col-md-1 Mobile" style="width:8%; text-align:center; padding-left:20px; padding-top:8px;   padding-right:0px"><b>Mobile</b></div>
+            <div class="col-md-1 Location" style="width:6%; text-align:right;  padding-left:0px;  padding-top:8px;   padding-right: 0px;"><b>Location</b></div>
+            <div class="col-md-1 Issue" style="width:6%; text-align:center; padding-right:0px; padding-left:10px; padding-top:8px;"><b>Issue</b></div>
+            <div class="col-md-1 Description" style="width:6%; text-align:left;   padding-right:0px; padding-left:15px; padding-top:8px;"><b>Description</b></div>
+            <div class="col-md-1 Status" style="width:7%; text-align:right;  padding-right:0px; padding-left:5px;  padding-top:8px;"><b>Status</b></div>
+            <div class="col-md-1 Assigned To" style="width:6%; text-align:center; padding-right:0px; padding-left:10px;"><b>Assigned To</b></div>
+            <div class="col-md-1 Servicing Dealer" style="width:7%; text-align:center; padding-right:0px; padding-left:10px;"><b>Servicing Dealer</b></div>
+            <div class="col-md-1 LastCallTime" style="width:7%; text-align:center; padding-right:0px; padding-left:10px;"><b>Last Call Time</b></div>
+            <div class="col-md-1 Onsiteflag" style="width:6%; text-align:center; padding-right:5px; padding-left:5px"><b>Onsite flag</b></div>
+            <div class="col-md-1 NextActionDate" style="text-align:center; padding-left:0px; padding-top:0px;"><b>Next Action Date</b></div>
+            <div class="col-md-1 Source" style="width:6%; text-align:left; padding-right:0px; padding-left:0px"><b>Call Source</b></div>
+        </div></div>
+        <div id="loading"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6" style="margin-top:20px;"></div><p id="Msg"></p></div></div>
+        <div class="col-md-12 " id="example" style=" width: 100%; overflow-y: scroll; padding-bottom: 20px; height: 510px; padding-left: 0px; padding-right: 0px; color: #3c8dbc; background-color: white;"></div>
+        @*For filtering on ServicingAgent*@
+    </div>
+    <div class="modal fade" id="ServicingAgent">
+        <div class="modal-dialog" role="form">
+            <div class="modal-content">
+                <div class="modal-header" style="border:none; padding:0px">
+                    <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                </div>
+                <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                    <h4 style="text-align:center; font-size:18px; margin-top:0px;" class="modal-title">Select Dealer</h4>
+                    <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                    <form Class="form-horizontal" role="form" method="post" id="ServicingAgentFilterForm">
+                        <input type="hidden" name="PTask" id="PTask" value="">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="padding-top:0px">Select Dealer</label>
+                            @*@Html.List_Search("DealerId", "- Select Dealer -", "Dealers", "DealerName", "P_acccode", "superdealer = str(P_dealers)", 0, "", new {.onChange = "", .class = "form-control input-sm", .style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:202px"})*@
+                        </div>
+
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="submit" Class="btn btn-primary" style="margin-right:15px; margin-top:20px">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                            @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default">Cancel</a>*@
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $('#popover1').popover({
+        html: true,
+        trigger: 'manual',
+        content: function () {return $('#popover_content_wrapper1').html();}
+    });
+$(document).on('click', '#popover1', function () {
+        $(this).popover('toggle');
+        $('#popover2').popover({
+            html: true,
+            trigger: 'manual',
+            content: function () {return $('#popover_content_wrapper2').html();}
+        });
+    });
+    $(document).on('click', '#popover2', function () {$(this).popover('toggle');});
+</script>
+
+
+
+
+
+
+
+

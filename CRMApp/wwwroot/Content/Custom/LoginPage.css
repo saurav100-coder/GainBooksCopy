@@ -1,0 +1,105 @@
+﻿.Gainbookimg{
+    padding:0px;
+}
+.GainbookText{
+    margin-top:16px;left: 144px;
+}
+.GainbookSpan{
+    color:#1c74d0; font-family: 'Source Sans Pro',sans-serif; font-size:50px; font-weight:600
+}
+.SignUpLink{
+    margin-top: 48px;text-align:center;right: 57px;
+}
+.SignUpLinkText{
+    color:#484747; font-weight:400;font-size:15px;
+}
+.SignUpLinkText1{
+    color:#1c74d0;text-align:center;
+}
+.login-box-body{
+    background-color: transparent;height:579px; 
+}
+#BigImg{
+    width: 570px;height: 470px;
+}
+.AppLink{
+    color: #232929;bottom: 50px;font-size: 20px;text-align: center;right:68px;
+}
+.Ahere{
+    font-size:20px;color: #1a04d2; cursor:pointer
+}
+.MainDiv{
+    height: 430px;padding-right: 0px;
+}
+.form{
+    height: 450px;border: 5px solid white;width: 400px;margin:0px;
+}
+.loginText{
+    margin-bottom:30px; text-align:center;margin-top: 0px;
+}
+.loginForm{
+    text-align: center;margin-bottom: 10px;margin-left: 0px;
+}
+.labelBU{
+    margin-right:3px;padding-bottom:10px
+}
+.InputBU{
+    margin-right: 30px;margin-left: 5px;
+}
+.LabelIU{
+    margin-left: 20px;padding-left: 10px;
+}
+.InputIU{
+    margin-left: 8px;
+}
+.IDCorporate{
+    border: none; border-bottom: 2px solid #a5a2a2;margin-bottom: 10px;width: 340px;background-color: white;font-family: sans-serif, FontAwesome;margin-left: 20px;padding-bottom: 7px;display:none
+}
+.user{
+    border: none; border-bottom: 2px solid #a5a2a2;margin-bottom: 10px;width: 340px;background-color: white;font-family: sans-serif, FontAwesome;margin-left: 20px;padding-bottom: 7px;
+}
+.pass{
+    border: none; border-bottom: 2px solid #a5a2a2;width: 340px;background-color: white;margin-bottom: 3px; font-family:sans-serif, FontAwesome ;margin-left: 21px;padding-bottom: 7px;
+}
+.For{
+    color:#a5a2a2;font-family: sans-serif;text-align:right;margin-right: 17px;font-size: 13px;margin-top: 2px;
+}
+.SignInBtn{
+    width: 100px;margin-top: 30px;margin-bottom: 0px;font-size: 17px;float: right;height: 32px;padding-top: 4px;padding-bottom: 8px;background-color:#1c74d0;margin-right: 17px;
+}
+.google{
+    border-radius:5px; border:2px solid red;background-color:white;margin-left: 35px;color:red;font-size: 15px;padding-top: 4px;padding-bottom: 10px;height: 40px;width: 120px;padding-left: 10px;padding-right: 10px;
+}
+.facebook{
+    border-radius:5px; border:2px solid #1c74d0;float:right;margin-right: 10px; background-color:white;color:#1c74d0;font-size: 15px;padding-top: 4px;padding-bottom: 10px;height: 40px;width: 120px;padding-left: 5px;padding-right: 10px;
+}
+.googleimg{
+    padding-right: 8px;
+}
+.facebookimg{
+    padding-right: 7px;
+}
+.hr-sect {display: flex;flex-basis: 100%;align-items: center;color: rgba(0, 0, 0, 0.35);margin: 75px 0px 8px 20px;}
+.hr-sect::before,
+.hr-sect::after {content: "";flex-grow: 1;background: rgba(0, 0, 0, 0.35);height: 1px;font-size: 0px;line-height: 0px;margin: 0px 0px;}
+.login-page {background-color: white;}
+body, html {height: 100%;font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+.container {position: absolute;right: 0;margin: 20px;padding: 16px;background-color: white;}
+input[type=text], input[type=password] {padding: 15px;margin: 5px 0 22px 0;}
+input[type=text]:focus, input[type=password]:focus {background-color: #ffffff;outline: none;}
+#bg-img{display:block;}
+#BigImg{display:block;}
+@media only screen and (max-width:600px){
+#bg-img{display:none;}
+#BigImg{display:none;}
+.col-xs-6{
+    right: 19px;
+}
+
+}
+@media only screen and (max-width:425px) {
+    .GainbookText {
+        left: 42px;
+    }
+}

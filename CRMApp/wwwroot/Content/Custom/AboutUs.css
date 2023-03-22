@@ -1,0 +1,356 @@
+﻿
+.about-container {
+    text-align: center;
+    padding: 120px;
+    background: url(/images/main/aboutus.png);
+    background-repeat: no-repeat;
+}
+
+.about-container h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 69px;
+    font-weight: 400;
+    color: rgb(16,108,200);
+}
+
+.subdiv {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 10px 0;
+    width: 90%;
+}
+
+.text-div {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    width: 49%;
+}
+
+    .text-div h2 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 25px;
+        color: rgb(16,108,200)
+    }
+
+    .text-div p {
+        line-height: 20px;
+        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+.img-div {
+    width: 37%;
+    display: flex;
+}
+
+    .img-div a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+.main-container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.boxes {
+    width: 86%;
+    margin: 20px auto;
+    background-color: whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    width: 50%;
+}
+
+.header {
+    position: relative;
+    margin-top: 20px;
+}
+
+.heading {
+    margin: 10px 0;
+    background: rgb(16,108,200);
+    color: white;
+    padding: 5px;
+    width: 210px;
+    padding-left: 13px;
+    font-weight: 500;
+}
+
+.arrow {
+    position: absolute;
+    left: 210px;
+    top: 0px;
+    border-top: 18px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 10px solid rgb(16,108,200);
+}
+
+.box p {
+    line-height: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 15px;
+    text-align: justify;
+}
+
+.box img {
+    width: 100%;
+    height: 287.9px;
+}
+
+.team-section {
+    width: 86%;
+    margin: 50px auto;
+    margin-bottom: 65px;
+}
+
+.teams h4 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 2.2px solid darkgrey;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+    .teams h4 span {
+        background: #fff;
+        padding: 0 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 25px;
+        color: rgb(16,108,200);
+    }
+
+.teams p {
+    text-align: justify;
+}
+
+.teams-text {
+    line-height: 20px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: #fff;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+
+.card {
+    background: #fff;
+    width: 240px;
+    height: 330px;
+    transform: translate(0%, 0%);
+    border-radius: 5px;
+    box-shadow: 0px 10px 70px rgba(0, 0, 0, 0.15);
+    overflow: hidden
+}
+
+.card-header {
+    height: 75%;
+    width: 100%;
+    padding: 0px;
+    /*overflow: hidden;*/
+}
+
+.header-img {
+    /*height: 100%;*/
+    height: 245px;
+    width: 100%;
+    /*background: url(https://source.unsplash.com/y3aP9oo9Pjc/500x500) left center;
+          background-size: 100%;*/
+    border-radius: inherit;
+    transition: all ease-in-out .4s;
+}
+
+.first {
+    background: url(/images/main/neha.png);
+    background-size: 100%;
+}
+
+.second {
+    background: url(/images/main/hc.png);
+    background-size: 100%;
+}
+
+.third {
+    background: url(/images/main/reetika.png);
+    background-size: 100%;
+}
+
+/* .card:hover .header-img{
+          transform: scale(1.25) rotate(2deg);
+        }*/
+
+.card-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 10px;
+    height: 25%;
+    transition: 2s;
+    margin-bottom: 20px;
+}
+
+    .card-title h1 {
+        font-family: 'Catamaran', sans-serif;
+        text-transform: uppercase;
+        font-size: 18px;
+        line-height: 28px;
+        padding: 0px;
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    .card-title p {
+        margin: 0;
+        text-align: center;
+        font-size: 13px;
+    }
+
+.info-div {
+    opacity: 0;
+    background: rgb(16,108,200);
+    color: white;
+    padding: 20px 0;
+    height: 350px;
+    text-align: center;
+    position: absolute;
+    transition: opacity linear 2s;
+    -webkit-transition: all 2s ease-in-out;
+}
+
+.card:hover .info-div {
+    opacity: 0.9;
+}
+
+.card:hover .card-title {
+    transform: translateY(60px);
+}
+
+.info-div p {
+    padding: 15px 20px;
+    line-height: 15px;
+    font-size: 12px;
+}
+
+.gain-maindiv:hover {
+    background: linear-gradient(to right, rgb(186, 227, 254), white);
+    margin-left: -7px;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.saral-maindiv:hover {
+    background: linear-gradient(to right, white, rgb(186, 227, 254));
+    margin-top: -2px;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+@media screen and (max-width: 480px) {
+    .about-container {
+        padding: 90px;
+    }
+
+        .about-container h1 {
+            font-size: 50px;
+        }
+
+    .text-div {
+        padding: 0 10px;
+    }
+
+        .text-div h2 {
+            text-align: center;
+            margin: 20px;
+        }
+
+    .subdiv {
+        flex-direction: column;
+    }
+
+    .gain-maindiv .subdiv {
+        flex-direction: column-reverse !important;
+    }
+
+    .text-div {
+        width: 100%;
+    }
+
+    .img-div {
+        width: 100%;
+    }
+
+        .img-div a {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        .img-div img {
+            width: 85%;
+        }
+
+    .boxes {
+        width: 100%;
+    }
+
+    .box {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .heading {
+        width: 180px;
+    }
+
+    .arrow {
+        left: 180px;
+    }
+
+    .box p {
+        width: 100% !important;
+    }
+
+    .box img {
+        height: 200px;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    .card {
+        margin: 20px auto;
+    }
+
+    .team-section {
+        width: 100%;
+    }
+
+    .teams h4 span {
+        font-size: 20px;
+    }
+
+    .teams-text {
+        margin: 0 10px;
+    }
+}
+

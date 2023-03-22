@@ -1,0 +1,53 @@
+﻿@*@Optimization.Scripts.Render("~/bundles/jquery")*@
+<script src="~/Scripts/FrameWork/jquery.min.js"></script>
+
+<style>
+    @@media only screen and (max-width:600px) {
+        .con{
+            width:100% !important;
+            margin-left:0px !important;
+        }
+    }
+</style>
+   <h2 class="text-center text-primary">Calls Report</h2>
+<p class="text-center text-primary">Click directly on Send to get Reports as of Today</p>
+    <p class="text-center text-success">@TempData["Message"]</p>
+   <br/>
+<div class="col-md-12 con" style="width:50%; margin-left:25%">
+    
+    <div class="panel panel-default">
+        <div class="panel-body" style="padding:40px;">
+            <form action="@Url.Action("SendCompCalls")" method="post">
+                <div Class="form-group" style="margin-bottom: 30px; margin-top: 15px; ">
+                    <Label for="inputEmail1" class=" control-label" style="margin-bottom: 0px; margin-top: 12px; text-align: right ">Completed Calls</Label>
+                    <div Class="" style="margin-bottom:30px;margin-top:8px;  display:flex;">
+                        <input type="date" id="CompCallsDate" name="CompCallsDate" placeholder="Set Date" style="width: 90%; border: none; border-bottom: 1px solid #ddd; outline: none; margin-left: 0px;" />
+                      
+                        <input type="Submit" id="SendCompCalls" class="btn btn-primary" name="SendCompCalls" value="Send" style="border-radius: 25px;width: auto; padding-left: 15px;padding-top: 0px; padding-right: 15px;margin-left: 15px;padding-bottom: 0px;margin-bottom: 0px; background-color:#105faf;" />
+                        @*<i class="fa fa-send" style="font-size:20px"></i>*@
+                    </div>
+                </div>
+            </form>
+            <form action="@Url.Action("SendPendingCalls")" method="post">
+                <div Class="form-group" style="margin-bottom:30px;margin-top:15px;">
+                    <Label for="inputEmail1" class=" control-label" style="margin-bottom: 0px; margin-top: 12px; text-align: right">Pending Calls</Label>
+                    <div Class="" style="margin-bottom: 50px; margin-top: 8px; display: flex; ">
+                        <input type="datetime-local" id="PendingCallsDate" name="PendingCallsDate" placeholder="Set Date" style="width: 90%; border: none; border-bottom: 1px solid #ddd; outline: none; margin-left: 0px;" />
+                        <input type="Submit" class="btn btn-primary" id="SendPendingCalls" name="SendPendingCalls" value="Send" style="border-radius: 25px;width: auto; padding-left: 15px;padding-top: 0px; padding-right: 15px;margin-left: 15px;padding-bottom: 0px;margin-bottom: 0px; background-color:#105faf;" />
+                    </div>
+        </div>
+        </form>
+        @*<form action="@Url.Action("SendPendingCallsActivityLog")" method="post">
+            <div Class="form-group col-md-offset-4">
+                <input type="Submit" class="btn btn-primary" id="SendPendingCalls" name="SendPendingCalls" value="Send Pending Calls Activity Log" style="width:200px;border-radius: 0px; padding-left: 5px;height: 25px;padding-top: 0px; padding-right: 5px;margin-left: 40px;padding-bottom: 0px;margin-bottom: 0px;" />
+            </div>
+        </form>
+        <form action="@Url.Action("SendPaymentPendingCallsActivityLog")" method="post">
+            <div Class="form-group col-md-offset-4">
+                <input type="Submit" class="btn btn-primary" id="SendPendingCalls" name="SendPendingCalls" value="Send Payment Pending Calls Activity Log" style="width:250px;border-radius: 0px; padding-left: 5px;height: 25px;padding-top: 0px; padding-right: 5px;margin-left: 20px;padding-bottom: 0px;margin-bottom: 0px;" />
+            </div>
+        </form>*@
+
+    </div>
+</div>
+</div>

@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewData["Title"]</title>
+     <link rel="shortcut icon" href="~/images/GainbooksFavicon.ico" />
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+
+     @*Need bundling from *@
+    <link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/AdminLTE.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/skin-blue.min.css" />
+    <link rel="stylesheet" href="~/Content/Layout.css" />
+
+    <script src="~/scripts/FrameWork/jquery.min.js"></script>
+    <script src="~/Scripts/Custom/Layout.js"></script>
+    <script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+    <script src="~/Scripts/FrameWork/fastclick.js"></script>
+    <script src="~/Scripts/FrameWork/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/FrameWork/adminlte.min.js"></script>
+    <script src="~/Scripts/FrameWork/modernizr-2.6.2.js"></script>
+    @*Need bundling to *@
+
+    <style>
+        .content-wrapper, .main-footer{margin-left:0px!important;}
+        .skin-blue .main-header .logo {
+            background-color: #094e94;
+        }
+
+        .skin-blue .main-header .navbar {
+            background-color: #105faf;
+        }
+
+        .titleName p {
+            padding-left: 65px;
+            margin-top:12px;
+            font-size: larger;
+            color: white;
+        }
+
+        .skin-blue .main-sidebar {
+            background: url(/images/BGaside28.png);
+            background-position: right;
+            background-size:cover;
+        }
+        
+        .main-sidebar-img {
+            width: 25px;
+            margin-right: 5px;
+        }
+
+        .user-panel {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .user-panel .img-circle {
+            max-width: 70px;
+            width: 100%;
+        }
+
+        .user-panel .user-name {
+            margin-bottom: 0px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .user-panel .user-panel-inner {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: stretch;
+        }
+        .user-panel .user-panel-inner img {
+            width: 13px;
+            margin-right: 4px;
+        }
+        .user-panel .user-panel-inner p {
+            font-size: 12px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+        }
+
+
+        @@media only screen and (max-width:600px) {
+            .main-sidebar-img {
+                width: 22px;
+            }
+            .user-panel .img-circle {
+               max-width: 60px;
+            }
+        }
+        @@media (min-width: 768px){
+           .sidebar-mini.sidebar-collapse .user-panel .user-name,
+           .sidebar-mini.sidebar-collapse .user-panel .user-panel-inner {
+                display: none!important;
+                -webkit-transform: translateZ(0);
+            }
+
+           .sidebar-mini.sidebar-collapse .sidebar-menu > li > a {
+                padding: 12px 5px 12px 9px;
+            }
+        }
+    </style>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+                @*<input type="hidden" id="type1" value="@Session("menuid")" />*@
+                <input type="hidden" id="type1" value="@httpContextAccessor.HttpContext?.Session.GetString("menujson")" />
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer" style="background-color:whitesmoke; font-size:12px;padding-left:10px;    position: fixed; bottom: 0; width: 100%;">
+            <a href="http://gainbooks.com/" style="padding-left:10px;"> <strong>Powered by <img src="/images/gainbooks_logo.png" style="height: 15px;/* display:inline-block; */"> <span>Gainbooks</span></strong></a>
+        </footer>
+    </div>
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)*@
+</body>
+</html>

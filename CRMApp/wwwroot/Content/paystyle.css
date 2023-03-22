@@ -1,0 +1,28 @@
+﻿body {background-color:#ecf0f5}
+.container{width:50%;}        
+.col-md-6.input-effect{margin:2% 0% 2% 30%;padding-left:0px;padding-right:0px;}
+label{margin:0px}      
+h2:before {border:none;width:0px;}               
+input[type=date]{width:100%;}
+input[type=date]:focus{color: #000; }     
+#mode, #all, #cheque {display: none;}
+.vv{text-align:center}
+.btn-default{margin-left:10px}
+#myselect{padding:4px 0px 9px 0px}
+h2{margin:10px 0px 10px 0px;color :#31708f}
+/*.scrollbar{height:300px;margin-top:40px;margin-left:40px;overflow-y:scroll;float:left;}
+.content{height:450px;} 
+#ex3::-webkit-scrollbar{width:16px;background-color:#cccccc;} 
+#ex3::-webkit-scrollbar-thumb{background-color:#B03C3F;border-radius:10px;height:1%;}
+#ex3::-webkit-scrollbar-thumb:hover{background-color:#BF4649;border:1px solid #333333;}
+#ex3::-webkit-scrollbar-thumb:active{background-color:#A6393D;border:1px solid #333333;} 
+#ex3::-webkit-scrollbar-track{border:1px gray solid;border-radius:10px;-webkit-box-shadow:0 0 6px gray inset;}*/ 
+@media screen and (max-width:800px){
+.container{width:100%;}
+h2{float:none;}
+.col-md-6.input-effect{margin:8% 0% 8% 10%;padding-left:0px;padding-right:0px;}
+select{width:100%}
+ }
+
+
+

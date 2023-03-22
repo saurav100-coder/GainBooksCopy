@@ -1,0 +1,273 @@
+﻿@model CRMApp.Models.CustomerMaster
+@{
+    ViewData["Title"] = "CustomerForm";
+}
+@*@Optimization.Styles.Render("~/Content/CustomerForm")
+@Optimization.Scripts.Render("~/bundles/CustomerForm")*@
+
+<link rel="stylesheet" href="/Content/CustomerForm.css" />
+<script src="~/Scripts/Custom/DealerRegForm.js"></script>
+<script src="~/Scripts/Custom/CustomerForm.js"></script>
+
+
+<script>
+        $(document).ready(function () {
+            var home = "";
+            home = $("#TextHomeTown").val();
+            $("#searchString").val(home);
+            $(".ii").show();
+            $("#TextHomeTown").hide();
+          
+                
+        });
+
+
+    function ConfirmSubmit(ctrlValue) {
+        var Email = $("#Email").val();
+        var Mobile = $("#MobNo").val();
+        var Address = $("#PostalAddress1").val();
+
+        var EmailTrim = Email.trim();
+        var MobileTrim = Mobile.trim();
+        var AddressTrim = Address.trim();
+
+
+        var b = $("#homeTown").val();
+        var c = $("#hdn-hometown").val();
+        var HomeTownTrim = c.trim();
+        if (b == 0 || b == "null" || b == "undefined" || b == "") {
+            $("#homeTown").val(c);
+        }
+        var value = document.getElementById("MainBussCode").value;
+        //if (MobileTrim == "" || AddressTrim == "" || EmailTrim == "" || HomeTownTrim == "" || value == 0) {
+        if (MobileTrim == "") {
+            $("#Msg").text('Mobile Number cannot be empty');
+        } else {
+            $(".btn-Submit").attr("disabled", true);
+            var d = $("#CustomerForm");
+            $("#CustomerForm").attr('action', '/Configuration/CustomerForm');
+            var custcode = $("#CustCode").val();
+                d.submit();
+        }
+    }
+
+</script>
+
+<div class="cont" style="margin-bottom:50px">
+    <div class="box-header">
+        <div class="rr">
+            <h2 class="text-info text-center">Customer Form</h2>
+            <p id="Msg" class="text-danger text-center"></p>
+        </div>
+    </div>
+    <form method="post" id="CustomerForm">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+        <div class="row">
+            <div id="gen1">
+
+                <p class="center text-center" style="">General Details</p>
+                <div class="col-md-12" style="height:auto; overflow:auto;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.HiddenFor(model=> model.Customers_Key)
+                            @Html.HiddenFor(model=> model.P_Customers)
+                            @Html.HiddenFor(model=> model.exitmode)
+                            @Html.HiddenFor(model=> model.p_acccode)
+                            @Html.HiddenFor(model=> model.ActivationDate)
+                            <label class="text-info">CustCode</label>
+                            @Html.TextBoxFor(model=> model.CustCode, new {@class = "form-control input-md", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                            @Html.ValidationMessageFor(model=> Model.CustCode, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Company Name</label>
+                            @Html.TextBoxFor(model=> model.CustName, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                            @Html.ValidationMessageFor(model=> Model.CustName, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="height:auto; overflow:auto;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Contact Person@*<span style="color:red">*</span>*@</label>
+                            @*@Html.TextBoxFor(model=> model.Contactperson, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Contactperson, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                            @Html.ValidationMessageFor(model=> Model.Contactperson, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Mobile<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(model=> model.MobNo, new {@maxlength = "10", @class = "form-control input-sm", @required = "true", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;", @onkeypress = "return isNumberKey(event)"})
+                            @Html.ValidationMessageFor(model=> Model.MobNo, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="height:auto; overflow:auto;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Phone</label>
+                            @Html.TextBoxFor(model=> model.Phone, new {@maxlength = "10", @class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;", @onkeypress = "return isNumberKey(event)"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Email@*<span style="color:red">*</span>*@</label>
+                            @*@Html.TextBoxFor(model=> model.Email, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Email, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                            @Html.ValidationMessageFor(model=> Model.Email, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="height:auto; overflow:auto;">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="hometown form-group" style="">
+                            <label class="text-info">Home Town@*<span style="color:red">*</span>*@ </label>
+                            @Html.TextBoxFor(model=> model.TextHomeTown, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                            <input type="hidden" id="hdn-hometown" value="@Model.HomeTown" />
+                            <div class="ii">
+                                @*Aslam_ Commented at this time, but need to update it after*@
+                                @*@Html.Action("LocationGrid", "CRM", new {.id = "LocationGrid"})*@
+                                @await Component.InvokeAsync("LocationGrid")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">PinCode</label>
+                            @*@Html.TextBoxFor(model=> model.Pincode, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Pincode, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+                <div class="PostalAddressmain col-md-12" style="">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Postal Address@*<span style="color:red">*</span>*@</label>
+                            @*@Html.TextBoxFor(model=> model.PostalAddress1, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.PostalAddress1, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                    <div class="PostalAddress col-md-6">
+                        <div class="form-group">
+                            <label class="text-info"></label>
+                            @Html.TextBoxFor(model=> model.PostalAddress2, new {@class = "form-control input-sm p2", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model=> model.PostalAddress3, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model=> model.PostalAddress4, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div id="oth1">
+                <div class="col-md-12">
+                    <p class="text-center extra" style="margin-bottom:20px; font-size:20px; background-color:lightsteelblue">Others Details</p>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Business Type@*<span style="color:red">*</span>*@</label>
+                            @Html.List_Search("MainBussCode", "7", "- Select BusinessTypes -", Model.MainBussCode, "", new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-info">Product</label>
+                            @Html.List_Search("Product", "15", "- Select Product -", Model.ProductCode, "", new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div Class="form-group">
+                            <Label Class="text-info">Website</Label>
+                            @*@Html.TextBoxFor(model=> model.website, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.website, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" id="SaleE">
+                            <label class="text-info">Facebook ID</label>
+                            @*@Html.TextBoxFor(model=> model.Facebookid, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Facebookid, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div Class="form-group">
+                            <Label Class="text-info">Twitter ID</Label>
+                            @*@Html.TextBoxFor(model=> model.Twitterid, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Twitterid, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                    <div Class="col-md-6">
+                        <div Class="form-group">
+                            <Label for="title" class="text-info">LinkedIn</Label>
+                            @*@Html.TextBoxFor(model=> model.Linkedin, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Linkedin, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div Class="col-md-6">
+                        <div Class="form-group">
+                            <Label Class="text-info"> Customer Status</Label>
+                            @{
+                                List<SelectListItem> listItems = new List<SelectListItem>();
+                                listItems.Add(new SelectListItem("Select",""));
+                                listItems.Add(new SelectListItem("Pending","P"));
+                                listItems.Add(new SelectListItem("Matured","M"));
+                                listItems.Add(new SelectListItem("Left","L"));
+                            }
+                            @*@Html.DropDownListFor(model=> model.CustomerStatus, New SelectListItem() {New SelectListItem() With {.Text = "Select", .Value = ""}, New SelectListItem() With {.Text = "Pending", .Value = "P"}, New SelectListItem() With {.Text = "Matured", .Value = "M"}, New SelectListItem() With {.Text = "Left", .Value = "L"}}, new {.id = "cs", .class = "form-control input-sm", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.DropDownListFor(model=> model.CustomerStatus,listItems, new {@id = "cs", @class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+
+                        </div>
+                    </div>
+                    <div Class="col-md-6">
+                        <div Class="form-group">
+                            <Label Class="text-info"> Customer Type</Label>
+                            @Html.List_Search("CustomerType", "43", "- Select Customer Type -", Model.CustomerType, "", new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div Class="col-md-6">
+                        <div Class="form-group">
+                            <Label for="title" class="text-info">Industry</Label>
+                            @*@Html.TextBoxFor(model=> model.Industry, new {.class = "form-control input-sm", .required = "true", .style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})*@
+                            @Html.TextBoxFor(model=> model.Industry, new {@class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                    <div Class="col-md-6">
+                        <div Class="form-group">
+                            <Label Class="text-info">GSTIN</Label>
+                            @Html.TextBoxFor(model=> model.GSTIN, new {@type = "text", @class = "form-control input-sm", @style = "height: 27px;padding-top: 0px;padding-bottom: 0px;font-size: 15px;padding-left: 5px;"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div Class="form-group text-center" style="margin-top:40px">
+            <input type="button" value="Submit" class="btn btn-primary btn-Submit" onclick="ConfirmSubmit(this.value)">
+            <input type="Reset" value="Cancel" style="margin-left:  20px;" class="btn btn-default" onclick="location.href='@Url.Action("ManageCustomers")'">
+        </div>
+
+    </form>
+</div>
+

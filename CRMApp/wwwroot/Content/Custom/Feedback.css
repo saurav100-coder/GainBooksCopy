@@ -1,0 +1,100 @@
+﻿body {
+}
+
+.FeedbackContainer {
+    max-width: 700px;
+}
+
+.formfield {
+    position: relative;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0px;
+    border: 0px;
+    font-size: 1em;
+}
+
+    .formfield * {
+        box-sizing: border-box;
+    }
+
+
+
+
+    .formfield > textarea, .formfield > label {
+        padding: 0.2em;
+        margin: 0.5em;
+        width: 100%;
+    }
+
+    .formfield > textarea {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        outline: none;
+    }
+
+    .formfield > label {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        color: #ccc;
+        font-weight: normal;
+    }
+
+textarea:focus + label, textarea:valid + label {
+    color: #105faf;
+    font-size: 0.8em;
+    width: auto;
+    height: 1.3em;
+    padding: 0px 0.1em 0px 0.5em;
+    margin: 0px;
+    background: white;
+    transition: 0.2s ease-in-out;
+    top: -10px;
+    left: 0em;
+}
+
+
+   .inpt-btn {
+  position: relative;
+}
+
+.inpt-btn input {
+  position: absolute;
+  opacity: 0;
+}
+
+.inpt-btn label {
+  display: inline-block;
+  background: white;
+  border-radius: 1em;
+  border-bottom: solid 4px #bbb;
+  padding: 15px 20px;
+  margin-top: 0;
+  vertical-align: bottom;
+  
+  cursor: pointer;
+      margin-left: 5px;
+    margin-right: 5px;
+    color: green;
+    font-size: 16px;
+}
+
+    .inpt-btn :checked + label {
+        border-bottom: solid 1px #bbb;
+        border: 4px solid lightgoldenrodyellow;
+        color: white;
+        background-color: #4BB543;
+    }
+
+ .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+
+@media only screen and (max-width:600px) {
+    .FeedbackContainer {
+        width: 90% !important;
+    }
+}

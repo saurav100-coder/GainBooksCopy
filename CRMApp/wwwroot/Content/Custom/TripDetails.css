@@ -1,0 +1,26 @@
+﻿body {
+}
+
+
+img {
+    margin-right: 10px;
+}
+.startTime, .endTime, .Trip, .Duration, .avgSpeed, .CoverDistance {
+    transition: background-color 0.5s;
+}
+.startTime:hover, .endTime:hover, .Trip:hover, .Duration:hover, .avgSpeed:hover, .CoverDistance:hover {
+    background-color: white !important;
+}
+
+
+@media only screen and (max-width:600px) {
+    .googlemap {
+        height: 300px !important;
+    }
+    .avgSpeedDiv, .DurationDiv, .TripDiv, .startTimeDiv {
+        padding-right: 0px !important;
+        padding-bottom:10px !important;
+    }
+
+}
+   

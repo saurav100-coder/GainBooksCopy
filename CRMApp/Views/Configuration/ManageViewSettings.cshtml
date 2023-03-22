@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "ViewSetting";
+}
+
+<link href="~/Content/Custom/viewSetting.css" rel="stylesheet" />
+<script src="~/Scripts/Custom/viewSetting.js"></script>
+
+@*These fields are useful to select dropdown values when we  call this page from grid hover menu (customize hoverStrip)*@
+<input type="hidden" id="ViewbagInfotype" value="@ViewBag.infotype" />
+<input type="hidden" id="ViewbagViewid" value="@ViewBag.viewid" />
+
+<select id="infoType" name="infoType" Style="width: 230px; height: 30px; outline: none; border-style: none; border-bottom: 1px solid #ddd;"><option value="0">--Select InfoType--</option><option value="hoverstripstring">HOVERSTRIPSTRING</option></select>
+
+<select id="viewid" name="viewid" Style="width: 230px; height: 30px; outline: none; border-style: none; border-bottom: 1px solid #ddd; margin-left:10px;"><option value="0">--Select View--</option></select>
+@*search button*@
+<button class="btn searchButton" onclick="loadViewSettingData();" style="vertical-align:initial; "><i class="glyphicon glyphicon-search"></i></button>
+
+<div class="loader" style="display: none; border-style: none !important; background-color: transparent; position: absolute; top: 50%; left: 55%;"><img src="~/Images/loader.gif" /></div>
+
+<div id="alertMsgDiv" style="padding-top:7px;">
+</div>
+
+@*Table*@
+<div id="viewSettingDiv" style="display:none;padding:20px; ">
+    <div style="overflow-y:scroll; max-height:70vh; box-shadow: 0px 1px 4px 0px #33333359; border-radius:5px; margin-top:10px;">
+        <table class="table table-striped " id="tblViewSetting">
+            <thead>
+                <tr>
+                    <th class="item">ITEM</th>
+                    <th class="order">SEQUENCE</th>
+                    <th class="action">ACTION</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-success" onclick="saveViewSettings();">Save</button>
+    </div>
+</div>

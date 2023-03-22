@@ -1,0 +1,699 @@
+﻿@model CRMApp.Models.RegCalls
+@{
+    ViewData["Title"] = " Register ServiceRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<meta HTTP-EQUIV="Pragma" content="no-cache">
+<meta HTTP-EQUIV="Expires" content="-1">
+@*<script src="~/Scripts/FrameWork/jquery-1.10.2.js" type="text/javascript"></script>*@
+<link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+<script src="~/Scripts/Custom/CompositeControls.js"></script>
+<style>
+    
+
+    [data-tip] {
+        position: relative;
+    }
+
+        [data-tip]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 35px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-tip]:after {
+            display: none;
+            content: attr(data-tip);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 8px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-tip]:hover:before,
+        [data-tip]:hover:after {
+            display: block;
+        }
+
+    tr:hover:not(.highlight) td {
+        background-color: lightblue;
+        color: #666;
+    }
+
+    .highlight {
+        background-color: #568CA7;
+        color: white;
+    }
+
+    #P_CustSearch {
+        width: 34px;
+        height: 25px;
+        padding-left: 5px;
+        padding-top: 2px;
+        padding-right: 5px;
+        border-radius: 0px;
+    }
+
+    .form-horizontal .control-label {
+        padding-top: 2px;
+    }
+
+    .form-control.input-sm {
+        padding-left: 5px;
+    }
+
+    /*loader*/
+    .loader, .loader:after {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+
+    .loader {
+        margin: 60px auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 3px solid rgba(0,0,0, 0.2);
+        border-right: 3px solid rgba(0,0,0, 0.2);
+        border-bottom: 3px solid rgba(0,0,0, 0.2);
+        border-left: 3px solid #1DA3E6;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+    }
+    .list-items{
+        margin-left:34.5%;
+        width:250px;
+    }
+    .checkbox{
+        margin-bottom:10px;
+        padding-top:0 !important;
+    }
+    .select-btn{
+        width:250px;
+    }
+
+    @@-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+
+    .modalbutton {
+        background-color: #337ab7;
+        color: white;
+        border-radius: 25px;
+        margin-bottom: 1px;
+        margin-left: -4px;
+        font-size: 13px;
+    }
+
+        .modalbutton:hover {
+            color: white;
+        }
+
+    .modalbuttonsecondary {
+        background-color: #efefef;
+        color: #555;
+        border-radius: 25px;
+        margin-bottom: 1px;
+        margin-left: -4px;
+        font-size: 13px;
+        border: 1px #cdcdcd solid;
+    }
+    /*loader done*/
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('#RegForm')[0].reset();
+        //Added by aslam for compositefield
+        if ("@Model.InfoString" != "null" && "@Model.InfoString" != "undefined" && "@Model.InfoString" != "") {
+            createControls("@Model.InfoString");
+
+         }
+
+
+        @*if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != ""){
+            var ctrlsArr ="@Model.Compositefield".split("#");
+            for(i=0;i<ctrlsArr.length;i++){
+
+                var ctrlarr=ctrlsArr[i].split("~");
+
+
+                var container=$("<div></div>");
+                if (ctrlarr[1]=="text"||ctrlarr[1]=="date"||ctrlarr[1]=="password"||ctrlarr[1]=="email"||ctrlarr[1]=="number"){
+                    container.html("<div class='form-group' '><Label class='col-sm-4 control-label'>"+ ctrlarr[0] + "</Label><div class='col-sm-4'>"
+                                  +"<input type='"+ ctrlarr[1] +"' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' value='"+ ctrlarr[5] +"' class='form-control input-sm' />"
+                                   + "</div>"
+                                   + "</div>");
+                    $("#RegForm").append(container)
+                }else if(ctrlarr[1]=="dropdown"){
+                    container.html("<div class='form-group' ><Label class='col-sm-4 control-label'>"+ ctrlarr[0] + "</Label><div class='col-sm-4'>"
+                             +"<select type='"+ ctrlarr[1] +"' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' value='"+ ctrlarr[6] +"' class='form-control input-sm' />"
+                              + "</div>"
+                              + "</div>");
+                 $("#RegForm").append(container)
+                    var ddlvaluearr=ctrlarr[3].split(",");
+                    var ddltextarr=ctrlarr[4].split(",");
+                    var ddloptions="";
+                    for (j=0;j<ddlvaluearr.length;j++){
+                        ddloptions+="<option value='" + ddlvaluearr[j] +"'>" + ddltextarr[j] +"</option>"
+                    }
+                    var ddid="#"+ctrlarr[2] ;
+                    $(ddid).append(ddloptions);
+                    $(ddid).val(ctrlarr[6])
+                    if (ctrlarr[6]=""){ $(ddid).val(ctrlarr[5])}
+
+
+                }else if(ctrlarr[1]=="radio"){
+                    container.html("<div class='form-group' ><Label class='col-sm-4 control-label'>"+ ctrlarr[0] + "</Label><div class='col-sm-4' id='radio-"+i+"'>"
+                             +"<select type='"+ ctrlarr[1] +"'  value='"+ ctrlarr[6] +"' class='form-control input-sm'  />"
+                              + "</div>"
+                              + "</div>");
+                    $("#RegForm").append(container)
+                    var ddlvaluearr=ctrlarr[3].split(",");
+                    var ddltextarr=ctrlarr[4].split(",");
+                    var radiooptions="";
+                    for (j=0;j<ddlvaluearr.length;j++){
+                        radiooptions+= "<div class='col-md-6'><input class='form-check-input' name='" + ctrlarr[2] +"' id='"+ ctrlarr[2] +"' class='form-control input-sm' type='radio' value='" + ddlvaluearr[j] +"' "
+                        if(ctrlarr[6]==ddlvaluearr[j]){radiooptions+=" checked "};
+                        radiooptions+= "/>"+ ddltextarr[j] +"</div>"
+                    }
+                    var divid="#radio-"+i ;
+                    $(divid).append(radiooptions);
+
+                }
+
+
+
+            }
+
+        }*@
+
+        $("#Firmname").on('keyup ', function () {
+            var firmname = $("#Firmname").val();
+            if (firmname.length >= 3) {
+                $("#tblCustomers tbody tr").remove();
+                $('#tblCustomers #loading').show();
+                $('#tblCustomers #loadingmessage').show();
+                $('#tblCustomers #Msg').hide();
+                $("#CustContainer").css("display", "");
+                $.post('/CRM/FindCustomersCombinedAddress', { firmname: firmname }, function (data) {
+                    var tblEmployee = $("#tblCustomers tbody");
+                    if (data != "error") {
+                        $.each(data.data, function (index, item) {
+                            var m = index + 1;
+                            var tr = $("<tr id='" + item.P_Customers + "'></tr>");
+                            tr.html(("<td>" + m + "</td>")
+                                  + " " + ("<td><input type='hidden' id='Contactperson' class='Contactperson' value='" + item.Contactperson + "'/>" + item.CustCode + "</td>")
+                               + " " + ("<td><input type='hidden' id='Email' class='Email' value='" + item.Email + "'/>" + item.CustName + "</td>")
+                                + " " + ("<td>" + item.MobNo + "</td>")
+                               + " " + ("<td><input type='hidden' id='MainBussCode' class='MainBusscode' value='" + item.MainBussCode + "'/>" + item.TextMainBussCode + "</td>")
+                                  + " " + ("<td>" + item.TextHomeTown + "</td>")
+                                   + " " + ("<td>" + item.CombinedAddress + "</td>")
+                                   + " " + ("<td>" + item.TxtBilledUpto + "</td>")
+                                    + " " + ("<td>" + item.OnsiteFlag + "</td>")
+                                );
+                            tblEmployee.append(tr);
+                        })
+                        $('#tblCustomers #loading').hide();
+                        $('#tblCustomers #loadingmessage').hide();
+                        $('#tblCustomers #Msg').hide();
+                    }else{
+                     $('#tblCustomers #loading').show();
+                     $('#tblCustomers #loadingmessage').hide();
+                     $("#tblCustomers #Msg").show();
+                     $("#tblCustomers #Msg").text("No record found");
+                     $('#CustContainer').css("display", "none");
+                }
+                });
+            }
+            else {
+                $('#CustContainer').css("display", "none");
+                return;
+            }
+        });
+
+
+        $("#PCust_Text").on('keyup ', function () {
+            var custcode = $("#PCust_Text").val();
+            if (custcode.length >= 3) {
+                $("#tblCustomers tbody tr").remove();
+                $('#tblCustomers #loading').show();
+                $('#tblCustomers #loadingmessage').show();
+                $('#tblCustomers #Msg').hide();
+                $("#CustContainer").css("display", "");
+                $.post('/CRM/FindCustomersbyCustCode', { CustCode: custcode }, function (data) {
+                    var tblEmployee = $("#tblCustomers");
+                    if (data != "error") {
+                        $.each(data.data, function (index, item) {
+                            var m = index + 1;
+                            var tr = $("<tr id='" + item.P_Customers + "'></tr>");
+                            tr.html(("<td>" + m + "</td>")
+                                  + " " + ("<td><input type='hidden' id='Contactperson' class='Contactperson' value='" + item.Contactperson + "'/>" + item.CustCode + "</td>")
+                               + " " + ("<td><input type='hidden' id='Email' class='Email' value='" + item.Email + "'/>" + item.CustName + "</td>")
+                                + " " + ("<td>" + item.MobNo + "</td>")
+                               + " " + ("<td><input type='hidden' id='MainBussCode' class='MainBusscode' value='" + item.MainBussCode + "'/>" + item.TextMainBussCode + "</td>")
+                                  + " " + ("<td>" + item.TextHomeTown + "</td>")
+                                   + " " + ("<td>" + item.CombinedAddress + "</td>")
+                                   + " " + ("<td>" + item.TxtBilledUpto + "</td>")
+                                    + " " + ("<td>" + item.OnsiteFlag + "</td>")
+                                );
+                            tblEmployee.append(tr);
+                        })
+                        $('#tblCustomers #loading').hide();
+                        $('#tblCustomers #loadingmessage').hide();
+                        $('#tblCustomers #Msg').hide();
+                    }else{
+                     $('#tblCustomers #loading').show();
+                     $('#tblCustomers #loadingmessage').hide();
+                     $("#tblCustomers #Msg").show();
+                     $("#tblCustomers #Msg").text("No record found");
+                     $('#CustContainer').css("display", "none");
+                }
+                });
+            }
+            else {
+                $('#CustContainer').css("display", "none");
+                return;
+            }
+        });
+
+
+        $("#ContactPerson").on('click', function () {
+            $('#CustContainer').css("display", "none");
+        })
+
+        //$("#P_CustSearch").on('click', function () {
+        //    var Pcust = $("#PCust_Text").val();
+        //    var PCustomer = "";
+        //    if (Pcust != 0 || Pcust != undefined || Pcust != null) {
+        //        $.post('/CRM/FindCustomersbyCustCode', { CustCode: Pcust }, function (data) {
+        //            $('#Firmname').val(data[0].CustName);
+        //            $('#Emailid').val(data[0].Email);
+        //            $('#Mobileno').val(data[0].MobNo);
+
+        //            PCustomer = data[0].P_Customers;
+        //            $("#P_Customers").val(Pcust);
+        //            if (data[0].MainBussCode == -2) {
+        //                data[0].MainBussCode = 0;
+        //            }
+        //            var findbuss = false;
+        //            $('#Buss option').map(function () {
+        //                if ($(this).val() == data[0].MainBussCode) { findbuss = true; return this;}
+        //            }).attr('selected', 'selected');
+        //            if (findbuss == false) {
+        //                $('#Buss option').map(function () {
+        //                    if ($(this).val() == 0) { return this; }
+        //                }).attr('selected', 'selected');
+        //            }
+        //            $('#Buss option').map(function () {
+        //                if ($(this).val() == data[0].MainBussCode) { findbuss = true; return this; }
+        //            }).prop('selected', 'selected');
+        //            if (findbuss == false) {
+        //                $('#Buss option').map(function () {
+        //                    if ($(this).val() == 0) { return this; }
+        //                }).prop('selected', 'selected');
+        //            }
+        //            $('#Buss option').map(function () {
+        //                if ($(this).val() == data[0].MainBussCode) { findbuss = true; return this; }
+        //            }).prop('selected', 'selected');
+        //            if (findbuss == false) {
+        //                $('#Buss option').map(function () {
+        //                    if ($(this).val() == 0) { return this; }
+        //                }).prop('selected', 'selected');
+        //            }
+
+        //            $('#Location').val(data[0].TextHomeTown);
+        //            $('#Contactperson').val(data[0].ContactPerson);
+
+        //        });
+
+        //    }
+        //});
+        
+        $('#tblCustomers').on('click', 'tr', function () {
+            $(this).addClass("highlight");
+            $("#CustContainer").css("display", "none");
+            var rowid = this.id;
+            var rid = "#" + rowid;
+            var email = $(rid).find("td input.Email").val();
+            var BussCode = $(rid).find("td input.MainBusscode").val();
+            $("#P_Customers").val(rowid);
+            var custcode = $(this).find("td:nth-child(2)").text();
+            var fname = $(this).find("td:nth-child(3)").text();
+            var Mobno = $(this).find("td:nth-child(4)").text();
+            var Location = $(this).find("td:nth-child(6)").text();
+            var contactperson = $(rid).find("td input.Contactperson").val();
+            $('#Contactperson').val(contactperson);
+            $('#Emailid').val(email);
+            $('#Mobileno').val(Mobno);
+            //var selectedText = 'Admin';
+            if (BussCode == -2 || BussCode == null || BussCode==undefined) {
+                BussCode = 0;
+            }
+            var findbuss = false;
+
+            $('#Buss option').map(function () {
+                if ($(this).val() == BussCode) { findbuss = true; return this; }
+            }).attr('selected', 'selected');
+            if (findbuss == false) {
+                $('#Buss option').map(function () {
+                    if ($(this).val() == 0) { return this; }
+                }).attr('selected', 'selected');
+            }
+            $('#Buss option').map(function () {
+                if ($(this).val() == BussCode) { findbuss = true; return this; }
+            }).prop('selected', 'selected');
+            if (findbuss == false) {
+                $('#Buss option').map(function () {
+                    if ($(this).val() == 0) { return this; }
+                }).prop('selected', 'selected');
+            }
+            $('#Location').val(Location);
+            $('#Firmname').val(fname);
+            //console.log(custcode);
+            $('#PCust_Text').val(custcode);
+
+        })
+        //});
+        $(".btn-Submit").click(function () {
+            $("#isRedirect").val("Y");
+            $(".btn-Submit").attr("disabled", true);
+            $("#btnSubmitCreate").attr("disabled", true);
+            $("#RegForm").submit();
+        });
+    });
+
+    //Added by aslam for compositefield
+    //function createControls(infostring) {
+    //    var ctrlsArr = infostring.split("#");
+    //    var fieldsArr = "";
+    //    if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != "") {
+    //        var CompositeFieldString = "@Model.Compositefield";
+    //        fieldsArr = CompositeFieldString.split("#");
+    //    }
+    //    for (var i = 0; i < ctrlsArr.length; i++) {
+    //        var ctrlarr = ctrlsArr[i].split("~");
+    //        var container = $("<div></div>");
+    //        if (ctrlarr[1] == "text" || ctrlarr[1] == "date" || ctrlarr[1] == "password" || ctrlarr[1] == "email" || ctrlarr[1] == "number") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'>"
+    //                              + "<input type='" + ctrlarr[1] + "' name='" + ctrlarr[2] + "' id='" + ctrlarr[2] + "' value='" + $.trim(ctrlarr[4]) + "' class='form-control input-sm' />"
+    //                              + "</div>"
+    //                              + "</div>");
+    //            $("#RegFormDiv").append(container)
+    //        }
+    //        else if (ctrlarr[1] == "dropdown") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'>"
+    //                     + "<select type='" + ctrlarr[1] + "' name='" + ctrlarr[2] + "' id='" + ctrlarr[2] + "'  class='form-control input-sm' style='padding-left:1px;'></select>"
+    //                      + "</div></div>");
+    //            $("#RegFormDiv").append(container)
+
+    //            var ddid = "#" + ctrlarr[2];
+    //            var ddvalue = $.trim(ctrlarr[4]);
+    //            var ddType = ctrlarr[1];
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var ddloptions = "<option value=0>--Select--</option>";
+    //                if (data != "error") {
+    //                    $.each(data.data, function (index, item) {
+    //                        ddloptions += "<option value=" + item.P_infotable + ">" + item.NameOfInfo + "</option>";
+    //                    });
+    //                }
+    //                $(ddid).append(ddloptions);
+    //                if (ddvalue != "") {
+    //                    $(ddid).val(ddvalue);
+    //                }
+    //                else {
+    //                    $(ddid).val(0);
+    //                }
+    //            });
+
+    //        }
+    //        else if (ctrlarr[1] == "radio") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4' id='radio-" + i + "'>"
+    //                          + "</div></div>");
+    //            $("#RegFormDiv").append(container)
+    //            var radioname = ctrlarr[2];
+    //            var defval = $.trim(ctrlarr[4]);
+    //            var radiotype = ctrlarr[1];
+    //            var radiodivid = "#radio-" + i;
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var radiooptions = "";
+    //                if (data != 'error') {
+    //                    $.each(data.data, function (index, item) {
+    //                        radiooptions += "<input  name='" + radioname + "' id='" + radioname + "' style='margin-right:5px;margin-left:5px;' type='" + radiotype + "' value='" + item.P_infotable + "' "
+    //                        if (defval == item.P_infotable) {
+    //                            radiooptions += "checked"
+    //                        };
+    //                        radiooptions += "/>" + item.NameOfInfo ;
+    //                    });
+    //                    $(radiodivid).append(radiooptions);
+    //                }
+    //            });
+    //        }
+    //        else if (ctrlarr[1] == "checkbox") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'  id='checkbox-" + i + "'>"
+    //                           + "</div></div>");
+    //            $("#RegFormDiv").append(container)
+
+    //            var checkboxname = ctrlarr[2];
+    //            var checkboxtype = ctrlarr[1];
+    //            var checkboxdivid = "#checkbox-" + i;
+    //            var valueArr = $.trim(ctrlarr[4]).split(",");
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var checkoptions = "";
+    //                if (data != "error") {
+    //                    $.each(data.data, function (index, item) {
+    //                        checkoptions += "<label class='checkbox-inline'><input  type='" + checkboxtype + "' id='" + checkboxname + "' name='" + checkboxname + "' value='" + item.P_infotable + "' />" + item.NameOfInfo + "</label>";
+    //                    });
+    //                    $(checkboxdivid).append(checkoptions);
+
+    //                    $.each(valueArr, function (index, item) {
+    //                        $("input[type=" + checkboxtype + "][name=" + checkboxname + "][value=" + item + "]").attr("checked", true);
+
+    //                    });
+    //                }
+
+    //            });
+    //        }
+    //    }
+
+    //}
+
+   function createControls(infostring) {
+        var ctrlsArr = infostring.split("#");
+        if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != "") {
+            var CompositeFieldString = "@Model.Compositefield";
+            fieldsArr = CompositeFieldString.split("#");
+        }
+        for (var i = 0; i < ctrlsArr.length; i++) {
+            var ctrlarr = ctrlsArr[i].split("~");
+            var container = $('<div></div>');
+           
+            var fieldLabel = $.trim(ctrlarr[0]);
+            var fieldType = $.trim(ctrlarr[1]);
+            var fieldName = $.trim(ctrlarr[2]);
+            var infotype = $.trim(ctrlarr[3]);
+            var defaultvalue = $.trim(ctrlarr[4]);
+            var formGroup = $("<div class='form-group'>");
+            formGroup.append("<Label class='col-sm-4 control-label'>" + fieldLabel + "</Label>");
+            var fieldWrapper = $("<div class='col-sm-4'>");
+            fieldWrapper.append(makeCompositeFieldHtml(fieldLabel, fieldType, fieldName, infotype, defaultvalue));
+            formGroup.append(fieldWrapper);
+            container.append(formGroup);
+            $("#RegFormDiv").append(container);
+        }
+    }
+    
+function submitAndCreateNew() {
+    $("#isRedirect").val("N");
+    $("#btnSubmitCreate").attr("disabled", true);
+    $(".btn-Submit").attr("disabled", true);
+    RegForm.submit();
+}
+
+function closetable(button) {
+//console.log(button)
+$(button).parents("#CustContainer").hide();
+$("#PCust_Text").val("")
+}
+
+
+
+</script>
+<form Class="form-horizontal" action="@Url.Action("RegisterCalls")" role="form" enctype="multipart/form-data" method="post" id="RegForm">
+    <p style="color:green;text-align:center">@TempData["msg"]</p>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+    @Html.HiddenFor(model=> model.P_Customers)
+    <input type="hidden" id="isRedirect" name="isRedirect" value="Y"/>
+
+    <h2 Class="text-center text-info">Register Your Call</h2>
+    <hr />
+    <h4 class="text-center">Please submit your issues, concerns and complaints here. We would get back to you at the earliest.</h4>
+    <br />
+    <div id="RegFormDiv">
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Firm Name<strong style="color:red;">*</strong></Label>
+            <div Class="col-sm-4 firname" style="padding-right:0px; width:265px" data-tip="Please type 3 letters to enable searching for Firm Name.">
+                @Html.TextBoxFor(model=> model.Firmname, new {@class = "form-control input-sm"})
+                @Html.ValidationMessageFor(model=> Model.Firmname, "", new {@class = "text-danger"})
+
+            </div>
+
+            <div class="col-sm-1 ordive" style="width: 50px; "><h4 style="margin-top:0px; margin-bottom:0px">OR</h4></div>
+            <div Class="col-sm-3 " style="padding-left:0px; display:flex;" data-tip="Please type 3 letters to enable searching for Custcode">
+                <input type="text" id="PCust_Text" name="PCust_Text" class="form-control input-sm col-sm-2" placeholder="Type Customer CustCode" style="width:202px;" />@*<div id="P_CustSearch" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>*@
+            </div>
+        </div>
+        <div id="CustContainer" style="display:none; overflow:auto; width:850px; height:400px; background-color:white; margin:auto; font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px">
+            <table id="tblCustomers" class="table table-bordered" cellspacing="0">
+                <thead>
+                    <tr style="text-align:center;">
+                        <th>S.No</th>
+                        <th>CustCode</th>
+                        <th>CustName</th>
+                        <th>Mobile No</th>
+                        <th>BusinessType</th>
+                        <th>HomeTown</th>
+                        <th>Address</th>
+                        <th>BilledUpto</th>
+                        <th>OnsitFlag</th>
+                        <th class="closebttn" onclick="closetable(this)">&times;</th>
+                    </tr>
+                    <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Contact Person</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Contactperson, new {@class = "form-control input-sm"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Email</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Emailid, new {@class = "form-control input-sm", @type = "email"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Contact No<strong style="color:red;">*</strong></Label>
+            <div Class="col-sm-4" data-tip="This Contact number will be used to send notification about progress of your issue.Please provide correct Number.">
+                @Html.TextBoxFor(model=> model.Mobileno, new {@class = "form-control input-sm", @maxlength = "10", @placeholder = "Enter 10 digit number Only"})
+                @Html.ValidationMessageFor(model=> Model.Mobileno, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Bussiness Type</Label>
+            <div Class="col-sm-4">
+                @Html.List_Search("Buss", "7", "-Select Business Types-", Model.Businesstype,"", new {@class = "form-control input-sm", @style = "padding-left:1px", @name = "Businesstype"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Location</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Location, new {@class = "form-control input-sm", @PlaceHolder = "District,State"})
+                @Html.ValidationMessageFor(model=> Model.Location, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Issue Type</Label>
+            <div Class="col-sm-4">
+                @Html.List_Search("IssueType", "38", "-Select Issue Types-", Model.Issuetype,"", new {@class = "form-control input-sm", @style = "padding-left:1px"})
+            </div>
+        </div>
+
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:25px">Issue description</Label>
+            <div Class="col-sm-4">
+                @Html.TextAreaFor(model=> model.Issuedescription, 4, 63, new {@class = "form-control input-sm"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label" style="width:34.5%; padding-right:30px;">Tags</Label>
+           
+             
+                 @Html.List_Search_Multi("multiTags", "68", "-Select Tags-", 0,"", new {@class = ""}, false)
+                 
+             
+           @* <div Class="col-sm-4">
+                @Html.List_Search("Tags", "68", "-Select Tag-", 0,"", new {@class = "form-control input-sm", @style = "padding-left:1px"}, false, true)
+            </div>*@
+        </div>
+        <div id="UploadFile">
+            <div Class="form-group">
+                <Label for="inputEmail1" class="col-sm-4 control-label">Upload File</Label>
+                <div Class="col-sm-4">
+                    <input type="file" name="pic" accept="doc/*" class="form-control  input-sm" style="padding-top:0px; padding-bottom:0px; height:22px; padding-left:0px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <hr />
+    <div Class="form-group text-center" style=" margin-top:30px;">
+        <Button type="button" onclick="submitAndCreateNew();" id="btnSubmitCreate" Class="btn modalbutton" style="margin-right:20px">Submit & CreateNew</Button>
+        <Button type="submit" Class="btn modalbutton btn-Submit" style="margin-right:20px">Submit</Button>
+        @*<Button type="Button" Class="btn modalbuttonsecondary" onclick="window.location.href = '/CRM/ManageRegCalls';">Cancel</Button>*@
+        <Button type="Button" Class="btn modalbuttonsecondary" onclick="window.location.href = '/CRM/Home';">Cancel</Button>
+    </div>
+</form>
+

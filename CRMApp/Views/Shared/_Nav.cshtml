@@ -1,0 +1,141 @@
+﻿
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="shortcut icon" href="~/images/GainbooksFavicon.ico" />
+    <link href="~/Content/FrameWork/BootStrap/bootstrap.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="~/scripts/FrameWork/jquery-latest.js"></script>
+    <script src="~/scripts/FrameWork/BootStrap/bootstrap.min.js"></script>
+    <style>
+        ul.Tag li a:focus {
+            background: #2482e3;
+            margin-top: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            color: #fff;
+            border-radius: 30px;
+        }
+
+        .navActive {
+            background: #2482e3;
+            color: #fff;
+            border-radius: 30px;
+        }
+
+        h1, h2, h3, h4, p, a, button, select, option {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .body {
+            -webkit-box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);
+            -moz-box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);
+            box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);
+            border-radius: 15px;
+            margin-left: 20px;
+            margin-top: 30px;
+            margin-right: 20px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            float: left;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .input-group-addon {
+            background-color: #fff;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .footer {
+            position: relative;
+        }
+
+        .navbar {
+            height: 50px;
+        }
+
+        @@media all and (min-width: 768px) {
+            .footer {
+                position: absolute;
+            }
+        }
+        @@media (max-width: 768px) {
+            .navbar-collapse {
+                background:#fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" style="border-bottom:1px solid #e6e6e6;z-index:1000;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="padding-top:5px;">
+                    <img src="~/images/gainbooks_logo.png" style="height:40px; display:inline-block;" />
+                    <h4 style="font-size:16px; display:inline-block; font-weight:700;">GainBooks</h4>
+                </a>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="margin-right:5%; border:none;">
+                    <span class="icon-bar" style="background:#2482e3;"></span>
+                    <span class="icon-bar" style="background:#2482e3;"></span>
+                    <span class="icon-bar" style="background:#2482e3;"></span>
+                </button>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right Tag" style="margin-right:2%; margin-left:0px;">
+                    <li><a class="nav-a" id="navAbout" href="@Url.Action("AboutUs", "Home")" style="font-size:14px;">About Us</a></li>
+                    <li><a class="nav-a" id="navcontact" href="@Url.Action("ContactUs", "Home")" style="font-size:14px; ">Contact</a></li>
+                    <li><a class="nav-a" id="navPricing" href="@Url.Action("Pricing", "Home")" style="font-size:14px;">Pricing</a></li>
+                    <li><a class="nav-a" id="navDownloadApp" href="@Url.Action("DownloadApp", "Home")" style="font-size:14px;">App</a></li>
+                    <li><a class="nav-a" id="navProduct" href="@Url.Action("Product", "Home")" style="font-size:14px;">Product</a></li>
+                    <li><a class="nav-a" id="navPrivacy" href="@Url.Action("PrivacyPolicy", "Home")" style="font-size:14px;">Privacy Policy</a></li>
+                    <li><a class="nav-a" id="navLogin" href="@Url.Action("Login", "Home")">Sign In</a></li>
+                    <li><a class="nav-a" id="navSignUp" href="@Url.Action("SignUp", "Home")" style="font-size:14px;">Sign Up</a></li>
+                    
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <div class="blue">
+        @RenderBody()
+    </div>
+
+
+    <div class="container footer hidden-sm hidden-xs" style="bottom:0px; width:101%; background:#efefef; padding:0px;">
+        <div class="row" style="">
+            <div class="col-lg-6 col-md-6" style="padding:0px;">
+
+            </div>
+            <div class="col-lg-6 col-md-6 pull-right" style="padding:0px; text-align:right; margin-right:50px;">
+                <strong style="font-size: 11px;">Copyrights |<a id="copyright" href="http://technopinch.com">Technopinch Solutions Pvt Ltd &#169; @DateTime.Now.Year </a> All rights reserved.</strong>
+            </div>
+        </div>
+    </div>
+    <div class="container footer hidden-lg hidden-md" style="margin-top: 20px; bottom:0px; width:100%; background:#efefef; padding:0px;position: relative;">
+        <div class="row" style="">
+            <div class="col-lg-6 col-md-6" style="padding:0px;">
+            </div>
+            @*margin-right:20px;padding:0px;padding-right:10px;*@
+            <div class="col-lg-6 col-md-6 pull-right" style="text-align:right;padding-right:20px;">
+                <strong style="font-size: 9px;">Copyrights |<a id="copyright" href="http://technopinch.com">Technopinch Solutions Pvt Ltd &#169; @DateTime.Now.Year </a> All rights reserved.</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

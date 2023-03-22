@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "~/Views/Shared/" + ViewBag.customLayout;
+}
+
+@if (ViewBag.customLayout == "_Nav.cshtml"){
+   @* @Optimization.Styles.Render("~/Content/Admin_Styles_Main")
+    @Optimization.Styles.Render("~/Content/Admin_Styles_Layout")
+    @Optimization.Scripts.Render("~/bundles/jquery")
+    @Optimization.Scripts.Render("~/bundles/Admin_Scripts_Main")*@
+    
+    @*Need bundling from *@
+    <link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/AdminLTE.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/skin-blue.min.css" />
+    <link rel="stylesheet" href="~/Content/Layout.css" />
+
+    <script src="~/scripts/FrameWork/jquery.min.js"></script>
+    <script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+    <script src="~/Scripts/FrameWork/fastclick.js"></script>
+    <script src="~/Scripts/FrameWork/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/FrameWork/adminlte.min.js"></script>
+    <script src="~/Scripts/FrameWork/modernizr-2.6.2.js"></script>
+    @*Need bundling to *@
+    
+    <style>
+         .blue {
+             background-color: #ecf0f5;
+             z-index: 800;
+             margin-top: -19px;
+             padding-top: 19px;
+             height: 90vh;
+         }
+
+         label {
+             float: none;
+         }
+    </style>
+}
+   
+
+
+<link rel="stylesheet" href="~/Content/Custom/Feedback.css" />
+<script src="~/scripts/Custom/Feedback.js"></script>
+
+@if (ViewBag.pageNotFound == "Y")
+{
+    <div id="pageNotFoundDiv">
+         <h1 class="text-info text-center">404</h1>
+         <h2 class="text-info text-center" style="color:#105faf;">The page you are looking is no longer here.</h2>
+    </div>
+}
+
+else
+{
+    <div id="mainDiv">
+        <h2 class="text-info text-center" style="color:#105faf;">How satisfied are you with resolution of the call?</h2>
+        @*10 3d radio button UI*@
+        <div style="text-align:center">
+            @for (int i=0;i<10;i++)
+            {
+                string id = "fp" + (i + 1).ToString();
+                <span Class="inpt-btn">
+                    <input type="radio" id=@id name="feedbckpoints" value="@(i + 1)" />
+                    <Label for=@id>@(i + 1)</Label>
+                </span>
+            }
+
+        </div>
+        <br />
+        <form id="callfeedbackForm">
+            <input type="hidden" value="@ViewBag.encStr" name="encStr" id="encStr" />
+            <div Class="container FeedbackContainer" style="width:50%; background-color:white; padding:0px">
+                <div Class="panel panel-default" style="margin-bottom:0px">
+                    <div Class="panel-body" style="border-top: 3px solid #3c8dbc; padding-left: 35px; padding-right: 38px;">
+                        <div Class="form-group">
+                            <Label for="feedbckremrks">Feedback<span style="font-weight:normal">(Optional)</span></Label>
+                            <textarea Class="form-control" name="feedbckremrks" id="feedbckremrks" style="resize: none;" autocomplete="off" rows="6"></textarea>
+                            <p style="display:flex;justify-content:flex-end;">(300 characters)</p>
+                        </div>
+                        <div Class="text-center" style="margin-top:20px; margin-bottom:30px;">
+                            <input type="button" id="btnSubmit" Class="btn btn-primary" onclick="SubmitFeedback();" value="Submit" style="width:40%; border-radius:25px;" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="thanksDiv" style="display:none;">
+         <h1 class="text-center" style="font-weight: bold;">Thank you for your feedback!</h1>
+         <h4 class="text-center">Your review has beed submitted successfully.</h4>
+    </div>
+
+}
+
+
+
+

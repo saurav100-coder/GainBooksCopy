@@ -1,0 +1,311 @@
+﻿body {
+}
+
+
+td {
+    padding-bottom: 30px !important;
+}
+
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    border: none;
+    border-bottom: 4px solid green;
+}
+
+.nav-tabs > li > a:hover {
+    border: none;
+    background-color: transparent;
+}
+
+.nav-tabs > li > a {
+    border: none;
+    background-color: transparent;
+}
+.modalbutton {
+    background-color: #337ab7;
+    color: white;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+    .modalbutton:hover {
+        color: white;
+    }
+
+.modalbuttonsecondary {
+    background-color: #efefef;
+    color: #555;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+.filter, #min, #max, #filterText, #filterDropdown, .sort, .sortOrders, select {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+}
+
+    .filter:focus, #max:focus, #min:focus, #filterText:focus, #filterDropdown:focus {
+        border-bottom: 1px solid #337ab7;
+    }
+
+
+table #filterTable {
+    margin-right: 0px !important;
+    padding-left: 15px !important;
+    width: 100%;
+    margin-left: 10px !important;
+}
+
+#info {
+    font-size: 13px;
+    padding-right: 7px;
+}
+.DatesMargin {
+    margin-top: 0px !important;
+}
+
+.searchButton {
+    display: inline-flex;
+    cursor: pointer;
+    color: #337ab7;
+    height: 29px;
+    width: 29px;
+    border-radius: 0px;
+    /* padding-bottom: 12px; */
+    padding-top: 7px;
+    padding-left: 8px;
+    /* padding-right: 10px; */
+    margin-left: 6px;
+    border-radius: 0px 3px 3px 0px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+}
+    .searchButton:hover {
+        background-color: #246399;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+    }
+.MoreDetails {
+    position: absolute;
+    padding-top: 5px;
+    z-index: 2;
+    display: none;
+    background-color: #cce6ff;
+    width: 200px;
+    height: 38px;
+    padding-left: 20px;
+    right: 10px;
+}
+
+
+
+.clickable {
+    transition: box-shadow 0.5s;
+}
+
+    .clickable:hover {
+        box-shadow: 0 0 6px 1px #33333359;
+    }
+
+.loader, .loader:after {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+#loading {
+    margin-top: 15%;
+    /*margin-left: 38%;*/
+    /*position:absolute;*/
+}
+.loader {
+    /*margin: 60px auto;*/
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 3px solid rgba(0,0,0, 0.2);
+    border-right: 3px solid rgba(0,0,0, 0.2);
+    border-bottom: 3px solid rgba(0,0,0, 0.2);
+    border-left: 3px solid #1DA3E6;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@media only screen and (max-width:600px) {
+   
+    
+    .department{
+        padding-left:0px !important;
+        width:auto;
+    }
+  .clickable { 
+        width:auto;
+    }
+    #example {
+        
+        background: #e6f6fc !important;
+    }
+    .TaskBar {
+        border-bottom: 7px solid white;
+        
+        width:auto;
+    }
+   
+}
+@media only screen and (max-width:480px) {
+    .sno{
+        width:8% !important;
+    }
+    .empId {
+        display: none !important;
+    }
+    .fname {
+        width: 23% !important;
+        margin-left: 0 !important;
+    }
+    .uname {
+        width: 17% !important;
+        margin-left: 0 !important;
+    }
+
+    .mobile {
+        width: 18% !important;
+    }
+    .email {
+        display: none !important;
+    }
+
+    .department {
+        display: none !important;
+    }
+    .designation {
+        display: none !important;
+    }
+    .joining {
+        width: 21% !important;
+        padding-left: 0 !important;
+    }
+    .homeTown {
+        display: none !important;
+    }
+    .status {
+        width: 14% !important;
+    }
+    .snoValue {
+        width: 8% !important;
+    }
+    .empIdValue {
+        display: none !important;
+    }
+    .fnameValue {
+        width: 20% !important;
+        padding:0 !important;
+    }
+    .unameValue {
+        width: 20% !important;
+        padding: 0 10px !important;
+    }
+    .mobileValue {
+        width: 17% !important;
+        padding: 0px !important;
+    }
+    .emailValue {
+        display: none !important;
+    }
+    .departmentValue {
+        display: none !important;
+    }
+    .designationValue {
+        display: none !important;
+    }
+    .joiningValue {
+        width: 20% !important;
+        padding: 0 7px !important;
+    }
+    .homeTownValue {
+        display: none !important;
+    }
+    .statusValue {
+        width: 18% !important;
+        padding-left: 5px !important;
+    }
+    .search{
+        width:100% !important;
+    }
+    .icon-div{
+        padding-right:0 !important;
+    }
+    .basicfilterDiv {
+        width: 98% !important;
+        left: 5px;
+        top: 70px !important;
+        padding: 5px !important;
+    }
+        /* td:nth-last-child(1) {
+        text-align: right;
+    }*/
+        .basicfilterDiv tr td:nth-child(2) {
+            width: 20%;
+        }
+
+        .basicfilterDiv input[type=date] {
+            width: auto !important;
+        }
+
+        .basicfilterDiv input[type=datetime-local] {
+            width: 35% !important;
+        }
+
+        .basicfilterDiv .min, .minDT {
+            margin-left: 2px !important;
+        }
+
+        .basicfilterDiv .max, .maxDT {
+            margin-left: 2px !important;
+        }
+
+    #basicFilterTable tr td {
+        max-width: none !important;
+    }
+
+    #basicFilterTable {
+        width: 100%;
+    }
+}
+
+
+

@@ -1,0 +1,446 @@
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+B
+B
+B
+B
+B
+B
+B
+B
+NEHA8591
+Password matched
+B
+B
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+in signup 23-08-2022 09:59:07 AM
+dbcreatescript 23-08-2022 10:00:33 AM
+dbowneruser 23-08-2022 10:00:37 AM
+B
+in signup 23-08-2022 10:06:18 AM
+dbcreatescript 23-08-2022 10:06:31 AM
+dbowneruser 23-08-2022 10:06:36 AM
+B
+NEHA8591
+Password matched
+in signup 23-08-2022 11:00:41 AM
+dbcreatescript 23-08-2022 11:00:47 AM
+dbowneruser 23-08-2022 11:00:50 AM
+after db created 23-08-2022 11:00:56 AM
+in signup 23-08-2022 11:03:31 AM
+dbcreatescript 23-08-2022 11:03:45 AM
+dbowneruser 23-08-2022 11:03:51 AM
+dbcreatescript 23-08-2022 11:06:52 AM
+dbowneruser 23-08-2022 11:06:58 AM
+in signup 23-08-2022 11:10:50 AM
+dbcreatescript 23-08-2022 11:11:02 AM
+dbowneruser 23-08-2022 11:11:05 AM
+systable57 23-08-2022 11:11:14 AM
+B
+in signup 23-08-2022 11:20:54 AM
+dbcreatescript 23-08-2022 11:21:06 AM
+dbowneruser 23-08-2022 11:21:10 AM
+systable57 23-08-2022 11:21:17 AM
+in signup 23-08-2022 11:31:20 AM
+dbcreatescript 23-08-2022 11:32:08 AM
+dbowneruser 23-08-2022 11:32:14 AM
+systable57 23-08-2022 11:33:36 AM
+in signup 23-08-2022 11:37:18 AM
+dbcreatescript 23-08-2022 11:37:29 AM
+in signup 23-08-2022 11:45:04 AM
+dbcreatescript 23-08-2022 11:45:14 AM
+dbowneruser 23-08-2022 11:46:05 AM
+systable57 23-08-2022 11:46:11 AM
+in signup 23-08-2022 01:40:44 PM
+dbcreatescript 23-08-2022 01:40:55 PM
+dbowneruser 23-08-2022 01:40:58 PM
+systable57 23-08-2022 01:41:10 PM
+after db created 23-08-2022 01:48:17 PM
+after populating infotableuser 23-08-2022 01:48:36 PM
+in signup 23-08-2022 01:53:24 PM
+after db created 23-08-2022 01:53:29 PM
+after populating infotableuser 23-08-2022 01:53:35 PM
+D:\TECHNO_SAAS\CRMApp\CRMApp\KOTA7969\D:\TECHNO_SAAS\CRMApp\CRMApp\KOTA7969\recording\
+in signup 23-08-2022 02:24:49 PM
+dbcreatescript 23-08-2022 02:24:57 PM
+dbowneruser 23-08-2022 02:25:00 PM
+systable57 23-08-2022 02:25:07 PM
+after db created 23-08-2022 02:29:50 PM
+after populating infotableuser 23-08-2022 02:30:20 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40706,13815,0,'Kota Office','aszdxfcgvb@sdfgh.com','KOTA7969',3100,'9876512345','Kota User B',3092,'Y',840, 10319,'2022-08-23 02:30:21','2022-08-28 02:30:21') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10319,10319,0,'Kota Office','aszdxfcgvb@sdfgh.com','9876512345','2022-08-23 02:30:21',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18468,'KOTA7969','aszdxfcgvb@sdfgh.com','12345678','Kota Office','C',10319,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (32999,26148,0,'2022-08-23 02:30:21','2022-08-28 02:30:21','I','S',13815,10319,'U',0,0,'Y','2022-08-23 02:30:46') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32130,32126,0,26148,1,'2022-08-23 02:30:21',10319,13815,3092,3093,'2022-08-23 02:30:21','2022-08-28 02:30:21',1,'2022-08-23 02:30:46') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13815,'KOTA7969','KOTA7969','KOTA7969',18468) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 02:30:48','2022-08-23 02:30:48','2022-08-23 02:30:48','XR','KOTA7969') 23-08-2022 02:30:48 PM
+in signup 23-08-2022 02:36:00 PM
+dbcreatescript 23-08-2022 02:36:03 PM
+dbowneruser 23-08-2022 02:36:07 PM
+systable57 23-08-2022 02:36:19 PM
+after db created 23-08-2022 02:58:41 PM
+after populating infotableuser 23-08-2022 02:59:21 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40707,13815,0,'Kota Office','sdfghjbn@dfg.com','KOTA7969',3100,'9876512345','Kota user B',3092,'Y',840, 10319,'2022-08-23 02:59:22','2022-08-28 02:59:22') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10319,10319,0,'Kota Office','sdfghjbn@dfg.com','9876512345','2022-08-23 02:59:22',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18468,'KOTA7969','sdfghjbn@dfg.com','12345678','Kota Office','C',10319,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (33001,26149,0,'2022-08-23 02:59:22','2022-08-28 02:59:22','I','S',13815,10319,'U',0,0,'Y','2022-08-23 03:00:16') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32131,32127,0,26149,1,'2022-08-23 02:59:22',10319,13815,3092,3093,'2022-08-23 02:59:22','2022-08-28 02:59:22',1,'2022-08-23 03:00:16') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13815,'KOTA7969','KOTA7969','KOTA7969',18468) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 03:00:22','2022-08-23 03:00:22','2022-08-23 03:00:22','XR','KOTA7969') 23-08-2022 03:00:22 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40707,13815,0,'Kota Office','sdfghjbn@dfg.com','KOTA7969',3100,'9876512345','Kota user B',3092,'Y',840, 10319,'2022-08-23 02:59:22','2022-08-28 02:59:22') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10319,10319,0,'Kota Office','sdfghjbn@dfg.com','9876512345','2022-08-23 02:59:22',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18468,'KOTA7969','sdfghjbn@dfg.com','12345678','Kota Office','C',10319,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (33001,26149,0,'2022-08-23 02:59:22','2022-08-28 02:59:22','I','S',13815,10319,'U',0,0,'Y','2022-08-23 03:00:16') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32131,32127,0,26149,1,'2022-08-23 02:59:22',10319,13815,3092,3093,'2022-08-23 02:59:22','2022-08-28 02:59:22',1,'2022-08-23 03:00:16') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13815,'KOTA7969','KOTA7969','KOTA7969',18468) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 03:05:58','2022-08-23 03:05:58','2022-08-23 03:05:58','XR','KOTA7969') 23-08-2022 03:06:04 PM
+in signup 23-08-2022 03:09:40 PM
+dbcreatescript 23-08-2022 03:09:43 PM
+dbowneruser 23-08-2022 03:09:46 PM
+systable57 23-08-2022 03:09:49 PM
+after db created 23-08-2022 03:09:57 PM
+after populating infotableuser 23-08-2022 03:10:05 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40707,13815,0,'Kota Office','dftgyhjub@dfg.com','KOTA7969',3100,'987643234','Kota User B',3092,'Y',840, 10319,'2022-08-23 03:10:05','2022-08-28 03:10:05') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10319,10319,0,'Kota Office','dftgyhjub@dfg.com','987643234','2022-08-23 03:10:05',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18468,'KOTA7969','dftgyhjub@dfg.com','12345678','Kota Office','C',10319,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (33001,26149,0,'2022-08-23 03:10:05','2022-08-28 03:10:05','I','S',13815,10319,'U',0,0,'Y','2022-08-23 03:11:23') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32131,32127,0,26149,1,'2022-08-23 03:10:05',10319,13815,3092,3093,'2022-08-23 03:10:05','2022-08-28 03:10:05',1,'2022-08-23 03:11:23') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13815,'KOTA7969','KOTA7969','KOTA7969',18468) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 03:11:32','2022-08-23 03:11:32','2022-08-23 03:11:32','XR','KOTA7969') 23-08-2022 03:11:32 PM
+in signup 23-08-2022 04:03:47 PM
+in signup 23-08-2022 04:11:58 PM
+dbcreatescript 23-08-2022 04:12:23 PM
+dbowneruser 23-08-2022 04:13:17 PM
+systable57 23-08-2022 04:14:33 PM
+in signup 23-08-2022 04:18:09 PM
+dbcreatescript 23-08-2022 04:18:12 PM
+dbowneruser 23-08-2022 04:18:23 PM
+systable57 23-08-2022 04:18:26 PM
+in signup 23-08-2022 04:21:09 PM
+dbcreatescript 23-08-2022 04:21:13 PM
+dbowneruser 23-08-2022 04:21:16 PM
+systable57 23-08-2022 04:21:18 PM
+after db created 23-08-2022 04:27:19 PM
+after populating infotableuser 23-08-2022 04:27:57 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40711,13815,0,'Kota Office','sdfgh@dfgh.com','KOTA7969',3100,'23456789','cvbfgh',3092,'Y',840, 10319,'2022-08-23 04:27:58','2022-08-28 04:27:58') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10319,10319,0,'Kota Office','sdfgh@dfgh.com','23456789','2022-08-23 04:27:58',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18468,'KOTA7969','sdfgh@dfgh.com','12345678','Kota Office','C',10319,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (33009,26153,0,'2022-08-23 04:27:58','2022-08-28 04:27:58','I','S',13815,10319,'U',0,0,'Y','2022-08-23 04:28:24') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32136,32132,0,26153,1,'2022-08-23 04:27:58',10319,13815,3092,3093,'2022-08-23 04:27:58','2022-08-28 04:27:58',1,'2022-08-23 04:28:24') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13815,'KOTA7969','KOTA7969','KOTA7969',18468) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 04:28:30','2022-08-23 04:28:30','2022-08-23 04:28:30','XR','KOTA7969') 23-08-2022 04:28:36 PM
+in signup 23-08-2022 04:55:59 PM
+dbcreatescript 23-08-2022 04:56:03 PM
+dbowneruser 23-08-2022 04:56:06 PM
+systable57 23-08-2022 04:56:08 PM
+after db created 23-08-2022 05:01:46 PM
+in signup 23-08-2022 05:10:24 PM
+dbcreatescript 23-08-2022 05:10:28 PM
+dbowneruser 23-08-2022 05:10:31 PM
+systable57 23-08-2022 05:10:35 PM
+B
+NEHA8591
+in signup 23-08-2022 05:28:45 PM
+dbcreatescript 23-08-2022 05:28:52 PM
+dbowneruser 23-08-2022 05:28:57 PM
+systable57 23-08-2022 05:29:00 PM
+in signup 23-08-2022 07:08:19 PM
+dbcreatescript 23-08-2022 07:08:23 PM
+dbowneruser 23-08-2022 07:08:26 PM
+systable57 23-08-2022 07:08:29 PM
+in signup 23-08-2022 07:53:26 PM
+dbcreatescript 23-08-2022 07:54:08 PM
+dbowneruser 23-08-2022 07:54:11 PM
+systable57 23-08-2022 07:54:14 PM
+after db created 23-08-2022 08:01:48 PM
+in signup 23-08-2022 08:17:19 PM
+dbcreatescript 23-08-2022 08:17:22 PM
+dbowneruser 23-08-2022 08:17:25 PM
+systable57 23-08-2022 08:17:28 PM
+after db created 23-08-2022 08:21:59 PM
+in signup 23-08-2022 08:33:18 PM
+dbcreatescript 23-08-2022 08:33:21 PM
+dbowneruser 23-08-2022 08:33:24 PM
+systable57 23-08-2022 08:33:26 PM
+after db created 23-08-2022 08:38:13 PM
+in signup 23-08-2022 08:43:36 PM
+dbcreatescript 23-08-2022 08:43:39 PM
+dbowneruser 23-08-2022 08:43:42 PM
+systable57 23-08-2022 08:43:44 PM
+after db created 23-08-2022 08:48:47 PM
+in signup 23-08-2022 08:55:12 PM
+dbcreatescript 23-08-2022 08:55:16 PM
+dbowneruser 23-08-2022 08:55:19 PM
+systable57 23-08-2022 08:55:21 PM
+after db created 23-08-2022 08:58:21 PM
+after populating infotableuser 23-08-2022 08:58:22 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40714,13816,0,'Kota Office','sdfghbjnk@dfghj.com','KOTA7969',3100,'23456789','sdxfcgvhbjnk',3092,'Y',840, 10320,'2022-08-23 08:58:23','2022-08-28 08:58:23') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10320,10320,0,'Kota Office','sdfghbjnk@dfghj.com','23456789','2022-08-23 08:58:23',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18469,'KOTA7969','sdfghbjnk@dfghj.com','12345678','Kota Office','C',10320,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (33012,26155,0,'2022-08-23 08:58:23','2022-08-28 08:58:23','I','S',13816,10320,'U',0,0,'Y','2022-08-23 08:58:43') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32138,32134,0,26155,1,'2022-08-23 08:58:23',10320,13816,3092,3093,'2022-08-23 08:58:23','2022-08-28 08:58:23',1,'2022-08-23 08:58:43') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13816,'KOTA7969','KOTA7969','KOTA7969',18469) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 08:58:46','2022-08-23 08:58:46','2022-08-23 08:58:46','XR','KOTA7969') 23-08-2022 08:58:46 PM
+userdt quwery Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (1,1,0,'Kota Office','23456789','sdfghbjnk@dfghj.com','1','2022-08-23 08:58:23','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(1,1,0,'Kota Office','sdfghbjnk@dfghj.com','23456789','2022-08-23 08:58:23',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(1,'KOTA7969','sdfghbjnk@dfghj.com','12345678','Kota Office','E',1 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (1,1,0,1,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C')  insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (1,1, 'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',1,0,'2022-08-23 08:58:23','Y',0,'I') Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (2,2,0,'saral mainuser','9999999999','abc@gmail.com','2','2022-08-23 08:58:23','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(2,2,0,'saral mainuser','abc@gmail.com','9999999999','2022-08-23 08:58:23',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(2,'sara0001','abc@gmail.com','12345678','saral mainuser','E',2 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (2,2,0,2,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C') insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (2,2, 'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',2,0,'2022-08-23 08:58:23','Y',0,'I')  Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (3,3,0,'PineUser','9999999998','pine@gmail.com','3','2022-08-23 08:58:23','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(3,3,0,'PineUser','pine@gmail.com','9999999998','2022-08-23 08:58:23',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(3,'pine0001','pine@gmail.com','12345678','PineUser','E',3 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (3,3,0,3,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C') insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (3,3, 'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',3,0,'2022-08-23 08:58:23','Y',0,'I') Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (4,4,0,'MswipeUser','9999999997','mswipe@gmail.com','4','2022-08-23 08:58:23','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(4,4,0,'MswipeUser','mswipe@gmail.com','9999999997','2022-08-23 08:58:23',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(4,'mswi0001','mswipe@gmail.com','12345678','MswipeUser','E',4 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (4,4,0,4,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C') insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (4,4,  'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',4,0,'2022-08-23 08:58:23','Y',0,'I')  23-08-2022 09:00:01 PM
+in signup 23-08-2022 09:07:28 PM
+dbcreatescript 23-08-2022 09:07:31 PM
+dbowneruser 23-08-2022 09:07:34 PM
+systable57 23-08-2022 09:07:37 PM
+after db created 23-08-2022 09:10:36 PM
+after populating infotableuser 23-08-2022 09:10:36 PM
+saralweb quwery Insert into customers (customers_key, p_customers,rowstatus, custname, email, custcode, customertype,mobno,contactperson,productcode,activef,mainbusscode,p_acccode,firstinstalldate,billedupto) values(40714,13816,0,'Kota Office','dfcgvhbj@sdfgh.com','KOTA7969',3100,'9876412345','sdxfcgvhbj',3092,'Y',840, 10320,'2022-08-23 09:10:36','2022-08-28 09:10:36') Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email, mobile, mtimestamp,acctype) values(10320,10320,0,'Kota Office','dfcgvhbj@sdfgh.com','9876412345','2022-08-23 09:10:36',3041) Insert into userlogin (userlogin_key, userid, email, pwd, name, linktype, linkcode, prevlogintype) values(18469,'KOTA7969','dfcgvhbj@sdfgh.com','12345678','Kota Office','C',10320,'B') Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (33012,26155,0,'2022-08-23 09:10:36','2022-08-28 09:10:36','I','S',13816,10320,'U',0,0,'Y','2022-08-23 09:10:40') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32138,32134,0,26155,1,'2022-08-23 09:10:36',10320,13816,3092,3093,'2022-08-23 09:10:36','2022-08-28 09:10:36',1,'2022-08-23 09:10:40') insert into dbcustconfig  (dbcustconfig_key, custcode, p_customers, dbname, userid, pwd, userlogin_key) values (249,'KOTA7969',13816,'KOTA7969','KOTA7969','KOTA7969',18469) insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42651,2171,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','CA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42652,2172,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','CD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42653,2173,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','CC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42654,2174,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','TA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42655,2175,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','TD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42656,2176,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','TC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42657,2177,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','LA','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42658,2178,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','LD','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42659,2179,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','LC','KOTA7969') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42660,2180,0,'crmtasks',0,0,'I','2022-08-23 09:11:02','2022-08-23 09:11:02','2022-08-23 09:11:02','XR','KOTA7969') 23-08-2022 09:11:02 PM
+userdt quwery Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (1,1,0,'Kota Office','9876412345','dfcgvhbj@sdfgh.com','1','2022-08-23 09:10:36','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(1,1,0,'Kota Office','dfcgvhbj@sdfgh.com','9876412345','2022-08-23 09:10:36',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(1,'KOTA7969','dfcgvhbj@sdfgh.com','12345678','Kota Office','E',1 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (1,1,0,1,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C')  insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (1,1, 'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',1,0,'2022-08-23 09:10:36','Y',0,'I') Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (2,2,0,'saral mainuser','9999999999','abc@gmail.com','2','2022-08-23 09:10:36','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(2,2,0,'saral mainuser','abc@gmail.com','9999999999','2022-08-23 09:10:36',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(2,'sara0001','abc@gmail.com','12345678','saral mainuser','E',2 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (2,2,0,2,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C') insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (2,2, 'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',2,0,'2022-08-23 09:10:36','Y',0,'I')  Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (3,3,0,'PineUser','9999999998','pine@gmail.com','3','2022-08-23 09:10:36','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(3,3,0,'PineUser','pine@gmail.com','9999999998','2022-08-23 09:10:36',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(3,'pine0001','pine@gmail.com','12345678','PineUser','E',3 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (3,3,0,3,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C') insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (3,3, 'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',3,0,'2022-08-23 09:10:36','Y',0,'I') Insert into Employees(employees_key, p_employees, rowstatus, empname, mobno,email,p_acccode,mtimestamp,activeyn,department,status) values (4,4,0,'MswipeUser','9999999997','mswipe@gmail.com','4','2022-08-23 09:10:36','Y',50005,2696) Insert into accmaster (accmaster_key, p_acccode,rowstatus, accname, email,mobile, mtimestamp,acctype,status) values(4,4,0,'MswipeUser','mswipe@gmail.com','9999999997','2022-08-23 09:10:36',3042,'Y') Insert into userlogin (userlogin_key, userid,email, pwd, name, linktype, linkcode) values(4,'mswi0001','mswipe@gmail.com','12345678','MswipeUser','E',4 ) insert into userroles (userroles_key,p_userroles,rowstatus,userlogin_key,webroles,approles,serviceroles) values (4,4,0,4,'4,5,109,110,111,112,113,114,115,133,164,165,166,167','60,61,65,66,69,72,117,127,134,169,187,188,204,205,206,207,208,209,214,215,212','C') insert into usersettings (usersettings_key,p_usersettings,settingsstring,userlogin_key,rowstatus,mtimestamp,activeyn,websessions_key,updateflag ) values (4,4,  'simslot=s1~icallact=rce~impcontc=n~rempopdg=fal~stktrfop=n~proselop=s~filetype=txt~srchtype=sws~prntconn=blu~defseamo=txt~bypssord=tru~prnttime=y~pricmode=s',4,0,'2022-08-23 09:10:36','Y',0,'I')  23-08-2022 09:11:09 PM
+D:\TECHNO_SAAS\CRMApp\CRMApp\KOTA7969\  D:\TECHNO_SAAS\CRMApp\CRMApp\KOTA7969\recording\
+B
+NEHA8591
+Password matched
+B
+B
+B
+NEHA8591
+Password matched
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+GUWA5465
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+B
+NEHA8591
+B
+NEHA8591
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+TEST7981
+Password matched
+B
+TEST7981
+Password matched
+B
+TEST7981
+Password matched
+B
+TEST7981
+Password matched
+B
+TEST7981
+Password matched
+B
+TEST7981
+Password matched
+B
+TEST7981
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+B
+NEHA8591
+Password matched
+in signup 13-12-2022 11:53:31 AM
+dbcreatescript 13-12-2022 11:55:21 AM
+dbowneruser 13-12-2022 11:55:25 AM
+after db created 13-12-2022 11:55:27 AM
+after populating infotableuser 13-12-2022 11:55:27 AM
+saralweb quwery    Insert into chargingheader (chargingheader_key, headerno,rowstatus, billdate,billedupto,billtype,billseries,p_customers,p_acccode,paymentflag, grandtotal, roundoffamt,wt,mtimestamp) values (34188,26922,0,'2022-12-13 11:55:28','2023-01-12 11:55:28','I','S',849,5152,'U',0,0,'Y','2022-12-13 11:55:33') insert into chargingitems (chargingitems_key,p_chargingitems,rowstatus,headerno,itemsno,chargingdate,p_acccode,p_customers,productcode,servicecode,chargingfromdate,chargingtodate,quantity,mtimestamp) values(32950,32946,0,26922,1,'2022-12-13 11:55:28',5152,849,3092,3093,'2022-12-13 11:55:28','2023-01-12 11:55:28',1,'2022-12-13 11:55:33')  insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42981,2501,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','CA','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42982,2502,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','CD','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42983,2503,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','CC','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42984,2504,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','TA','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42985,2505,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','TD','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42986,2506,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','TC','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42987,2507,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','LA','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42988,2508,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','LD','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42989,2509,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','LC','tara2626') insert into notificationcontrol (notificationcontrol_key,p_notificationcontrol,rowstatus,tablename,prevprocessvalue,currentvalue,processflag,mtimestamp,prevprocessdatetime,currentvaluedatetime,notificationtype,corpid) values(42990,2510,0,'crmtasks',0,0,'I','2022-12-13 11:55:33','2022-12-13 11:55:33','2022-12-13 11:55:33','XR','tara2626') 13-12-2022 11:55:34 AM

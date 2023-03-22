@@ -1,0 +1,1494 @@
+﻿@{
+    ViewData["Title"] = " Manage ServiceRequests";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+    var DT = df1.GetDateTimeISTNow().ToString("yyyy-MM-ddTHH:mm:ss");    
+    string desktop = ".right";
+}
+
+
+@*@Optimization.Scripts.Render("~/bundles/ManageRegCalls")*@
+@*@Optimization.Styles.Render("~/Content/ManageRegCalls")*@
+
+@*Added by aslam for multiselect dropdown css*@
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>*@
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+
+<link rel="stylesheet" href="~/Content/Custom/ManageRegCalls.css" />
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageRegCalls.js"></script>
+<script src="~/scripts/Custom/BasicFilter.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+
+@*@Optimization.Scripts.Render("~/Scripts/Link_Customer")*@
+
+<script src="~/Scripts/Custom/LinkCustomer.js"></script>
+<script>
+    function closetable(button) {
+        $(button).parents("#CustContainer").hide();
+    }
+
+</script>
+
+<style>
+    .bootstrap-select > .dropdown-toggle {
+        margin: 10px 0px 0px 2px;
+        font-size: 11px;
+        outline: none;
+        border: none;
+    }
+
+    .mainpanel {
+        width: auto;
+    }
+
+    .close {
+        opacity: 0.8;
+    }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+    .select-btn.select-filterDropdown, .select-filterDropdown ~ .list-items{
+       width: auto;
+       margin: 0px 17px;
+       margin-left: 10px;
+   }
+
+   /*.select-filterDropdown ~ .list-items {
+    width: 250px;
+    margin: 0px 10px;
+}*/
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #2e2e2e;
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 25px;
+            left: 0px;
+            padding: 0 5px;
+            background: #2e2e2e;
+            color: #fff;
+            z-index: 9;
+            font-size: 11px;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .bootstrap-select [data-toggle]:hover:before,
+    .bootstrap-select [data-toggle]:hover:after {
+        display: none
+    }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+
+  /*  tr:hover:not(.highlight) td {
+        background-color: transparent;
+    }
+    */
+   
+
+
+    .sub:hover {
+        background-color: #3c8dbc;
+        color: white;
+    }
+
+    .u {
+        /*padding: 18px;
+        padding-right: 20px;
+        */
+    }
+
+    .collapse {
+        background-color: transparent;
+        width: 100%;
+        padding-top: 10px;
+        padding: 10px;
+        margin-right: 0px;
+        margin-right: 3px;
+        padding-right: 10px;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .DateBtn {
+        height: 26px;
+        margin-top: 10px;
+        border-radius: 0px;
+        padding: 3px 6px 6px 6px;
+        width: 29px;
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+
+    .content {
+        height: auto;
+    }
+
+    .subSelected {
+        background-color: orange !important;
+    }
+
+    option {
+        transform: translateY(1);
+        transition: transform 0.5s ease;
+    }
+
+    div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 8px 23.4px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .content-wrapper {
+        height: auto;
+    }
+
+    .clickable:hover {
+        /*box-shadow: 0px 8px 6px -8px gray; 0px -11px 8px -10px gray,top shadow */
+        box-shadow: 0px 11px 8px -10px gray;
+    }
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+        .sticky + .ShowRemarksValues {
+            padding-top: 102px;
+        }
+
+        .asidenav{
+            height:87%;
+        }
+
+        .menu{
+            height:106%;
+        }
+
+   .numberCircle {
+        border-radius: 50px;
+        width: 15px;
+        height: 14px;
+        padding: 1px;
+        margin-right: 5px;
+        background: #FF0000;   
+        /*border: 0.5px solid #FF0000;*/
+        color: #fff;
+        text-align: center;
+        font: 11px Arial, sans-serif;
+    }
+    .callfreqdiv{
+        width:10px;
+        visibility:hidden;
+    }
+
+    .context-menu-item {
+        padding-left: 28px;
+        padding-right: 20px;
+    }
+
+    .context-menu-list {
+        width: 220px;
+    }
+
+    .context-menu-item labels context-menu-visible {
+        padding-left: 15px;
+    }
+
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+
+    .arrowicon .fa-caret-up{
+        height:12px;
+        margin-top:-2px;
+    }
+
+    /*Added by aslam for datetimefilter*/
+    #filterTable tr:hover:not(.highlight) td,
+    #sortingTable tr:hover:not(.highlight) td {
+        background-color: transparent;
+    }
+
+    /*.resultContent {
+        border: #d9d5d0 1px solid;
+        margin: 15px;
+        border-radius: 3px;
+        background-color: #f9f9f9;
+    }*/
+
+       /* .resultContent p {
+            margin: 0px !important;
+            padding: 6px;
+            font-size: 12px;
+        }*/
+
+        .resultDiv{
+            margin-top:5px;
+        }
+</style>
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+<div class="con">
+    <input type="hidden" id="infostring" name="infostring" value="@ViewBag.hoverStripString" />
+    <input type="hidden" name="grid1" id="grid1" value="">
+    <input type="hidden" name="LoggedIn" id="LoggedUser" value="@httpContextAccessor.HttpContext?.Session.GetString("loginname")" />
+    @*<p class="text-center text-success">@ViewContext.TempData("Message")</p>*@
+    <div class="row mainWrapper">
+        <div class="left">
+            <div class="calHeightIcon">
+                <div class="icon-div">
+                    <div class="search2 ">
+                        <a id="RegisterCalls" href='/CRM/RegisterCalls' class="top" title="" data-placement="bottom" data-toggle="Register New Call" style="text-align:left;cursor:pointer;">
+                            <img src="/images/icon-plus.png">
+                        </a>
+                        <a class="top" title="" data-placement="bottom" data-toggle="Refresh" style="cursor:pointer;" onclick="ReloadGrid()">
+                            <img src="/images/icon-refresh.png">
+                        </a>
+                        <a class="top" title="" data-placement="bottom" data-toggle="Export" style="cursor:pointer;" onclick="ExportCalls();">
+                            <img src="/images/icon-export.png">
+                        </a>
+                        <a class="top" title="" data-placement="bottom" data-toggle="Close Calls" style="cursor: pointer;" onclick="ShowMultiCallCloseModal();">
+                            <img src="/images/icon-close.png">
+                        </a>
+                        <a class="top" title="" data-placement="bottom" data-toggle="Add Tags" style="cursor: pointer;" onclick="ShowMultiCallAddTagsModal();">
+                            <img src="/images/tag.png">
+
+                        </a>
+                        <a class="top" title="" data-placement="bottom" data-toggle="Advance Filter" style="cursor:pointer;" onclick="ShowFilters();">
+                            <img src="/images/icon-filter.png">
+                        </a>
+
+                        <a class="top" title="" data-placement="bottom" data-toggle="Delete Calls" style="cursor: pointer;" onclick="ShowMultiCallDeleteModal();">
+                            <img src="/images/icon-delete.png">
+                        </a>
+
+                         <div class="confirmationBox" id="MultiTagsAddModal">
+                            <input type="hidden" name="callids" value="" id="callids"/>
+                            @*@Html.List_Search("ddlmultiTags", "68", "-Select Tag-", 0,"", new {@class = "form-control"}, false, true, true)*@
+                            @Html.List_Search_Multi("ddlmultiTags", "68", "-Select Tags-", 0,"", new {@class = ""}, false)
+                        </div>
+                    </div>
+
+                    <input type="text"  id="mobileNumFilter" class="quickSearch" onkeyup="searchByMobileNum();"  placeholder="Search by mobile number">
+
+                    <div id="dropdown" class="search" style="display: inline-flex;   margin-left: 0px; padding-left:10px; margin-top:7px;">
+                        @*<select class="" id="filter" style="cursor: pointer; height: 26px; top: 10px; padding-left: 5px; width: auto; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px; ">
+                            <option value="0">Filter By</option>
+                            <option value="1">No filter</option>
+                        </select>*@
+
+                        <p class="basicFilterTitle" onclick="ShowCloseBasicFilter();" style="height:21.5px"><span>Select Filter</span> <i class="fa fa-caret-down"></i></p>
+                        <div id="filterDiv" class="basicfilterDiv">
+                            <table id="basicFilterTable">
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;">
+                                            <div id="search1" onclick="ApplyBasicFilters();" class="btn modalbutton ">Apply<i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                                            <button type="button" class="btn modalbuttonsecondary" onclick="ShowCloseBasicFilter();">Close</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                       @* <div id="dateC" style="display:none" class="filterDiv">
+                            <div class="datedisplay" style="display: flex;">
+                                <div class="FromDiv" style="margin-left:15px;">
+                                    <label class="ee" style="margin-bottom: -5px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                                    <input type="date" id="min" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div class="ToDiv" style="margin-left: 15px;">
+                                    <label class="ww" style="margin-bottom:0px; margin-right: 0px;  font-size: 10px; color: #337ab7; ">  To </label>
+                                    <input type="date" id="max" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div id="search2" onclick="DateSearch();" class="searchButton date" style="margin-left: 0px; margin-top: 0px; place-self: center; "><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+
+                        @*Added by aslam for datetimefilter*@
+                       @* <div id="datetimeC" style="display:none" class="filterDiv">
+                            <div class="datedisplay" style="display: flex;">
+                                <div class="FromDiv" style="margin-left:15px;">
+                                    <label class="ee" style="margin-bottom: -5px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                                    <input type="datetime-local" id="minDT" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" max="@DT" step="1" />
+                                </div>
+                                <div class="ToDiv" style="margin-left: 15px;">
+                                    <label class="ww" style="margin-bottom:0px; margin-right: 0px; font-size: 10px; color: #337ab7; ">  To </label>
+                                    <input type="datetime-local" id="maxDT" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" max="@DT" step="1" />
+                                </div>
+                                <div id="search2" onclick="DateTimeSearch();" class="searchButton date" style="margin-left: 0px; margin-top: 0px; place-self: center; "><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+
+                        <div id="TextC" class="filterDiv" style="display: none; width: auto;">
+                            <div style="display:flex">
+                                <input type="text" id="filterText" class="" placeholder="Type to search" style="height:26px; padding-left:5px; margin-left:20px; width:120px; border:none; border-bottom:1px solid #ddd; padding-bottom:0px; outline:none; font-size:11px;" />
+                                <div id="search1" onclick="DoSearch();" class="searchButton"><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+
+                        <div id="IssueC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("IssueFilter", "38", "-Select Issue-",0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px;  border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)
+                            </div>
+                        </div>
+
+                        <div id="assigntoC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("assignto", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px;  border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)
+                            </div>
+                        </div>
+
+                        <div id="sourceC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("source", "55", "-Select Source-",0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px;  border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)
+                            </div>
+                        </div>
+
+                        <div id="tagsC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("Tags", "68", "-Select Tag-", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, false, true)
+                                <div id="btnTagSearch" onclick="tagSearch();" class="searchButton" style="display:none;"><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+
+                        <a class="closebn filterclose" id="closefilter" onclick="removeFilter()" data-placement="bottom" data-toggle="Remove Filter" style="display:none;margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;margin-top: 9px;">&times;</a>
+*@
+                        <div id="FilterText" class="" style="float:left; display:none; margin-top: 10px;margin-left:15px;font-size:13px;border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+                            <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                            <a class='' id='' onclick='ReloadGrid();'>
+                                <i class='glyphicon glyphicon-remove'></i>
+                            </a>
+                        </div>
+                         <button onclick="getMyCalls();" class="btn btn-default  myTaskBtn" style="margin-top: 0px;">MyCalls</button>
+                        @if (ViewBag.showAllCalls == "Y")
+                        {
+                            <button onclick="getAllCalls();" class="btn btn-default myTaskBtn" style="margin-top: 0px;">AllCalls</button>
+                        }
+                        @*<button type="button" onclick="lastcalltimesort(this)" class="myTaskBtn sorting"><span>LastCallTime</span><span class="arrowicon"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></button>*@
+                         @*<button type="button" onclick="registerdatesort(this)" class="myTaskBtn sorting"><span>RegisterDate</span><span class="arrowicon"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></button>*@
+                    </div>
+                   
+                    <div class="search1">
+                        <div class="g">
+                            <label id="info">0-00 of 00 </label>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Previous" id="Prev">
+                                <i class="fa fa-angle-left" style="font-size:23px"></i>
+                            </a>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Next" id="Next">
+                                <i class="fa fa-angle-right" style="font-size:23px"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="resultDiv" style="display:none;">
+                    <div class="resultContent">
+                        <div class="result-msg">
+                        </div>
+                        <p class="clearFilter" onclick="removeFilter();">Clear Filter</p>
+                    </div>
+                </div>
+
+            </div>
+            <div id="subDiv">
+                <label id="subDivLable" onclick="Allselection();"></label>
+            </div>
+            <div class="col-md-12 text-center Table-Dive" style="padding-right:0;">
+                <div class="calHeightTaskBar">
+                    <div class="TaskBar tr" id="taskb">
+                        <div class="callfreqdiv"></div>
+                        <input type="checkbox" id="selectall" class="css-checkbox " name="selectall" style="margin:2px 0 0 2px;" />
+                        <div class="SNo td tbHead" style="width:4%; text-align:center; padding: 0 0px 0 8px; "><b>SNo.</b></div>
+                        <div class="CallId td tbHead" style="width:5%; text-align:left;  padding: 0 0px 0 6px; "><b>Call Id</b></div>
+                        <div class="Date td tbHead" style="width: 7%;" onclick="registerdatesort(this)"><b>Date</b><span class="arrowicon" style="float: right; margin-right: 10px;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></div>
+                        <div class="Firm td tbHead" style="width:17%; text-align:left;"><b>Firm Name</b></div>
+                        <div class="Name td tbHead" style="width:8%; text-align:left; padding: 0 8px 0 8px; display:none; "><b>Name</b></div>
+                        <div class="Mobile td tbHead" style="width: 7%; text-align:left;padding-left:5px;"><b>Mobile</b></div>
+                        <div class="Location td tbHead" style="width: 9%; text-align: left;"><b>Location</b></div>
+                        <div class="Issue td tbHead" style="width:15%; text-align:left;"><b>Issue</b></div>
+                        <div class="Description td tbHead" style="width: 10%; text-align: left; padding: 0 8px 0 8px; display: none; "><b>Description</b></div>
+                        <div class="Status td tbHead" style="width: 4%; text-align: left;"><b>Status</b></div>
+                        <div class="AssignedTo td tbHead" style="width: 9%; text-align: left; padding-left:4px;"><b>Assigned To</b></div>
+                        <div class="LastCallTime td tbHead" style="width:8.5%; text-align:left;" onclick="lastcalltimesort(this)"><b>LastCallTime</b><span class="arrowicon" style="float: right;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></div>
+                        <div class="Source td tbHead" style="width:12%; text-align:left;padding-left:5px;"><b>Source</b></div>
+                        <div class="Onsiteflag td tbHead" style="width: 5%; text-align: left; display: none; "><b>Onsite flag</b></div>
+                        <div class="NextActionDate td tbHead" style="width:8.5%; text-align:left; "><b>NextActionDate</b></div>
+                        <div class="td tbHead" style="width: 9%; text-align: left; padding: 0 8px 0 8px; display: none; "><b>Call Source</b></div>
+                    </div>
+                </div>
+                <div id="loading" style="margin:10% auto;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div></div>
+                <div class="" id="example"></div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="detailPane">
+                <div class="row detailpaneIconrow">
+                    <i class="fa fa-arrow-right" id="RightShift" aria-hidden="true"></i>
+                    <div class="save">
+                        <span id="CloseCall" onclick="ShowCloseCallModal('@desktop');" style="cursor:pointer;" title="" data-placement="bottom" data-toggle="Call Close"><img src="~/images/i-close.png" alt="CloseCall" class="detailpaneIcon"></span>
+                       @* <span id="FeedbackLink" onclick="CreateFeedbackLink('@desktop');" style="cursor:pointer" title="" data-placement="bottom" data-toggle="Share Link"><img src="~/images/icon-share.png" alt="CreateFeedbackLink" class="detailpaneIcon"></span>*@
+                        <span id="editIcon" onclick="ShowEditCall('@desktop');" style="cursor:pointer" title="" data-placement="bottom" data-toggle="Edit"><img src="~/images/edit2.png" alt="" class="detailpaneIcon" style="width:22px; margin-top:-2px;"></span>
+                        <span id="SaveCall" onclick="SubmitEditCall('@desktop');" style="display: none;"><img src="~/images/save.png" alt="Save" class="detailpaneIcon"></span>
+
+                        @* <button id="SaveCall" onclick="SubmitEditCall('@desktop');" class="btn button" type="button" style="display: none; margin-right: 10px;float: right; background-color: #3C8DBC; width: auto; color: white; border-radius: 50px; padding-top: 2px; padding-bottom: 2px; ">Save</button>*@
+                        <span id="CancleEdit" onclick="CancleEditCall('@desktop');" style="cursor:pointer;display:none;" title="" data-placement="bottom" data-toggle="Cancle"><img src="~/images/icon-cancel.png" alt="" class="detailpaneIcon"></span>
+                    </div>
+                </div>
+                <div class="ShareBox">
+                    <label>Share Link</label> <span class="closebn" onclick="this.parentElement.style.display = 'none';">&times;</span>
+                    <div class="Box">
+                        <input type="text" class="shareLinkTextBox" />
+                        <button id="copylinkbtn" class="btn btn-primary copyBtn" type="button" data-clipboard-target="#downloadlink">Copy link</button>
+                    </div>
+                </div>
+
+
+                @*TopNavBar in Detail pane*@
+                <div class="topnavbar">
+                    <a class="active" onclick="homedata()" id="homedata">Home</a>
+                    <a class="unactive" onclick="progressdata()" id="progressdata">Progress</a>
+                    <a class="unactive" onclick="edithistorydata()" id="edithistorydata">History</a>
+                    <a class="unactive" onclick="collaboratordata()" id="collaboratordata">Collaborator</a>
+                    <a class="unactive" onclick="classificationdata()" id="classificationdata">Classification</a>
+                </div>
+
+                <section class="editSection editSectiondata" id="details">
+
+
+                    <div class="x-id">
+                        @*<span>Id -</span> <span id="callid"></span>
+                            <span style="display:none" id="callkey"></span>*@
+                        <p><span id="issuetitle"></span> <span>( Id -</span> <span id="callid"></span><span>)</span></p>
+                        <span style="display:none" id="callkey"></span>
+                    </div>
+
+                    <div class="issue-desc x-desc">
+                        <span id="spc">Issue Description</span>
+                        <textarea id="txtissuedescription" class="x-TextArea"></textarea>
+                        <p id="issuedescription"></p>
+                    </div>
+
+
+                    <div class="firm-title">
+                        @*<h3 id="firmtitle"></h3>*@
+                        <input type="hidden" name="P_Cust" id="P_Cust" value="" />
+                        <div id="firmDiv" style="display:none">
+                            <span style="font-weight: 600;color: #337ab7;font-size: 15px;">Firm Name</span>
+                            <input type="text" id="txtfirmtitle" name="txtfirmtitle" value="" onkeyup="ShowFirmGrid();" class="form-control" style="width: 100%; font-size:14px; border-color: #ddd;color: #555;outline: none;" />
+                        </div>
+                        <div id="FirmContainer" style="display:none; overflow:auto ;background-color:white; font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px">
+                            <table id="tblFirms" class="table table-bordered" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align:center;">
+                                        <th>S.No</th>
+                                        <th>CustCode</th>
+                                        <th>CustName</th>
+                                        <th>Mobile No</th>
+                                        <th>BusinessType</th>
+                                        <th>HomeTown</th>
+                                        <th>Address</th>
+                                        <th>OnsitFlag</th>
+                                    </tr>
+                                    <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        @*<p><span id="contactPerson" style="font-size:16px;"></span><span style="float:right;font-size: 16px;" id="mobno"></span></p>*@
+                        <div id="contactDiv">
+                            <span style="font-weight: 600;color: #337ab7;font-size: 15px;">Contact Person</span>
+                            <input type="text" name="txtcontactPerson" id="txtcontactPerson" value="" class="form-control" style="font-size:14px; border-color: #ddd;color: #555;outline: none;" />
+                            <span style="font-weight: 600;color: #337ab7;font-size: 15px;">Contact Number</span>
+                            <input type="text" name="txtmobno" id="txtmobno" value="" class="form-control" style="font-size:14px; border-color: #ddd;color: #555;outline: none;" />
+                            <span style="font-weight: 600;color: #337ab7;font-size: 15px;">Email Id</span>
+                            <input type="email" name="txtemail" id="txtemail" value="" class="form-control" style="font-size:14px; border-color: #ddd;color: #555;outline: none;" />
+                            <span style="font-weight: 600;color: #337ab7;font-size: 15px;">Location</span>
+                            <input type="text" name="txtlocation" id="txtlocation" value="" class="form-control" style="font-size:14px; border-color: #ddd;color: #555;outline: none;" />
+                        </div>
+
+                    </div>
+                    <div class="issue-title">
+                        @*  <h3 id="issuetitle"></h3>*@
+                        <div id="issueDiv">
+                            <span style="font-weight: 600;color: #337ab7;font-size: 15px;">Issue Type</span>
+                            @Html.List_Search("ddlIssueType", "38", "-Select Issue-",0,"", new {@style = "width:100%;padding-left:2px; border:1px solid #ddd; border-radius:4px;"}, true)
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="dates">
+                        <p id="n">Name<span id="contactPerson"></span></p>
+
+                        <p id="f">Firm<span id="firmtitle"></span></p>
+
+                        <p id="m">Mobile<span id="mobno"></span></p>
+
+                        <p id="l">Location<span id="location"></span></p>
+
+                        <p>
+                            CallStatus
+                            <span id="callstatus"></span>
+                            <span>
+                                @Html.List_Search("ddlCallStatus", "39", "Select Status", 0,"", new {@style = "padding-left:2px;display:none; border:1px solid #ddd; width:165px; border-radius:4px; height:22px;"}, true)
+                            </span>
+                        </p>
+                        <p>
+                            Assigned To
+                            <span id="assignedto"></span>
+                            <span>
+                                @Html.List_Search("ddlAssignedto", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)",0 ,"" , new {@style = "padding-left:2px;  display:none; border:1px solid #ddd; border-radius:4px; height:22px;"})
+                            </span>
+                        </p>
+                        <p>
+                            Priority Order
+                            <span id="priorityOrder"></span>
+                            <span style="float:right;">
+                                <input type="number" name="txtpriorityOrder" id="txtpriorityOrder" min="0" value="" class="form-control" style="font-size:14px; border-color: #ddd;color: #555;outline: none; height:22px;width:164px;border-radius:4px;" />
+                            </span>
+                        </p>
+
+                        <p>Register Date <span id="registerdate" style="margin-top:2px"></span></p>
+
+                    </div>
+                </section>
+                 <section class="editSection editSectiondata" id="gendetails" style="margin-top:10px">
+                    <div class="dates">
+                        <p>CustCode<span id="txtCustCode"></span></p>
+                        <p>BilledUpto<span id="billedupto"></span></p>
+                        <p>Dealer<span id="txtempassigned"></span></p>
+                        <p>Address<span id="custAddress"></span></p>
+                        <p>Email<span id="CustEmail"></span></p>
+                    </div>
+                </section>
+
+                <section class="AddRemarkDetailView" id="remarks">
+                    <div class="remarklabel">Progress Notes</div>
+                    <form id="frmRemarkRight">
+                        <textarea id="txtRemark"></textarea>
+                        <div class="row">
+                            <input type="file" name="remarkfile" id="remarkfile" class="x-fileInput">
+                            <button class="btn btnAddRemark" type="button" onclick="SubmitCallRemarkNew('@desktop');">Add</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="tabSection">
+                    <ul class="tabs-navWeb row">
+                        <li class="" id="list1">
+                            <a href="#remarkTab" rel="nofollow">Progress Notes</a>
+                        </li>
+                        <li class="tab-activeWeb " id="list2">
+                            <a href="#callAssignHistoryTab" rel="nofollow" onclick="showAssignmentHistoryTab();">Assignment History</a>
+                        </li>
+                        <li class="tab-activeWeb " id="list4">
+                            <a href="#CallEditTab" rel="nofollow" onclick="showEditHistoryTab();" id="list3">Edit History</a>
+                            <h3 id="edithead" style="display: none;">Edit History</h3>
+                        </li>
+                        <li class="tab-activeWeb ">
+                            <a href="#callLogsTab" rel="nofollow" id="list5">Call Logs</a>
+                        </li>
+                    </ul>
+                    <div class="tabs-stageWeb bgImage">
+                        <div class="div" id="remarkTab">
+                            <div id="boxLoading">
+                                <div colspan="5">
+                                    <div id="boxLoadingMessage" class="loader overlay col-md-offset-6" style="padding: 10px; margin-top: 20%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="AllRemarks"></div>
+                        </div>
+
+                        <div class="div" id="callAssignHistoryTab" style="display: none;">
+                            <div id="boxLoading">
+                                <div colspan="5">
+                                    <div id="boxLoadingMessage" class="loader overlay col-md-offset-6" style="padding: 10px; margin-top: 20%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="AllCallAssignment"></div>
+                        </div>
+
+                        <div class="div" id="CallEditTab" style="display: none;">
+                            <div id="boxLoading">
+                                <div colspan="5">
+                                    <div id="boxLoadingMessage" class="loader overlay col-md-offset-6" style="padding: 10px; margin-top: 20%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="allActivity"></div>
+                        </div>
+
+                        <div class="div" id="callLogsTab" style="display: none;">
+                            <div id="boxLoading">
+                                <div colspan="5">
+                                    <div id="boxLoadingMessage" class="loader overlay col-md-offset-6" style="padding: 10px; margin-top: 20%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="AllCallLogs"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="SectionCollaborators" id="collaborators">
+                    <div class="row">
+                        @*<i class="fa fa-users"></i>*@
+                        <img src="~/images/icon-Collaborators.png" class="icon-image" />
+                        <span class="x-heading">Collaborators</span>
+                        @*<span style="display:inline-flex;">Collaborators</span>*@
+
+                        <span id="AddCollabFromList" style="">
+                            @Html.List_Search("ddlCollab", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0, "", new {@onChange = "SubmitCollaboratorsNew( '" + desktop + "');", @style = "width:auto;  display:none; border-style:none; border:none; outline:none; border-bottom:1px solid #ddd; cursor:pointer;"})
+                            @* <span class="closebn" id="closeAddCollab" onclick="closeAddCollab('@desktop')" style="float: right; display: none; cursor: pointer; height: 20px; width: 20px; text-align: center; padding: 0px;  margin-top: 10px; ">&times;</span>*@
+                            <img src="/images/icon-cancel.png" alt="Cancle" class="deleteCollabIcon closeAdd" id="closeAddCollab" onclick="closeAddCollab('@desktop')" @*style="margin-right:12px;margin-top:4px;"*@>
+
+                        </span>
+                        <span id="AddCollab" class="addIcon" onclick="AddCollaboratorsNew('@desktop');"><img src="/images/add-collaborator.png" class="icon-image"></span>
+                    </div>
+                    <div class="boxx">
+                        <div id="boxLoading">
+                            <div colspan="5">
+                                <div id="boxLoadingMessage" class="loader overlay col-md-offset-6" style=" margin-top:15%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="AllCollab" class="bgImage"></div>
+                    </div>
+                </div>
+
+                <div class="task-classification" id="classification">
+                    <div class="row">
+                        <img src="/images/tag.png" class="icon-image">
+                        <span class="x-heading">Call Classification</span>
+                        <span id="AddTagFromList">
+                            @Html.List_Search("ddlTags", "68", "-Select Tag-",0,"", new {@onChange = "SubmitTagsNew('" + desktop + "');", @style = "width:auto;  display:none; border-style:none; border:none; outline:none; border-bottom:1px solid #ddd; cursor:pointer;"}, false)
+                            <img src="/images/icon-cancel.png" alt="Cancle" class="deleteCollabIcon closeAdd" id="closeTag" onclick="closeTag('@desktop')">
+                            @*<span class="closebn" id="closeTag" onclick="closeTag('@desktop')" style="float: right; display: none; cursor: pointer; height: 20px; width: 20px; text-align: center; padding: 0px; margin-top: 10px; ">&times;</span>*@
+                        </span>
+                        <span id="PlusTag" onclick="AddTagsNew('@desktop');" class="addIcon">
+                            <img src="~/images/classification.png" class="icon-image iconAddTag" />
+                        </span>
+
+
+                    </div>
+                    <div class="boxx">
+                        <div id="boxLoading">
+                            <div colspan="5">
+                                <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tag-container bgImage" id="tag-container"></div>
+                    </div>
+                </div>
+            </div>
+            @*asideNav*@
+            <section class="asidenav">
+                <nav class="menu">
+                    <a href="#" id="detailtop" onclick="asidenavActive('#detailtop', '#details')" class="menu__item menu__item--active asidenav-tab">
+                        @*<i class="fa fa-home"></i>*@
+                        <img src="~/images/icon-home.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="remarktop" onclick="asidenavActive('#remarktop', '#remarks')">
+                        @*<i class="fa fa-envelope" aria-hidden="true"></i>*@
+                        <img src="~/images/icon-progress note.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="collabtop" onclick="asidenavActive('#collabtop', '#collaborators')">
+                        @*<i class="fa fa-users"></i>*@
+                        <img src="~/images/icon-Collaborators.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="tagtop" onclick="asidenavActive('#tagtop', '#classification')">
+                        @*<i class="fa fa-tags"></i>*@
+                        <img src="~/images/tag.png" />
+                    </a>
+                </nav>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+<input type="hidden" id="type2" value="@ViewBag.Message" />
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+<div class="modal fade" id="Remark">
+    <div class="modal-dialog" role="form" style="width:33%;">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:16.5px; margin-top:0px; padding-top:30px; padding-left:30px;" class="modal-title"> Add Remark </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px; height: 200px;">
+                <hr style="margin-top:10px;width:80%" />
+                <div id="myRemark" class="col-md-12" style="">
+                    <form Class="form-horizontal" role="form" method="post" id="RegForm" style="margin-top:0px;">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <div Class="form-group">
+                            <input type="hidden" name="issueId" id="issueId" />
+                            <input type="hidden" name="calledfrom" id="calledfrom" />
+                            <Label for="inputEmail1" class="control-label">Progress Note</Label>
+                            <textarea id="Remarktextarea" cols="50" rows="4" name="Remark" value=""></textarea>
+                            @*<Button type="button" id="SubmitRemarkBtn" onclick="SubmitCallRemark(this);" class="btn btn-primary" style="padding:0px; width:102px; height:26px; margin-top:100px; position:absolute; left:318px; ">Submit</Button>*@
+                            <input type='file' name='modalremarkfile' id='modalremarkfile' style='display: inline-block; color: #0F5FAF; outline:none; font-size:11px;'>
+                            <Button type="button" id="SubmitRemarkBtn" onclick="SubmitCallRemark(this);" class="btn btn-primary" style="width:auto; float: right; padding:2px 8px; ">Submit</Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EngageStatus">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:16.5px; margin-top:0px; padding-top:15px; padding-left:30px;" class="modal-title"> Add Remark </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px; height: 60px;">
+                <hr style="margin-top:10px; margin-bottom:5px; width:80%" />
+                <div id="myRemark" class="col-md-12" style="">
+                    <form Class="form-horizontal" role="form" method="post" style="margin-top:0px;">
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <div Class="form-group">
+                            <input type="hidden" name="callId" id="callId" />
+                            <Label for="inputEmail1" class="col-sm-4 control-label" style="margin-left:40px; margin-right: 20px;margin-top: 5px; padding-top:0; padding-left:0px;">Call Engage Status</Label>
+                            @Html.List_Search("callEngageStatus", "56", "- Select status -",0,"", new {@class = "col-md-3", @style = "height:26px; width:30%; padding-left:0px; top:0px; outline:none; border:none; border-bottom:1px solid #ddd;", @onchange = "SubmitCallEngage(this)"}, false)
+                            @*<Button type="button" id="popup" class="btn btn-primary" style="padding:0px; width:20px; height:20px;margin-left:20px; border-radius:50%;"><span class="glyphicon glyphicon-ok" style="font-size:12px;"></span></Button>*@
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MsgCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left: 30px;" class="modal-title"> Message To Customer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <div id="msg">
+                    <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                    <div id="myMsgCustomer" class="col-md-12">
+                        <form Class="form-horizontal" role="form" method="post">
+                            <div Class="form-group">
+                                <input type="hidden" name="P_issuesfilegst" id="PCallMsgToCustomer" />
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Customer Name</label>
+                                <div class="col-sm-5">
+                                    <input type="text" id="firmNameMsgtoCustomer" name="FirmName" style="width:230px" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Phone No</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="Phoneno" id="Mobileno" style="width:230px" maxlength="10" placeholder="Enter 10 digit number only" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Template</label>
+                                <div class="col-sm-5">
+                                    @*@Html.List_Search("Template", "- Select a template -", "msgTemplate", "Title", "P_MsgTemplate", "rowstatus=0 and Templatetype in (3120,3121,3122,3124) and active='Y'", 0, "", new {@onChange = "onTemplateChange(this.value,this.id)", @style = "width:230px; height:26px; padding-bottom:1px; padding-top:1px; font-size:inherit"})*@
+                                    @Html.List_Search("Template", "- Select a template -", "msgTemplate", "Title", "P_MsgTemplate", "rowstatus=0 and Templatetype in (3121,3122,3124,3125) and active='Y'", 0, "", new {@onChange = "onTemplateChange(this.value,this.id)", @style = "width:230px; height:26px; padding-bottom:1px; padding-top:1px; font-size:inherit"})
+                                    @*<select id="Template" name="" class="" style="width:230px; height:26px; padding-bottom:1px; padding-top:1px; font-size:inherit" onchange="myFunction(this.value,this.id);">
+                                            <option value="0">Select an template</option>
+                                            <option value="1">Customer Unavailable</option>
+                                            <option value="2">Off in office</option>
+                                            <option value="3">Mail to dealer</option>
+                                            @*<option value="4">For Rajasthan Parties</option>
+                                                <option value="5"> For Outside Rajasthan Parties</option>
+                                            <option value="4"> Saral Softtech Pvt. Ltd. (SBI)</option>
+                                            <option value="5"> TECHNOPINCH SOLUTIONS PVT LTD.</option>
+                                            <option value="6"> Saral liaisoning and maintenance services</option>
+                                            <option value="7"> Saral Softech Pvt.ltd. (ICICI)</option>
+                                        </select>*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-sm-4 control-label">Message</label>
+                                <div class="col-sm-5">
+                                    <textarea rows="4" cols="35" id="T" name="msg" style="width:230px" value=""></textarea>
+                                </div>
+                            </div>
+                            <div Class="text-center" style="margin:20px 0px 10px 50px">
+                                <Button type="button" id="MsgToCustomerSubmitBtn" Class="btn btn-primary" onclick="SubmitMsgToCustomer(this.id)" style="margin-right:15px">Submit</Button>
+                                <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MailToCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left:30px;" class="modal-title"> Mail To Customer </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <div id="MailCustomerContent" class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="P_issuesfilegst" id="PCallMailToCustomer" />
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Customer Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="firmNameMailtoCustomer" name="FirmName" style="width:230px" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Email Id</label>
+                            <div class="col-sm-5">
+                                <input type="email" id="emailMailtoCustomer" name="EmailId" style="width:230px" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label">Email Content</label>
+                            <div class="col-sm-5">
+                                <textarea rows="4" cols="35" name="msg" id="msgMailToCustomer" value="" style="width:230px"></textarea>
+                            </div>
+                        </div>
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button" id="MailtoCustomerSubmitBtn" onclick="SubmitMailToCustomer(this.id);" Class="btn btn-primary" style="margin-right:15px">Submit</Button>
+                            <a data-dismiss="modal" Class="btn btn-default">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="LoaderOverlay">
+    <div class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px"></div>
+</div>
+<div class="modal fade" id="FollowUpCall">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px" class="modal-title">  </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <div id="IssueDescription" class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="padding-top:20px; text-align:right">Issue :</label>
+                        <div class="col-sm-5" style="padding-left:0px">
+                            <textarea rows="4" cols="35" name="msg" style="width:230px" id="description" value=""></textarea><br />
+                        </div>
+                    </div>
+                    <div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                        <input type="submit" Class="btn btn-primary" style="margin-right:15px; margin-top:20px" value="Submit" />
+                        <a data-dismiss="modal" Class="btn btn-default" style="margin-top:20px">Cancel</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Assignedto">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size: 25px;">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px;padding-top:20px;padding-left: 50px;" class="modal-title">Select Team Member</h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:15px; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="AssignedtoForm">
+                    <input type="hidden" name="PCall" id="PCall" value="">
+                    <input type="hidden" name="CalledFrom" value="ManageRegCall">
+                    <div class="form-group" style="text-align:center; margin:0 auto; width:100%; display:inline-flex;">
+                        <label class="col-sm-6 control-label" style="padding-top:0px">Select Employee</label>
+                        @Html.List_Search("Employee", "- Select Employee -", "AccMaster", "AccName", "P_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0, "", new {@onChange = "SubmitCallAssignTo(this)", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:200px; display:inline-block;"})
+                    </div>
+                   @* <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="button" id="popup" Class="btn btn-primary" onclick="SubmitCallAssignTo(this);" style="margin-right:15px; margin-top:20px">Submit</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>*@
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center;padding:0px;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="OnsiteModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left: 50px;" class="modal-title" id="Onsitevisit"></h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="OnsiteForm">
+                    <input type="hidden" name="PCall" id="PCall1" value="">
+                    <div class="text-center"><p style="font-size:17px"> Do you want to register Onsite Service </p></div>
+                    <div Class="text-center" style="margin:10px 0px 10px 50px">
+                        <Button type="button" id="onsiteVisitSubmitBtn" Class="btn btn-primary" onclick="submitOnsiteVisit(this);" style="margin-right:15px; margin-top:20px; width:76px">Yes</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="NoRow"></div>
+<div class="modal fade" id="CallClosed">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" class="modal-title"> Call Closed Successfully </h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div id="CallClosedContent" class="col-md-6"></div>
+                <div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="CallCollaborators">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:20px;padding-top:20px; padding-left: 40px;" class="modal-title"> Add Collaborators </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <div id="myCollaborators" class="col-md-12">
+                    <form Class="form-horizontal" action="@Url.Action("AddCallCollaborators")" role="form" method="post">
+                        <input type="hidden" name="PCall" id="PCall" value="">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="padding-top:0px">Add Collaborator</label>
+                            @Html.List_Search("collaboratorId", "- Select Employee -", "Accmaster", "accname", "p_acccode", "rowstatus = 0 and acctype=3042 and status='Y' and (updateflag<>'D' or updateflag is null) ", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:202px"})
+                        </div>
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button" id="CallCollabSubmitBtn" Class="btn btn-primary" onclick="submitCallCollaborator(this.id)" style="margin-right:25px; margin-top:20px">Submit</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="LinkCustomer">
+    <div class="modal-dialog" role="form" style="width:800px;">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-top: 10px;padding-left: 20px;padding-bottom: 20px;padding-right: 15px;">
+                <span aria-hidden="true" style="font-size:24px">&times;</span>
+            </button>
+            <h4 class="modal-title" style="text-align:center; padding-top:20px; padding-left: 40px;">Link Customer</h4>
+            <hr style="width:99%; margin-top:10px" />
+            <div class="modal-body" id="LinkCustomerContent" style="padding:10px">
+                <div>
+                    <div style="text-align:right;"><button class="btn btn-success" onclick="ShowAddAndLinkCustomerForm();"><i class="fa fa-plus"></i>&nbsp;Add &amp; Link Customer</button></div>
+                    <form Class="form-horizontal" action="@Url.Action("LinkCustomer")" role="form" method="post" id="linkCustomerForm">
+                        <div Class="form-group">
+                            <input type="hidden" id="P_Customers" name="P_Customers" />
+                            <input type="hidden" id="LinkCustomerCallId" name="LinkCustomerCallId" />
+                        </div>
+                        <div class="form-group" style="display:flex; margin-left:0;">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Firm Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="FirmName1" name="FirmName1" style="border-radius:0px; padding-left:4px; width:208px" value="" />
+                            </div>
+                        </div>
+                        <div id="CustContainer" style="display:none; overflow:auto; width:850px; height:400px; background-color:white; margin:auto; font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px">
+                            <table id="tblCustomers" class="table table-bordered" cellspacing="0">
+                                <thead>
+                                    <tr style="text-align:center;">
+                                        <th>S.No</th>
+                                       @* <th style="width:174px">CustName</th>
+                                        <th style="width:85px">Mobile No</th>
+                                        <th style="width:128px">BusinessType</th>
+                                        <th style="width:110px">HomeTown</th>
+                                        <th style="width:134px">Address</th>
+                                        <th style="width:134px">BilledUpto</th>
+                                        <th style="width:134px">OpenedUpto</th>
+                                        <th style="width:90px">onsiteflag</th>*@
+                                        <th>CustCode</th>
+                                        <th>CustName</th>
+                                        <th>Mobile No</th>
+                                        <th>BusinessType</th>
+                                        <th>HomeTown</th>
+                                        <th>Address</th>
+                                        <th>BilledUpto</th>
+                                        <th>OnsitFlag</th>
+                                        <th class="closebttn" onclick="closetable(this)">&times;</th>
+                                    </tr>
+                                    <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div Class="text-center" style="margin:20px 0px 10px 0px">
+                            <Button type="button" id="SubmitLinkCustomerBtn" Class="btn btn-primary" onclick="SubmitLinkCustomer(this.id);" style="margin-right:15px">Submit</Button>
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
+                    </form>
+
+                    @*Added by aslam for Add-and-Link-Customer*@
+                    <form class="form-horizontal" role="form" method="post" style="display: none;" id="AddAndLinkCustomerForm">
+                        @*<div class="form-group">
+                                <input type="hidden" id="LinkCustomerCallId" name="LinkCustomerCallId" value="23">
+                            </div>*@
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">CustCode</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="CustCode" name="CustCode" style="border-radius:0px; padding-left:4px; width:226px" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Company Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="CustName" name="CustName" style="border-radius:0px; padding-left:4px; width:226px" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Contact Person</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="Contactperson" name="Contactperson" style="border-radius:0px; padding-left:4px; width:226px" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Mobile</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="MobNo" name="MobNo" style="border-radius:0px; padding-left:4px; width:226px" value="" maxlength="10" onkeypress="return isNumberKey(event)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Email</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input-sm" id="CustEmail" name="CustEmail" style="border-radius:0px; padding-left:4px; width:226px" value="">
+                            </div>
+                        </div>
+
+                        <div class="text-center" style="margin:20px 0px 10px 0px">
+                            <button type="button" id="SubmitAddAndLinkCustomerBtn" class="btn btn-primary" onclick="SubmitAddAndLinkCustomer(this.id);" style="margin-right:15px">Add &amp; Link Customer</button>
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ViewCollaborator">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width:400px; margin-left:100px;min-height:210px;">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style=" font-size:18px; margin-top:0px; margin-bottom:15px; padding-top:20px; padding-left:45px;" class="modal-title">Collaborators </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;min-height:150px">
+                <div class="col-md-12" style="height:30px; margin-bottom:8px; background-color: #f3f8fa;">
+                    <div class="col-md-3" style="margin-top:5px;margin-top: 5px;width: 110px;"><b>Sno.</b></div>
+                    <div class="col-md-9" style="padding-left: 0px;width: 170px;margin-top:5px;text-align:left;padding-right: 30px;"><b>Employee Name</b></div>
+                </div>
+                <div id="loading1">
+                    <div colspan="8" style="padding:0px"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div>
+                </div>
+                <div id="ShowCollaborators" class="col-md-12"></div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade ShowRemark" id="ViewRemarks">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width: 775px; height: 220px; overflow-y: scroll; ">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body vrbody" style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; font-size:18px;  margin-top:0px; margin-bottom:15px" class="modal-title">Remarks</h4>
+                <div class="vrhead" style=" display: flex;padding-right :0px; z-index :10; width: 100%; color: #325faf; padding-left: 0px; background-color: white;">
+                    <div class="col-sm-1 col-md-1 vr-hno" style=" text-align: center; padding-top :10px; margin-bottom: 5px; padding-left :0px;"><b>Sno.</b></div>
+                    <div class="col-sm-3 col-md-3 vr-hremark" style=" padding-left: 0px; padding-top: 10px; margin-bottom: 5px; padding-right :0px; width:27%; text-align: left;"><b>Remark</b></div>
+                    <div class="col-sm-3 col-md-3 vr-hcomm" style=" text-align: left; padding-top :10px; margin-bottom :5px; padding-right :0px; padding-left: 0px; width: 15%;"><b>Comm. type</b></div>
+                    <div class="col-sm-3 col-md-3 vr-hdate" style=" text-align:left; padding-top: 10px; margin-bottom: 5px;width: 19%;padding-right :0px; padding-left: 0px;"><b>Date</b></div>
+                    <div class="col-sm-2 col-md-2 vr-hcreate" style=" padding-left: 0px; text-align: left; padding-top: 10px; margin-bottom: 5px; padding-right :10px;"><b>Created by</b></div>
+                </div>
+                <div class="ShowRemark col-md-12" id="ShowRemarkContent"></div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*For filtering on Hometown *@
+<div class="modal fade" id="ModelHomeTownFilter">
+    <div class="modal-dialog" role="form" style="left:auto; right:auto">
+        <div class="modal-content" style="width:500px;">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Hometown</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <form Class="form-horizontal" role="form" method="post" id="HomeTownfilter">
+                <div class="form-group">
+                    @*<label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">HomeTown</label>*@
+                    @*<div class="col-sm-6">*@
+                    <input type="text" class="form-control input-sm" id="searchString" name="searchString" style="border-radius:0px; padding-left:4px; width:226px;margin:auto;" />
+                    @*</div>*@
+                </div>
+                <input type="hidden" name="homeTown" id="homeTown" />
+                <div id="search" style="display:none; width:420px; background-color:white; margin:auto;font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px;">
+                    <table id="htexample" class="table table-bordered">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>SNo</th>
+                                <th>HomeTown</th>
+                                <th style="width:25px;">District</th>
+                                <th style="width:25px;">State</th>
+                                <th style="width:25px;">Country</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="submit" Class="btn btn-primary" style="margin-right:15px; margin-top:20px">Submit</Button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default">Cancel</a>*@
+                </div>
+            </form>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="CallTransfer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px">&times;</span>
+            <h4 style="text-align:center; font-size:18px; margin-top:0px; padding-top:20px; padding-left: 50px;" class="modal-title"></h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="CallTransferForm">
+                    <input type="hidden" name="CallIdforCallTransfer" id="CallIdforCallTransfer" value="">
+                    <div class="text-center"><p style="font-size:17px"> Do you want to register Onsite Service </p></div>
+                    <div Class="text-center" style="margin:10px 0px 10px 50px">
+                        <Button type="button" id="CallTransferSubmitBtn" Class="btn btn-primary" onclick="submitCallTransfer(this.id);" style="margin-right:15px; margin-top:20px; width:76px">Yes</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="TaskClose">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                @*<h4 style="text-align:center; font-size:18px; margin-top:0px;" class="modal-title"></h4>*@
+                <div id="TaskClosedContent" class="col-md-12"></div>
+                @*<div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                        <a  Class="btn btn-primary" data-dismiss="modal" style="margin-top:20px; width:66px; margin-right:30px">Ok</a>
+                    </div>*@
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:15px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="CallCloseModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to Close This Call?</p>
+                <input type="hidden" name="destinationName" value="" id="destinationName" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="CloseCallFromDetailPane()"> Close </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="MultiCallCloseModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to Close These Calls?</p>
+            </div>
+            <input type="hidden" name="callids" value="" id="callids" />
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="CloseMultipleCalls()"> Close </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MultiCallDeleteModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to Delete Call?</p>
+            </div>
+            <input type="hidden" name="callids" value="" id="callids" />
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="DeleteMultipleCalls()"> Delete </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="MultiTagsAddModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <input type="hidden" name="callids" value="" id="callids" />
+            <div Class="text-center">
+                    <label>Tags:</label>
+                       @Html.List_Search_Multi("ddlmultiTags", "68", "-Select Tags-", 0,"", new {@class = ""}, false)
+                    @Html.List_Search("ddlmultiTags", "68", "-Select Tag-", 0,, new {.class = "form-control", .style = "text-align:left"}, False, True)
+            </div>
+
+          @*  <div style="display:flex;justify-content: center;align-items: center;height:100px;">
+                <label style="margin-top:10px;margin-right:10px;">Tags:</label>
+                @Html.List_Search("ddlmultiTags", "68", "-Select Tag-", 0,"", new {@class = "form-control", @style = "text-align:left"}, false, true)
+                <Button type="button" Class="btn btn-primary" style="margin-left: 10px;font-size: 12px;border-radius: 50px;margin-top: 9px;cursor: pointer;" disabled id="btnAddMultiTags" onclick="AddMultipleTagsOnCalls()"> Submit </Button>
+            </div>
+            @*<div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                    <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " disabled id="btnAddMultiTags" onclick="AddMultipleTagsOnCalls()"> Submit </Button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+                </div>
+        </div>
+    </div>
+</div>
+*@
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+
+<!--new design-->
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 2px; width: 670px;">
+            <div class="modal-body" style="height: 400px;  overflow-y:scroll;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            <div id="addfilter" onclick="AddFilters();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer;">New Filter <i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            <div id="addsortOptions" onclick="AddSortingOptions();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer; ">New Sort Option<i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div id="clearFilters" onclick="removeFilter2();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>@*clear filter values*@
+                <div id="search1" onclick="ApplyFilters2();" class="btn modalbutton ">Apply <i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal">Close</button> @*close modal popup*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,259 @@
+﻿
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="~/images/GainbooksFavicon.ico" />
+
+    <style>
+       
+          .navbar-nav a {
+            color: rgb(16,108,200) !important;
+            text-decoration: none;
+        }
+
+        .dropdown-menu {
+            background-color: #0d6efd !important;
+            background-color: rgb(16,108,200) !important;
+            padding-bottom: 15px !important;
+            padding-top: 8px !important;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgb(16,108,200) !important;
+           /* color: #d1d4d8 !important;
+            color: #e8ebee !important;*/
+            color:#baacae !important;
+
+        }
+
+        .dropdown-menu a {
+            color: white !important;
+            text-align: center;
+            font-size: 14px;
+            font-weight:500;
+        }
+
+        .navbar-nav li:hover > ul.dropdown-menu {
+            display: block;
+            position: absolute;
+            right: 0;
+            left: auto;
+        }
+      .dropdown-submenu {
+         position:relative;
+       }
+
+        .dropdown-divider {
+            margin: 3px 12px !important;
+            color: white;
+            height: 1px !important;
+            opacity: 1;
+            margin-top: 2px !important;
+        }
+
+        .footer {
+            padding: 30px;
+            background-color: #212121;
+        }
+
+        .footer-parts{
+            display: flex;
+            flex-direction: row;
+            justify-content:space-between;
+            width:90%;
+            margin:20px auto;
+        }
+
+        .footer h4 {
+            margin-bottom: 20px;
+            color: white;
+            font-size: 25px;
+        }
+
+        .footer p {
+            color: #c7cbcf;
+            margin:10px 0;
+            cursor:pointer;
+        }
+
+        .img-holder{
+            display:flex;
+        }
+
+        .links a, .careers a{
+            text-decoration:none;
+        }
+
+      @@media screen and (max-width: 480px){
+        .navbar-toggler {
+            background-color: rgb(16,108,200) !important;
+            margin-right: 8px;
+            padding:3px 9px !important;
+            font-size:15px !important;
+        }
+
+        .navbar-collapse {
+            background: rgb(16,108,200);
+            padding: 10px;
+            z-index:100;
+            margin-top:10px;
+        }
+
+        .navbar-collapse .nav-link{
+            color:white !important;
+        }
+
+        .navbar .container {
+           padding: 0;
+        }
+
+        .nav-item {
+           /*text-align: center;*/
+           border-bottom: 2px solid white;
+        }
+
+            .dropdown-menu {
+                background-color: #0d6efd !important;
+                background-color: white !important;
+                padding-bottom: 8px !important;
+                padding-top: 8px !important;
+            }
+
+            .dropdown-item:hover {
+                background-color: rgb(16,108,200) !important;
+                /* color: #d1d4d8 !important;
+                    color: #e8ebee !important;*/
+                color: #baacae !important;
+            }
+
+            .dropdown-menu a {
+                color: rgb(16,108,200) !important;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .navbar-nav li:hover > ul.dropdown-menu {
+                display: block;
+                position: inherit;
+                right: 0;
+                left: auto;
+            }
+        
+        .navbar-nav .nav-link {
+           font-size: 14px !important;
+           font-weight: 600 !important;
+           padding:7px !important;
+           color:white !important;
+        } 
+
+        .footer-parts{
+            flex-direction:column;
+        }
+
+        .footer-parts div{
+            margin-bottom:20px;
+        }
+
+      }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-white static-top" style="height: 80px;">
+        <div class="container" style="max-width: 100%;">
+            <a class="navbar-brand" href="@Url.Action("GainbooksWebsite", "PublicUrl")" style="display:contents;">
+                <img src="/images/gainbooks_logo.png" alt="..." style="height:50px;">
+                <h4 style="font-size:20px; display:inline-block;color:#337ab7; margin:0;">GainBooks</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GainbooksWebsite", "PublicUrl")">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AboutUs", "PublicUrl")">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" data-toggle="dropdown" aria-expanded="false"> Products </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="@Url.Action("FinancialModule", "PublicUrl")">Financial Modules</a></li>
+                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="@Url.Action("OperationalModule", "PublicUrl")">Operational Modules</a></li>
+                            <hr class="dropdown-divider">
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ContactUs", "PublicUrl")">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("PartnerwithUs", "PublicUrl")">Partner with us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="@Url.Action("LoginForm", "PublicUrl")" id="navbarDropdownMenuLink" aria-haspopup="true" data-toggle="dropdown" aria-expanded="false"> Login </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="min-width:105px;">
+                            <li><a class="dropdown-item" href="@Url.Action("LoginForm", "PublicUrl")">Customer</a></li>
+                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item">Employee</a></li>
+                            <hr class="dropdown-divider">
+                            <li> <a class="dropdown-item" href="#">Dealer</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("SignUp", "Home")"> Signup </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="start">
+        @RenderBody()
+    </div>
+
+    <div class="footer">
+      <div class="footer-parts">
+        <div class="links">
+            <h4>IMPORTANT LINKS</h4>
+            <a href="@Url.Action("AboutUs", "PublicUrl")"><p>About us</p></a>
+            <a href="@Url.Action("ContactUs", "PublicUrl")"><p>Contact us</p></a> 
+            <a><p>Sitemap</p></a>
+            <a href="http://www.saralerp.com/"><p>Saral</p></a>
+            <a><p>Privacy policy</p></a>
+            <a><p>Terms and condition</p></a>
+        </div>
+        <div class="careers">
+            <h4>CAREERS</h4>
+            <a><p>Apply for jobs</p></a>
+            <a href="@Url.Action("ContactUs", "PublicUrl")"><p>Become a channel partner</p></a>
+        </div>
+        <div class="follow">
+            <h4>FOLLOW US</h4>
+            <p class="img-holder"><a href="https://www.instagram.com/gain.books/?igshid=NmE0MzVhZDY%3D"><img src="/images/main/logo-ig.png" alt="" style="height: 30px; margin-top:-1px; padding-right:7px;"></a><a href="https://www.facebook.com/technopinchS"><img src="/images/main/logo-fb.png" alt="" style="height: 24px; margin-top:2px; padding-right:10px;"></a><a href="https://www.linkedin.com/company/saralgainbooks/"><img src="/images/main/logo-ln.png" alt="" style="height: 25px; margin-top:2px; padding-right: 5px;"></a><a href="https://www.youtube.com/channel/UC0NNte2720JYou4gM2Heiug"><img src="/images/main/logo-yt.png" alt="" style="height: 30px;"></a></p>
+        </div>
+      </div>
+    </div>
+
+    @*<div class="container footer hidden-sm hidden-xs" style="bottom:0px; width:100%; background:#efefef; padding:0px; max-width:100%;">
+        <div class="row" style="--bs-gutter-x: 0;">
+            <div class="col-lg-6 col-md-6" style="padding:0px;">
+
+            </div>
+            <div class="col-lg-6 col-md-6 pull-right" style="padding:0px; text-align:right; padding-right:10px;">
+                <strong style="font-size: 11px;">Copyrights |<a id="copyright" href="http://technopinch.com">Technopinch Solutions Pvt Ltd &#169; @DateTime.Now.Year </a> All rights reserved.</strong>
+            </div>
+        </div>
+    </div>*@
+   
+</body>
+</html>

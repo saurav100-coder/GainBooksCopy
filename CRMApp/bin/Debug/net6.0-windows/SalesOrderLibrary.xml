@@ -1,0 +1,440 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SalesOrderLibrary
+</name>
+</assembly>
+<members>
+<member name="T:SalesOrderLibrary.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SalesOrderLibrary.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SalesOrderLibrary.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateBillheader(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert Update Billheader
+ </summary>
+ <param name="p_billheader"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateBillItems(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert Update BillItems
+ </summary>
+ <param name="p_billitems"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateShopControl(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert Update ShopControl
+ </summary>
+ <param name="p_shopcontrol"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.rewritesrlproFromCrmtemplate(System.String@,System.String)">
+ <summary>
+ Insert update delete menumaster of user database from crmtemplate infotable 
+ </summary>
+ <param name="custcode"></param>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.rewritesrlbchFromCrmtemplate(System.String@,System.String)">
+ <summary>
+ Insert update delete menumaster of user database from crmtemplate infotable 
+ </summary>
+ <param name="custcode"></param>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.rewriteiemsgroupsFromCrmtemplate(System.String@,System.String)">
+ <summary>
+ Insert update delete menumaster of user database from crmtemplate infotable 
+ </summary>
+ <param name="custcode"></param>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateIemsGroups(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert Update IemsGroups
+ </summary>
+ <param name="p_iemsgroups"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetShopControlRow(System.String,System.String)">
+ <summary>
+ Return shopcontrol row 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetBillitemsdatabyP_billheader(System.String,System.String,System.String)">
+ <summary>
+ Retrun billitems datatable for comma Separated p_billheaders
+ </summary>
+ <param name="p_billheaders"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetBillheaderRowbyOrderid(System.String,System.String,System.String)">
+ <summary>
+ Return billheader row for Orderid
+ </summary>
+ <param name="orderid"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetP_BillheaderbyOrderid(System.String,System.String)">
+ <summary>
+ Return P_Billheader for Orderid
+ </summary>
+ <param name="orderid"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetBillheaderRowbyP_Billheader(System.Int32,System.String,System.String)">
+ <summary>
+ Return Billheader rows for p_billheader
+ </summary>
+ <param name="p_billheader"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateSaleIems(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ Insert update saleiems Method
+ </summary>
+ <param name="p_saleiems"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getSaleiemsData(System.String,System.String,System.String)">
+ <summary>
+ Get Saleiems data for rowstatus=0 and syncflag='N'
+ </summary>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getShopControlDatatable(System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ Get shopcontrol Datatable with textcolumns
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="dtinfotableuser"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetProductInfoCount(System.String,System.String,System.String)">
+ <summary>
+ Return Srl_pro Rows count 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="search"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getProductinfoWithBatch(System.Nullable{System.Int32},System.String,System.Int32,System.String,System.String,System.String)">
+ <summary>
+ Get  Product and batch details 
+ </summary>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param> 
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.SaveIntodbGetKeybillheader(System.Object[],System.String,System.String)">
+ <summary>
+  Take ClassObject and mtypeCode as parameter and save into database and return key value as per the name of table and column of row which is inserted.
+ </summary>
+ <param name="aClsObject">aClsObject can contain multiple tables.</param>
+ <param name="tablename"></param>
+ <param name="fieldname"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.SaveIntodbGetOrderId(System.Object[],System.String,System.String)">
+ <summary>
+  Take ClassObject and mtypeCode as parameter and save into database and return key value as per the name of table and column of row which is inserted.
+ </summary>
+ <param name="aClsObject">aClsObject can contain multiple tables.</param>
+ <param name="tablename"></param>
+ <param name="fieldname"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetOrderDetailsData(System.String,System.String,System.String,System.Int32,System.Int32,System.String)">
+ <summary>
+ orders data
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lorder"></param>
+ <param name="start"></param>
+ <param name="pSize"></param>
+ <param name="colStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetOrderDetailsCount(System.String,System.String)">
+ <summary>
+ orders count 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getRowsCountSaleOrdersDataForGrid(System.String,System.String)">
+ <summary>
+ Get Rows Count of BillHeader
+ </summary>
+ <param name="condition"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getSaleOrdersDataForGrid(System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Nullable{System.Int32},System.Int32)">
+ <summary>
+ Get data from BillHeader
+ </summary>
+ <param name="dtInfotable"></param>
+ <param name="dtInfotableUser"></param>
+ <param name="serverdatabase"></param>
+ <param name="condition"></param>
+ <param name="order"></param>
+ <param name="start"></param>
+ <param name="pSize"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getBillItemsDataForPBillheader(System.Int32,System.String)">
+ <summary>
+ Get BillItems data for p_billHeader
+ </summary>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.generateProdcodeForItemType(System.String,System.String)">
+ <summary>
+ Retrun sequenced prodcode for given itemtype 
+ </summary>
+ <param name="itemtype"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getBillheaderRowForEntryTypeandBillDate(System.String,System.DateTime,System.String,System.String)">
+ <summary>
+ Get billheader row for Entrytype and billdate
+ </summary>
+ <param name="EntryType"></param>
+ <param name="BillDate"></param>
+ <param name="serverdatabase"></param>
+ <param name="columns"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetPurchasesCount(System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetPurchasesData(System.String,System.String,System.String,System.Int32,System.Int32,System.String)">
+ <summary>
+ Purchase data
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lorder"></param>
+ <param name="start"></param>
+ <param name="pSize"></param>
+ <param name="colStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.DeleteOderDetails(System.String,System.String)">
+ <summary>
+ Delete data from Srl_ord, Billheader and Billitems 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="orderId">CommaSeparated Values</param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.DeleteBillHeaderBillItems(System.String,System.String,System.String)">
+ <summary>
+ Delete data from Billheader and Billitems 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="p_billheader">comma separated value</param>
+ <param name="srl_ordDelete">if want to delete data from srl_ord </param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetPhysicalStockCount(System.String,System.String)">
+ <summary>
+ Count physicalstock rows
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetPhysicalStockData(System.String,System.String,System.String,System.Int32,System.Int32,System.String)">
+ <summary>
+ Get physicalstock Table data using pagination
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lorder"></param>
+ <param name="start"></param>
+ <param name="pSize"></param>
+ <param name="colStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetProductDetailByProdcode(System.String,System.String,System.String)">
+ <summary>
+ Return product details using prodcode
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="prodcode"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateInSRLProSRLBchwine(System.String@,System.Collections.Hashtable@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert update Data into srl_pro or srl_bch using single Transaction
+ </summary>
+ <param name="prodcode"></param>
+ <param name="ChangedFieldsValuesPairSrlPro"></param>
+ <param name="ChangedFieldsValuesPairSrlBch"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateInSRLProUsingTrans(System.String,System.Collections.Generic.List{System.Collections.Hashtable},System.String)">
+ <summary>
+ Insert multiple rows in srl_pro using single SQL Transaction
+ </summary>
+ <param name="custcode"></param>
+ <param name="ListofChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateInSRLBCHUsingTrans(System.String,System.Collections.Generic.List{System.Collections.Hashtable},System.String)">
+ <summary>
+ Insert multiple rows in srl_bch using single Transaction
+ </summary>
+ <param name="custcode"></param>
+ <param name="ListOfChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.insertbillheaderbillitemsPharma(System.Int32,System.Collections.Hashtable,System.Collections.Generic.List{System.Collections.Hashtable},System.String,System.Data.DataRow)">
+ <summary>
+ 
+ </summary>
+ <param name="p_billheader"></param>
+ <param name="changefieldbillheader"></param>
+ <param name="changebillitems"></param>
+ <param name="serverdatabase"></param>
+ <param name="sessionrow"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.SaveIntodbGetKeybillheaderPharma(System.Object[],System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="aClsObject"></param>
+ <param name="tablename"></param>
+ <param name="fieldname"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.InsertUpdateInSRLProSrlBchUsingTrans(System.String,System.Collections.Generic.List{System.Collections.Hashtable},System.Collections.Generic.List{System.Collections.Hashtable},System.Data.DataRow,System.String)">
+ <summary>
+ This function is usefull to insert or update data into SRLPRO or SRLBCH for multiple Prodcodes using single transaction 
+ </summary>
+ <param name="prodCodeStr">Comma separated ProdCode String</param>
+ <param name="ListofChangedFieldsValuesPairSrlPro">List of SrlPro HashTable</param>
+ <param name="ListofChangedFieldsValuesPairSrBch">List of SrlBch HashTable</param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.UpdateOpeningStockUsingTras(System.Int32,System.Collections.Hashtable,System.Collections.Generic.List{System.Collections.Hashtable},System.String,System.Data.DataRow,System.String)">
+ <summary>
+ Separate InsertUpdate for Update Opening stock
+ </summary>
+ <param name="p_billheader"></param>
+ <param name="changefieldbillheaderForUpdate"></param>
+ <param name="changebillitemsForInsert"></param>
+ <param name="serverdatabase"></param>
+ <param name="sessionrow"></param>
+ <param name="updateBillitemsQuery">Sql query for update billitems qty according to prodcode</param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.SaveIntodbUpdateOpeningStock(System.Object[],System.String)">
+ <summary>
+ Separate SaveintoDb Method for Update Opening Stock
+ </summary>
+ <param name="aClsObject"></param>
+ <param name="updateBillitemsQuery"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.UpdatebillheaderbillitemsNew(System.Int32,System.Collections.Hashtable,System.Collections.Generic.List{System.Collections.Hashtable},System.Collections.Generic.List{System.Collections.Hashtable},System.String,System.Data.DataRow)">
+ <summary>
+ Update Billheader or Billitems
+ </summary>
+ <param name="p_billheader"></param>
+ <param name="changefieldbillheader"></param>
+ <param name="changebillitemsForInsert"></param>
+ <param name="changebillitemsForUpdate"></param>
+ <param name="serverdatabase"></param>
+ <param name="sessionrow"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetSrlProCount(System.String,System.String,System.String)">
+ <summary>
+ Return Srl_pro Rows count 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="search"></param>
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.getSrlproDetails(System.Nullable{System.Int32},System.String,System.Int32,System.String,System.String,System.String)">
+ <summary>
+ Get  Srlpro details 
+ </summary>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param> 
+ <returns></returns>
+</member>
+<member name="M:SalesOrderLibrary.SalesOrderFunction.GetSrlBchdatabyProdcode(System.String,System.String,System.String)">
+ <summary>
+ Retrun srlbch datatable for comma separated prodcode string
+ </summary>
+ <param name="prodcodestr"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

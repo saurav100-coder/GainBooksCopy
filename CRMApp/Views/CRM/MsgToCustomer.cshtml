@@ -1,0 +1,71 @@
+﻿@model CRMApp.Models.RegCalls
+@{
+    Layout = "";
+}
+
+@*@Optimization.Scripts.Render("~/Scripts/Msg_To_Customer")*@
+<script src="~/Scripts/Custom/MsgToCustomer.js"></script>
+
+<script>
+    function myFunction(value, id) {
+        var msg = "";
+        if (value == "1") {
+            msg = "Hello Mr <contact Person> , <firm name>, We have been trying to call you regarding your call registered at Saral, but could not connect. Request you to contact at 9414184250 to discuss your issue. Thanks for your association with Saral. Have a great day! Regards Team Saral";
+        }
+        else if (value == "2") {
+            msg = "Dear Sir, Our head office is closed today due to <reason>. Apologies for the inconvenience. Regards Saral Team";
+        }
+        else if (value == "3") {
+            msg = "Dear Sir, Your call has been forwarded to our servicing dealer in your area. You can contact him on <email>, <phone> for your issue resolution.Regards Saral Team.";
+        }
+        else if (value == "4") {
+            msg = "Saral softech pvt ltd. A/c no.: 30450926206, IFSC code: SBIN0011311, State bank of india branch: Mahaveer nagar kota, Regstration: 1100/-, GST updation: 2000/- one time depo.";
+        }
+        else if (value == "5") {
+            msg = "TECNOPINCH SOLUTIONS PVT LTD. A/c no.: 018405500839, IFSC: ICIC0000184, ICICI BANK branch:Jhalawar road kota, Regstration: 1100rs+GST(18%), GST updation: 2000rs+GST(18%)";
+        }
+        document.getElementById("T").value = msg;
+    }
+
+</script>
+<div>
+    <form Class="form-horizontal" action="@Url.Action("MsgToCustomer")" role="form" method="post">
+        <div Class="form-group">
+            @Html.HiddenFor(model=> model.AllCallsReg_key)
+            @Html.HiddenFor(model=> model.P_AllCallsReg)
+            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Customer Name</label>
+            <div class="col-sm-5">
+                @Html.TextBoxFor(model=> model.Firmname, new {@style = "width:230px"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Phone No</label>
+            <div class="col-sm-5">
+                @Html.TextBoxFor(model=> model.Mobileno, new {@style = "width:230px", @maxlength = "10", @placeholder = "Enter 10 digit number Only", @name = "Phoneno"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">Template</label>
+            <div class="col-sm-5">
+                <select id="Template" name="" class="" style="width:230px; height:26px; padding-bottom:1px; padding-top:1px; font-size:inherit" onchange="myFunction(this.value,this.id);">
+                    <option value="0">Select an template</option>
+                    <option value="1">Customer Unavailable</option>
+                    <option value="2">Off in office</option>
+                    <option value="3">Mail to dealer</option>
+                    <option value="4">For Rajasthan Parties</option>
+                    <option value="5"> For Outside Rajasthan Parties</option>
+                </select>            
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail1" class="col-sm-4 control-label">Message</label>
+                <div class="col-sm-5">
+                    <textarea rows="4" cols="35"  id="T"  name="msg" style="width:230px"></textarea>
+                </div>
+            </div>
+            <div Class="text-center" style="margin:20px 0px 10px 50px">
+                <Button type="submit" Class="btn btn-primary" style="margin-right:15px">Submit</Button>
+                <a href="@Url.Action("ManageRegCalls")" Class="btn btn-default">Cancel</a>
+            </div>
+</form>
+</div>

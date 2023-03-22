@@ -1,0 +1,282 @@
+﻿@{
+    ViewData["Title"] = "Message Templates";
+}
+
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Custom/ManageMessageTemplates.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageMessageTemplates.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+
+
+<style>
+    .context-menu {
+        width: 250px;
+        height: auto;
+        position: absolute;
+        display: none;
+    }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 8px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+    /*.MoreDetails:hover i:hover .MoreDetails {
+                background: #8f1fe7;
+            }*/
+
+    tr:hover:not(.highlight) td {
+        background-color: white;
+    }
+
+    .highlight {
+        background-color: #568CA7;
+        color: white;
+    }
+
+    /*.clickable:hover {*/
+        /*box-shadow: 0px 8px 6px -8px gray;*/
+        /*box-shadow: 0px 11px 8px -10px gray, 0px -11px 8px -10px gray;
+    }*/
+  
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .DateBtn {
+        height: 26px;
+        margin-top: 10px;
+        border-radius: 0px;
+        padding: 3px 6px 6px 6px;
+        width: 29px;
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+
+    /*.content {
+        height: 580px;
+    }*/
+
+    .subSelected {
+        background-color: orange !important;
+    }
+
+    tr:hover:not(.highlight, .subSelected) td {
+        background-color: lightblue;
+    }
+</style>
+
+
+@*<div class="container" style="height: 50px;">
+    <h4 style="color:#3c8dbc; font-size:25px; text-align:center; margin-top:10px; font-family:verdana,arial,sans-serif;">Message Templates</h4>
+</div>*@
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+<div class="calHeightIcon">
+    @*<div class="panelbody">*@
+        <div class="icon-div">
+            <div id="FilterText" class="col-md-2" style="float:left; display:none; margin-top:13px; font-size:13px; border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:24px; margin-right:15px">
+            
+                    <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;"></p>
+                    <a class='' id='' onclick='removeFilter();'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>
+                
+            </div>
+            <div id="FilterText1" style="float:left; display:none; margin-top:13px; font-size:13px; border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:24px">
+                
+                    <p id="fText1" style="float:left; margin-bottom:0px; margin-right:10px;"></p>
+                    <a class='' id='' onclick='removeFilter1();'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>
+                
+            </div>
+            <div class="search2">
+                <a class="top" title="" data-placement="bottom" data-toggle="Create New Template" onclick="CreateTemplate()">
+                    <img src="~/images/icon-plus.png" />
+                </a>
+                <a class="top" title="" data-placement="bottom" data-toggle="Refresh" onclick="reloadGrid()">
+                        <img src="~/images/icon-refresh.png" />
+                </a>
+            </div>
+        <div class="g" style=" top: 52px;">
+                <label id="info" style="font-size:11px; color:#808080; padding-right:10px;"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:23px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px"> 
+                    <i class="fa fa-angle-right" style="font-size:23px"></i>
+                </div>
+            </div>
+        </div>
+    @*</div>*@
+</div>
+
+<div>
+    <input type="hidden" name="grid1" id="grid1" value="">
+</div>
+
+<div class="col-md-12 text-center Table-Dive" style="padding-right:0; padding-bottom:0;">
+    <div class="calHeightTaskBar">
+      <div class="TaskBar tr bg-primary">
+            <div class="HSno tbHead"><b>SNo.</b></div>
+        <div class="HTemplateid tbHead"><b>Template Id</b></div>
+        <div class='HTemplateType tbHead'><b>Template Type</b></div>
+        <div class='HTemplateTitle tbHead'><b>Template Title</b></div>
+        <div class="HTemplateText tbHead"><b>Template Text</b></div>
+        <div class='HTemplatestatus tbHead'><b>Active Status</b></div>
+        <div class='HCreateDate tbHead'><b>Create Date</b></div>
+      </div>
+    </div>
+    <div id="loading" style="z-index:9999;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6" style="margin-top:20px;"></div><p id="Msg"></p></div></div>
+    <div class="" id="example" style=""></div>
+</div>
+
+<input type="hidden" id="type2" value="@ViewBag.Message" />
+
+<div class="modal fade in" id="CreateMsgTemplateModel">
+    <div class="modal-dialog" role="form" style="width:350px">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body" style=" ">
+                <div id="CreateMsgTemplateForm">
+
+                </div>
+                <div id="contextMenu" class="context-menu" onclick="getValueAndhideContextMenu();">
+                    <select multiple class="form-control input-sm" id="lstVariables" style="height: 90px;"></select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+        </div>
+    </div>
+</div>
+
+
+
+<div Class="modal fade" id="deleteTemplate">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title">Delete Message Template</h4>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <form Class="form-horizontal" role="form" method="post" id="deleteTemplateForm">
+                    <input type="hidden" id="p_msgTemplate" name="p_msgTemplate" value="" />
+                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="button" Class="btn btn-primary" onclick="DeleteTemplate()" style="margin-right:25px; margin-top:20px">Delete</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

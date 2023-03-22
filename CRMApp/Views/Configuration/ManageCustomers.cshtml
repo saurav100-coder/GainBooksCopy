@@ -1,0 +1,474 @@
+﻿@{
+    ViewData["Title"] = "ManageCustomers";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+
+}
+@*Added by aslam for multiselect dropdown css*@
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>*@
+
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+
+<link href="~/Content/Custom/sumoselect.min.css" rel="stylesheet" />
+<script src="~/scripts/Custom/sumoselect.min.js"></script>
+
+@*Added by aslam*@
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="~/Content/Custom/ManageCustomers.css" />  
+@*<link rel="stylesheet" href="~/Content/Custom/CommanStyleSheet.css" />*@
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageCustomers.js"></script>
+<script src="~/scripts/Custom/BasicFilter.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+
+<style>
+    .bootstrap-select > .dropdown-toggle {
+        margin: 10px 0px 0px 2px;
+        font-size: 11px;
+        outline: none;
+        border: none;
+    }
+    .highlight {
+        background-color: #a0b3c5 !important;
+        color: white;
+        /* border: solid 1px #ddd;*/
+    }
+    .colorwhite{
+        color:white !important;
+    }
+
+    #CallClosedContent {
+        width: 100%;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+    .select-btn.select-filterDropdown, .select-filterDropdown ~ .list-items{
+       width: auto;
+       margin: 0px 17px;
+       margin-left: 10px;
+    }
+    /*.select-filterDropdown{
+         width: auto;
+         margin: 0px 17px;
+         margin-left: 10px;
+   }*/
+
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+     .context-menu-list {
+        width: 185px;
+    }
+      .context-menu-list li{
+        margin-top:6px;
+        margin-bottom:6px;
+    }
+    .css-checkbox, .checkboxall{
+        cursor:pointer;
+    }
+
+    /*.resultContent {
+        
+        border: #d9d5d0 1px solid;
+        margin-bottom: 10px;
+        border-radius: 3px;
+        background-color: #f9f9f9;
+    }
+        .resultContent p {
+            margin: 0px !important;
+            padding: 6px;
+            font-size: 12px;
+        }
+    .closebn:hover {
+    background-color: #ddd;
+    border-radius: 50%;
+    color: #246399;*/
+}
+</style>
+<input type="hidden" id="infostring" name="infostring" value="@ViewBag.hoverStripString" />
+<input type="hidden" name="grid1" id="grid1" value="">
+<p Class="text-center text-success">@TempData["Message"]</p>
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+        <div class="calHeightIcon">
+    
+            <div class="icon-div">
+                <div class="search2">
+                    <a class="top" id="CreateCustomer" href='/Configuration/CustomerForm' title="" data-placement="bottom" data-toggle="Create New Customer">
+                    <img src="~/images/icon-plus.png" />
+                    </a>
+
+                    <a class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh" style="cursor:pointer">
+                        <img src="~/images/icon-refresh.png" />
+                    </a>
+                    <a class="top" title="" data-placement="bottom" data-toggle="Download format file"  href='@Url.Action("downloadImportCustomerFormatFile", "Home")'>
+                       <img src="~/images/icon-export.png" />
+                       @*<i class="glyphicon glyphicon-download-alt" style="font-size:15px;"></i>*@
+                    </a>
+                    <a class="top" title="" data-placement="bottom" data-toggle="Import Cusomers"  onclick="OpenImportModal();">
+                       <img src="~/images/icon-import.png" />
+
+                    </a>
+                    <a class="top" title="" data-placement="bottom" data-toggle="Add Tags" onclick="ShowMultiCustomerAddTagsModal();">
+                        <img src="~/images/tag.png" />
+                    </a>
+                     <a class="top btn-Filter" title="" data-placement="bottom" data-toggle="Advance Filter"  onclick="ShowFilters();">
+                       <img src="~/images/icon-filter.png" />
+                    </a>
+
+                    <div class="confirmationBox" id="MultiTagsAddModal">
+                        <input type="hidden" name="p_customers" value="" id="p_customers" />
+                        @Html.List_Search_Multi("ddlmultiTags", "79", "-Select Tag-", 0,"", new {@class = ""}, false)
+                    </div>
+                </div>
+        <div id="dropdown" class="search" style="display: inline-flex;margin-left: 0px; padding-left:10px; /*width:68%;*/ position:relative;align-items: center;margin-right: 50px;" @*style="height:30px; display:inline-flex; margin-top:10px;"*@>
+                   @* <select class="" id="filter" style="height: 26px;padding-left: 5px;width: auto;">
+                        <option value="0">Filter By</option>
+                    </select>*@
+                    <p class="basicFilterTitle"  onclick="ShowCloseBasicFilter();"><span>Select Filter</span> <i class="fa fa-caret-down"></i></p>
+                    <div id="filterDiv" class="basicfilterDiv">
+                        <table id="basicFilterTable">
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                <td colspan="3" style="text-align:center;">
+                                    <div id="search1" onclick="ApplyBasicFilters();" class="btn modalbutton ">Apply<i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                                    <button type="button" class="btn modalbuttonsecondary" onclick="ShowCloseBasicFilter();">Close</button>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div id="FilterText" Class="" style="float:left; font-size: 13px;border: 1px solid lightgray;width: auto;padding: 5px;height: 26px;left: 156px;bottom: 18px;">
+                            <p id="fText" ></p>
+                            <a Class='' id='' onclick='ReloadGrid();'>
+                                <i Class='glyphicon glyphicon-remove'></i>
+                            </a>
+                    </div>
+                </div>
+
+                <input type="text"  id="custnameFilter" class="custnameFilter" onkeyup="searchByCustName();" style="width:40%; margin-right:8px; margin-left:10px; margin-top: 5px;border: none;border-bottom: 1px solid;outline: none;" placeholder="Search for customer name">
+
+                <div class="g" style=" top: 52px;">
+                    <label id="info" style="padding-right: 10px; font-size: 11px;color:#808080"> </label>
+                    <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                        <i class="fa fa-angle-left" style="font-size:23px"></i>
+                    </div>
+                    <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                        <i class="fa fa-angle-right" style="font-size:23px"></i>
+                    </div>
+                </div> </div>  </div>
+
+<div class="resultDiv" style="display:none;margin-top:5px;">
+    <div class="resultContent">
+        <div class="result-msg">
+        </div>
+        <p class="clearFilter" onclick="removeFilter();">Clear Filter</p>
+    </div>
+</div>
+
+<div id="subDiv" style="display:none;">
+    <label id="subDivLable" onclick="Allselection();"></label>
+</div>
+
+<div Class="col-md-12 text-center Table-Dive">
+   <div Class="calHeightTaskBar">
+      <div Class="TaskBar tr bg-primary">
+
+        <div Class="HSNo tbHead" style="width: 7%; padding: 0; text-align: left; "><input type="checkbox" id="selectall" class="css-checkbox " name="selectall" style="margin-right:10px;" /><b style="vertical-align: super;">SNo.</b></div>
+        <div Class="HCustId tbHead" style="width:4%;  padding:0;text-align:left; margin-left: 5px;"><b>Id</b></div>
+        <div Class="HCustCode tbHead" style="width:8%; text-align:left;"><b>Code</b></div>
+        <div Class="HCustomerName tbHead" style="width:18%;"><b>Name</b></div>
+        <div Class="HContactperson tbHead" style="width:11%; text-align:left;padding-left:7px;"><b>Person</b></div>
+        <div Class="HMobNo tbHead" style="width:8%;  padding:0px 0px 0px 5px; text-align:left;"><b>MobNo</b></div>
+        <div Class="HomeTown tbHead" style="width:9%;  padding:0px 0px 0px 0px;text-align:left;"><b>Location</b></div>
+        <div Class="HCustomerType tbHead" style="width:6%; text-align:left;  "><b>Type</b></div>
+        <div Class="HStatus tbHead" style="width:6%; text-align:left;"><b>Status</b></div>
+        <div Class="HActivationDate tbHead" style="width:7%;text-align:left;  "><b>Date</b></div>
+        <div Class="HBusinessType tbHead" style="width:8%;  padding:0px 5px 0px 0px; text-align:left; "><b>Business</b></div>
+        <div Class="HProduct tbHead" style="width:9%;  padding:0px 5px 0px 10px; text-align:left; "><b>Product</b></div>
+        <div Class="HGst tbHead" style="width:8%;  padding:0px 5px 0px 10px; text-align:left; "><b>GSTIN</b></div>
+        <div Class="HTags tbHead" style="width:8%;  padding:0px 5px 0px 10px; text-align:left; "><b>Tags</b></div>
+        <div Class="HBilled tbHead" style="width:8%;  padding:0px 5px 0px 10px; text-align:left; "><b>BilledUpto</b></div>
+     </div>
+
+    </div>
+    <!--<table id="" class="table row-border table-responsive calHeightTaskBar" cellspacing="0">
+        <thead>
+            <tr style=" font-size: 11px; text-align: center; color: #337ab7; background-color: #f3f8fa; width: 100%; border-bottom: 7px solid white; padding-bottom: 10px !important;">
+                <th style="width: 75px">
+                    <input type="checkbox" id="selectall" class="css-checkbox " name="selectall" style="margin-right:10px;" />
+                    SNo.
+                </th>
+                <th style="width:40px">Customer Id</th>
+                <th style="width: 40px">CustCode</th>
+                <th style="width: 100px">Customer Name</th>
+                <th style="width: 100px">Contact person</th>
+                <th style="width: 100px">Mob No</th>
+                <th style="width: 100px">Home Town</th>
+                <th style="width: 100px">Customer Type</th>
+                <th style="width: 50px">Status</th>
+                <th style="width: 100px">Activation Date</th>
+                <th style="width: 100px">Business Type</th>
+                <th style="width: 100px">Product</th>
+
+            </tr>-->
+            @*<tr id="loading"><td colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>*@
+        <!--</thead>
+        <tbody></tbody>
+    </table>-->
+    <div id="loading" style="padding:10px; margin:10% auto;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div></div>
+    <div class=" " id="example" style=""></div>
+</div>
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+
+@*<div Class="LoaderOverlay">
+        <div Class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px"></div>
+    </div>*@
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:500px; margin-bottom:50px; display:none"></div>
+</div>
+
+<div Class="modal fade" id="NoRow"></div>
+<div Class="modal fade" id="CallClosed">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title"></h4>
+            <div Class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div id="CallClosedContent" Class="col-md-6"></div>
+                <div Class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Import Employees*@
+<div class="modal fade" id="ImportCustomerModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width: 559px;">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding: 6px 12px 10px 12px; font-size: 28px;width: 54px;height: 46px;text-align: center;">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; margin-top:0px;" class="modal-title"><b>Please Upload Excel File</b>(Use .xlsx files) </h4>
+                <div id="myRemark" class="col-md-12">
+                    <form Class="form-horizontal" role="form" method="post" id="importForm" enctype="multipart/form-data" style="margin-top:0px;">
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <br />
+                        <div Class="" style="margin-bottom: 45px;margin-right: 62px;">
+                            @*<label class="col-sm-5 control-label" style="padding-top:0px; padding-right:0px; text-align:right">Upload Excel File</label>*@
+                            @*<input type="file" name="file1" id="file1" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="col-sm-6" style="left: 115px;">*@
+                            <input type="file" name="file1" id="file1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="col-sm-6" style="left: 115px;">
+                        </div>
+                    </form>
+
+                </div>
+                @*<div style="text-align:center">
+                        <p style="color:red;margin-left:-25px;" id="fileErrormsg"></p>
+                    </div>*@
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+                <Button type="button" Class="btn btn-primary" onclick="SubmitImportCustomers();" style="margin-right:30px; padding:0px; width:102px; height:26px">Submit</Button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*For filtering on Hometown *@
+<div Class="modal fade" id="ModelHomeTownFilter">
+    <div Class="modal-dialog" role="form" style="left:auto; right:auto">
+        <div Class="modal-content" style="width:500px;">
+            <div Class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <Button type="button" Class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </Button>
+                <h4 Class="modal-title" style="text-align:center">Hometown</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <form Class="form-horizontal" role="form" method="post" id="HomeTownfilter">
+                <div Class="form-group">
+                    @*<label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:3px">HomeTown</label>*@
+                    @*<div class="col-sm-6">*@
+                    <input type="text" Class="form-control input-sm" id="searchString" name="searchString" style="border-radius:0px; padding-left:4px; width:226px;margin:auto;" />
+                    @*</div>*@
+                </div>
+                <input type="hidden" name="homeTown" id="homeTown" />
+                <div id="search" style="display:none; width:420px; background-color:white; margin:auto;font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px;">
+                    <Table id="htexample" Class="table table-bordered">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>SNo</th>
+                                <th> HomeTown</th>
+                                <th style="width:25px;"> District</th>
+                                <th style="width:25px;"> State</th>
+                                <th style="width:25px;"> Country</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </Table>
+                </div>
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="submit" Class="btn btn-primary" style="margin-right:15px; margin-top:20px">Submit</Button>
+                    <Button type="button" Class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </Button>
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default">Cancel</a>*@
+                </div>
+            </form>
+            <div Class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div Class="modal fade" id="deleteCustomer">
+    <div Class="modal-dialog" role="form">
+        <div Class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title">Delete Customer</h4>
+            <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                <form Class="form-horizontal" role="form" method="post" id="deleteCustomerForm">
+                    <input type="hidden" id="p_Customer" name="p_Customer" value="" />
+                    <input type="hidden" name="custCode" id="custCode" value="" />
+                    <input type="hidden" name="custName" id="custName" value="" />
+                    <input type="hidden" name="p_acccode" id="p_acccode" value="" />
+                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="button" Class="btn modalbutton" onclick="DeleteCustomer()" style="margin-right:25px; margin-top:20px">Delete</Button>
+                        <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="AddCustomertoGroupModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <span class="close" data-dismiss="modal" style="padding:6px 12px 20px 20px; font-size:24px">&times;</span>
+            <h4 style="text-align:center; font-size:16.5px; margin-top:0px; padding-top:30px; padding-left:30px;" class="modal-title"> Add Customer To Group </h4>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px; height: 160px;">
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <div  class="col-md-12" style="padding-right: 75px;">
+                    <form Class="form-horizontal" role="form" method="post" style="margin-top:0px;" id="AddCustomertoGroupForm">
+                        <div Class="form-group">
+                            <input type="hidden" name="p_acccode" id="p_acccode" value="" />
+                            <Label for="inputEmail1" class="col-sm-4 control-label" style="margin-left: 100px;margin-top: 5px;">Customer Group: </Label>
+                            @Html.List_Search("Customergroup", "57", "- Select Group -",0,"", new {@class = "col-md-3", @style = "height:26px; width:30%; padding-left:0px; top:10px;"}, false)
+                            <Button type="button" onclick="AddCustomertoGroup();" id="popup" class="btn btn-primary" style="padding:0px; width:102px; height:26px; margin-top:80px; position:absolute; left:225px;">Submit</Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+
+<!--New design-->
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 2px; width: 670px;">
+            <div class="modal-body" style="height: 400px;  overflow-y:scroll;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            <div id="addfilter" onclick="AddFilters();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer;">New Filter <i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            <div id="addsortOptions" onclick="AddSortingOptions();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer; ">New Sort Option<i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div id="clearFilters" onclick="removeFilter2();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>@*clear filter values*@
+                <div id="search1" onclick="ApplyFilters2();" class="btn modalbutton ">Apply <i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal">Close</button> @*close modal popup*@
+
+            </div>
+        </div>
+    </div>
+</div>

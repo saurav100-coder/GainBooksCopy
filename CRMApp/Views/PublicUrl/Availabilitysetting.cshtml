@@ -1,0 +1,564 @@
+﻿@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <style>
+        .main-div {
+            display: grid;
+        }
+
+        #datepicker {
+            display: flex;
+            justify-content: space-between;
+            width: 700px;
+            /* margin: 5px 30px; */
+            align-items: baseline;
+        }
+
+        #btn1 {
+            padding: 0 10px;
+            background-color: rgb(254, 248, 248);
+            font-size: 25px;
+            border: none;
+        }
+
+        #btn2 {
+            padding: 10px;
+            background: revert;
+            font-size: 15px;
+            border: none;
+            /* height: 50px; */
+        }
+
+        #slot {
+            width: 100px;
+            height: 40px;
+            border: 1px solid rgb(219, 215, 215);
+            border-radius: 20px;
+            text-align: center;
+            margin: 10px 20px;
+        }
+
+        .day {
+            border-bottom: 2px solid rgb(219, 216, 216);
+            display: flex;
+            justify-content: space-around;
+        }
+
+        p {
+            margin: 0 !important;
+        }
+
+        h4 {
+            margin: 0 !important;
+        }
+
+        .head-container {
+            display: flex;
+            justify-content: space-evenly;
+            border-bottom: 2px solid rgb(212, 210, 210);
+        }
+
+        #sel {
+            padding: 20px;
+        }
+
+        #mode {
+            padding: 20px;
+        }
+
+        .week {
+            position: absolute;
+            z-index: 10;
+            width: 160px;
+            margin-top: 30px;
+            display: none;
+            right: 0;
+            background: var(--container-background-color, #ffffff);
+            user-select: none;
+            box-shadow: #cec9c9 10px 20px 20px 10px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sub-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        #weekly-submit {
+            background-color: peachpuff;
+            margin: 20px auto;
+            padding: 5px 20px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .daily-div {
+            display: grid;
+        }
+
+        #daily-submit {
+            background-color: peachpuff;
+            margin: 20px auto;
+            padding: 5px 20px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        #myselect {
+            width: 100px;
+        }
+
+        .slotsno {
+            padding: 20px;
+        }
+
+        #slotsno-input {
+            width: 50px;
+        }
+
+        .slotsduration {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head-container">
+        <div id="sel">
+            <label for="employee">Select Employee: </label>
+
+            <select name="" id="myselect" onchange="employee()" required>
+                <option value="" selected>Dr.</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div id="demo"></div>
+        </div>
+        <div id="mode">
+            <label for="mode">Select Mode: </label>
+            <select name="" id="mymode" onchange="modechange(this)">
+                <!-- <option value="" selected>Mode</option> -->
+                <option value="W" selected>Weekly</option>
+                <option value="D">Daily</option>
+            </select>
+
+        </div>
+        <div class="slotsno">
+            <form action="">
+                <label for="slotsno">No.of Slots: </label>
+                <input type="text" name="" id="slotsno-input">
+            </form>
+        </div>
+        <div class="slotsduration">
+            <form action="">
+                <label for="slotsduration">Slot Duration: </label>
+                <input type="text" name="" id="slotsduration-input" pattern="^[1-9]+[0-9]*$"
+                       placeholder="Enter in Minutes">
+            </form>
+        </div>
+    </div>
+
+
+    <div class="main-div" id="main-div">
+        <div class="week-days">
+
+            <div class="sunday day" id="sunday" data-weekday="1">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Sunday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" disabled checked></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="monday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="tuesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="wednesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="thursday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="friday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="saturday"></div>
+                            </div>
+                            <button style="padding: 10px; border: none;margin-bottom: 10px; border-radius: 20px; background-color:blueviolet; color: white;"
+                                    onclick="apply(this)">
+                                apply
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="monday day" id="monday" data-weekday="2">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Monday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="sunday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" checked disabled></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="tuesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="wednesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="thursday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="friday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="saturday"></div>
+                            </div>
+                            <button style="padding: 10px; border: none;margin-bottom: 10px; border-radius: 20px; background-color: blueviolet; color: white;"
+                                    onclick="apply(this)">
+                                apply
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tuesday day" id="tuesday" data-weekday="3">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Tuesday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="sunday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="monday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" checked disabled></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="wednesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="thursday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="friday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="saturday"></div>
+                            </div>
+                            <button style="padding: 10px; border: none;margin-bottom: 10px; border-radius: 20px; background-color:blueviolet; color: white;"
+                                    onclick="apply(this)">
+                                apply
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wednesday day" id="wednesday" data-weekday="4">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Wednesday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="sunday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="monday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="tuesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" checked disabled></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="thursday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="friday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="saturday"></div>
+                            </div>
+                            <button style="padding: 10px; border: none;margin-bottom: 10px; border-radius: 20px; background-color: blueviolet; color: white;"
+                                    onclick="apply(this)">
+                                apply
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="thursday day" id="thursday" data-weekday="5">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Thursday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="sunday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="monday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="tuesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="wednesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" checked disabled></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="friday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="saturday"></div>
+                            </div>
+                            <button style="padding: 10px; border: none; margin-bottom: 10px; border-radius: 20px; background-color: blueviolet; color: white;"
+                                    onclick="apply(this)">
+                                apply
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="friday day" id="friday" data-weekday="6">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Friday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="sunday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="monday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="tuesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="wednesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="thursday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" checked disabled></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="saturday"></div>
+                            </div>
+                            <button style="padding: 10px; border: none; border-radius: 20px; background-color: blueviolet; color: white;"
+                                    onclick="apply(this)" id="apply">
+                                apply
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="saturday day" id="saturday" data-weekday="7">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Saturday</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                    <button id="btnc" onclick="show_week(this)">c</button>
+                    <div class="week">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div>Sunday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="sunday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Monday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="monday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Tuesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="tuesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Wednesday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="wednesday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Thursday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="thursday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Friday</div>
+                                <div><input type="checkbox" name="mycheck" id="" value="friday"></div>
+                            </div>
+                            <div class="sub-container">
+                                <div>Saturday</div>
+                                <div><input type="checkbox" name="mycheck" id="" checked disabled></div>
+                            </div>
+                            <button style="padding: 10px; border: none; border-radius: 20px; background-color:blueviolet; color: white;"
+                                    onclick="apply(this)" id="apply">
+                                apply
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="daily-div" id="daily-div">
+
+            <div class="daily day" id="daily" data-weekday="-1">
+                <div style="width:20%">
+                    <input type="checkbox" name="" id="" onchange="checkd(this)" class="coupon">
+                    <b>Daily</b>
+                </div>
+                <div id="datepicker">
+                    <h4>unavailable</h4>
+                    <p></p>
+                    <button id="btn1" onclick="slot(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="weekly-submit" onclick="submit(this)">Submit</button>
+
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet"
+          type="text/css" />
+    <script type="text/javascript" src="~/scripts/Custom/Availabilitysetting.js"></script>
+
+
+
+</body>
+
+</html>

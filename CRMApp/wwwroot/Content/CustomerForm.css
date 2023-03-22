@@ -1,0 +1,38 @@
+﻿.cont{width:50%; margin:0px auto;}
+    h3{text-align:center}
+        .form-group .input-sm { border-radius:0px}
+    body {font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif; }
+     p{font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;}
+    h2 { font-family: 'Source Sans Pro',sans-serif;}
+            .panel.uu{
+                margin-bottom:0px; background-color:#E9E9E9; font-size:16px; padding:10px; color:black; border-radius:0px; width:542px}
+         .uu a:hover{text-decoration:none; color:black}
+         .uu a{color:black; text-decoration:none; font-family:'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:20px }
+      .fixed-pos{ position:fixed; top: 0px;  z-index:1000; width:42%; background-color:#ecf0f5 }
+  
+     .uu{margin-top:15px; height:40px; }
+      .active{ border-bottom:2px solid}
+      .box-header{padding-left:0px; background-color:#ecf0f5}
+    #gd, #od , #Hwd {margin-right: 15px;}
+    .btn-1{width:10%; height:30px; padding:0px; font-size:13px}
+    .p2{margin-top:5px}
+    .center{font-size:20px;margin-left: 20px;width: 544px; background-color:lightsteelblue; margin-bottom:20px; margin-top:10px}
+    label{font-weight: normal;margin-bottom:0px}
+.form-group{margin-bottom: 5px;}
+.PostalAddressmain{height:auto; overflow:auto}
+@media screen and (max-width:800px) {
+    .extra{width:340px;}
+    .PostalAddressmain{height:114px; overflow:auto}
+.cont{width:100%;margin-left:5px;margin-right:5px;}
+.form-control {height: 25px;margin-right: 0;}
+.input-sm {padding: 5px 0;border-radius:0px}
+.rr{width: 350px}
+.center{font-size:20px;margin-left: 20px;width: 325px; background-color:lightsteelblue; margin-bottom:20px; margin-top:10px}
+.form-control.input-sm {height: 27px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 0px;}
+.panel.uu{padding:10px 0px 10px 2px}
+#od{margin-left:5px}
+p{width:220px}
+.PostalAddress{bottom: 20px;}
+ .btn-1{width:50%; height:30px; padding:0px; font-size:13px; margin-top:20px}
+ .srd{width:100%}
+}

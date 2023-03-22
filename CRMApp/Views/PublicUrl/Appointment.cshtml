@@ -1,0 +1,136 @@
+﻿@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Appointment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="~/Content/style.css">*@
+    <link rel="stylesheet" href="~/Content/Custom/Appointment.css"/>
+    @*<script src="~/Scripts/Custom/Appointment.js"></script>*@
+
+</head>
+<body>
+    @*<form method="post" id="Appointment">*@
+    <p id="pacccode" style="display:none;">@ViewBag.p_acccode</p> 
+    <div class="main-div">
+        <div class="First-div">
+            <div class="icon-div">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="details">
+                <h2 id="name"></h2>
+                <p>General Physician</p>
+                <p>14 years of experience</p>
+
+            </div>
+            <div class="address">
+                <p>
+                    <span><i class="fa fa-map-marker"></i> </span><span id="Add"></span>
+                </p>
+            </div>
+            <div class="contact">
+                <p style="font-size: 17px; font-weight:600; font-family:sans-serif;">
+                    <span>
+                        <i class="fa fa-phone-square"></i>
+                    </span> <span>+91</span> <span id="ContactNo"></span>
+                </p>
+            </div>
+        </div>
+        <div class="Second-div">
+            <div>
+                <h2 class="heading"> Schedule Appointment</h2>
+            </div>
+            <div class="container">
+                <main>
+                    <div class="wrapper">
+                        <div class="container-calendar">
+                            <!-- <h3 id="monthAndYear"></h3> -->
+                            <div class="button-container-calendar">
+                                <button id="previous" onclick="previous()">&#8249;</button>
+                                <h3 id="monthAndYear"></h3>
+                                <button id="next" onclick="next()">&#8250;</button>
+                            </div>
+                            <table class="table-calendar" id="calendar" data-lang="en">
+                                <thead id="thead-month"></thead>
+                                <tbody id="calendar-body"></tbody>
+                            </table>
+                            <div class="footer-container-calendar" style="display: none;">
+                                <label for="month" style="display: none;">Jump To: </label>
+                                <select id="month" onchange="jump()" style="display: none;">
+                                    <option value=0>Jan</option>
+                                    <option value=1>Feb</option>
+                                    <option value=2>Mar</option>
+                                    <option value=3>Apr</option>
+                                    <option value=4>May</option>
+                                    <option value=5>Jun</option>
+                                    <option value=6>Jul</option>
+                                    <option value=7>Aug</option>
+                                    <option value=8>Sep</option>
+                                    <option value=9>Oct</option>
+                                    <option value=10>Nov</option>
+                                    <option value=11>Dec</option>
+                                </select>
+                                <select id="year" onchange="jump()" style="display: none;"></select>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <div class="time">
+                    <div class="session-div">
+                        <!-- <p style="font-size:20px; cursor: pointer;">&#8249;</p> -->
+                        <h3 id="session">Time Slots</h3>
+                        <!-- <p style="font-size:20px; cursor: pointer;">&#8250;</p> -->
+                    </div>
+                    <div class="slot-div" id="divTime">
+                       
+
+                    </div>
+                    <h5 style="padding: 5px; color: #1b6ab9;" id="hSlots"></h5>
+
+                </div>
+                    <p id="ptime" style="display:none;"></p>
+                    <p id="pdate" style="display:none;"></p>
+            </div>
+            <button class="confirm"
+                    style="padding:0px 30px; background-color: #fac72f; border: 1px solid transparent; border-radius: 20px; font-size: 25px; color: #1b6ab9; font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; cursor: pointer;"
+                    onclick="confirmation()">
+                Confirm
+            </button>
+
+
+        </div>
+        <div class="Third-div">
+            <h2>Patient Details</h2>
+            <form>
+                <input type="text" placeholder="Name" id="CustName" required>
+                <select name="gender" class="change" id="CustGender" required>
+                    <option value="none" selected>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <input name="date" type="text" placeholder="Date Of Birth" id="CustDob" onfocus="(this.type='date')"
+                       onblur="if(!this.value)this.type='text'" required>
+                <input type="email" placeholder="Email" maxlength="100" id="CustEmail" required>
+                <input type="tel" placeholder="Phone No" maxlength="10" id="CustPhoneNo" required>
+
+                <button onclick="submission()">Submit </button>
+            </form>
+        </div>
+        <div class="message-box">
+            <p>Your Appointment has been confirmed for <span style="font-weight:bold; font-size:16px"> Wednesday July 20,2022 - 01:00 PM to 01:30PM</span> </p>
+            <button class="message-button" onclick="done()">OK</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="~/scripts/Custom/Appointment.js"></script>
+    @*</form>*@
+
+    @*testgbv*@
+    @*dfcgvhbj*@
+</body>
+</html>

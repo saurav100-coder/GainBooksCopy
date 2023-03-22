@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewData["Title"] - GainBooks</title>
+     <link rel="shortcut icon" href="~/images/GainbooksFavicon.ico" />
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+
+     @*Need bundling from *@
+    <link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/AdminLTE.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/skin-blue.min.css" />
+    <link rel="stylesheet" href="~/Content/Layout.css" />
+
+    <script src="~/scripts/FrameWork/jquery.min.js"></script>
+    <script src="~/Scripts/Custom/Layout.js"></script>
+    <script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+    <script src="~/Scripts/FrameWork/fastclick.js"></script>
+    <script src="~/Scripts/FrameWork/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/FrameWork/adminlte.min.js"></script>
+    <script src="~/Scripts/FrameWork/modernizr-2.6.2.js"></script>
+    @*Need bundling to *@
+
+    <link href="~/Content/Custom/Notification_Layout.css" rel="stylesheet" />
+    @*<script src="~/Scripts/Custom/Notification_Layout.js"></script>*@
+
+    <style>
+        .skin-blue .main-header .logo {
+            background-color: #094e94;
+        }
+
+        .skin-blue .main-header .navbar {
+            background-color: #105faf;
+        }
+
+        .titleName p {
+            padding-left: 65px;
+            margin-top:12px;
+            font-size: larger;
+            color: white;
+        }
+
+        .skin-blue .main-sidebar {
+            background: url(/images/BGaside28.png);
+            background-position: right;
+            background-size:cover;
+        }
+        
+        .main-sidebar-img {
+            width: 25px;
+            margin-right: 5px;
+        }
+
+        .user-panel {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .user-panel .img-circle {
+            max-width: 70px;
+            width: 100%;
+        }
+
+        .user-panel .user-name {
+            margin-bottom: 0px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .user-panel .user-panel-inner {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: stretch;
+        }
+        .user-panel .user-panel-inner img {
+            width: 13px;
+            margin-right: 4px;
+        }
+        .user-panel .user-panel-inner p {
+            font-size: 12px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+        }
+
+
+        @@media only screen and (max-width:600px) {
+            .main-sidebar-img {
+                width: 22px;
+            }
+            .user-panel .img-circle {
+               max-width: 60px;
+            }
+        }
+        @@media (min-width: 768px){
+           .sidebar-mini.sidebar-collapse .user-panel .user-name,
+           .sidebar-mini.sidebar-collapse .user-panel .user-panel-inner {
+                display: none!important;
+                -webkit-transform: translateZ(0);
+            }
+
+           .sidebar-mini.sidebar-collapse .sidebar-menu > li > a {
+                padding: 12px 5px 12px 9px;
+            }
+        }
+    </style>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <span class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>GB</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>GainBooks</b></span>
+            </span>
+            
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" style="position:relative;">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <i class="fa fa-bars" aria-hidden="true" style="font-size:18px;"></i>
+                </a>
+                <span class="titleName"> </span>
+
+                @*notification work start*@
+                <div class="notification_wrapper">
+                    <div id="notification_Counter"></div>
+                    <div id="notification_Button"><i class="fa fa-bell" style="font-size:17px;"></i></div>
+                    <div id="notifications">
+                        @*<h3>Notifications</h3>*@
+                        <div>
+                            <h3>Notifications</h3>
+                            <span class="close" id="CloseNotificationLayout" style="font-size: 20px;position: absolute;right: 12px;top: 5px;opacity:1;"> × </span>
+                        </div>
+                        <div id="notifications-body" style="height:300px;color:black;overflow-y:auto;">
+
+                        </div>
+                        <div id="loading_layout" style="padding:10px;background:white;"><div colspan="5"><div id="loadingmessage_layout" Class="loader overlay col-md-offset-6"></div></div></div>
+                        <div class="seeAll"><a href="@Url.Action("Notifications", "Notifications")">See All</a></div>
+                    </div>
+                </div>
+                @*notification work end*@
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar test"  id="side">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <img src="~/images/profile.png" class="img-circle" alt="User Image"/>
+                    <p class="user-name">@httpContextAccessor.HttpContext?.Session.GetString("loginname")</p>
+                    <div class="user-panel-inner">
+                        <img src="~/images/icon-userid.png" alt="" /><p>@httpContextAccessor.HttpContext?.Session.GetString("userid")</p>
+                        <img src="~/images/icon-copr.png" alt="" /><p>@httpContextAccessor.HttpContext?.Session.GetString("corpid")</p>
+                    </div>
+                </div>
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                   @*dynamic menus*@
+                </ul>
+
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+       
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+                @*<input type="hidden" id="type1" value="@Session("menuid")" />*@
+                <input type="hidden" id="type1" value="@httpContextAccessor.HttpContext?.Session.GetString("menujson")" />
+                <input type="hidden" id="homeMenuJson" value="@httpContextAccessor.HttpContext?.Session.GetString("homemenujson")" />
+            </section>
+            <!-- /.content -->
+        </div>
+    
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyrights |<a href="http://technopinch.com">Technopinch Solutions Pvt Ltd</a>  &copy; @DateTime.Now.Year </strong> All rights reserved.
+        </footer>
+    </div>
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)*@
+</body>
+</html>

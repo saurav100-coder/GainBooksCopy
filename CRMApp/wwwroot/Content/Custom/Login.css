@@ -1,0 +1,20 @@
+﻿/* Style the tab */
+div.tab {overflow: hidden;border: 1px solid #ccc;background-color: #f1f1f1;}
+/* Style the buttons inside the tab */
+div.tab button {background-color: inherit;float: left;border: none;outline: none;cursor: pointer;padding: 8px 23.4px;transition: 0.3s;font-size: 15px;}
+/* Create an active/current tablink class */
+#Customer, .cus.active {background-color: #d8edf3;}
+#Employee, .emp.active {background-color: #ccccff;}
+#Dealer, .dea.active {background-color: #ffddcc;}
+            /* Style the tab content */
+ .tabcontent {display: none;padding: 6px 12px;border: 1px solid #ccc;border-top: none;}
+@media screen and (max-width:800px){
+/* Style the tab content */
+.tabcontent {width:100%;display: none;padding: 0px 0px;border: 1px solid #ccc;border-top: none;}
+            /* Style the buttons inside the tab */
+div.tab button {width:100%;background-color: inherit;float: left;border: none;outline: none;cursor: pointer;padding: 8px 23.4px;transition: 0.3s;font-size: 16px;}
+.col-xs-4 {width:50%;float:right;margin:0px 10px 10px 0px}
+.email{margin:0px 10px 10px 10px}
+.password{margin:0px 10px 10px 10px}
+.For{margin:0px 0px 0px 10px}
+}

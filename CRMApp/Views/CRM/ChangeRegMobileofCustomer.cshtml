@@ -1,0 +1,307 @@
+﻿@{
+    ViewData["Title"] = "ChangeRegMobileofCustomer";
+}
+
+<link rel="stylesheet" href="~/Content/Custom/PageLoaderLogin.css" />
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+<style>
+    .disabled {
+        pointer-events: none;
+        color: #E0E0E0;
+    }
+
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+
+
+    .formfield {
+        position: relative;
+        box-sizing: border-box;
+        /*float: left;*/
+        margin: auto;
+        padding: 0px;
+        border: 0px;
+        font-size: 1em;
+    }
+
+        .formfield * {
+            box-sizing: border-box;
+        }
+
+
+    .formfield > input, .formfield > label {
+        padding: 0.2em;
+        margin: 0.5em;
+        width: 100%;
+    }
+
+    .formfield > input {
+        border:none;
+        border-bottom: 1px solid #ddd;
+        outline: none;
+    }
+
+    .formfield > label {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 10px;
+        color: #ccc;
+        font-weight: normal;
+    }
+
+    input:focus + label, input:valid + label {
+        color: #105faf;
+        font-size: 0.8em;
+        width: auto;
+        height: 1.3em;
+        padding: 0px 0.1em 0px 0.5em;
+        margin: 0px;
+        background: white;
+        transition: 0.2s ease-in-out;
+        top: -10px;
+        left: 0em;
+    }
+
+    @@media only screen and (max-width:600px) {
+        .col-md-offset-3{
+            margin-left:0px !important;
+        }
+    }
+
+</style>
+<script>
+    $(document).ready(function () {
+        $('#MobNo').val("");
+        $("#Firmname").on('keyup ', function () {
+            var firmname = $("#Firmname").val();
+            if (firmname.length >= 3) {
+                $("#tblCustomers tbody tr").remove();
+                $('#loading').show();
+                $('#loadingmessage').show();
+                $('#Msg').hide();
+                $("#CustContainer").css("display", "");
+                $.post('/CRM/FindCustomersCombinedAddress', { firmname: firmname }, function (data) {
+                    var tblEmployee = $("#tblCustomers");
+                    if (data != "error") {
+                        $.each(data.data, function (index, item) {
+                            var m = index + 1;
+                            var tr = $("<tr id='" + item.P_Customers + "'></tr>");
+                            tr.html(("<td>" + m + "</td>")
+                                  + " " + ("<td>" + item.CustCode + "</td>")
+                               + " " + ("<td><input type='hidden' id='Email' class='Email' value='" + item.Email + "'/>" + item.CustName + "</td>")
+                                + " " + ("<td>" + item.MobNo + "</td>")
+                               + " " + ("<td><input type='hidden' id='MainBussCode' class='MainBusscode' value='" + item.MainBussCode + "'/>" + item.TextMainBussCode + "</td>")
+                                  + " " + ("<td>" + item.TextHomeTown + "</td>")
+                                   + " " + ("<td>" + item.CombinedAddress + "</td>")
+                                    + " " + ("<td><input type='hidden' id='servicingAgentCode' class='servicingAgentCode' value='" + item.ServicingAgentCode + "'/>" + item.OnsiteFlag + "</td>")
+                                );
+                            tblEmployee.append(tr);
+                        })
+                        $('#loading').hide();
+                        $('#loadingmessage').hide();
+                        $('#Msg').hide();
+                    }else{
+                        $('#loading').show();
+                        $('#loadingmessage').hide();
+                        $("#Msg").show();
+                        $("#Msg").text("No record found");
+                        //setTimeout($('#CustContainer').css("display", "none"), 5000)
+                        $('#CustContainer').css("display", "none");
+                    }
+                });
+            }
+            else {
+                $('#CustContainer').css("display", "none");
+                return;
+            }
+        });
+
+
+        $('#tblCustomers').on('click', 'tr', function () {
+            $(this).addClass("highlight");
+            $("#CustContainer").css("display", "none");
+            var rowid = this.id;
+            var rid = "#" + rowid;
+            var fname = $(this).find("td:nth-child(3)").text();
+            $("#P_Customers").val(rowid);
+            $('#Firmname').val(fname);
+        });
+    })
+    //Show Messages
+function ShowMsg(msg,msgType) {
+    var bgColor = "";
+    switch ($.trim(msgType).toLowerCase()) {
+        case "success":
+            bgColor = "#4abc4a"; 
+            break;
+
+        case "info":
+            bgColor = "#53bcf1"; 
+            break;
+
+        case "warning":
+            bgColor = "#d0b62d"; 
+            break;
+
+        case "error":
+            bgColor = "#e82121"; 
+            break;
+
+        default:
+            bgColor = "#53bcf1";
+    }
+
+    $(".RemarkMessage").css("background-color", bgColor);
+    $(".RemarkMessage #Content").text(msg);
+    $('.RemarkMessage').show();
+    setTimeout(function () { $('.RemarkMessage').hide(); }, 7000);
+}
+
+    function verifyOTP() {
+        var value = $("#otp").val();
+        var P_Customer = $("#P_Customers").val();
+        var MobNo = $("#MobNo").val();
+        if (value != "" && value != null) {
+            $("#loadspin,#overlay").show();
+            $.post('/CRM/VerifyOTPforChngCustomerMob', { otp: value, P_Customer: P_Customer, MobNo: MobNo }, function (data) {
+                $("#loadspin,#overlay").hide();
+                if (data == "true") {
+                    $('#OtpVerification').modal('hide');
+                    //$("#msg").text("Registered Mobile is changed successfully.");
+                    //$('#msg').css("display", "");
+                    ShowMsg("Registered Mobile is changed successfully.","success");
+                    $("#P_Customers").val("");
+                    $('#Firmname').val("");
+                    $('#MobNo').val("");
+                    //setTimeout(function () { $('#msg').css("display","none"); }, 2000)
+                } else {
+                    $('.incorrectOTP').css("display", "block");
+                    //$('#MobNo').val("");
+                }
+            })
+        }
+    }
+    function reSend() {
+        var P_Customer = $("#P_Customers").val();
+        var MobNo = $("#MobNo").val();
+        if(P_Customer!=""){
+            $("#loadspin,#overlay").show();
+            $.post('/CRM/sendOTP', { P_Customer: Number(P_Customer), MobNo: MobNo }, function (data) {
+                $("#loadspin,#overlay").hide();
+                $('.OTPSendMsg').removeClass("text-primary")
+                $('.OTPSendMsg').addClass("text-danger")
+                $('.OTPSendMsg').text("OTP has been resent to your mobile "+$("#MobNo").val()+" . Please enter to Proceed");
+            })
+        }
+    }
+
+    function SendOTP() {
+        var P_Customer = $("#P_Customers").val();
+        var MobNo = $("#MobNo").val();
+        if (P_Customer != "") {
+            $("#loadspin,#overlay").show();
+            $.post('/CRM/sendOTP', { P_Customer: Number(P_Customer), MobNo: MobNo }, function (data) {
+                $("#loadspin,#overlay").hide();
+                //var options = { "backdrop": "static", keyboard: true };
+                var options = { "backdrop": "static", keyboard: false };
+                $('#OtpVerification').modal(options);
+                $('#OtpVerification').modal('show');
+                $('.OTPSendMsg').text("OTP has been sent to mobile number - "+$("#MobNo").val()+". Please enter to proceed.")
+                setTimeout(function () { $('#reSendOTP').removeClass('disabled'); }, 30000);
+            })
+        }
+    }
+
+
+</script>
+
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+<h2 class="text-center text-primary" style="text-align:center;margin-bottom:50px; color: #105faf;">Update Reg Mobile of Customer</h2>
+<div class="col-md-offset-3 col-md-4 col-md-offset-3" style=" margin-left: 33%;">
+    <div class="panel panel-default ">
+        <div class="panel-body" style=" padding-right: 20px;">
+            <p id="msg" class="text-center text-success" style="display:none;"></p>
+            <div Class="form-group" style="margin-right: 0px; padding: 15px; margin-bottom: 5px;">
+                <div class="" style="margin-top: 20px; margin-bottom: 30px;">
+                    <div Class="formfield" style="padding-right:0px; " data-tip="Please type 3 letters to enable searching for Firm Name.">
+                        <input type="hidden" name="P_Customers" id="P_Customers" value="" />
+                        <input type="text" name="Firmname" id="Firmname" class="form-control input-sm " style="height: 39px; width: 100%;" required/>
+                        <Label for="Firmname" class=" control-label " style="margin-bottom:10px;">Firm Name<strong style="color:red;">*</strong></Label>
+
+                    </div>
+                </div>
+                <div class="text-center" id="CustContainer" style="display:none; overflow-y:scroll; overflow-x:auto;height:400px;width:500px; background-color:white;font-family: verdana,arial,sans-serif; font-size:11px; margin-bottom:10px;">
+                    <table id="tblCustomers" class="table table-bordered" cellspacing="0">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>S.No</th>
+                                <th>CustCode</th>
+                                <th>CustName</th>
+                                <th>Mobile No</th>
+                                <th>BusinessType</th>
+                                <th>HomeTown</th>
+                                <th>Address</th>
+                                <th>OnsitFlag</th>
+                            </tr>
+                            <tr id="loading"><td colspan="9"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div Class="form-group formfield" style="height: 50px;">
+                    <input class="form-control input-sm " type="text" name="MobNo" id="MobNo" style="height: 39px; width: 100%; " maxlength="10" required />
+                    <Label for="MobNo" class=" control-label" style=" margin-bottom:20px;">Mobile No.</Label>
+                </div>
+                <div Class="form-group text-center col-md-12" style="margin-top: 20px; display:flex; padding-left: 60px;">
+                    <Button type="button" onclick="SendOTP();" Class="btn btn-primary" style="width: 40%; margin-right: 20px; border-radius: 25px;">Submit</Button>
+                    <Button type="Button" Class="btn btn-default" style="border-radius: 25px; width:40%;">Cancel</Button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="overlay">
+        <div class="loading" id="loadspin" style="text-align : center;display:none"></div>
+    </div>
+
+<div class="modal fade" id="OtpVerification">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>*@
+                <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px;margin-right:35px;" class="modal-title">OTP Verification</h4>
+            </div>
+
+            <p class="text-center text-primary OTPSendMsg"></p>
+
+
+            <div class="col-md-12 modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div class="incorrectOTP" style="text-align:center; color:red;margin-bottom: 10px;margin-right:10px;display:none;">Incorrect OPT, Please Try again! </div>
+                <div Class="form-group">
+                    <Label for="inputEmail1" class="col-sm-4 control-label" style="text-align:right">Enter OTP</Label>
+                    <div Class="col-sm-4" style="padding-left:0px;">
+                        <input class="form-control input-sm" type="text" id="otp" name="OTP" @*placeholder="Enter OTP"*@ style="height: 25px; padding-left:3px; width:165px;" value="">
+                    </div>
+                    <a href="#" id="reSendOTP" onclick="reSend()" class="col-sm-4 text-danger disabled text-center">Resend OTP</a>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:15px;padding-top: 5px;">
+                <div Class="form-group text-center" style="margin-right:100px; margin-top:30px; margin-right: 0px;">
+                    <Button type="button" Class="btn btn-primary btn-Submit" onclick="verifyOTP()" style="margin-right:20px">Submit</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

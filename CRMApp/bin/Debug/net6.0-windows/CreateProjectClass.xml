@@ -1,0 +1,469 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CreateProjectClass
+</name>
+</assembly>
+<members>
+<member name="T:CreateProjectClass.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CreateProjectClass.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CreateProjectClass.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateProject(System.String,System.String,System.String,System.String)">
+ <summary>
+ To create the project.
+ </summary>
+ <param name="SubFolder"></param>Represent the Folder in which project is to be saved
+ <param name="ProjectType"></param>Represent the type of Project i.e. windows application,control library etc.
+ <param name="ProjectName"></param>Represent the name of the project
+ <param name="ProjectTypeID"></param>Represent the type.i.e.it is of visual studio 8 or visual studio 15 project
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateWindowsApplicationProject(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+ <summary>
+ To create Windows application project
+ </summary>
+ <param name="ProjectPath"></param>The path of the project to be saved..eg..E:\Newfolder
+ <param name="UniqueId">Project Unique Id</param>
+ <param name="ProjectName"></param>The name given to the project.
+ <param name="FormName"></param>It represent comma separated values of path of form file with extension...eg..E:\Testing\WindowsApp\WindowsApp\Form1.vb
+ <param name="ClassName"></param>It represent comma separated values of path of class file with extension...eg..E:\Testing\WindowsApp\WindowsApp\Class1.vb
+ <param name="DllName"></param>It represent comma separated values of path of dll file with extension...eg..E:\Testing\WindowsApp\WindowsApp\Golbal1.dll
+ <param name="ProjectTypeID"></param>It represent the projectId i.e. For project 2008-"VisualStudio.DTE.9.0" and for project 2015-"VisualStudio.DTE.14.0,project 2015-"VisualStudio.DTE.16.0"
+ <param name="BuildPath"></param>It represent the path where build dll have to be saved
+ <param name="RemoveOld" ></param>
+ <param name="AddDesigner" ></param>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.AddCodeinVbprojWindowsApp(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)">
+ <summary>
+ to add code in vbproj file of windows application
+ </summary>
+ <param name="Vbprojpath"></param>Path of Vbproj file
+ <param name="VbProjCodelist"></param>Code of Form and class that has to be added in vbproj file
+ <param name="VbProjCodeResxlist"></param>Code of Resx that has to be added in vbproj file
+ <param name="VbProjCodeDlllist"></param>Code of dll that has to be added in vbproj file
+ <param name="BuildPath"></param> Represent the path where build dll have to be saved
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.DeleteCodeinVbprojWindowsApp(System.String)">
+ <summary>
+ Code That has to be deleted from vbproj
+ </summary>
+ <param name="Vbprojpath"></param>Path of Vbproj file
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.ChangeAppDesignerVal(System.String,System.String)">
+ <summary>
+ To set the Value to the current form
+ </summary>
+ <param name="FormName"></param>The form name that has to be set
+ <param name="Apppath"></param>The app path of file
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateClassLibraryProject(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Collections.Generic.List{System.String})">
+ <summary>
+ To create Class library project
+ </summary>
+ <param name="ProjectPath"></param>The path of the project to be saved..eg..E:\Newfolder
+ <param name="UniqueId">Uniqueid of project</param>
+ <param name="ProjectName"></param>The name given to the project.
+ <param name="FormName"></param>It represent comma separated values of path of form file with extension...eg..E:\Testing\WindowsApp\WindowsApp\Form1.vb
+ <param name="ClassName"></param>It represent comma separated values of path of class file with extension...eg..E:\Testing\WindowsApp\WindowsApp\Class1.vb
+ <param name="DllName"></param>It represent comma separated values of path of dll file with extension...eg..E:\Testing\WindowsApp\WindowsApp\Golbal1.dll
+ <param name="ProjectTypeID"></param>It represent the projectId i.e. For project 2008-"VisualStudio.DTE.9.0" and for project 2015-"VisualStudio.DTE.14.0"
+ <param name="BuildPath"></param>It represent the path where build dll have to be saved
+ <param name="RemoveOld" >Remove old class folders</param>
+ <param name="AddDesigner" >True if vb.designer and .resx files are to be added</param>
+ <param name="ImportsRefs" >List of import clause</param>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.AddCodeinVbprojClassLibrary(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.Collections.Generic.List{System.String})">
+ <summary>
+ to add code in vbproj file of class library
+ </summary>
+ <param name="Vbprojpath"></param>Path of Vbproj file
+ <param name="VbProjCodelist"></param>Code of Form and class that has to be added in vbproj file
+ <param name="VbProjCodeRefFormlist"></param>Code of Reference that has to be added in vbproj file
+ <param name="VbProjCodeResxlist"></param>Code of Resx that has to be added in vbproj file
+ <param name="VbProjCodeDlllist"></param>Code of dll that has to be added in vbproj file
+ <param name="BuildPath"></param> Represent the path where build dll have to be saved
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.DeleteCodeinVbprojClassLibrary(System.String)">
+ <summary>
+ Code that has to be deleted from the class library vbproj file
+ </summary>
+ <param name="Vbprojpath"></param>Path of vbproj file
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojFormexcessCode">
+ <summary>
+ The code that need to be added in vbproj file
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojResxCode(System.String[])">
+ <summary>
+ The resx code that need to be added in vbproj file
+ </summary>
+ <param name="Filenames"></param>The name of the form file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojClassCode(System.String[])">
+ <summary>
+  The Class code that need to be added in vbproj file
+ </summary>
+ <param name="Classnames"></param>The name of the class file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojImportCode(System.Collections.Generic.List{System.String})">
+ <summary>
+  The Import code that need to be added in vbproj file
+ </summary>
+ <param name="ImportList"></param>The name of the class file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojFormCode(System.String[])">
+ <summary>
+ The Form code that need to be added in vbproj file
+ </summary>
+ <param name="Filenames"></param>The name of the form file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojDllCode(System.String[],System.String[])">
+ <summary>
+ The dll code that need to be added in vbproj file
+ </summary>
+ <param name="Dllnames"></param>The name of the dll file
+ <param name="DllPath"></param>The path of the dll file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojDllCode(System.String,System.String)">
+ <summary>
+ The dll code that need to be added in vbproj file
+ </summary>
+ <param name="Dllname"></param>The name of the dll file
+ <param name="DllPath"></param>The path of the dll file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateVbprojDllCodeUserControl(System.String[],System.String)">
+ <summary>
+ The dll code that need to be added in vbproj file for usercontrol
+ </summary>
+ <param name="Dllnames"></param>The name of the dll file
+ <param name="DllFileFolder"></param>The path of the dll file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.UpdateCodeinVbprojClassLibraryOrWindowsApp(System.String,System.String)">
+ <summary>
+ To update BuildPathcode in Vbproj file
+ </summary>
+ <param name="Vbprojpath"></param>Path of Vbproj file
+ <param name="BuildPath"></param>Represent the path where build dll have to be saved
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetSplitString(System.String)">
+ <summary>
+ to get the comma separated  separated string array
+ </summary>
+ <param name="Value"></param>the value that has to be split
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetValueArrayfromValuePath(System.String,System.String)">
+ <summary>
+ To get a array of file that has to coped or replace.
+ </summary>
+ <param name="ValueName"></param>The name of path of the file
+ <param name="ValType"></param>To get the type of the file i.e. "Form","Class","Dll"
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetFilePathArr(System.String[],System.String)">
+ <summary>
+ To get the array of the exist file
+ </summary>
+ <param name="FilterStr"></param>Contain extension for the files
+ <param name="ValueName"></param>The name of path of the file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetFileName(System.String[])">
+ <summary>
+ To get the name of the file from the path
+ </summary>
+ <param name="Filepath"></param>The path of the file
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CopyFilefromOnepathtoOther(System.String[],System.String)">
+ <summary>
+ To copy one file to another position
+ </summary>
+ <param name="InitialPath"></param>The initial path of the file
+ <param name="FinalPath"></param>The path where the file has to be copied
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.ReplaceFilefromOnepathtoOther(System.String[],System.String)">
+ <summary>
+  To replaced one file to another position
+ </summary>
+ <param name="InitialPath"></param>The initial path of the file
+ <param name="FinalPath"></param>The path where the file has to be replaced
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetUniqueId(System.String)">
+ <summary>
+ To get the unique id
+ </summary>
+ <param name="VbprojfilePath"></param>The path of vbproj file 
+ <returns></returns>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateSlNFile15(System.String,System.String,System.String)">
+ <summary>
+ To cretae the sln of 2015
+ </summary>
+ <param name="Uniqueid"></param>represent the unique id
+ <param name="ProjectName"></param>To get the name of the file
+ <param name="MainFolderPath"></param>To get the main folder of the file
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateSlNFile19(System.String,System.String,System.String)">
+ <summary>
+ To cretae the sln of 2015
+ </summary>
+ <param name="Uniqueid"></param>represent the unique id
+ <param name="ProjectName"></param>To get the name of the file
+ <param name="MainFolderPath"></param>To get the main folder of the file
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateSlNFile08(System.String,System.String,System.String)">
+ <summary>
+ To cretae the sln of 2008
+ </summary>
+ <param name="Uniqueid"></param>represent the unique id
+ <param name="ProjectName"></param>To get the name of the file
+ <param name="MainFolderPath"></param>to get the main folder of the file
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.BuildProject(System.String,System.String,System.String,System.String)">
+ <summary>
+ To build the the Project of the vbproj file provided.
+ "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+ </summary>
+ <param name="VbprojFullPath">Represent the path of vbproj file.. eg-"E:\laveena\DemoClassLib\DemoClassLib\DemoClassLib.vbproj</param>
+ <param name="OutputPath">Path where dll will be created</param>
+ <param name="BuildType">Type of BuildType i.e "Coded" or "Normal".Bydefault, BuildType is coded,then OutputPath can be "",As output path is alraedy set in vbproj.</param>
+ <param name="MsBuildExePath">Path of MSBuildExe</param>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetVBScriptFromProcFile(System.Collections.Generic.List{System.String}@,System.Data.DataTable,System.String,System.Collections.Hashtable)">
+ <summary>
+ Populate  VB Script from ProcFile.
+ </summary>
+ <param name="VBScriptList"></param>
+ <param name="DtProcFile"></param>
+ <param name="ProcCode"></param>
+ <param name="mVariablesHashTable"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetPropertyListFromString(System.Collections.Generic.List{System.String}@,System.String)">
+ <summary>
+ Populate PropertyList  from Propertystring (Convention Additional  Properties of form  Interface (Convention PropertyName#PropertyType#DefaultValue[NEW] to create new property) Properties separated by | (pipe)
+ </summary>
+ <param name="PropertyList"></param>
+ <param name="PropertyString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetDimVarListFromString(System.Collections.Generic.List{System.String}@,System.String)">
+ <summary>
+ Populate DimVarList  from DimVarString (Convention Additional  Dim Variables of the form  (Convention PropertyName#PropertyType#DefaultValue[New] to create new property) Properties separated by | (pipe)
+ </summary>
+ <param name="DimVarList"></param>
+ <param name="DimVarString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetAssemblyInterfaceListFromString(System.Collections.Generic.List{System.String}@,System.String,System.String,System.Collections.Hashtable,System.Data.DataTable)">
+ <summary>
+ Populate EventList  from AssemblyLoadInterface/AssemblyFocusInterFace from list (Interface properties on focus/load  the assembly  (Convention Variable/PropertyName#DefaultValue#VariableType to if defalultvalue is NEW the variable created aas new y) Variables/Property  separated by | (pipe) , If variable/Propertyname starts with * then it is without parentname qualifier. 
+ </summary>
+ <param name="InterfaceList"></param>
+ <param name="AssemblyInterFaceString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetAssemblyVBScriptFromString(System.Collections.Generic.List{System.String}@,System.String,System.Collections.Hashtable,System.Data.DataTable)">
+ <summary>
+ Populate EventList  from AssemblyLoadVBScript/AssemblyFocusVBScript/AssemblyLeaveScript from list (Convention Additional  Dim Variables of the form  (Convention PropertyName#PropertyType#DefaultValue[New] to create new property) Properties separated by | (pipe) and ProcName prefixed by @
+ </summary>
+ <param name="InterfaceList"></param>
+ <param name="AssemblyVBScriptString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.Addreference(System.String,System.String)">
+ <summary>
+ Add reference to a project.
+ </summary>
+ <param name="VbProjFile"></param>
+ <param name="DllFilesToBeAdded"></param>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetVBScriptForDataTable(System.Collections.Generic.List{System.String}@,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ Create VB  Statements list to create a datatable runtime.
+ </summary>
+ <param name="StmtsList"></param>
+ <param name="SourceDataTable"></param>
+ <param name="ExcludeColumns">Columns to be excluded in vb script</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CheckVBScripts(System.String,System.String,System.String,System.Data.DataTable,System.String)">
+ <summary>
+ Check VB Statements  of particular event exists in Control_Property.xlsx 
+ </summary>
+ <param name="ControlName"></param>
+ <param name="ControlType"></param>
+ <param name="EventCode">EventName</param>
+ <param name="dtProperties">Datatable of Control_Property.xlsx</param>
+ <param name="CodeFile">V</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetVBControlEvents(System.String,System.Data.DataTable,System.String,System.Collections.Generic.List{System.String}@)">
+ <summary>
+ Get list of VB events used in form property file by control name.
+ </summary>
+ <param name="ControlName"></param>
+ <param name="dtProperties"></param>
+ <param name="CodeFile">Permissible values V,R,D</param>
+ <param name="CheckInEventList">List of previous event scripts,event added only if not found in this list</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetVBEventScripts(System.String,System.String,System.Data.DataTable,System.Data.DataTable,System.Collections.Generic.List{System.String}@,System.String,System.String,System.Data.DataTable@,System.Collections.Hashtable@)">
+ <summary>
+ Function to Insert VB Statements into control events block derived from Form_Properties.xlsx 
+ </summary>
+ <param name="ControlName">Control Name</param>
+ <param name="EventType">Event Name of control</param>
+ <param name="dtProperties">DataTable of "Form_Properties.xlsx"</param>
+ <param name="DtErpProperties">DataTable of "ErpControlPropertiesList.xlsx"</param>
+ <param name="StatementsList">Input/Output List of statement</param>
+ <param name="CodeFile">V= because the statements are  taken into VB,</param>
+ <param name="InsertAfter">Index no where event block starts in StatementsList</param>
+ <param name="DtProcFile">DataTable of "ProcNameFile.xlsx"</param>
+ <param name="PublicVariables">Public Variables hashtable ,if variables are used in Form_Properties  to "PropNameOrScript,ValueOrVbScript" </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetVBEventScripts(System.String,System.Data.DataTable,System.Data.DataTable,System.Collections.Generic.List{System.String}@,System.String,System.Data.DataTable@,System.Collections.Hashtable@)">
+ <summary>
+ Function to Insert VB Statements into control events block derived from Form_Properties.xlsx 
+ </summary>
+ <param name="ControlName">Control Name</param>
+ <param name="dtProperties">DataTable of "Form_Properties.xlsx"</param>
+ <param name="DtErpProperties">DataTable of "ErpControlPropertiesList.xlsx"</param>
+ <param name="StatementsList">Input/Output List of statement</param>
+ <param name="CodeFile">V= because the statements are  taken into VB,</param>
+ <param name="DtProcFile">DataTable of "ProcNameFile.xlsx"</param>
+ <param name="PublicVariables">Public Variables hashtable ,if variables are used in Form_Properties  to "PropNameOrScript,ValueOrVbScript" </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetDesignerProperties(System.String,System.String,System.Data.DataTable,System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}@,System.String,System.String,System.Boolean)">
+ <summary>
+ Add designer lines to list used to write designer later.
+ </summary>
+ <param name="ControlName"></param>
+ <param name="FullPropLine">Properties are separated by chrw(210)</param>
+ <param name="dtPropertyList"></param>
+ <param name="InitializeControls"></param>
+ <param name="PropertiesList"></param>
+ <param name="WithEventsList"></param>
+ <param name="ResxList"></param>
+ <param name="controlType" >ControlType as empty</param> 
+ <param name="CodeFile" >D=Set in designer, V=Set in VB Table</param>
+ <param name="IfControlIsClass" >If control is class then true </param>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.CreateResxFile(System.String,System.Collections.Generic.List{System.String})">
+ <summary>
+ Create ResxFile and insert images from a list having comma separated values of key and ImageFileName.
+ </summary>
+ <param name="ResxFilePath">Resx file name with path</param>
+ <param name="resxList">list of items are comma separated key and image filename</param>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetVBPropertyScripts(System.String,System.String,System.String,System.Data.DataTable,System.Data.DataTable,System.Collections.Generic.List{System.String}@,System.String)">
+ <summary>
+ Get VB Statements from Form property table.
+ </summary>
+ <param name="ControlName">Control Name </param>
+ <param name="ControlType">Control Type</param>
+ <param name="EventCode">event name </param>
+ <param name="dtProperties">Form properties data table.</param>
+ <param name="DtErpProperties">ERP Controls data table</param>
+ <param name="StatementsList"></param>
+ <param name="CodeFile">D=For designer,V=VB File,R=Evaluate Run Time</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.AddFontColorStyleInPropertyXlsx(System.Data.DataTable@,System.Data.DataRow@,System.String@,System.Data.DataTable@,System.Boolean)">
+ <summary>
+ Add rows in Controls_Property.xlsx to set Font and color properties from FontColorStyleCode of controlrow of entform.
+ </summary>
+ <param name="dtProp">DataTable of Controls_Property.xlsx</param>
+ <param name="ControlRow">From entForm</param>
+ <param name="ControlName">ControlName</param>
+ <param name="DtInfoTable">DataTable of InfoTable.xlsx</param>
+ <param name="IgnoreIfExists">True</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.AddRowInPropertyXlsx(System.Data.DataTable@,System.String@,System.String@,System.String@,System.String@,System.String@,System.String@,System.Boolean)">
+ <summary>
+ Add property statement from 
+ </summary>
+ <param name="dtProp"></param>
+ <param name="ControlName"></param>
+ <param name="CodeFile"></param>
+ <param name="CodeType"></param>
+ <param name="EventName"></param>
+ <param name="PropName"></param>
+ <param name="PropValue"></param>
+ <param name="IgnoreIfExists"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.SetPropertiesInERPExcels_old(System.Object,System.Data.DataTable,System.String@)">
+ <summary>
+ 
+ </summary>
+ <param name="ControlName"></param>
+ <param name="PreviousPropertyDt"></param>
+ <param name="CntrlName"></param>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.SetPropertiesInERPExcels(System.Object,System.Data.DataTable,System.String@)">
+ <summary>
+ 
+ </summary>
+ <param name="ControlName"></param>
+ <param name="PreviousPropertyDt"></param>
+ <param name="CntrlName"></param>
+ <remarks></remarks>
+</member>
+<member name="M:CreateProjectClass.CreateProjectClass.GetTagString(System.Data.DataRow@,System.Data.DataRow@,System.Data.DataTable,System.Collections.Hashtable@)">
+ <summary>
+ Tag is constructed by MainControlProperties , ControlExtraProperties, Control's Extra RCM Items.
+ </summary>
+ <param name="ControlRow"></param>
+ <param name="EntFormRow"></param>
+ <param name="DtErpControlsProperties" ></param>
+ <param name="ExtraRCMList"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

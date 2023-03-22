@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "OrderForm";
+}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
+    <meta name="HandheldFriendly" content="true" />
+    <title>Order Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/fontawesome.min.css">
+    @*<link rel="stylesheet" href="~/Content/Custom/theme.css">*@
+    <link rel="stylesheet" href="~/Content/Custom/style.css">
+
+</head>
+
+<style>
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+</style>
+
+
+
+<form action="" method="post" id="frmOrder">
+    @Html.AntiForgeryToken()
+    @Html.ValidationMessage("0", new {@class = "text-danger"})
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+        <div role="main" class="form-all">
+            <ul class="form-section page-section">
+                <li class="form-line form-line-column form-col-1">
+                    <label class="form-label form-label-top">
+                        Company Name
+                    </label>
+                    <div class="form-input-wide"> <input type="text" class="form-textbox"> </div>
+                </li>
+
+                <li class="form-line form-line-column form-col-2">
+                    <label class="form-label form-label-top"> Date </label>
+                    <div class="form-input-wide"> <input type="date" class="form-textbox"> </div>
+                </li>
+
+                <li class="form-line form-line-column form-col-1">
+                    <label class="form-label form-label-top">
+                        Delivery Mode
+                    </label>
+                    <div class="form-input-wide"> <input type="text" class="form-textbox"> </div>
+                </li>
+
+                <li class="form-line form-line-column form-col-1">
+                    <label class="form-label form-label-top">
+                        Phone Number
+                    </label>
+                    <div class="form-input-wide"> <input type="text" class="form-textbox"> </div>
+                </li>
+
+                <li class="form-line">
+                    <label class="form-label form-label-top form-label-auto"> Additional Notes </label>
+                    <div class="form-input-wide"> <textarea class="form-textarea" style="height: 140px"></textarea> </div>
+                </li>
+
+                <li class="form-line">
+                    <div class="form-input-wide">
+                        <input type="text" class="form-textbox" placeholder="Type Product Name">
+                    </div>
+                </li>
+
+                <li class="form-line" data-type="control_paypalSPB" id="id_7" data-payment="true">
+                    <div class="form-input-wide">
+                        <div>
+                            <div class="product-container-wrapper">
+                                <div class="p_item_separator "></div>
+                                <span class="form-product-item hover-product-item new_ui">
+                                    <div class="form-product-item-detail new_ui">
+                                        <div class="form-product-container">
+                                            <span>
+                                                <div class="title_description">
+                                                    <span class="form-product-name">A TO Z TABLETS<span>(</span><span>1 piece</span><span>)</span></span>
+                                                    <span class="form-product-description">Ingredients will be written here.</span>
+                                                </div>
+                                                <span class="form-product-details"><b><span>$<span>15.00</span></span></b></span>
+                                            </span>
+                                            <span style="  justify-content: space-between;  display: flex;  align-items: center;  flex-direction: row;">
+                                                <div class="title_description">
+                                                    <span class="form-sub-label-container" style="vertical-align:top">
+                                                        <label class="form-sub-label" style="min-height:13px">Quantity</label>
+                                                        <span class="select_cont">
+                                                            <span class="form-dropdown">
+                                                                <span style="padding: 10px;">1</span>
+                                                                <span class="arrowicon" style="float: right; margin:4px 10px; display: flex; flex-direction: column;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <span class="form-special-subtotal">
+                                                    <span class="form-item-subtotal">Item subtotal:</span><span>$<span>0.00</span></span>
+                                                </span>
+                                            </span>
+                                            <span style="position: absolute; right: 0; bottom:-10px; font-size: 13px;"><a href="">More Details</a></span>
+                                        </div>
+                                    </div>
+
+                                </span>
+
+                                <div class="p_item_separator "></div>
+
+                                <span class="form-product-item hover-product-item new_ui">
+                                    <div class="form-product-item-detail new_ui">
+                                        <div class="form-product-container">
+                                            <span>
+                                                <div class="title_description">
+                                                    <span class="form-product-name">Pizza Mare e Monti</span>
+                                                    <span class="form-product-description">Ingredients will be written here.</span>
+                                                </div>
+                                                <span class="form-product-details"><b><span>$<span>15.00</span></span></b></span>
+                                            </span>
+                                            <span style="  justify-content: space-between;  display: flex;  align-items: center;  flex-direction: row;">
+                                                <div class="title_description">
+                                                    <span class="form-sub-label-container" style="vertical-align:top">
+                                                        <label class="form-sub-label" style="min-height:13px">Quantity</label>
+                                                        <span class="select_cont">
+                                                            <span class="form-dropdown">
+                                                                <span style="padding: 10px;">1</span>
+                                                                <span class="arrowicon" style="float: right; margin:4px 10px; display: flex; flex-direction: column;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <span class="form-special-subtotal">
+                                                    <span class="form-item-subtotal">Item subtotal:</span><span>$<span>0.00</span></span>
+                                                </span>
+                                            </span>
+                                            <span style="position: absolute; right: 0; bottom:-10px; font-size: 13px;"><a href="">More Details</a></span>
+
+                                        </div>
+                                    </div>
+
+                                </span>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+   
+
+</form>
+
+
+
+
+
+

@@ -1,0 +1,368 @@
+@{
+    Layout = "~/Views/Shared/Navbar.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>GAINBOOKS</title>
+    @*<link rel="shortcut icon" href="~/images/GainbooksFavicon.ico" />*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400&family=IBM+Plex+Sans+Arabic:wght@500;600&family=Work+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/Content/Custom/GainbooksWebsite.css">
+    <script src="~/Scripts/Custom/GainbooksWebsite.js"></script>
+</head>
+
+<body>
+  @*  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-white static-top" style="height: 80px;">
+        <div class="container" style="max-width: 100%;">
+            <a class="navbar-brand" href="#" style="display:contents;">
+                <img src="/images/gainbooks_logo.png" alt="..." style="height:50px;">
+                <h4 style="font-size:20px; display:inline-block;color:#337ab7; margin:0;">GainBooks</h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="@Url.Action("FinancialModule", "PublicUrl")">Financial Module</a></li>
+                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="@Url.Action("OperationalModule", "PublicUrl")">Operational Module</a></li>
+                            <hr class="dropdown-divider">
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Partner with us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Customer</a></li>
+                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="#">Employee</a></li>
+                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="#">Dealer</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>*@
+
+    <!-- Page Content -->
+    <div class="container Schedule">
+        <div class="row"  style="--bs-gutter-x: 0;">
+
+            <div class="col-lg-6 col-md-6 Schedule-div">
+                <div class="Schedule-innerdiv">
+                    <div class="col-lg-12 col-md-12">
+
+                        <h3 class="heading">
+                            GAINBOOKS</h3>
+                        <p class="subheading">A complete business management solution</p>
+
+                    </div>
+                    <div class="col-lg-12 col-md-12" style="margin-top: 40px;">
+
+                        <h3 class="qualities"> Affordable | Reliable | User friendly</h3>
+                        <a href="@Url.Action("ContactUs", "PublicUrl")"><button class="demobtn">Schedule Demo</button></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 Schedule-imgdiv">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+
+                        <div class="item">
+                            <img src="/images/main/screen_img.png" alt="" class="screen-img">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container cards-section">
+        <h2 style="text-align:center;">Why Gainbooks ?</h2>
+        <div class="cards">
+              <div class="card">
+                <div class="img-div">
+                    <img src="/images/main/BMS.png" alt="">
+                </div>
+                <div class="text">
+                    <h5>Complete Business Management Solution</h5>
+                    <p>An all-in-one solution to help optimize and simplify your operations in one place. A complete suite of modules with enriched features covering Financial Management, Customer relationship, Inventory, Sales and Marketing, Task and Workforce management, and more.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img-div">
+                    <img src="/images/main/UserFriendly_img.png" alt="">
+
+                </div>
+                <div class="text">
+                    <h5 style="padding:0 20px;">Intuitive & User friendly</h5>
+                    <p>Works exactly the way user expects it to! A clean user interface makes it simple and easy to use by even the most non-technical person. Users can navigate straightforwardly without undergoing any special training.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img-div">
+                    <img src="/images/main/Insightfull_img.png" alt="">
+                </div>
+                <div class="text">
+                    <h5>Insightful and customisable reports</h5>
+                    <p>Offers real time analytical dashboards for various business operations to support better decision
+                        making. Also provides option to customise reports relevant to individual needs.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img-div">
+                    <img src="/images/main/AccessAnywhere_img.png" alt="">
+                </div>
+                <div class="text">
+                    <h5>Access anywhere</h5>
+                    <p>Access your business data such as real time inventory, ordering status etc. on your mobile
+                        anytime, anywhere. Multiple employees can access the same data at once, and they can do so from
+                        different locations.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-div">
+                    <img src="/images/main/CallCenter_img.png" alt="">
+                </div>
+                <div class="text">
+                    <h5>Centralised Call centre for quick support</h5>
+                    <p>Automated call registration facility with dedicated customer service team to provide support and
+                        resolve queries at the earliest.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="container partnership-section">
+        <h2 style="text-align:center; padding-top: 20px; ">Partnerships</h2>
+        <div class="para">
+            <div class="logo-div">
+                <div> <img src="/images/main/pine_abs2.png" alt="" style="height:85px;"> </div>
+                <div> <img src="/images/main/mswipe.jpg" alt=""></div>
+                <div> <img src="/images/main/govt2.png" alt=""></div>
+                <div> <img src="/images/main/pharmarack2.png" alt="" style="height: 100px;"></div>
+            </div>
+            <div class="logo-div">
+                <div> <img src="/images/main/nielsen2.png" alt=""> </div>
+                <div> <img src="/images/main/iqvia2.png" alt=""></div>
+                <div> <img src="/images/main/awacs2.png" alt=""></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container business-section">
+        <h2 style="text-align:center;">
+            Business segments
+            <div class="arrow" style="left: 5px; display:none;">
+                <img src="/images/main/1.png" alt="" id="btn-left">
+            </div>
+            <div class="arrow" style="right: 5px; display:none;">
+                <img src="/images/main/2.png" alt="" id="btn-right">
+            </div>
+        </h2>
+        <div class="marquee row business-innerdiv" id="b">
+            <ul class="marquee-content main-segments">
+                <div class="box">
+                    <img src="/images/main/seed.png" alt="" class="img-circle">
+                    <p>Seed Mills</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Pharmaceutical Manufacturers.png" alt="" class="img-circle">
+                    <p>Pharmaceutical Manufacturers</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Photo Studio.png" alt="" class="img-circle">
+                    <p>Photo Studios</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Vegetable Dealers.png" alt="" class="img-circle">
+                    <p>Vegetables</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Glass.png" alt="" class="img-circle">
+                    <p>Glass/Marble</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/woekshop.png" alt="" class="img-circle">
+                    <p>Automobile Workshops</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Grain Merchant.png" alt="" class="img-circle">
+                    <p>Grains</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Garments3.png" alt="" class="img-circle">
+                    <p>Garments</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Jewellers.png" alt="" class="img-circle">
+                    <p>Jewellers</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/dairy.png" alt="" class="img-circle">
+                    <p>Dairy</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/general store.png" alt="" class="img-circle">
+                    <p>General Stores</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/books.png" alt="" class="img-circle">
+                    <p>Book Stores</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/coaching.png" alt="" class="img-circle">
+                    <p>Coaching Institutes</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/event.png" alt="" class="img-circle">
+                    <p>Event Management</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/oil.png" alt="" class="img-circle">
+                    <p>Oil Mills</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Hospital.png" alt="" class="img-circle">
+                    <p>Hospitals</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/mobile.png" alt="" class="img-circle">
+                    <p>Mobile Shops</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/hotel.png" alt="" class="img-circle">
+                    <p>Hotels</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/paint.png" alt="" class="img-circle">
+                    <p>Paint Shops</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Pesticide dealers.png" alt="" class="img-circle">
+                    <p>Pesticide Dealers</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Pharmaceutical retail.png" alt="" class="img-circle">
+                    <p>Pharmaceutical Retail</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/petrol pump.png" alt="" class="img-circle">
+                    <p>Petrol Pumps</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/restaurant.png" alt="" class="img-circle">
+                    <p>Restaurants</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/Pharmaceutical dist.png" alt="" class="img-circle">
+                    <p>Pharmaceutical Distributors</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/stone.png" alt="" class="img-circle">
+                    <p>Stone Merchants</p>
+                </div>
+                <div class="box">
+                    <img src="/images/main/transport.png" alt="" class="img-circle">
+                    <p>Transport</p>
+                </div>
+
+            </ul>
+        </div>
+    </div>
+
+  @*  <div class="footer">
+        <div class="footer-parts part1">
+            <div class="apps col-lg-5 col-md-5">
+                <h4>APPS</h4>
+                <p>Gainbooks</p>
+                <p>Saral Hybrid EPL</p>
+                <p>Saral Hybrid EGR</p>
+                <p>Saral Hybrid EAA</p>
+
+            </div>
+            <div class="policy col-lg-4 col-md-4">
+                <h4>Policy</h4>
+                <p>Privacy Policy</p>
+                <p>Terms of agreement</p>
+            </div>
+            <div class="part col-lg-3 col-md-3">
+                <h4>Be a part</h4>
+                <p>Contact us</p>
+            </div>
+        </div>
+        <h2 style="text-align: center;">Contact us</h2>
+        <div class="footer-parts">
+            <div class="head col-lg-5 col-md-5">
+                <h4>Head office</h4>
+                <p>1103, Ramses Tower</p>
+                <p>Omaxe The Nile, Sector-49, Sohna Road</p>
+                <p>Gurgaon-122018,</p>
+                <p>Haryana (India)</p>
+
+            </div>
+            <div class="branch col-lg-4 col-md-4">
+                <h4>Branch office</h4>
+                <p>8-A</p>
+                <p>Near Gumanpura Thana</p>
+                <p>Kota-324007,</p>
+                <p>Rajasthan (India)</p>
+
+            </div>
+            <div class="info col-lg-3 col-md-3">
+                <h4>Contact info</h4>
+                <p>contact@gainbooks.com</p>
+                <p>+91 9653940874</p>
+                <p>+91 9414184250</p>
+            </div>
+        </div>
+    </div>*@
+    <script>
+        const root = document.documentElement;
+        const marqueeElementsDisplayed = getComputedStyle(root).getPropertyValue("--marquee-elements-displayed");
+        const marqueeContent = document.querySelector("ul.marquee-content")
+
+        root.style.setProperty("--marquee-elements", marqueeContent.children.length);
+
+        for (let i = 0; i < marqueeElementsDisplayed; i++) {
+            marqueeContent.appendChild(marqueeContent.children[i].cloneNode(true));
+        }
+    </script>
+</body>
+
+
+</html>

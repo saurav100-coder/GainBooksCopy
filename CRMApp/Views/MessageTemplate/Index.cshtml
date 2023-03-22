@@ -1,0 +1,312 @@
+﻿@{
+     ViewData["Title"] = "Message Template";
+}
+
+<style type="text/css">
+    .context-menu {
+        width: 250px;
+        height: auto;
+        position: absolute;
+        display: none;
+    }
+
+    .focus {
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .selected {
+        font-weight: bold;
+    }
+
+    .asc:after {
+        content: "\25B2";
+    }
+
+    .desc:after {
+        content: "\25BC";
+    }
+</style>
+
+<div class="container">
+    <h4 style="color:#3c8dbc; font-size:25px; text-align:center; margin-top:10px; font-family:verdana,arial,sans-serif;">Message Templates</h4>
+    <button id="btnCreateTemplate" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add New Template</button>
+    <button id="btnRefereshTable" class="btn btn-info"><i class="glyphicon glyphicon-refresh"></i> Referesh</button>
+</div>
+
+<hr />
+
+<div class="container">
+    <table id="tblDataList" class="table table-bordered table-striped sortable">
+        <thead>
+            <tr>
+                <th>SR. No.</th>
+                <th>TYPE</th>
+                <th>TITLE</th>
+                <th>TEMPLATE MESSAGE</th>
+                <th>Active</th>
+                <th>ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+
+
+<div class="modal fade in" id="CreateMsgTemplateModel">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width:375px;">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" style="font-weight:700!important; width:100%">Message Template</h3>
+            </div>
+            <div class="modal-body">
+                <div id="CreateMsgTemplateForm">
+
+                </div>
+                <div id="contextMenu" class="context-menu">
+                    <select multiple class="form-control" id="lstVariables"></select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+        </div>
+    </div>
+</div>
+
+
+@*<div class="modal fade in" id="CreateMsgTemplateModel">
+        <div class="modal-dialog" role="form" style="width:350px">
+            <div class="modal-content">
+                <div class="modal-header" style="border:none; padding:0px">
+
+                    <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">×</span>
+                </div>
+                <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                    <h4 class="modal-title"> </h4>
+
+                    <div id="CreateMsgTemplateForm" class="col-md-12" style="padding-left:0px">
+
+                    </div>
+                    <div id="contextMenu" class="context-menu">
+                        <select multiple class="form-control" id="lstVariables"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>*@
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            LoadDataList();
+            LoadVaribles();
+
+            $("th").each(function (column) {
+                debugger
+                $(this).hover(
+                    function () { $(this).addClass('focus'); },
+                    function () { $(this).removeClass('focus'); }
+                    );
+                $(this).click(function () {
+                    if ($(this).is('.asc')) {
+                        $(this).removeClass('asc');
+                        $(this).addClass('desc selected');
+                        sortOrder = -1;
+                    }
+                    else {
+                        $(this).addClass('asc selected');
+                        $(this).removeClass('desc');
+                        sortOrder = 1;
+                    }
+                    $(this).siblings().removeClass('asc selected');
+                    $(this).siblings().removeClass('desc selected')
+                    var rows = $('#tblDataList tbody  tr').get();
+                    rows.sort(function (a, b) {
+                        var val1 = $(a).children('td').eq(column).text().toUpperCase();
+                        var val2 = $(b).children('td').eq(column).text().toUpperCase();
+                        if ($.isNumeric(val1) && $.isNumeric(val2))
+                            return sortOrder == 1 ? val1 - val2 : val2 - val1;
+                        else
+                            return (val1 < val2) ? -sortOrder : (val1 > val2) ? sortOrder : 0;
+                    });
+                    $.each(rows, function (index, row) {
+                        $('#tblDataList').children('tbody').append(row);
+                    });
+                });
+            });
+
+        });
+
+
+        function LoadDataList() {
+            $.ajax({
+                url: "/MessageTemplate/AllMessageTemplates",
+                type: "Get",
+                success: function (result) {
+                    var tblDataList = $("#tblDataList");
+                    $("#tblDataList tbody tr").remove();
+                    var html = "";
+                    $.each(result, function (index, item) {
+                        var m = index + 1;
+                        html += "<tr id='" + item.P_msgtemplate + "' class='search'>";
+                        html += "<td>" + m + "</td>";
+                        html += "<td>" + item.NameOfInfo + "</td>";
+                        html += "<td>" + item.Title + "</td>";
+                        html += "<td>" + item.Text + "</td>";
+                        var active = item.Active == 'Y' ? 'Yes' : 'No';
+                        html += "<td>" + active + "</td>";
+                        html += "<td><button class='btn btn-info' onclick=EditTemplate(" + item.P_msgtemplate + ")><i class='glyphicon glyphicon-pencil'></i></button> <button class='btn btn-danger' onClick=Delete(" + item.P_msgtemplate + ")><i class='glyphicon glyphicon-trash'></i></button></td>";
+                        html += "</tr>";
+                    });
+                    $("#tblDataList tbody").html(html);
+                },
+                error: function (error) {
+                    alert(error.responseText);
+                }
+
+            });
+        }
+
+        var options = {
+            "backdrop": "static",
+            "keyboard": false
+        }
+        function EditTemplate(ID) {
+            $.ajax({
+                type: "Get",
+                url: "/MessageTemplate/MessageTemplateForm?exitmode=Edit&id=" + ID,
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (data) {
+                    $('#CreateMsgTemplateForm').html(data);
+                    $('#CreateMsgTemplateModel').modal(options);
+                    $('#CreateMsgTemplateModel').modal('show');
+                    $(".PanelForm").css({ "border": "none", "box-shadow": "none", "width": "200px" });
+                    $(".Task").css({ "margin-top": "0px", "margin-bottom": "10px" });
+                    $(".hr").append('<hr />')
+                    $(".hr").css("margin-bottom", "20px")
+                    $(".mainpanel").css({ "margin-left": "0px", "padding-left": "5px", "width": "270px" });
+                    $(".labeltext").css({ "margin-bottom": "10px" });
+                    $(".forminput").css({ "margin-bottom": "15px" });
+                    $(".mainbutton").css({ "margin": "20px 0px 20px 15px" });
+                    $(".cancel").attr("data-dismiss", "modal");
+                }
+            });
+        }
+
+        $("#btnCreateTemplate").click(function () {
+            $.ajax({
+                type: "Get",
+                url: "/MessageTemplate/MessageTemplateForm",
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (data) {
+                    $('#CreateMsgTemplateForm').html(data);
+                    $('#CreateMsgTemplateModel').modal(options);
+                    $('#CreateMsgTemplateModel').modal('show');
+                    $(".PanelForm").css({ "border": "none", "box-shadow": "none", "width": "200px" });
+                    $(".Task").css({ "margin-top": "0px", "margin-bottom": "10px" });
+                    $(".hr").append('<hr />')
+                    $(".hr").css("margin-bottom", "20px")
+                    $(".mainpanel").css({ "margin-left": "0px", "padding-left": "5px", "width": "270px" });
+                    $(".labeltext").css({ "margin-bottom": "10px" });
+                    $(".forminput").css({ "margin-bottom": "15px" });
+                    $(".mainbutton").css({ "margin": "20px 0px 20px 15px" });
+                    $(".cancel").attr("data-dismiss", "modal");
+                }
+            });
+        });
+
+
+
+        /**feature=> , , ,
+
+             2. Show Variable List on right-click
+             3. Set value on cursor position in TextArea
+             4. Hide Variale List after select a value(In This case user click on list)
+             5. Hide Variale List Without select a value(In This case user Press ESC key or click anywhere on screen )
+           **/
+
+        var contextMenu = document.getElementById('contextMenu');
+        var txtmsg = $('#Text');
+
+        contextMenu.onclick = getValueAndhideContextMenu;
+        window.onkeydown = listenKeys;
+        window.onclick = hideContextMenu;
+
+        //2. Show Variable List on right-click
+        function ShowContextmenu(event) {
+            event.preventDefault();
+            contextMenu.style.display = 'inline';
+            var dialogElm = $("#CreateMsgTemplateModel .modal-body ");
+            var relativeX = event.pageX - dialogElm.offset().left;
+            var relativeY = event.pageY - dialogElm.offset().top;
+            contextMenu.style.left = relativeX + "px";
+            contextMenu.style.top = relativeY + "px";
+            return false;
+        }
+
+        //3  Set value on cursor position in TextArea
+        function setTextToCurrentPos() {
+            var curPos = document.getElementById("Text").selectionStart;
+            let x = $("#Text").val();
+            let text_to_insert = "~~" + $("#lstVariables :selected").text();
+            $("#Text").val(x.slice(0, curPos) + text_to_insert + x.slice(curPos));
+            $("#Text").focus();
+        }
+
+        //4  Hide Variale List after select a value(In This case user click on list)
+        function getValueAndhideContextMenu() {
+            contextMenu.style.display = 'none';
+            setTextToCurrentPos();
+        }
+
+        //5  Hide Variale List Without select a value(In This case user click anywhere on screen )
+        function hideContextMenu() {
+            contextMenu.style.display = 'none';
+        }
+
+        //5 Hide Variale List Without select a value(In This case user Press ESC key  )
+        function listenKeys(event) {
+            var keyCode = event.which || event.keyCode;
+            if (keyCode == 27) {
+                hideContextMenu();
+            }
+        }
+
+        function LoadVaribles() {
+
+            $.ajax({
+                url: "/MessageTemplate/GetVariablesList",
+                type: "Get",
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (data) {
+                    var html = "";
+                    $.each(data, function (index, item) {
+                        html += "<option value=" + item.P_VariableTable + ">" + item.VariableName + "</option>"
+                    });
+
+                    $('#lstVariables').html(html);
+                }
+            });
+        }
+
+        $("#btnRefereshTable").click(function () {
+            LoadDataList();
+            LoadVaribles();
+        });
+
+
+
+
+
+
+    </script>

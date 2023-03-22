@@ -1,0 +1,92 @@
+﻿ .TopBlue {
+            display: inline-flex;
+            height: 26px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-left: 2px solid #3c8dbc;
+            border-top: 2px solid #3c8dbc;
+            border-right: 2px solid #3c8dbc;
+            width: 346px;
+            background-color: #ecf0f5;
+            padding-right: 5px;
+        }
+ .rcorners_innerBlue{z-index:20; padding-bottom: 0px;padding-left: 5px;padding-right: 22px;padding: 20px;padding: 2px 5px 0px 5px;margin-right: 20px;background-color: white;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 12px;border-bottom-left-radius: 12px;border-right: 2px solid #3c8dbc;border-left: 2px solid #3c8dbc;border-bottom: 1px solid #3c8dbc;width:100%;}
+  .panelBlue {
+            padding: 0 0px;background-color: white;max-height: 0;overflow: hidden;transition: max-height 0s ease-out;margin-top: 0px;margin-left: 0px;width: 346px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 12px;border-bottom-left-radius: 12px;margin-bottom: 10px;font-size: 13px;z-index: 100;
+        }
+  .cgs{
+      font-size: 13px;
+    padding-left: 15px;
+    margin-left: 0px;
+    top: -2px;
+    bottom: 1px;
+    width: 355px;
+    background-color: gainsboro;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-right: 5px;
+  }
+@media only screen and (max-width:376px) {
+     .TopBlue {
+            display: inline-flex;
+            height: 26px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-left: 2px solid #3c8dbc;
+            border-top: 2px solid #3c8dbc;
+            border-right: 2px solid #3c8dbc;
+            width: 90%;
+            background-color: #ecf0f5;
+            padding-right: 5px;
+        }
+      .rcorners_innerBlue{z-index:20; padding-bottom: 0px;padding-left: 5px;padding-right: 22px;padding: 20px;padding: 2px 5px 0px 5px;margin-right: 20px;background-color: white;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 12px;border-bottom-left-radius: 12px;border-right: 2px solid #3c8dbc;border-left: 2px solid #3c8dbc;border-bottom: 1px solid #3c8dbc;width:90%;}
+      .panelBlue {
+            padding: 0 0px;background-color: white;max-height: 0;overflow: hidden;transition: max-height 0s ease-out;margin-top: 0px;margin-left: 0px;width: 96.5%;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 12px;border-bottom-left-radius: 12px;margin-bottom: 10px;font-size: 13px;z-index: 100;
+        }
+    .cgs {
+        font-size: 13px;
+        padding-left: 15px;
+        margin-left: 0px;
+        top: -2px;
+        bottom: 1px;
+        width: 320px;
+        background-color: gainsboro;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-right: 5px;
+    }
+}
+@media only screen and (max-width:321px) {
+     .cgs {
+        font-size: 13px;
+        padding-left: 15px;
+        margin-left: 0px;
+        top: -2px;
+        bottom: 1px;
+        width: 280px;
+        background-color: gainsboro;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-right: 5px;
+    }
+     .TopBlue {
+            display: inline-flex;
+            height: 26px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-left: 2px solid #3c8dbc;
+            border-top: 2px solid #3c8dbc;
+            border-right: 2px solid #3c8dbc;
+            width: 80%;
+            background-color: #ecf0f5;
+            padding-right: 5px;
+        }
+      .rcorners_innerBlue{z-index:20; padding-bottom: 0px;padding-left: 5px;padding-right: 22px;padding: 20px;padding: 2px 5px 0px 5px;margin-right: 20px;background-color: white;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 12px;border-bottom-left-radius: 12px;border-right: 2px solid #3c8dbc;border-left: 2px solid #3c8dbc;border-bottom: 1px solid #3c8dbc;width:80%;}
+       .panelBlue {
+            padding: 0 0px;background-color: white;max-height: 0;overflow: hidden;transition: max-height 0s ease-out;margin-top: 0px;margin-left: 0px;width: 102%;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 12px;border-bottom-left-radius: 12px;margin-bottom: 10px;font-size: 13px;z-index: 100;
+        }
+
+}

@@ -1,0 +1,726 @@
+﻿var options = { "backdrop": "static", keyboard: true };
+var popOverOpen = false;
+var CurrentHoverRowId = 0;
+var CollabPopOpen = false
+//1) global variable for viewSettings
+var infoString = "";
+
+function loadData(data) {
+    var tblEmployee = $("#example");
+    $("#example div").remove();
+    var a = data.draw;
+    if ($("#Next").hasClass("disabledbutton") == true) { $("#Next").removeClass("disabledbutton"); }
+    if ($("#Prev").hasClass("disabledbutton") == true) { $("#Prev").removeClass("disabledbutton"); }
+    var d = sessionStorage.getItem("PageSize");
+    if (d == null || d == 0 || d == "undefined") { d = 50; sessionStorage.setItem("PageSize", d); };
+    var b;
+    if (a == 1) { b = d; sessionStorage.setItem("start", 0); } else { b = parseInt(a) + parseInt(d); a = parseInt(a) + 1; sessionStorage.setItem("start", a); }
+    sessionStorage.setItem("Total", data.recordsTotal);
+    var c = data.recordsTotal;
+    if (c == 0) { a = c; b = c; $("#Next").addClass("disabledbutton"); $("#Prev").addClass("disabledbutton"); }
+    else if (c < b && a == 1) { b = c; $("#Next").addClass("disabledbutton"); $("#Prev").addClass("disabledbutton"); }
+    else if (c < b && a > 1) { b = c; $("#Next").addClass("disabledbutton"); }
+    else if (a == 1) { $("#Prev").addClass("disabledbutton"); }
+    else if (b == d) { $("#Next").addClass("disabledbutton"); }
+    else if (parseInt(a) + parseInt(d) > c) { $("#Next").addClass("disabledbutton"); $("#Prev").removeClass("disabledbutton"); }
+    $("#info").text(a + "-" + b + " of " + c);
+    var m = a - 1;
+    //4) split infoString by "~"
+    var infoStringArray = infoString.split("~");
+
+    $.each(data.data, function (index, item) {
+        var Parentdiv = "";
+        var MoreDetailsdiv = "";
+
+        Parentdiv = $("<div id='MainDiv-" + item.Customers_Key + "' class='col-md-12  clickable parentdiv' style='display: inline-flex;  padding-left:5px; width: 100%; padding-right:0px'  onmouseover='hoverId(this)' onmouseout='hoverNot(this)'></div>");
+        MoreDetailsdiv = $(("<div  class='MoreDetails' id='" + item.Customers_Key + "' style='position: absolute; z-index: 2; display: none; background-color: white; width: 100px; border:none !important; height: 35px; right:20px;  '> </div>"))
+
+        tblEmployee.append(Parentdiv);
+        m = m + 1;
+        var div = $("<div id='tr-" + item.Customers_Key + "'  style='display:inline-flex; position:relative; padding-top:10px; padding-bottom:20px; width: 100%;  margin-top:10px;  font-size:11px; font-family: verdana,arial,sans-serif; padding-right:0px;'></div>");
+        //"<div style='width: 3%;padding: 0px 5px;' id='" + item.Customers_Key + "' value='" + item.Customers_Key + " style='margin-top:2px; float:left'>" + m + ".</div>"
+        div.html(("<div style='width: 7%;padding: 0px 0px;' id='" + item.Customers_Key + "' value='" + item.Customers_Key + "'><input type='checkbox' class='checkboxall' id='" + item.Customers_Key + "' value='" + item.Customers_Key + "' data-p_acccode='" + item.p_acccode  + "' style='margin-top:2px; margin-right:10px; float:left'>&nbsp;" + m + ".</div>")
+         + " " + ("<div style='width: 9%;padding: 0px 5px; text-align:left; padding-left:10px; '>" + item.P_Customers + "</div>")
+            + " " + ("<div style='width: 7%;padding: 0px 5px; text-align: left;'>" + item.CustCode + "</div>")
+            + " " + ("<div style='width: 12%;padding: 0px 15px; text-align: left;'>" + item.CustName + "</div>")
+         + " " + ("<div style='display:none'>" + item.p_acccode + "</div>")
+            + " " + ("<div style='width: 10%;padding: 0px 5px; text-align: left;'>" + item.Contactperson + "</div>")
+         + " " + ("<div style='width: 9%; padding: 0px 5px;'>" + item.MobNo + "</div>")
+            + " " + ("<div style='width: 11%;padding: 0px 5px; text-align: left;'>" + item.TextHomeTown + "</div>")
+            + " " + ("<div style='width: 12%;padding: 0px 5px; text-align: left;'>" + item.TextCustomerType + "</div>")
+            + " " + ("<div style='width: 8%; padding-left: 5px;text-align: left;'>" + item.CustomerStatus + "</div>")
+         + " " + ("<div style='width: 15%;text-align: left;'>" + item.TxtActivationDate + "</div>")
+            + " " + ("<div style='width: 10%;padding: 0px 5px; text-align: left;'>" + item.TextMainBussCode + "</div>")
+            + " " + ("<div style='width: 8%; padding: 0px 5px; text-align: left;'>" + item.TextProductCode + "</div>"));
+        Parentdiv.append(div);
+
+        //5) Operation to show hoverStrip menu
+        var moreDetailsDivHtml = "";
+        var moreDetailsDivPopoverDiv = "";
+        for (var i = 0; i <= infoStringArray.length - 1; i++) {
+            var infoStringItemArray = infoStringArray[i].split("#");
+            var itemOrder = infoStringItemArray[0];
+            var itemEnable = infoStringItemArray[1];
+            var itemtext = $.trim(infoStringItemArray[2]);
+            if (itemtext.toLocaleLowerCase() == "edit") {
+                if (itemEnable.toLocaleLowerCase() == "y") {
+                    moreDetailsDivHtml += "<a data-toggle='Edit&nbsp' href='/Configuration/CustomerForm?P_customers=" + item.P_Customers + "&exitmode=edit'>       <i class='atag glyphicon glyphicon-pencil' style='font-size:20px; color:#616A6B;padding-left:11px;' ></i></a>";
+                }
+            }
+            else if (itemtext.toLocaleLowerCase() == "delete") {
+                if (itemEnable.toLocaleLowerCase() == "y") {
+                    //moreDetailsDivHtml += "<a data-toggle='Delete&nbsp&nbsp&nbsp' href='/Configuration/CustomerForm?P_customers=" + item.P_Customers + "&exitmode=delete'>       <i class='glyphicon glyphicon-trash' style='font-size:20px; color:#616A6B;padding-left:11px;' ></i></a>";
+                    moreDetailsDivHtml += "<a data-toggle='Delete&nbsp&nbsp&nbsp'><i class=' atag glyphicon glyphicon-trash' onclick = 'DeleteCustomerCtrls(this)' style='font-size:20px; color:#616A6B;padding-left:11px;' ></i></a>";
+                }
+            }
+            //else if (itemtext.toLocaleLowerCase() == "importcustomer") {
+            //    if (itemEnable.toLocaleLowerCase() == "y") {
+            //        moreDetailsDivHtml += "<a data-toggle='Import Cusomerss' onclick='OpenImportModal();'><i class='glyphicon glyphicon-import' style='font-size:20px; color:#616A6B;padding-left:11px;' ></i></a>";
+            //    }
+            //}
+        }
+
+        //6) at last we show Customize HoverStrip menu and this will redirect to viewsetting controller
+        moreDetailsDivHtml += "<a data-toggle='Customize Hover Strip' href='/Configuration/ManageViewSettings?infotype=hoverstripstring&viewid=managecustomers'><i class='atag fa fa-wrench'  style='font-size:22px; color:#616A6B; padding-left:11px;'></i></a>";
+
+        //7) append anchore tag data on MoreDetailsDiv
+        MoreDetailsdiv.append(moreDetailsDivHtml);
+        //8) append popover_content_wrapper div on MoreDetailsDiv
+        MoreDetailsdiv.append(moreDetailsDivPopoverDiv);
+
+        div.append(MoreDetailsdiv);
+
+    });
+    if (data.data.length == 0) {
+        $('#loading').show();
+        $('#loadingmessage').hide();
+        $("#Msg").show();
+        $("#Msg").text("No record found");
+        $('#loading').addClass('clickable');
+    } else {
+        $('#loading').hide();
+        $('#loadingmessage').hide();
+        $('#Msg').hide();
+    }
+    Deviceheight();
+
+    $("#selectall").click(function () {
+        if (this.checked) {
+            $('.checkboxall').each(function () {
+                $(".checkboxall").prop('checked', true);
+                var s = $(this).parent().parent();
+                var m = s.find(".MoreDetails");
+                var n = m.find(".atag");
+                // var c = n.find("i");
+                console.log(n);
+                $(n).addClass('colorwhite');
+
+                $(s).parent().addClass('highlight');
+                $(m).addClass('highlight');
+                // $(m).css("color", "white !important");
+
+                $(s).parent().removeClass('clickable');
+            })
+        } else {
+            $('.checkboxall').each(function () {
+                $(".checkboxall").prop('checked', false);
+                var t = $(this).parent().parent();
+                var m = t.find(".MoreDetails");
+                var n = m.find(".atag");
+                console.log(n);
+                $(n).removeClass('colorwhite');
+                $(t).parent().removeClass('highlight');
+                $(m).removeClass('highlight');
+                $(t).parent().removeClass('clickable');
+            })
+        }
+    });
+
+
+}
+
+
+
+function Deviceheight() {
+    var Header = $("header").height();
+    var icondiv = $(".calHeightIcon").height();
+    var TableDive = $(".calHeightTaskBar").height();
+    var Footer = $(".main-footer").height();
+    
+    var windowHeight = $(window).height();
+    
+    var SumOfElementHeight = Header + TableDive + icondiv + Footer;
+    var MainHeight = windowHeight - SumOfElementHeight-35;
+    $("#example").height(MainHeight);
+}
+
+$(document).ready(function () {
+    $(window).resize(function () {
+        Deviceheight();
+    });
+});
+
+
+//$(document).ready(function () {
+//    $(window).resize(function () {
+//        Deviceheight();
+//        //DetailPaneHeight();
+//    });
+//});
+function OpenImportModal() {
+    $('#ImportCustomerModal').modal('show');
+}
+function SubmitImportCustomers() {
+    var file = document.getElementById('file1');
+    if (file.files.length !== 0) {
+        if (checkFile(file)) {
+
+            //$("#fileErrormsg").text("");
+            var formdata = new FormData(document.getElementById('importForm'))
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Configuration/ImportCustomersFromExcel');
+            xhr.send(formdata);
+            $('#ImportCustomerModal').modal("hide");
+            $("#loadspin,#overlay").show();
+            xhr.onreadystatechange = function (data) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    $("#loadspin,#overlay").hide();
+                    ReloadGrid()
+                    $('#CallClosedContent').html('');
+                    $('#CallClosed').modal(options);
+                    $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>Customers Imported Successfully.</p>");
+                    $('#CallClosed').modal("show");
+                    setTimeout(function () { $('#CallClosed').modal("hide"); }, 1000);
+
+                }
+                else {
+                    $("#loadspin,#overlay").hide();
+                    $('#CallClosedContent').html('');
+                    $('#CallClosed').modal(options);
+                    $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>An Error occured While storing your Information .Please Try again later.</p>");
+                    $('#CallClosed').modal("show");
+                    setTimeout(function () { $('#CallClosed').modal("hide"); }, 1000);
+                }
+            }
+        }
+    }
+    else {
+        //$("#fileErrormsg").text("*Please select file.");
+        $('#ImportCustomerModal').modal("hide");
+        $('#CallClosedContent').html('');
+        $('#CallClosed').modal(options);
+        $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>*Please select file.</p>");
+        $('#CallClosed').modal("show");
+        setTimeout(function () { $('#CallClosed').modal("hide"); }, 1000);
+    }
+    return false;
+}
+
+function checkFile(sender) {
+    var validExts = new Array(".xlsx", ".xls");
+    var fileExt = sender.value;
+    fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+    if (validExts.indexOf(fileExt) < 0) {
+
+        $('#CallClosedContent').html('');
+        $('#CallClosed').modal(options);
+        $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>Invalid file selected, valid files are of " + validExts.toString() + " types.</p>");
+        $('#CallClosed').modal("show");
+        setTimeout(function () { $('#CallClosed').modal("hide"); }, 2000);
+        $('#ImportCustomerModal').modal("hide");
+        return false;
+    }
+    else return true;
+}
+
+
+
+
+
+$(document).ready(function () {
+    var d = $("#fvalue").val();
+    var m = [];
+    m = d.split("|");
+    var l;
+    for (i = 0; i <= m.length - 1; i = i + 1) {
+        l = m[i].split("~");
+        var dropdown = $("#filter");
+        $('#filter').append($('<option>', {
+            value: l[1] + ":" + l[2],
+            text: l[0]
+        }));
+    };
+
+    $('a').tooltip();
+    var a = 1;
+    sessionStorage.setItem("start", 0);
+    var t = sessionStorage.getItem("PageSize");
+    if (t == null) { t = 50 }
+    var SelectedRows = "";
+    //GetEmployeeData(a, 0, t);
+    sessionStorage.setItem("search", null);
+    //2) get viewSetting data for current user
+    //getViewSettingData();
+    infoString = $("#infostring").val();
+    setInterval(ReloadGrid(), 15 * 60 * 1000);//setting Interval of 15 minutes by which every 15 minutes grid is getting refresh.
+
+    //added by aslam on 15/03/2021
+    $('#example').on('click', "input[type='checkbox']", function () {
+        debugger
+        if ($(this).prop("checked") == true) {
+            var s = $(this).parent().parent();
+            var m = s.find(".MoreDetails");
+            var n = m.find(".atag");
+            // var c = n.find("i");
+            console.log(n);
+            $(n).addClass('colorwhite');
+
+            $(s).parent().toggleClass('highlight');
+            $(m).toggleClass('highlight');
+            $(m).css("color", "white !important");
+            $(s).parent().removeClass('clickable');
+        }
+        else if ($(this).prop("checked") == false) {
+            var t = $(this).parent().parent();
+            var m = t.find(".MoreDetails");
+            var n = m.find(".atag");
+            console.log(n);
+            $(n).removeClass('colorwhite');
+            $(t).parent().toggleClass('highlight');
+            $(m).toggleClass('highlight');
+            $(t).parent().removeClass('clickable');
+        }
+    });
+
+    $("#Prev").on("click", function () {
+        var a = sessionStorage.getItem("PageSize");
+        var b = sessionStorage.getItem("search");
+        var d = sessionStorage.getItem("start");
+        var o = sessionStorage.getItem("order");
+        var total = sessionStorage.getItem("Total");
+        //if (o != undefined && o != "null") {
+        //    order = o.split(":");
+        //    var orderid = "tbody tr:last td:nth-child(" + order[0] + ")";
+        //    ordervalue = $(orderid).text();
+        //    o = order[1] + "~" + ordervalue + "~" + order[2];
+        //    JSON.stringify(o);
+        //}
+        if (a != null) { d = (d - a) - 1; } else { d = (d - 50) - 1; }
+        $("#example div").remove();
+        $('#loading').show();
+        $('#loadingmessage').show();
+        $('#Msg').hide();
+        if (d >= 0) {
+            $.post('/Configuration/AjaxGetCustomersData', { start: d, pSize: a, search: b, order: o, ServerOrderValue: "" }, function (data) {
+                loadData(data);
+            })
+        }
+    });
+    $("#Next").on("click", function () {
+        var total = sessionStorage.getItem("Total");
+        var a = sessionStorage.getItem("PageSize");
+        var c = sessionStorage.getItem("search");
+        var d = sessionStorage.getItem("start");
+        debugger
+        var o = sessionStorage.getItem("order");
+
+        if (a != null) { d = parseInt(d) + parseInt(a) - 1; } else { d = parseInt(d) + 50 - 1; }
+        $("#example div").remove();
+        $('#loading').show();
+        $('#loadingmessage').show();
+        $('#Msg').hide();
+        if (d < total) {
+            $.post('/Configuration/AjaxGetCustomersData', { start: d, pSize: a, search: c, order: o, ServerOrderValue: "" }, function (data) {
+                loadData(data);
+            })
+        }
+    });
+
+   
+
+    function getViewSettingData() {
+        $.post('/Configuration/GetViewSettingData', { InfoType: "hoverstripstring", ViewId: "managecustomers" }, function (viewData) {
+            infoString = viewData.Infostring;
+        });
+    }
+    $("#filter").on("change", function () {
+        var a = $("#filter").val();
+        $(".filterDiv").css("display", "none")
+        if (a != "0" && a != "1") {
+            b = a.split(":");
+            if (b[0] == 5) {
+                var a = document.getElementById("dateC")
+                a.style.display = "";
+            }
+            else if (b[0] == 2 || b[0] == 3 || b[0] == 4 || b[0] == 6) {
+                $("#TextC").css("display", "");
+            } 
+        }
+    });
+});
+
+function removeFilter() {
+    $(".filterDiv").css("display", "none")
+    $("#filter").val(0);
+    $("#filterText").val("");
+    $("#min").val("");
+    $("#max").val("");
+}
+
+function DoSearch() {
+    var ValueToSearch = $("#filterText").val().trim();
+    var filterSelected = $("#filter").val();
+    var filter = filterSelected.split(":")
+    var col = ""
+    var search = ""
+    if ($("#filterText").val() != "" || $("#filterText").val() != "undefined") {
+        if (filter[0] == 2) {
+            value = $("#filterText").val();
+            col = "custcode";
+            search = ValueToSearch + "," + col + ":String";
+        }
+        if (filter[0] == 3) {
+            value = $("#filterText").val();
+            col = "custname";
+            search = ValueToSearch + "," + col + ":String";
+        }
+        if (filter[0] == 4) {
+            value = $("#filterText").val();
+            col = "P_Customers";
+            search = ValueToSearch + "," + col + ":Integer";
+        }
+        if (filter[0] == 6) {
+            value = $("#filterText").val();
+            col = "MobNo";
+            search = ValueToSearch + "," + col + ":String";
+        }
+        JSON.stringify(search);
+        sessionStorage.setItem("search", search);
+        var pSize = sessionStorage.getItem("PageSize");
+        $("#example div").remove();
+        $("#loading").show();
+        $('#loadingmessage').show();
+
+        $.ajax({
+            url: '/Configuration/AjaxGetCustomersData',
+            type: "POST",
+            data: { start: 0, pSize: pSize, search: search },
+            success: function (data) {
+                //$(".filterDiv").css("display", "none")
+                //$("#fText").text(ValueToSearch);
+                //$("#FilterText").show();
+                sessionStorage.setItem("Total", data.recordsTotal);
+                loadData(data);
+            },
+            error: function (data) {
+                alert("Failed");
+            }
+        });
+    }
+    return false;
+}
+
+
+function DateSearch() {
+
+    value1 = $("#min").val();
+    value2 = $("#max").val();
+    col = "activationdate";
+    search = value1 + "," + value2 + "," + col + ":Date";
+
+    JSON.stringify(search);
+    sessionStorage.setItem("search", search);
+    var pSize = sessionStorage.getItem("PageSize");
+    $("#example div").remove();
+    $("#loading").show();
+    $('#loadingmessage').show();
+
+    $.ajax({
+        url: '/Configuration/AjaxGetCustomersData',
+        type: "POST",
+        data: { start: 0, pSize: pSize, search: search },
+        success: function (data) {
+            // $("#fText").text(value);
+            // $("#FilterText").show();
+            sessionStorage.setItem("Total", data.recordsTotal);
+            loadData(data);
+        },
+        error: function (data) {
+            alert("Failed");
+        }
+    });
+
+
+}
+
+function hoverId(ctrl) {
+    // $(ctrl).find('.MoreDetails').show()
+    if (popOverOpen == true) {
+        $(".MoreDetails").not(CurrentHoverRowId).hide;
+    } else {
+        $(ctrl).find('.MoreDetails').show();
+        $(ctrl).find('.MoreDetails').css("display", "inline-flex");
+    }
+}
+
+function hoverNot(ctrl) {
+    $('.MoreDetails').hide();
+    if (popOverOpen == true) {
+        $(CurrentHoverRowId).find('.MoreDetails').show();
+    }
+}
+
+
+function GetEmployeeData(pageNumber, start, PSize) {
+    $('#loading').show();
+    $('#loadingmessage').show();
+    $.ajax({
+        type: "POST",
+        url: "/Configuration/AjaxGetCustomersData",
+        data: { id: "", start: start, pSize: PSize },
+        success: function (data) {
+            
+            sessionStorage.setItem("Total", data.recordsTotal);
+            loadData(data);
+        },
+        error: function () {
+            alert("Error in loading data")
+        }
+    });
+}
+
+// function to close button on popover
+function popoverClose() {
+    popOverOpen = false
+    $('.popover').hide();
+    $('.MoreDetails').popover('hide');
+    $("#ShowSubTaskControlDiv").popover('hide');
+    $(".ShowRemark").popover('hide');
+}
+
+
+
+function ReloadGrid() {
+    removeFilter();
+    $("#example div").remove();
+    sessionStorage.setItem("start", 0);
+    var t = sessionStorage.getItem("PageSize");
+    if (t == null) { t = 50 }
+    GetEmployeeData(1, 0, 50);
+    $("#fText").text("");
+    $("#FilterText").hide();
+}
+
+function SubmitFilterSort(search, order, pSize) {
+    $.ajax({
+        url: '/Configuration/AjaxGetCustomersData',
+        type: "POST",
+        data: { start: 0, pSize: pSize, search: search, order: order },
+        success: function (data) {
+            $('#FilterModel').modal('hide');
+            sessionStorage.setItem("Total", data.recordsTotal);
+            loadData(data);
+        },
+        error: function (data) {
+            alert("Failed");
+        }
+    });
+
+}
+function PageSize() {
+    var a = $("#size").val();
+    sessionStorage.setItem("PageSize", a);
+    $(".yy").hide();
+    var b = sessionStorage.getItem("search");
+    var o = sessionStorage.getItem("order");
+    //if (o != undefined && o != "null") {
+    //    order = o.split(":");
+    //    var orderid = "tbody tr:last td:nth-child(" + order[0] + ")";
+    //    ordervalue = "";
+    //    o = order[1] + "~" + ordervalue + "~" + order[2];
+    //    JSON.stringify(o);
+    //}
+    $("#example tbody tr").remove();
+    $('#loading').show();
+    $('#loadingmessage').show();
+    $('#Msg').hide();
+    $('#p').css("display", "none");
+
+    $.post('/Configuration/AjaxGetCustomersData', { id: "", start: 1, pSize: a, search: b, order: o, ServerOrderValue: firmname }, function (data) {
+        loadData(data);
+    })
+}
+
+
+
+function DeleteCustomerCtrls(ctrl) {
+    var id = $(ctrl).parent().parent()[0].id;
+    var Rowid = "#tr-" + id;
+    var Pid = $(Rowid).children(1)[1].innerText;
+    var custCode = $(Rowid).children(1)[2].innerText;
+    var custName = $(Rowid).children(1)[3].innerText;
+    var p_acccode = $(Rowid).children(1)[4].innerText;
+    $("#deleteCustomerForm #p_Customer").val(Pid);
+    $("#deleteCustomerForm #custCode").val(custCode);
+    $("#deleteCustomerForm #custName").val(custName);
+    $("#deleteCustomerForm #p_acccode").val(p_acccode);
+    $("#deleteCustomer").modal(options);
+    $("#deleteCustomer").modal("show");
+}
+
+function DeleteCustomer() {
+    $("#deleteCustomer").modal("hide");
+    var Pid = $("#deleteCustomerForm #p_Customer").val();
+    var p_acccode = $("#deleteCustomerForm #p_acccode").val();
+    $.post('/Configuration/AjaxDeleteCustomer', { p_customers: Pid, p_acccode: p_acccode }, function (data) {
+        if (data.toLowerCase() === "success") {
+            $('#CallClosedContent').html('');
+            $('#CallClosed').modal(options);
+            $('#CallClosed .modal-title').text("Delete successfully");
+            $('#CallClosed').modal("show");
+            setTimeout(function () { $('#CallClosed').modal("hide"); }, 1000);
+            ReloadGrid();
+        }
+        else {
+            $('#CallClosedContent').html('');
+            $('#CallClosed').modal(options);
+            $('#CallClosed .modal-title').text("Error while deleting");
+            $('#CallClosed').modal("show");
+            setTimeout(function () { $('#CallClosed').modal("hide"); }, 1000);
+        }
+    });
+}
+
+function ShowGroupModal() {
+    var mp_acccode =""
+    $(".checkboxall:checked").each(function () {
+        var val = $(this).attr("data-p_acccode")
+        mp_acccode += mp_acccode == "" ? val : "," + val;
+
+    });
+    if ($.trim(mp_acccode)!=="") {
+        $("#AddCustomertoGroupModal").modal(options);
+        $("#AddCustomertoGroupModal").modal("show");
+        $("#AddCustomertoGroupModal #p_acccode").val(mp_acccode);
+    }
+    else {
+        $('#CallClosedContent').html('');
+        $('#CallClosed').modal(options);
+        $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>Please select minimum 1 customer.</p>");
+        $('#CallClosed').modal("show");
+        setTimeout(function () { $('#CallClosed').modal("hide"); }, 2000);
+    }
+    
+}
+
+function AddCustomertoGroup() {
+    $("#AddCustomertoGroupModal").modal("hide");
+    var p_acccode = $("#AddCustomertoGroupModal #p_acccode").val();
+    var p_infotable = $("#AddCustomertoGroupModal #Customergroup").val();
+    if ($.trim(p_acccode) !== "" && $.trim(p_infotable)!=="0") {
+        $.post('/Configuration/AjaxAddCustomertoGroup', { p_acccode: p_acccode, p_infotable: p_infotable }, function (data) {
+            if ($.trim(data)=="") {
+                window.location.href = "/Home/Logout";
+            }
+            else if ($.trim(data) == "True") {
+                $('#CallClosedContent').html('');
+                $('#CallClosed').modal(options);
+                $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>Customer successfully added in group. </p>");
+                $('#CallClosed').modal("show");
+                setTimeout(function () { $('#CallClosed').modal("hide"); }, 2000);
+            }
+
+        })
+    }
+    else {
+        $('#CallClosedContent').html('');
+        $('#CallClosed').modal(options);
+        $('#CallClosedContent').html("<p class='text-center' style='font-size: 18px;margin-bottom: 30px;'>Please select customer group.</p>");
+        $('#CallClosed').modal("show");
+        setTimeout(function () { $('#CallClosed').modal("hide"); }, 2000);
+
+    }
+
+    
+}
+
+$('#example').on('contextmenu', 'div.parentdiv', function (e) {
+    console.log("right clicked");
+});
+
+$(function () {
+    /**************************************************
+     * Custom Command Handler
+     **************************************************/
+    $.contextMenu({
+        selector: '#example div.parentdiv',
+        build: function ($trigger) {
+            var options = {
+                callback: function (key, options) {
+                    var divid = options.$trigger[0].id;
+                    var temp = divid.split("-");
+                    var id = temp[1];
+                    var Rowid = "#tr-" + id;
+                    var Callid = '';
+
+                    switch (key) {
+                        //function to show Edit model
+                        case "Edit":
+                            var Rowid = "#tr-" + id;
+                            var Pid = $(Rowid).children(1)[1].innerText;
+                            window.location = '/Configuration/CustomerForm?P_Customers=' + Pid + '&&exitmode=edit'
+                            break;
+                        case "Delete":
+                            var Rowid = "#tr-" + id;
+                            var Pid = $(Rowid).children(1)[1].innerText;
+                            //window.location = '/Configuration/CustomersForm?P_Customers=' + Pid + '&&exitmode=delete'
+                            var custCode = $(Rowid).children(1)[2].innerText;
+                            var custName = $(Rowid).children(1)[3].innerText;
+                            var p_acccode = $(Rowid).children(1)[4].innerText;
+                            $("#deleteCustomerForm #p_Customer").val(Pid);
+                            $("#deleteCustomerForm #custCode").val(custCode);
+                            $("#deleteCustomerForm #custName").val(custName);
+                            $("#deleteCustomerForm #p_acccode").val(p_acccode);
+                            $("#deleteCustomer").modal(options);
+                            $("#deleteCustomer").modal("show");
+                            break;
+
+                            //9) function to redirect to  view Setting controller
+                        case "ViewSetting":
+                            window.location = '/Configuration/ViewSetting?infotype=hoverstripstring&viewid=managecustomers'
+                            break;
+                    }
+                },
+                //10) blank array on item property
+                items: {},
+
+            }
+            //11) for loop which we use in stpe , but this is for context menu
+            if ($trigger.hasClass('parentdiv')) {
+                var infoStringArray = infoString.split("~");
+                var infoStringArray = infoString.split("~");
+                for (var i = 0; i <= infoStringArray.length - 1; i++) {
+                    var infoStringItemArray = infoStringArray[i].split("#");
+                    var itemOrder = infoStringItemArray[0];
+                    var itemEnable = infoStringItemArray[1];
+                    var itemtext = $.trim(infoStringItemArray[2]);
+
+                    if (itemtext.toLocaleLowerCase() == "edit") {
+                        if (itemEnable.toLocaleLowerCase() == "y") {
+                            options.items.Edit = { name: "Edit", icon: "fa-pencil" };
+                        }
+                    }
+                    else if (itemtext.toLocaleLowerCase() == "delete") {
+                        if (itemEnable.toLocaleLowerCase() == "y") {
+                            options.items.Delete = { name: "Delete", icon: "fa-trash" };
+                        }
+                    }
+                }
+                //12) at last Show context menu which redirect to viewSetting Contoller
+                options.items.ViewSetting = { name: "Customize HoverStrip", icon: "glyphicon glyphicon-wrench" };
+            }
+            return options;
+        }
+    });
+});

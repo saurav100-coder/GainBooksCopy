@@ -1,0 +1,160 @@
+﻿body {
+}
+#info{
+    font-size:13px;
+    padding-right:7px;
+}
+.searchButton {
+    display: inline-flex;
+    background-color: #337ab7;
+    color: white;
+    height: 26px;
+    border-radius: 0px;
+    padding-bottom: 8px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: -4px;
+    border-radius: 0px 3px 3px 0px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+}
+.TaskBar {
+    padding: 20px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    /*text-transform: uppercase;*/
+    display: flex;
+    padding-right: 28px;
+    padding-top: 15px;
+    padding-bottom: 22px;
+    width: 100%;
+    color: #337ab7;
+    background-color: #e6f6fc;
+    width: 100%;
+    border-bottom: 7px solid white;
+    margin-top: 0px;
+    font-family: open sans,sans-serif;
+}
+
+#example {
+    width: 100%;
+   overflow-y: scroll;
+    overflow-x:hidden;
+    padding-bottom: 20px;
+    
+    padding-left: 0px;
+    padding-right:0px;
+    color: #3c8dbc;
+    background-color: #e6f6fc;
+}
+.allrows {
+    /*overflow-y: scroll;
+    overflow-x: hidden;*/
+    background-color: #e6f6fc;
+}
+.MoreDetails {
+    position: absolute;
+    padding-top: 5px;
+    z-index: 2;
+    display: none;
+    background-color: white;
+    width: 200px;
+    height: 40px;
+    padding-left: 20px;
+    margin-left: 830px;
+}
+
+.clickable {
+    display: inline-flex;
+   
+    
+   
+    padding-top:12px;
+    padding-bottom:0px;
+}
+
+    .clickable:hover {
+        /*box-shadow: 0px 8px 6px -8px gray; 0px -11px 8px -10px gray,top shadow */
+        background-color: white;
+        box-shadow: 0px 11px 8px -10px gray;
+    }
+.loader, .loader:after {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.loader {
+    /*margin: 60px auto;*/
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 3px solid rgba(0,0,0, 0.2);
+    border-right: 3px solid rgba(0,0,0, 0.2);
+    border-bottom: 3px solid rgba(0,0,0, 0.2);
+    border-left: 3px solid #1DA3E6;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@media only screen and (max-width:600px) {
+    .allrows {
+        overflow-x: auto !important;
+        background: #e6f6fc !important;
+    }
+    .sno, .empId, .name, .mobile, .email, .department, .designation, .joining, .homeTown {
+        margin-right: 58px !important;
+       
+    }
+    .department{
+        padding-left:0px !important;
+        width:auto;
+    }
+    .snoValue, .empIdValue, .nameValue, .mobileValue, .emailValue, .departmentValue, .designationValue, .joiningValue, .homeTownValue {
+        margin-right: 58px !important;
+        
+    }
+    .clickable { 
+        width:auto;
+    }
+    #example {
+        
+        background: #e6f6fc !important;
+    }
+    .TaskBar {
+        border-bottom: 7px solid white;
+        
+        width:auto;
+    }
+   
+}
+
+
+

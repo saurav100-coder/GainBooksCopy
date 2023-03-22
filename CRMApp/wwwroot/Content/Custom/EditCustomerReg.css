@@ -1,0 +1,131 @@
+﻿﻿.content{padding-left:2px; padding-right:2px}
+.Ryes{text-align:right; padding-right:0px; margin-top:15px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+.Ryes p{margin-bottom:0px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+.CName{ font-size:14px;}
+.CustMis{padding-left:20px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+
+.Rno{margin-top:15px}
+.Rno p{margin-bottom:0px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+.LanMis{padding-left:20px; margin-top:5px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+.new{margin-bottom:20px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+p.CustMis1{margin-bottom:5px; font-size:16px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+b.CustMis2{color:#31708f; font-family:Verdana, Geneva, Tahoma, sans-serif}
+b.CustMis3{color:#31708f; font-family:Verdana, Geneva, Tahoma, sans-serif}
+.Confirm{margin-top:15px; margin-bottom:0px; font-family:Verdana, Geneva, Tahoma, sans-serif}
+#Mismatch{padding:0px}
+
+/*laveena*/
+  .disabled {pointer-events: none;background-color: #E0E0E0;}
+     
+   .table > thead > tr > th {border: none;}
+    .table > tbody > tr > td {border: none;}
+/*#overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        cursor: pointer;
+    }*/
+
+    #text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        color:white;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+    }
+    /*laveena*/
+     .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    #overlay {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+
+    .accordion {
+        color: #444;
+        cursor: pointer;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        border: none;
+        float: left;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+
+
+        .accordion:after {
+            color: #777;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+
+
+    .panel {
+        padding: 0px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+        margin-bottom: 0px;
+        margin-top: 20px;
+        background-color: #d5e9fb;
+    }
+
+    .row-main {
+        background-color: #d5e9fb;
+        padding-top: 0px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }

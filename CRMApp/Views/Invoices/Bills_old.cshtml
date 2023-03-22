@@ -1,0 +1,258 @@
+﻿@{
+    ViewData["Title"] = "Daily Sale";
+}
+@model CRMApp.Models.SaleIEMSModel
+
+
+<link rel="stylesheet" href="~/Content/Custom/Bills.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+<script src="~/Scripts/Custom/Bills.js"></script>
+
+<style>
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .loader {
+        margin: auto;
+        border: 0.625em solid #f3f3f3; /* Light grey */
+        border-top: 0.625em solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 4.375em;
+        height: 4.375em;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+
+    .content {
+        /* min-height: 250px;*/
+        padding: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: white;
+    }
+
+
+
+
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            display: none;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: -11px;
+            left: 130px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 30px;
+            left: 0px;
+            padding: 0 5px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+
+    .context-menu-list {
+        width: 185px;
+    }
+
+        .context-menu-list li {
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+
+    .content-wrapper {
+        background-color: white;
+    }
+    .callHeightTaskBar{
+        margin: 0;
+    padding: 0;
+    }
+</style>
+
+
+<div class="container" style="width:100%;"></div>
+<input type="hidden" name="grid1" id="grid1" value="">
+<input type="hidden" name="LoggedIn" id="LoggedUser" value="@httpContextAccessor.HttpContext?.Session.GetString("loginname")" />
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+
+
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align:center; margin-left:500px; margin-bottom:50px;display:none"></div>
+</div>
+
+<div class="calHeightIcon panelpanel-default">
+    <div class="icon-div">
+        <div id="main" class="search2">
+            <a class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh" style="cursor:pointer">
+                <img src="~/images/icon-refresh.png" />
+            </a>
+            @*<a class="top" title="" onclick="" data-toggle="Advance Filter" style="top: 0.25em;cursor:pointer">
+                    <i class="glyphicon glyphicon-filter" style="font-size: 17px; padding-top: 0.75em; padding-right: 5px; margin-right: 15px; padding-bottom: 0.3125em;"></i>
+                </a>*@
+            @*<a class="top" title="" onclick="ExportToExcel()" data-toggle="Export to Excel" style="top: 0.25em;cursor:pointer">
+                    <i class="glyphicon glyphicon-export" style="font-size: 14px; padding-top: 0.75em; padding-right: 5px; margin-right: 15px; padding-bottom: 0.3125em;"></i>
+                </a>*@
+            <a class="top" title="" onclick="ExportToIEMS()" data-toggle="Export to IEMS" style="cursor:pointer">
+                            <img src="~/images/icon-export.png" />
+            </a>
+            <a class="top" title="" onclick="GenerateBillSummary()" data-toggle="Generate Bill Summary" style="cursor:pointer">
+                <img src="~/images/icon-export.png" />
+            </a>
+            @*<a class="top" title="" onclick="DeleteCtrl()" data-toggle="Delete" style="top: 0.25em;cursor:pointer">
+                    <i class="glyphicon glyphicon-trash" style="font-size: 17px;  padding-top: 0.75em; padding-right: 5px; margin-right: 15px; padding-bottom: 0.3125em;"></i>
+                </a>*@
+        </div>
+            <div class="g" style="top:50px">
+                <label id="info"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:0.75em; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:0.75em; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:23px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:0.75em; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:0.75em;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:23px"></i>
+                </div>
+            </div>
+       
+    </div>
+</div>
+<div id="MainDiv" class="col-md-12">
+    <div id="tr">
+        <div class="row">
+            <div class="col-md-6" style="display:flex;">
+                <div class="col-md-3 BillDateDiv" style="display: flex; width: 100%; padding-left: 5px;">
+                    <label id="BillDateFrom" class="BillDate" style="vertical-align: baseline; font-size: 11px; font-weight: 600; text-align: left; margin-top: 2px; margin-bottom: 0px; ">Bill Date From</label>
+                    <input type="date" id="billdatepickerFrom" class="billdatepicker" />
+                </div>
+                <div class="col-md-3 BillDateDiv" style="display: flex; width: 100%; padding-left: 5px;">
+                    <label id="BillDateTo" class="BillDate" style="vertical-align: baseline; font-size: 11px; font-weight: 600; text-align: left; margin-top: 2px; margin-bottom: 0px; margin-right: 10px; ">Bill Date To</label>
+                    <input type="date" id="billdatepickerTo" class="billdatepicker" />
+                    <i class="fa fa-search" id="btnSearch" style="place-self:center; padding-left:14px;"></i>
+                </div>
+                <div class="col-md-3 ShopCodeDiv" style="display: flex; width: 100%; padding-right: 0px !important; ">
+                    <i class="fa fa-search" id="btnSearch" style="place-self:center; padding-left:18px; display:none;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="subDiv">
+    <label id="subDivLable" onclick="Allselection();" style="vertical-align: baseline; font-size: 11px; font-weight: 600; text-align: left; margin-top: 2px; margin-bottom: 0px;cursor:pointer;color: #337ab7; "></label>
+</div>
+<div class="col-md-12 text-center Table-Dive" " style="width:100%; overflow-y:scroll;">
+    <table id="example" class="table" style="margin-top:10px" >
+        <thead class="TaskBar tr bg-primary"  style="width:100%; display:block; padding-left:15px;">
+            <tr class="callHeightTaskBar" style="color:white;width:100%">
+                <th class="Icon" style="width: 3%;">
+                    <input type="checkbox" id="selectall" class="css-checkbox " name="selectall" style="cursor:pointer" />
+                </th>
+                <th class="SNo tbHead" style="width: 4%;">SNo.</th>
+                <th class="SaleDate tbHead" style="width: 7%;">Bill Date</th>
+                <th class="invoiceid Series tbHead" style="width:8%;">Bill Series</th>
+                <th class="invoiceid No tbHead" style="width:8%;">Bill No.</th>
+                <th class="BrandName Customer tbHead" style="width:8%;">Customer</th>
+                <th class="BrandName Salesman tbHead" style="width:8%;">Salesman</th>
+                <th class="BrandName Payment tbHead" style="width:10%;">Payment Mode</th>
+                <th class="PackingCode tbHead" style="width:10%;">Gross Amount</th>
+                <th class="Quantity tbHead" style="width:7%;">Discount</th>
+                <th class="mrp tbHead" style="width:6%;">Charge</th>
+                <th class="total tbHead" style="width:9%;">Net Amount</th>
+                <th class="invoiceid Order tbHead" style="width:7%;">Order Id</th>
+                <th class="invoiceid Timestamp tbHead" style="width:5%;">Timestamp</th>
+
+            </tr>
+            <tr id="loading"><td colspan="8"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+        </thead>
+        <tbody id="example" class="table-responsive"></tbody>
+    </table>
+</div>
+<div class="TotalAmountSection" style="display:none;margin-right:10px;margin-bottom:10px;">
+    <label class="TotalAmounLabel">Total Amount: </label>
+    <div class="TotalAmountValue"></div>
+</div>
+
+
+
+
+
+
+
+@*<div Class="modal fade" id="deleteDailySale">
+        <div Class="modal-dialog" role="form">
+            <div Class="modal-content">
+                <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+                <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" Class="modal-title">Delete Sale</h4>
+                <div Class="modal-body" style="padding-top:0px;margin-top: 20px;">
+                    <form Class="form-horizontal" role="form" method="post" id="deleteDailySaleForm">
+                        <input type="hidden" id="p_saleiems" name="p_saleiems" value="" />
+                        <div Class="text-center" style="margin:20px 0px 10px 50px">
+                            <Button type="button" Class="btn btn-primary" onclick="DeleteDailySale()" style="margin-right:25px; margin-top:20px">Delete</Button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+<div class="modal fade" id="msgModel">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <a data-dismiss="modal" Class="btn close"><span aria-hidden="true" style="font-size:24px">&times;</span></a>
+            <h4 style="text-align:center; font-size:18px; padding-left: 10px; margin-top:0px; padding-top:20px" class="modal-title"></h4>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;margin-top: 20px;">
+                <div id="msgModelContent" class="col-md-6"></div>
+                <div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

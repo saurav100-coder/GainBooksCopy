@@ -1,0 +1,1087 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SaralAuthLib
+</name>
+</assembly>
+<members>
+<member name="T:SaralAuthLib.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SaralAuthLib.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SaralAuthLib.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GenerateAuthKey(System.Data.DataRow,System.String,System.String,System.String,System.String,System.Data.DataRow)">
+ <summary>
+ generate auth key 
+ </summary>
+ <param name="UserLoginRow"></param>
+ <param name="custcode">custcode</param>
+ <param name="key">websessionkey</param>
+ <param name="sessiontype"></param>
+ <param name="serverdatabase"></param>
+ <param name="UserRoles"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserLoginRowFromMobile(System.String,System.String,System.String)">
+ <summary>
+  get userlogin row corresponding to a particular Mobile
+ </summary>
+ <param name="Mobile"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserSettingsRowFromUserLogin_key(System.Int32,System.String,System.String)">
+ <summary>
+ get usersettings row corresponding to a Userlogin_key
+ </summary>
+ <param name="Userlogin_key"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInUserSettings(System.Int32@,System.Collections.Hashtable@,System.String,System.Data.DataRow)">
+ <summary>
+ Insert/ updates UserSettings table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <param name="sessionrow"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetActiveEmployeesEmplTypeWise(System.String,System.String)">
+ <summary>
+ Returns Accmasterdt containing all the active employees 
+ </summary>
+ <param name="serverdatabase">serverdatabase</param>
+ <param name="columnString">Columns to be returned in accmaster datarow</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CreateIndexString(System.String)">
+ <summary>
+ Return a string  of  indexKey columns with asc or desc  
+ </summary>
+ <param name="indexkey"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetPropertyValfromSettingsString(System.String,System.String)">
+ <summary>
+ Retrun properyvalue from settingsstring of usersettings table
+ </summary>
+ <param name="settingsstring"></param>
+ <param name="propertyname"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.callUpdatefunction(System.String)">
+ <summary>
+ Return sql query 
+ </summary>
+ <param name="CorpId"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.callUpdateMasterTablesfunction(System.String)">
+ <summary>
+ Update Master tables from CRMTemplate db
+ </summary>
+ <param name="CorpId"></param>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAllActiveCustomers(System.Int32)">
+ <summary>
+ function to get all the active customers according to productcode . Bydefault it gives active customers of gainbooks
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAllActiveWineCustomers(System.Int32)">
+ <summary>
+ function to get all the active customers according to productcode . Bydefault it gives active customers of gainbooks
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.UpdateDbs(System.String,System.String)">
+ <summary>
+ function to detect schema changes from crmtemplate and customer database and return the queries in string
+ </summary>
+ <param name="templateserverdatabase">crmtemplate serverdatabase string</param>
+ <param name="destserverdb">customerDatabase/destination database</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getDbCredentials(System.String)">
+ <summary>
+ function to get the data of dbcustconfig according to corpids
+ </summary>
+ <param name="CorpId">custcode</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getRowsCountofActiveEmployees(System.String,System.String)">
+ <summary>
+ Get the count of active employees
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="condition"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetActiveEmployeesDatagrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ get active employees data
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param> 
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="Order"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.handleAuthForbrckets(System.String)">
+ <summary>
+ to handle Auth for brackets
+ </summary>
+ <param name="AuthStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.ReversehandleAuthForbrckets(System.String)">
+ <summary>
+ to Reverse handle Auth For brckets
+ </summary>
+ <param name="AuthStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.IsAuthenticated(System.String,System.String,System.Int32)">
+ <summary>
+ Test if the user is authenticated to perform operation
+ </summary>
+ <param name="AuthStr"></param>
+ <param name="serverdatabase"></param>
+ <param name="userlogin_keySaralweb"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.IsAuthenticated(System.String,System.String)">
+ <summary>
+ Test if the user is authenticated to perform operation
+ </summary>
+ <param name="AuthStr"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserrolesRowsFromServiceRoles(System.String,System.String,System.String,System.String)">
+ <summary>
+ get userroles rows corresponding to a particular ServiceRoles
+ </summary>
+ <param name="serviceroles"></param>
+ <param name="serverdatabase"></param>
+ <param name="condition"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetWebKeyFromAuthKey(System.String)">
+ <summary>
+ Generates AuthorizationKey
+ </summary>
+ <param name="AuthKey">Authorization Key</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetActiveEmployeesfromDeparment(System.String,System.String,System.Int32)">
+ <summary>
+ Returns employeesdt containing all the active employees according to Deparment
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="columnString"></param>
+ <param name="Deparment"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserRolesdatafromserviceroles(System.String,System.String,System.String)">
+ <summary>
+ get userroles datatable using serviceroles
+ </summary>
+ <param name="serviceroles"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.IsAuthorized(System.String,System.String,System.String)">
+ <summary>
+ Test if the user is authorized to perform operation
+ </summary>
+ <param name="AuthKey"></param>
+ <param name="prgname"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetMenuIDforPrgName(System.String,System.String,System.String)">
+ <summary>
+ GetMenuId from menumaster corresponding to programmable name
+ </summary>
+ <param name="prgname"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetRoleDescFromType(System.String,System.Int32,System.String)">
+ <summary>
+ Return logintype full name such as Employee,Manager etc. To be deprecated
+ </summary>
+ <param name="type"></param>
+ <param name="p_acccode"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CreateWebSessionRow(System.Data.DataRow,System.String,System.String,System.String)">
+ <summary>
+ Creates user session row as per login details passed
+ </summary>
+ <param name="mlogin">Row containing details such as userid and pwd</param>
+ <param name="ipAddress">Ip address of the machine from which login is done</param>
+ <param name="DeviceInfo">Device information from which login is done</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getWebMenuIdsFromUserLoginKey(System.Int32,System.String)">
+ <summary>
+ Return menuids authorized as a comma separated string for web for a particular userid
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getWebAuthorizedStringFromUserLoginKey(System.Int32,System.String)">
+ <summary>
+ Get authorized menu and function strings (comma separated) for web in a hashtable for a particular userloginkey. Keys used are menuids and funids
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAppAuthorizedStringFromUserLoginKey(System.Int32,System.String)">
+ <summary>
+ Get authorized menu and function strings (comma separated) for app in a hashtable for a particular userloginkey. Keys used are menuids and funids
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAppAuthorizedFunctionFromUserLoginKey(System.Int32,System.String,System.Data.DataRow)">
+ <summary>
+  Return function ids authorized as a comma separated string for app for a particular userid
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAppMenuIdsFromUserLoginKey(System.Int32,System.String)">
+ <summary>
+  Return menuids authorized as a comma separated string for app for a particular userid
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.IsValid(System.String,System.String,System.String)">
+ <summary>
+ Matching login credentialtials fron database and check if user is valid or not for login.
+ </summary>
+ <param name="UserId"></param>
+ <param name="pass"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetDatabaseDetailsFromUserlogin_key(System.Int32,System.String)">
+ <summary>
+ Return datarow from userlogin pertaining to userId if userid is found
+ </summary>
+ <param name="userlogin_key">UserId for which row is returned</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getLastcharFromClname(System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="mClname"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getLastcharFromUlname(System.String,System.String)">
+ <summary>
+ This function return new userid for userlogin table
+ </summary>
+ <param name="mUlname"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetUserSettingsFromUserLogin_key(System.Int32,System.String)">
+ <summary>
+ Get userSettings row for a particular userlogin_key
+ </summary>
+ <param name="userlogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.UserExist(System.String,System.String)">
+ <summary>
+ Return datarow from userlogin pertaining to userId if userid is found
+ </summary>
+ <param name="userId">UserId for which row is returned</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GenerateRandomPass(System.Int32)">
+ <summary>
+ Generates random password of 8 characters
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.UserExist(System.Int32,System.String,System.String)">
+ <summary>
+ Returns a row corresponding to a particular linkcode and linktype from userlogin table
+ </summary>
+ <param name="linkcode">linkcode</param>
+ <param name="linktype">linktype</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.ChangePass(System.String,System.Int32,System.String)">
+ <summary>
+ Changes password for a particular userloginkey
+ </summary>
+ <param name="pass"></param>
+ <param name="mlogin"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserLoginRowFromUserLoginKey(System.Int32,System.String,System.String)">
+ <summary>
+ Get UserLoginRow corresponding to userloginkey 
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name="columnStr"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetTokenbyEmpId(System.Int32,System.String,System.String)">
+ <summary>
+ Returns the token based on the particular userlogin_key
+ </summary>
+ <param name="EmpId"></param>
+ <param name="LoginType"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetEmployeeRowbyEmployee_key(System.Int32,System.String,System.String)">
+ <summary>
+ to Get Employee Row by Employee_key
+ </summary>
+ <param name="EmpId"></param>
+ <param name="columnstr"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetEmployeeRowbyP_employees(System.Int32,System.String,System.String)">
+ <summary>
+ to Get Employee Row by P_employees
+ </summary>
+ <param name="P_employees"></param>
+ <param name="columnstr"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getManageCustomersDataGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.Int32,System.String,System.String,System.Int32)">
+ <summary>
+ get pending registered calls data
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lOrder"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getRowsCountManageCustomers(System.String,System.String,System.String)">
+ <summary>
+ get total Customers's rows count
+ </summary>
+ <param name="lcondition"></param>
+ <param name="Linkcode"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetEmpIdfromDepartment(System.Int32,System.String)">
+ <summary>
+ To get list of p_employees as per value of Department
+ </summary>
+ <param name="Department"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInAcc_Master(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert/ updates Accmaster table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserLoginDatatableFromLinkType(System.String,System.String,System.String)">
+ <summary>
+ Get userloginDatatable for a particular LinkType
+ </summary>
+ <param name="linktype"></param>
+ <param name="columnStr"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserLoginRowFromLinkcodeLinktype(System.Int32,System.String,System.String,System.String)">
+ <summary>
+ Get UserLoginRow corresponding to linkcode and linktype in userlogin table 
+ </summary>
+ <param name="linkcode"></param>
+ <param name="linktype"></param>
+ <param name="columnStr"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getEmployeeRowForUserLogin_key(System.Int32,System.String,System.String)">
+ <summary>
+ Get employeeRow corresponding to a particular userlogin_key
+ </summary>
+ <param name="userlogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getEmployeeRowForUserLoginRow(System.Data.DataRow,System.String,System.String)">
+ <summary>
+ Get employeeRow corresponding to a particular userlogin row
+ </summary>
+ <param name="userloginRow"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getEmployeeRowForAccmaster(System.Int32,System.String,System.String)">
+ <summary>
+ Get employeeRow corresponding to a particular p_acccode
+ </summary>
+ <param name="p_acccode"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getEmployeeRowForAccmaster(System.Data.DataRow,System.String,System.String)">
+ <summary>
+ Get employeeRow corresponding to a particular accmasterrow
+ </summary>
+ <param name="AccmasterRow"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getCustomerRowForAccmaster(System.Int32,System.String,System.String)">
+ <summary>
+ Get CustomerRow corresponding to a particular p_acccode
+ </summary>
+ <param name="p_acccode"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getCustomerRowForAccmaster(System.Data.DataRow,System.String,System.String)">
+ <summary>
+ Get customerRow corresponding to a particular account master row
+ </summary>
+ <param name="AccmasterRow"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getCustomerRowForUserLogin(System.Data.DataRow,System.String,System.String)">
+ <summary>
+ Get CustomerRow corresponding to userlogin Row
+ </summary>
+ <param name="userloginrow"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr">comma separated list of columns to be queried</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getCustomerRowForUserLogin(System.Int32,System.String,System.String)">
+ <summary>
+ Get CustomerRow corresponding to userlogin_key
+ </summary>
+ <param name="userlogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr">comma separated list of columns to be queried</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAccMasterRowForUserLogin(System.Int32,System.String,System.String)">
+ <summary>
+ Get account master row corresponding to userlogin_key
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr">comma separated list of columns to be queried</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAccMasterRowForUserLogin(System.Data.DataRow,System.String,System.String)">
+ <summary>
+ Get account master row corresponding to userlogin row
+ </summary>
+ <param name="UserLoginRow"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr">comma separated list of columns to be queried</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAccMasterRowForp_acccode(System.Int32,System.String,System.String)">
+ <summary>
+ Get Account Master Row corresponding to a particular p_acccode
+ </summary>
+ <param name="p_acccode"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetUserRolesFromUserLogin_key(System.Int32,System.String)">
+ <summary>
+ Get userRoles row for a particular userlogin_key
+ </summary>
+ <param name="userlogin_key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetAccMasterRowForEmployeeId(System.Int32,System.String,System.String)">
+ <summary>
+ Returns AccmasterRow for a particular p_employees value from employees table
+ </summary>
+ <param name="p_employees"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnString">Columns to be returned in accmaster datarow</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetCustomerRowbyP_customers(System.Int32,System.String,System.String)">
+ <summary>
+ to Get Customer Row by P_customers
+ </summary>
+ <param name="P_customers"></param>
+ <param name="columnstr"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInCustomers(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ function to insert/update rows in Customers table
+ </summary>
+ <param name="id">-1 for insert and P_customers for update</param>
+ <param name="ChangedFieldsValuesPair">hashtable containing cgange values and columns</param>
+ <param name="sessionrow">SessionRow of Current Loggedin user</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateUserLogin(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ Insert update in userlogin Table
+ </summary>
+ <param name="id"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInEnquiry(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ Insert/ updates UserSettings table
+ <param name="P_enquiry"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <returns></returns>     
+ </summary>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetActiveEmployeesFromAccMaster(System.String,System.String)">
+ <summary>
+ Returns Accmasterdt containing all the active employees
+ </summary>
+ <param name ="serverdatabase"></param>
+ <param name="columnString">Columns to be returned in accmaster datarow</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUserRolesForCustomer(System.Int32,System.String,System.String)">
+ <summary>
+ to Insert UserRoles For Customer
+ </summary>
+ <param name="Linkcode"></param>
+ <param name="Approles"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateUserRoles(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ to Insert and Update in UserRoles table
+ </summary>
+ <param name="P_userRoles"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetP_InfotableFromNameofInfoAndInfotype(System.String,System.Int32,System.String)">
+ <summary>
+ Get P_Infotable value from infotable using NameofInfo and infotype
+ </summary>
+ <param name="nameofinfo"></param>
+ <param name="infotype"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInfotableUser(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ Insert and update InfotableUser
+ </summary>
+ <param name="p_infotable"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CreateInfotableUserHashTable(System.Int32,System.Int32,System.String,System.String)">
+ <summary>
+ Return a hashtable for infotableuser
+ </summary>
+ <param name="p_infotable"></param>
+ <param name="infotype"></param>
+ <param name="nameofinfo"></param>
+ <param name="updateflag"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetInfoTable(System.String,System.String)">
+ <summary>
+ Returns full infotable as datatable
+ </summary>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetInfoTableUser(System.String,System.String)">
+ <summary>
+ Returns full infotable as datatable
+ </summary>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getRowsCountInfotable(System.String,System.String)">
+ <summary>
+ get total Infotable's rows count
+ </summary>
+ <param name="lcondition"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.UpdateMastersTable(System.Collections.Hashtable)">
+ <summary>
+ update data into master tables(infotable, infotableuser, menumaster, viewsettings) of userdatabase 
+ </summary>
+ <param name="dthash"></param> keys are table name and values are last tablename_key 
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CreateHashableforUpdateMasters(System.String,System.String,System.Collections.Generic.List{System.Int32})">
+ <summary>
+ Return Hashtble which has "table name" as key and "last tablename_key" as value 
+ </summary>
+ <param name="Populationmethod"></param>it would be A =>"Automatic" and M=>"Manual"
+ <param name="LastkeyvalList"></param>by default is nothing and we can populate it with last tablename_key ; value order => infotable, infotableuser, menumaster, viewsettings
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateDeleteInfotableFromCrmtemplate(System.Int32@)">
+ <summary>
+ Insert update delete infotable of user database from crmtemplate infotable 
+ </summary>
+ <param name="UserDbInfotable_key"></param>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateDeleteInfotableUserFromCrmtemplate(System.Int32@)">
+ <summary>
+ Insert update delete infotableUser of user database from crmtemplate infotable 
+ </summary>
+ <param name="UserDbInfotable_key"></param>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateDeleteMenumasterFromCrmtemplate(System.Int32@)">
+ <summary>
+ Insert update delete menumaster of user database from crmtemplate infotable 
+ </summary>
+ <param name="UserDbMenumaster_key"></param>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateDeleteViewsettingsFromCrmtemplate(System.Int32@)">
+ <summary>
+ Insert update delete viewsettings of user database from crmtemplate infotable 
+ </summary>
+ <param name="UserDbViewsettings_key"></param>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInfotable(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ Insert update for infotable
+ </summary>
+ <param name="P_InfoTable"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateMenuMaster(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ to Insert and Update in MenuMaster table
+ </summary>
+ <param name="p_menumaster"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.MenuMasterAppData(System.String)">
+ <summary>
+ Returns menumaster table for app
+ </summary>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getUserLoginRowFromP_acccode(System.Int32,System.String,System.String)">
+ <summary>
+ to get userlogin row corresponding to a particular p_acccode
+ </summary>
+ <param name="P_acccode">Represents P_acccode field</param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr">Represents columns to be returned in accmaster datarow</param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getTokenFromUserlogin_key(System.Int32,System.String)">
+ <summary>
+ to get fcmtoken corresponding to a particular Userlogin_key
+ </summary>
+ <param name="Userlogin_key">Represents Userlogin_key field</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getTokenFromP_acccode(System.Int32,System.String)">
+ <summary>
+ to get fcmtoken corresponding to a particular P_acccode
+ </summary>
+ <param name="P_acccode">Represents P_acccode field</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetMenuMasterDataTableForMenuMaster_keys(System.String,System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="p_menumasters">Comma separated menu ids</param>
+ <param name="columnString"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateTags(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ InsertUpdate method for Tags Table
+ </summary>
+ <param name="P_tags"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CheckDuplicateForTagsTable(System.String,System.Int32,System.Int32,System.String)">
+ <summary>
+ Check is row available in tags table 
+ </summary>
+ <param name="linktype"></param>
+ <param name="tagkey"></param>
+ <param name="linkcode"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getRowsCountMenumaster(System.String,System.String)">
+ <summary>
+ Retrun menumaster rows count
+ </summary>
+ <param name="lcondition"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getMenumasterDataGrid(System.Int32,System.String,System.String,System.String,System.Int32,System.String)">
+ <summary>
+ Get Menumaster Data
+ </summary>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lOrder"></param>
+ <param name="psize"></param>
+ <param name="Columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getInfotableDataGrid(System.Int32,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ get Infotable data
+ </summary>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lOrder"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getInfotableuserForInfotype(System.Int32,System.String,System.String)">
+ <summary>
+ Return infotableuser datatable for infotype
+ </summary>
+ <param name="infotype"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getInfotableFromInfotypeAndNameofInfo(System.Int32,System.String,System.String,System.String)">
+ <summary>
+ Get infotable DataTable using infotype and nameofinfo
+ </summary>
+ <param name="nameofinfo"></param>
+ <param name="infotype"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getWebMenuJsonFromUserLoginKey(System.Int32,System.String)">
+ <summary>
+ Retrun Nested JSON String(MainMenu or submenu) 
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetNameofInfoFromInfotableuserUsingInfoType(System.Int32,System.String)">
+ <summary>
+ Return nameofinfo from infotableuser where infotype = value
+ </summary>
+ <param name="infotype"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getInfotableUserForCondition(System.String,System.String,System.String)">
+ <summary>
+ Get Infotableuser DataTable for condition
+ </summary>
+ <param name="condition"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetTripLogforTripids(System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="tripids"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getAccmasterDataGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.Int32,System.String,System.String,System.Int32)">
+ <summary>
+ get accmaster data
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="lOrder"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getRowsCountAccMaster(System.String,System.String,System.String)">
+ <summary>
+ get total Accmaster's rows count
+ </summary>
+ <param name="lcondition"></param>
+ <param name="Linkcode"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getCompletedTripinfo(System.Int32,System.Data.DataTable,System.Data.DataTable,System.Nullable{System.Int32},System.String,System.Int32,System.String,System.String)">
+ <summary>
+ Get Completed Trip of An Employee
+ </summary>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name="dtinfotableuser"></param>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInlocationUpdates(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="p_locationupdates"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInTripinfo(System.String@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="tripid"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateInTriplog(System.String@,System.String@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="tripid"></param>
+ <param name="locdatetime"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateSaleIems(System.Int32@,System.Collections.Hashtable@,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="p_saleiems"></param>
+ <param name="ChangedFieldsValuesPair"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetCustcodeFromShopCode(System.String,System.String)">
+ <summary>
+ Return Corpid from Wineshopmaster for  ShopCode
+ </summary>
+ <param name="shopcode"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetDatabaseDetailsFromCustcode(System.String,System.String)">
+ <summary>
+ Return datarow from dbcustconfig for Custcode
+ </summary>
+ <param name="custcode"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.ShopCodeExistInSaralWeb(System.String)">
+ <summary>
+ Check shopcode exist in dbCustConfig of Saralweb
+ </summary>
+ <param name="shopcode"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InvoiceExistInCustInvoice(System.String,System.String)">
+ <summary>
+ Get data for custcode invoice from custInoice
+ </summary>
+ <param name="invoiceNo"></param>
+ <param name="custCode"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.IsAccountDuplicate(System.String,System.String,System.String)">
+ <summary>
+ Check accountName in accmaster 
+ </summary>
+ <param name="accountName"></param>
+ <param name="serverdatabasename"></param>
+ <param name="condition"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetUserLoginRowFromUserid(System.String,System.String,System.String)">
+ <summary>
+ Get userLogin Row using Userid
+ </summary>
+ <param name="userId"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CreateEmpHashForCreateAccount(System.Int32,System.Data.DataRow)">
+ <summary>
+ Helper method to create Employee Hashtable in PostCreateAccount API 
+ </summary>
+ <param name="p_employees"></param>
+ <param name="dtRow"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.CreateUserloginHashForCreateAccount(System.Int32,System.Data.DataRow)">
+ <summary>
+ Helper method to create userlogin  Hashtable in PostCreateAccount API 
+ </summary>
+ <param name="userlogin_key"></param>
+ <param name="dtRow"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetUserloginKeyFromAuthKey(System.String)">
+ <summary>
+ Get UserLoginkey from authkey 
+ </summary>
+ <param name="AuthStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetSortvalueForUserloginKey(System.Int32,System.String,System.String)">
+ <summary>
+ Return infostring column value of viewsettings Table for Infotyp='sortvalue' using userlogin_key and viewid
+ </summary>
+ <param name="userlogin_key"></param>
+ <param name="viewid"></param>
+ <param name="serverdatabasename"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.InsertUpdateMultipleTags(System.String,System.Collections.Generic.List{System.Collections.Hashtable}@,System.Data.DataRow,System.String)">
+ <summary>
+ Insert update Multiple tags using single sql Transaction 
+ </summary>
+ <param name="p_tags">Comma Separated p_tags</param>
+ <param name="ChangedFieldsValuesPairList">List of hashtable</param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.getTagsDataForAllDepartment(System.String,System.String)">
+ <summary>
+ Get all Tags data for all departments 
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetEmpsForSendCallsReport(System.String,System.String,System.String)">
+ <summary>
+ Get Employees data from accmaster for sendpendingcall or sendcompcall prgname
+ </summary>
+ <param name="prgname"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnString"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetMsgTemplateTextByTemplateType(System.Int32,System.String)">
+ <summary>
+ Get Text value from msgTemplate using TemplateType
+ </summary>
+ <param name="templateType">p_infotable from infotable where infotype=59</param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetHomeMenuJsonFromUserLoginKey(System.Int32,System.String)">
+ <summary>
+ Get Show_on_home menu using userlogin_key
+ </summary>
+ <param name="UserLogin_key"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:SaralAuthLib.LoginFunctions.GetNameofInfoFromInfotableUserByP_infotable(System.String,System.String)">
+ <summary>
+ Get Comma Separated NameofInfo from Infotableuser for p_infotables
+ </summary>
+ <param name="p_infotable">comma separated p_infotable string</param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

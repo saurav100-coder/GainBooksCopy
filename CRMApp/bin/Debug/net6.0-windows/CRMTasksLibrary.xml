@@ -1,0 +1,741 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CRMTasksLibrary
+</name>
+</assembly>
+<members>
+<member name="T:CRMTasksLibrary.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CRMTasksLibrary.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CRMTasksLibrary.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksCommDataForGrid_New(System.Int32,System.Nullable{System.Int32},System.String,System.Int32,System.String,System.String,System.Boolean)">
+ <summary>
+ This function return task and its remarks details 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetRowsCountTasksCommDataForGrid_New(System.Int32,System.String,System.String,System.Boolean)">
+ <summary>
+ Count Total Rows for TaskCommDataGrid
+ </summary>
+ <param name="loginkey"></param>
+ <param name="serverdatabase"></param>
+ <param name="search"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ This Function bring data for Communication Grid in tasks according to login key
+ </summary>
+ <param name="loginkey"></param>
+ <param name = "serverdatabase" ></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getPendingTasksCountofanEmp(System.Int32,System.String,System.String,System.Boolean)">
+ <summary>
+ get pending task count of employee 
+ </summary>
+ <param name="loginkey"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getPendingSubTasksCountofanEmp(System.Int32,System.Int32,System.String,System.String)">
+ <summary>
+ get pending Subtask count of an employee for a task 
+ </summary>
+ <param name="under">mainTask p_crmtasks</param>
+ <param name="loginkey"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetPendingTasksDataForGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.Nullable{System.Int32},System.String,System.Int32,System.String,System.String,System.Boolean)">
+ <summary>
+ get pendint task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name="start"></param>
+ <param name ="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetPendingSubTasksUsingUnder(System.Int32,System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ Get subtasks data using "under" column
+ </summary>
+ <param name="under"></param>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name="dtinfotableuser"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetPendingSubTasksDataForGrid(System.Int32,System.Int32,System.Data.DataTable,System.Data.DataTable,System.Nullable{System.Int32},System.String,System.Int32,System.String,System.String)">
+ <summary>
+ Get subtasks data of main task using "under" column
+ </summary>
+ <param name="under"></param>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name="dtinfotableuser"></param>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetActiveTaskRowForAParticularCall(System.Int32,System.String,System.String)">
+ <summary>
+ get Active Task Row by P_AllCallsReg
+ </summary>
+ <param name="P_AllCallsReg"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksCommByDateForGrid(System.Int32,System.String,System.String,System.Int32,System.String,System.String)">
+ <summary>
+ Returns datatable 
+ </summary>
+ <param name="loginkey">p_acccode</param>
+ <param name="fromDate"></param>
+ <param name="toDate"></param>
+ <param name="empId">p_acccode of selected employee</param>
+ <param name="calledBy"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksFileDataForGrid(System.Int32,System.String,System.String)">
+ <summary>
+ get task Data by loginkey
+ </summary>
+ <param name="loginkey"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksCommByRemarkByForGrid(System.Int32,System.Int32,System.String)">
+ <summary>
+ get Task Remark Data
+ </summary>
+ <param name="loginkey"></param>
+ <param name="empId"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetLatestTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ get recent Task  remark data
+ </summary>
+ <param name="loginkey"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTodaysTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ get recent day's taskremark data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetCompletedTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ get completed task remark data by loginkey
+ </summary>
+ <param name="loginkey"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getClosedTasksInDateRange(System.String,System.Int32,System.DateTime,System.DateTime,System.String,System.String)">
+ <summary>
+ Get datatable of all tasks completed by a person in a particular date range 
+ </summary>
+ <param name="logintype"></param>
+ <param name="LoginCode"></param>
+ <param name="startDate"></param>
+ <param name="enddate"></param>
+ <param name ="serverdatabase"></param>
+ <param name="linktypecondition"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetDailyCallsReportmailText(System.Data.DataTable,System.String)">
+ <summary>
+ function to create html table in string to be send as email body(Calls report)
+ </summary>
+ <param name="Calldt">dt from which table is to be create</param>
+ <param name="MailText">string to continue further</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetDailyTaskReportmailText(System.Data.DataTable,System.String)">
+ <summary>
+ function to create html table in string to be send as email body(Task report)
+ </summary>
+ <param name="Taskdt">dt from which table is to be create</param>
+ <param name="MailText">string to continue further</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetCallsReportDt(System.String,System.Int32,System.DateTime,System.DateTime,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ Get datatable for calls daily report to be used in daily employee report
+ </summary>
+ <param name="logintype">LoginType of person whose report needs to be get</param>
+ <param name="LoginCode">LoginCode of person whose report needs to be get</param>
+ <param name="startDate">Start date time for which the report needs to be fetched</param>
+ <param name="enddate">End datetime for which the report needs to be fetched</param>
+ <param name ="serverdatabase"></param>
+ <param name="dtinfotable"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetP_SubTaskOfaTask(System.Int32,System.String)">
+ <summary>
+ return comma separated string of P_crmtasks of subtasks of a particular task
+ </summary>
+ <param name="P_CRMTasks">P_CRMTasks of main task</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksReportDt(System.String,System.Int32,System.DateTime,System.DateTime,System.String,System.Data.DataTable,System.String)">
+ <summary>
+ Returns datatable to get daily report of all types of tasks
+ </summary>
+ <param name="logintype"></param>
+ <param name="LoginCode"></param>
+ <param name="startDate"></param>
+ <param name="enddate"></param>
+ <param name ="serverdatabase"></param>
+ <param name="dtinfotable"></param>
+ <param name="LinkTypeCondition">linktype of tasks table to get report for that particular type in the format of m2.linktype = 'C'. This will return records related to call tasks</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getActiveTasksofanEmp(System.String,System.Int32,System.String,System.String)">
+ <summary>
+ Get datatable of all active tasks of a person  
+ </summary>
+ <param name="logintype"></param>
+ <param name="LoginCode"></param>
+ <param name ="serverdatabase"></param>
+ <param name="linktypecondition"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetRemarkDataOfATask(System.Int32,System.String,System.String)">
+ <summary>
+ Returns datatable containing remarks with attached document link for a particular task id
+ </summary>
+ <param name="P_CRMTasks"></param>
+ <param name ="serverdatabase"></param>
+ <param name ="NoOfRecord"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetRemarkAndDocumentDataOfTasks(System.String,System.String)">
+ <summary>
+ Retrun Remarks and Related Document data for comma seperated P_CrmTasks
+ </summary>
+ <param name="P_CRMTasks"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.sendPendingCallsDt(System.Data.DataTable,System.Data.DataTable,System.DateTime,System.String)">
+ <summary>
+ function to get dt for pendingcalls report
+ </summary>
+ <param name="dtinfotable">dt containing infotable</param>
+ <param name="pendingcallsDate">creation date</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.LatestRemarkDateOfATask(System.Int32,System.String)">
+ <summary>
+ get  creation date of latest remark of a call
+ </summary>
+ <param name="P_CRMTasks">P_crmtasks of a call</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetRemarkDataOfATask_old(System.Int32,System.String)">
+ <summary>
+ get task remark data by P_crmtasks
+ </summary>
+ <param name="P_CRMTasks"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetCollaboratorsOfATask(System.Int32,System.String)">
+ <summary>
+ get task collaborator from P_crmtasks
+ </summary>
+ <param name="P_CRMTasks"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.AddCollaboratorToATask(System.Data.DataTable,System.Data.DataRow,System.String)">
+ <summary>
+ Insert rows in CRMcollaborator as per values in datatable supplied
+ </summary>
+ <param name="dtcollaborators"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.CreateCollaboratersDt(System.String,System.String,System.Int32,System.String)">
+ <summary>
+ Create a datatable of CRMCollaborator as per values supplied
+ </summary>
+ <param name="Linktype">Type of task</param>
+ <param name="Linkcode">p_crmTasks</param>
+ <param name="p_employees">Linkcode of employee to be added as collaborator</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.CreateCRMCommunicationDt(System.String,System.String,System.Int32,System.Int32,System.DateTime)">
+ <summary>
+ function to create communicationdt to be stored in crmcommunication corresponding to a task.
+ </summary>
+ <param name="commtext"></param>
+ <param name="linktype"></param>
+ <param name="linkcode"></param>
+ <param name="communicationtype"></param>
+ <param name="creationdate"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.AddRowInCRMcommunication(System.Data.DataTable,System.Data.DataRow,System.String)">
+ <summary>
+ function to add Row/Rows in CRMCommunication corresponding to TaskId
+ </summary>
+ <param name="dtcrmCommunication"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.CreateCRMDocumentLinkDt(System.Int32,System.String,System.String,System.String,System.String)">
+ <summary>
+ create CRMDocumentLink datatable
+ </summary>
+ <param name="linkcode"></param>
+ <param name="linktype"></param>
+ <param name="filename"></param>
+ <param name="linkurl"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.ADDRowInCrmDocumentsLink(System.Data.DataTable,System.Data.DataRow,System.String)">
+ <summary>
+ add row in crmdocumentLink table 
+ </summary>
+ <param name="dtcrmDocumentsLink"></param>
+ <param name="sessionrow"></param>
+  <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.sendNotificationsToCollaboratorsofTaskForRemark(System.Int32,System.String,System.String,System.Data.DataRow,System.String)">
+ <summary>
+ send notification to collaborator when remark added in task
+ </summary>
+ <param name="taskID"></param>
+ <param name="strRemark"></param>
+ <param name="loggedInUserName"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetPendingTasksDataForGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ get pending task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetFilterPendingTasksDataForGrid(System.Int32,System.String,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ get pending task data by specific condition 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="filterText"></param>
+ <param name="dtinfotable"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamPendingTasksDataForGrid(System.Int32,System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ get pending task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="empId"></param>
+ <param name="dtinfotable"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamTasksCommByRemarkByForGrid(System.Int32,System.Int32,System.String,System.Data.DataTable,System.String)">
+ <summary>
+ get task remarks 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="empId"></param>
+ <param name="calledBy"></param>
+ <param name="dtinfotable"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetCompletedTasksDataForGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ get completed task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.emailForPendingTasks(System.Int32,System.DateTime,System.String,System.String)">
+ <summary>
+ send mail for pending tasks 
+ </summary>
+ <param name="Loginkey"></param>
+ <param name="creationdate"></param>
+ <param name="emailIds"></param>
+  <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.emailForPendingTasksComm(System.Int32,System.String,System.String)">
+ <summary>
+ send email for pending task's remarks 
+ </summary>
+ <param name="Loginkey"></param>
+ <param name="emailIds"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.emailForCompletedTasks(System.Int32,System.DateTime,System.String,System.String)">
+ <summary>
+ send email for completed tasks 
+ </summary>
+ <param name="Loginkey"></param>
+ <param name="creationdate"></param>
+ <param name="emailIds"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamCompletedTasksByDataForGrid(System.Int32,System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+  get completed task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="empId"></param>
+ <param name="dtinfotable"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamTasksFileDataForGrid(System.Int32,System.Int32,System.String)">
+ <summary>
+ get task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="empId"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetLatestTeamTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ get recent teamtask remarks data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name = "serverdatabase" ></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTodaysTeamTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ get recent  team tasks data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamTasksCommDataForGrid(System.Int32,System.String)">
+ <summary>
+ get Team Task data
+ </summary>
+ <param name="loginkey"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamTasksDataForGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ get team task data 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTeamCompletedTasksDataForGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ get completed team task data
+ </summary>
+ <param name="loginkey"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getTasksRowforCrmTasks_key(System.Int32,System.String,System.String)">
+ <summary>
+ get TaskRow from crmTasks_key
+ </summary>
+ <param name="crmtasks_key"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getTasksRowforP_CrmTasks(System.Int32,System.String,System.String)">
+ <summary>
+ get Task row from P_crmtasks
+ </summary>
+ <param name="p_crmTasks"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetPendingCallsEmailFormat(System.Data.DataTable,System.DateTime)">
+ <summary>
+ function to create email body from pendingcalls dt
+ </summary>
+ <param name="dt">datatable</param>
+ <param name="Creationdate">creation date</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetPendingCallsDTForDailyPendingReport(System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ prepares datatable of data(registered calls by users) from both issuesfilegst and issuesfilecomm tables according to creation date.
+ </summary>
+ <param name="creationdate">Creationdate as string</param>
+ <param name="serverdatabase"></param>
+ <returns>datatable containing data from both issuesfilegst and issuesfilecomm tables and some calculated Columns.</returns>      
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.sendPendingCallsReport(System.Data.DataTable,System.Data.DataTable,System.DateTime,System.String,System.Data.DataRow,System.String)">
+ <summary>
+ send pending calls report
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="pendingcallsDate"></param>
+ <param name="emailIdText"></param>
+ <param name="sessionRow"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.EmailidFromTxtFile(System.String,System.String,System.String)">
+ <summary>
+ function which creates comma separated string if emailids from text file according to function name and type
+ </summary>
+ <param name="EmailidTextFile">Path of text file from which emailids are to be searched.</param>
+ <param name="functionname">Function in which email is being sent</param>
+ <param name="type">type of publish test/production</param>
+ <returns>comma separated string of emailIds</returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.WithoutPaymentPendingCalls(System.String,System.String)">
+ <summary>
+ Prepares datatable of (user registered) Pending Calls according to Creationdate provided from issuesfilegst table.
+ </summary>
+ <param name="CreationDate">Creation date from which we will fetch data from issuesfilegst database table.</param>
+ <param name ="serverdatabase"></param>
+ <returns>Calculated datatable</returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.InitialCallResponseTime(System.Int32,System.String)">
+ <summary>
+ function return response time in days,hrs,min format between call register date and first remark creation date
+ </summary>
+ <param name="id">issuesfilegstkey of the call</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getCallRowfromAllCallsReg_key(System.Int32,System.String,System.String)">
+ <summary>
+ get AllCallsReg's row from AllCallsReg_key
+ </summary>
+ <param name="id"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.TaskClose(System.Int32,System.Data.DataRow,System.String,System.Boolean)">
+ <summary>
+ Function to close the task
+ </summary>
+ <param name="id"></param>
+ <param name="sessionRow"></param>
+ <param name="serverdatabase"></param>
+ <param name="CheckForSubTask"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksRowFromLinkTypeLinkCode(System.String,System.Int32,System.String,System.String)">
+ <summary>
+ get taskrow fron linktype linkcode
+ </summary>
+ <param name="linktype"></param>
+ <param name="linkcode"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksRowFromLinkType(System.String,System.Int32,System.String,System.String)">
+ <summary>
+ get taskrow fron linktype linkcode
+ </summary>
+ <param name="linktype"></param>
+ <param name="p_crmtasks"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTasksDataTableFromLinkTypeLinkCode(System.String,System.String,System.String,System.String)">
+ <summary>
+ get taskdatatable fron linktype linkcode
+ </summary>
+ <param name="linktype"></param>
+ <param name="linkcode"></param>
+ <param name ="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.SaveIntodbGetKeyforcrmtasks(System.Object[],System.String,System.String)">
+ <summary>
+  Take ClassObject and mtypeCode as parameter and save into database and return key value as per the name of table and column of row which is inserted.
+ </summary>
+ <param name="aClsObject">aClsObject can contain multiple tables.</param>
+ <param name="tablename"></param>
+ <param name="fieldname"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.InsertUpdateCRMTasks_old(System.Int32@,System.Collections.Hashtable@,System.String,System.Data.DataRow,System.Data.DataRow)">
+ <summary>
+ Returns p_crmtasks in case new row is inserted and number of rows effected in update transaction in case of update
+ </summary>
+ <param name="id">crmtasks_key. 0 in case of new row</param>
+ <param name="ChangedFieldsValuesPair">Hashtable of field values to be inserted or whose value has to be updated in case of update</param>
+ <param name="sessionrow">sessionrow</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.InsertUpdateCRMTasks(System.Int32@,System.Collections.Hashtable@,System.String,System.Data.DataRow,System.Data.DataRow)">
+ <summary>
+ Returns p_crmtasks in case new row is inserted and number of rows effected in update transaction in case of update
+ </summary>
+ <param name="id">crmtasks_key. 0 in case of new row</param>
+ <param name="ChangedFieldsValuesPair">Hashtable of field values to be inserted or whose value has to be updated in case of update</param>
+ <param name="sessionrow">sessionrow</param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.SendNotificationsForTaskAssignment(System.Int32,System.String,System.String,System.Data.DataRow)">
+ <summary>
+ send notification when task assigned 
+ </summary>
+ <param name="TaskId"></param>
+ <param name="loggedinUserName"></param>
+ <param name="sessionrow"></param>
+ <param name ="serverdatabase"></param>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.deleteCollaborator(System.Int32,System.String)">
+ <summary>
+ delete  collaborator by CRMCollaborator_key
+ </summary>
+ <param name="key"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTaskCollaboratorsByTaskId(System.Int32,System.String)">
+ <summary>
+ get Task Collaborator by P_crmtasks 
+ </summary>
+ <param name="TaskId"></param>
+ <param name ="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.DoesTaskHasSubTask(System.Int32,System.String)">
+ <summary>
+ get boolean if a task has subtask info
+ </summary>
+ <param name="P_CRMTasks"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getpendingTasksdtfromlinktype(System.Int32,System.String,System.String,System.String)">
+ <summary>
+ get pending task data 
+ </summary>
+ <param name="assignedto"></param>
+ <param name="columnstr"></param>
+ <param name="linktype"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.UpdateLinkCodeinCRMCommunication(System.String,System.Int32,System.String)">
+ <summary>
+ Update /Transfer Remarks to another Call/Task
+ </summary>
+ <param name="P_CRMCommunication">P_CRMCommunication or comma seperated P_CRMCommunications</param>
+ <param name="LinkCode">P_crmtasks</param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTagsOfATask(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ Return tags data for a Task using Taskid
+ </summary>
+ <param name="P_CRMTasks"></param>
+ <param name="dtinfotable"></param>
+ <param name="dtInfotableUser"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.deleteTag(System.Int32,System.String)">
+ <summary>
+ Delete task tag data from tags table using p_tags
+ </summary>
+ <param name="p_tags"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getCRMTasksDataUsingCondition(System.String,System.String,System.String)">
+ <summary>
+ Get CrmTasks dataTable using condition
+ </summary>
+ <param name="condition"></param>
+ <param name="serverdatabase"></param>
+ <param name="ColStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.getTaskDetail(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ Return Task Detail
+ </summary>
+ <param name="Taskid"></param>
+ <param name="dtInfoTable"></param>
+ <param name="dtinfotableuser"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CRMTasksLibrary.CRMTasksFunction.GetTaskActivityData(System.Int32,System.Int32,System.String)">
+ <summary>
+ Retrun Task Edit,Remark,Documents and Collaborator history
+ </summary>
+ <param name="taskid"></param>
+ <param name="logincode"></param>
+ <param name="serverdatabasename"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

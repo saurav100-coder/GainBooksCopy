@@ -1,0 +1,196 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Custom/ManageAccounts.js"></script>
+
+@*@Optimization.Scripts.Render("~/Scripts/Manage_Accounts")
+@Optimization.Styles.Render("~/Content/Manage_Accounts")
+*@
+<script src="~/Scripts/FrameWork/bootstrap.js" ></script>
+<script src="~/Scripts/Custom/ManageAccounts.js" ></script>
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css"/>
+<link rel="stylesheet" href="~/Content/Custom/ManageAccounts.css"/>
+
+
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<link rel="stylesheet" href="~/Content/Custom/ManageAccounts.css" />
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<style>
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 5px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+</style>
+@*<div class="container">
+        <div class="icon-bar">
+            <a class="top" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Create New" href="@Url.Action("AccountsForm", "Sales")">
+                <i class="glyphicon glyphicon-plus"></i>
+            </a>
+            <a class="top btn-edit" title="" iddata-placement="bottom" data-toggle="tooltip" data-original-title="Edit" onclick="dd();">
+                <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+            <a class="top btn-delete" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete" onclick="dd();">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a class="top btn-delete" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Convert To Customer" onclick="dd();">
+                <i class="glyphicon glyphicon-refresh"></i>
+            </a>
+        </div>
+    </div>*@
+<div class="">
+    <div class="">
+        <div id="main" class="col-md-12" style="padding-right: 12px; padding-left: 0px; margin-left: 0px; ">
+            <div class="col-md-1" style="top: 4px; width: 110px;">
+                <a id="RegisterCalls" href='/Sales/AccountsForm' title="" data-placement="bottom" data-toggle="Create" style="text-align:left">
+                    <i class="glyphicon glyphicon-plus" style="font-size:14px; margin-right:20px"></i>
+                </a>
+
+                <a class="top" title="" onclick="ReloadGrid()" data-toggle="Refresh">
+                    <i class="fa fa-refresh" style="font-size:16px;padding-top:10px; padding-right:10px; padding-bottom:5px "></i>
+                </a>
+
+
+            </div>
+            <div id="dropdown" class="col-md-4 search" style="width:50%">
+                <select class="col-md-2" id="filter" style="height: 26px; border-radius: 0px; border: none; border-bottom: 1px solid #ddd; outline: none;">
+                    <option value="0">Filter</option>
+                </select>
+                <div id="TextC" class="filterDiv" style="display:none">
+                    <input type="text" id="filterText" class="col-md-3" placeholder="Type to search" style="border-radius: 0px; border: none; border-bottom: 1px solid #ddd; outline: none; height: 26px" />
+                    <div id="search1" onclick="DoSearch();" class="btn searchButton"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
+                <div id="FilterText" class="col-md-2" style="float:left; display:none; margin-top: 1px;margin-left:15px; font-size:13px; border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+                   
+                        <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                        <a class='' id='' onclick='ReloadGrid();'>
+                            <i class='glyphicon glyphicon-remove'></i>
+                        </a>
+                    
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align:right; padding-right:0px; float:right">
+                <label id="info" style="font-size: 11px; color: #808080; padding-right: 10px;"> </label>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Prev" data-original-title="Newer" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                    <i class="fa fa-angle-left" style="font-size:19px"></i>
+                </div>
+                <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Next" data-original-title="Older" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                    <i class="fa fa-angle-right" style="font-size:19px"></i>
+                </div>
+                @*<div class="btn btn-default" style="color:#337ab7; margin-left:10px; width:30px; height:25px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; border-radius:0px; margin-top:10px">
+                    <p id="popover1" data-placement="bottom" style="margin-top:0px;"><i class="fa fa-gear xx" style="font-size:20px; margin-top:2px"></i></p>
+                    <div id="popover_content_wrapper1" style="display: none">
+                        <ul style="list-style:none; padding-left:0px">
+                            <li id="popover2" data-placement="left" style="left:-90px; width:90px;">Set Page Size</li>
+                        </ul>
+                    </div>
+                    <div id="popover_content_wrapper2" style="display:none; width:148px">
+                        <input type="number" id="size" style="padding:2px 2px 3px 5px; width:70%;height:25px" /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px;border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>
+                    </div>
+                </div>*@
+                @*<div class="yy">
+                        <br />
+                        <ul style="padding:0px">
+                            <li class="t1" rel="popover" data-content='<input type ="number" id="size" style="padding:2px 2px 3px 5px; width:70%; height:25px"  /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px; border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px; margin-bottom: 2.5;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>' data-placement="left" style="list-style:none"> <label>Set Page Size </label></li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="grid1" id="grid1" value="">
+
+@*<div class="col-md-12">
+    <table id="example" class="table row-border" cellspacing="0">
+        <thead>
+            <tr style="text-align:center;">
+                <th>Select</th>
+                <th style="cursor: pointer;"><input type="hidden" id="head1" value="2:AccountName:none" />Account Name<i class="glyphicon glyphicon-sort sortable none" id="sort-2" style="color:#C7C7C7"></i></th>
+                <th>Phone</th>
+                <th style="cursor: pointer;"><input type="hidden" id="head1" value="4:Email:none" />Email<i class="glyphicon glyphicon-sort sortable none" id="sort-4" style="color:#C7C7C7"></i></th>
+                <th style="cursor: pointer;"><input type="hidden" id="head1" value="5:Website:none" />Website<i class="glyphicon glyphicon-sort sortable none" id="sort-5" style="color:#C7C7C7"></i></th>
+            </tr>
+           <tr id="loading"><td colspan="5"><div id="loadingmessage"class="loader overlay col-md     -offset-6"></div><p id="Msg"></p></td></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    </div>*@
+<div class="col-md-12" style="padding: 10px;">
+    <div class="col-md-12 col-sm-12 TaskBar" >
+        <div class="col-md-1" style="text-align:center; padding-right:0px; padding-left:0px;margin-left:0px;padding-top:8px;width: 6%;"><b>SNo.</b></div>
+        <div class="col-md-1" style="text-align:left;   padding-right:0px; padding-left:0px; margin-left: 0px;padding-top: 8px;"><b>Account Id</b></div>
+        <div class="col-md-1" style="margin-left:0px;   padding-top:8px;   padding-left:0px;width: 7%;"><b>Date</b></div>
+        <div class="col-md-2" style="text-align:left;   padding-top:8px;   padding-left:0px; padding-right: 10px;width: 10%;"><b>Account Name</b></div>
+        <div class="col-md-1" style="text-align:center; padding-top:8px;   padding-left:0px;  padding-right: 0px;margin-right: 0px;"><b>Phone</b></div>
+        <div class="col-md-1" style="text-align:center; padding-left:20px; padding-top:8px;   padding-right:0px;width: 14%;"><b>Email</b></div>
+        <div class="col-md-1" style="text-align:center;  padding-left:0px;  padding-top:8px;   padding-right: 0px;width: 10%;"><b>Website</b></div>
+        <div class="col-md-1" style="text-align:center; padding-right:0px; padding-left:10px; padding-top:8px;width: 11%;"><b>Parent Account</b></div>
+        <div class="col-md-1" style="text-align:left;   padding-right:0px; padding-left:15px; padding-top:8px; width:13%"><b>Business Type</b></div>
+        <div class="col-md-1" style="text-align:left;  padding-right:0px; padding-left:5px;  padding-top:8px;width: 12%;"><b>Home Town</b></div>
+    </div>
+    <div id="loading"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6" style="margin-top:20px;"></div><p id="Msg"></p></div></div>
+    <div class="col-md-12 " id="example" style="width:100%; overflow-y:scroll; padding-bottom:20px; height:490px; padding-left: 0px;padding-right: 10px;"></div>
+</div>
+<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+
+
+
+

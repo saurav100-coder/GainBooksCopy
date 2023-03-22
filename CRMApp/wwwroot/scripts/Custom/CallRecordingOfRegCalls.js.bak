@@ -1,0 +1,517 @@
+﻿var options = { "backdrop": "static", keyboard: true };
+var popOverOpen = false;
+var CurrentHoverRowId = 0;
+function loadData(data) {
+    var CollabPopOpen = false
+
+    var tblEmployee = $("#example");
+    $("#example div").remove();
+    debugger
+    var a = data.draw;
+    if ($("#Next").hasClass("disabledbutton") == true) { $("#Next").removeClass("disabledbutton"); }
+    if ($("#Prev").hasClass("disabledbutton") == true) { $("#Prev").removeClass("disabledbutton"); }
+    var d = sessionStorage.getItem("RegPageSize");
+    if (d == null || d == 0 || d == "undefined") { d = 50; sessionStorage.setItem("RegPageSize", d); };
+    var b;
+    if (a == 1) { b = d; sessionStorage.setItem("start", 0); } else { b = parseInt(a) + parseInt(d); a = parseInt(a) + 1; sessionStorage.setItem("start", a); }
+    sessionStorage.setItem("Total", data.recordsTotal);
+    var c = data.recordsTotal;
+    if (c == 0) { a = c; b = c; $("#Next").addClass("disabledbutton"); $("#Prev").addClass("disabledbutton"); }
+    else if (c < b && a == 1) { b = c; $("#Next").addClass("disabledbutton"); $("#Prev").addClass("disabledbutton"); }
+    else if (c < b && a > 1) { b = c; $("#Next").addClass("disabledbutton"); }
+    else if (a == 1) { $("#Prev").addClass("disabledbutton"); }
+    else if (b == d) { $("#Next").addClass("disabledbutton"); }
+    else if (parseInt(a) + parseInt(d) > c) { $("#Next").addClass("disabledbutton"); $("#Prev").removeClass("disabledbutton"); }
+    
+    $("#info").text(a + "-" + b + " of " + c);
+    var m = a - 1;
+    $.each(data.data, function (index, item) {
+        var Parentdiv = "";
+        var MoreDetailsdiv = "";
+
+
+
+        Parentdiv = $("<div id='MainDiv-" + item.callrecordings_key + "' class='col-md-12  clickable parentdiv' style='display: inline-flex;border-bottom:1px black solid;padding-left:5px;margin-left:20px;width: 1080px;'  onmouseover='hoverId(this)' onmouseout='hoverNot(this)'></div>");
+        MoreDetailsdiv = $(("<div  class='MoreDetails' id='" + item.callrecordings_key + "'  style='background-color:white;width: 349px;min-height: 53px;padding-left: 10px;padding-top: 8px;margin-left: 900px;'> </div>"))
+
+        tblEmployee.append(Parentdiv);
+        m = m + 1;
+        var div = $("<div id='tr-" + item.callrecordings_key + "'  style='display:inline-flex; position:relative; min-height:55px; width: 1080px;  margin-top:10px;  font-size:11px; font-family: verdana,arial,sans-serif; padding-right:0px'></div>");
+        div.html( ("<div style='width: 2%;padding-right: 3px;' id='" + item.callrecordings_key + "' value='" + item.callrecordings_key + " style='margin-top:2px; float:left'>" + m + ".</div>")
+         + " " + ("<div style='width:6%;text-align: center;'><input type='hidden' class='filename' value='" + item.filename + ".amr' /><input type='hidden' class='linkurl' value='" + item.linkurl + "' />" + item.linkcode + "</div>")
+         + " " + ("<div style='width: 10%;padding-left: 15px;'>" + item.Textmtimestamp + "</div>")
+         + " " + ("<div style='width: 9%;padding-right: 5px;margin-right: 5px;padding-left: 0px;'>" + item.Firmname + "</div>")
+         + " " + ("<div style='width: 8%;padding-left: 5px;margin-right: 10px;'>" + item.Mobileno + "</div>")
+         + " " + ("<div style='width: 8%;padding-left: 10px;text-align: left;padding-right: 10px;'>" + item.Location + "</div>")
+         + " " + ("<div style='width: 8%;padding-right: 10px;'>" + item.TextIssuetype + "</div>")
+         + " " + ("<div style='width: 10%;padding-left: 5px;text-align: left;'>" + item.Issuedescription + "</div>")
+         + " " + ("<div style='width:7%;padding-left:5px; text-align:left;'>" + item.TextStatus + "</div>")
+         + " " + ("<div style='width:11%;padding-left:10px;'>" + item.source + "</div>"))
+        Parentdiv.append(div);
+        //
+
+        MoreDetailsdiv.html(("<a data-toggle='Play Recording' style='cursor:pointer' onclick='PlayFile(" + item.callrecordings_key + ")'><i class='glyphicon glyphicon-play' data-placement='right'  style='font-size:20px; color:#616A6B;padding-left:11px;'></i></a>" +
+           "<a data-toggle='Download' style='cursor:pointer' onclick='DownloadFile(" + item.callrecordings_key + ")'><i class='glyphicon glyphicon-download' data-placement='right'  style=' font-size:20px; color:#616A6B;padding-left:11px;'></i></a>"
+        ));
+
+        div.append(MoreDetailsdiv);
+
+    });
+    if (data.data.length == 0) {
+        $('#loading').show();
+        $('#loadingmessage').hide();
+        $("#Msg").show();
+        $("#Msg").text("No record found");
+        $('#loading').addClass('clickable');
+    } else {
+        $('#loading').hide();
+        $('#loadingmessage').hide();
+        $('#Msg').hide();
+    }
+
+}
+
+function DownloadFile(id) {
+    var rowid = "#tr-" + id;
+    var Filename = $(rowid)[0].children[1].children[0].value;
+    var LinkUrl = $(rowid)[0].children[1].children[1].value;
+    //window.location = '/CRM/downloadRecordedRegCall?Filename=' + Filename;
+    $.post('/CRM/downloadRecordedRegCall', { Filename: Filename, LinkUrl: LinkUrl }, function (data) {
+        if (data == "") {
+            window.location.href = "/Home/Logout";
+        }
+        else if (data == "err") {
+            $('#TaskClosedContent').html('');
+            $('#TaskClose').modal(options);
+            $('#TaskClosedContent').html("<h3 class='text-center'>File not found</h3>");
+            $('#TaskClose').modal("show");
+            setTimeout(function () { $('#TaskClose').modal("hide"); }, 1000);
+        }
+        else {
+            window.location.href = "/CRM/DownloadFile?FullFilepath=" + data.FullFilepath + "&contentType=" + data.contentType + "&filename=" + data.filename
+        }
+    })
+
+}
+function PlayFile(id) {
+    $("#AUDIO").remove();
+    var rowid = "#tr-" + id;
+    var Filename = $(rowid)[0].children[1].children[0].value;
+    var LinkUrl = $(rowid)[0].children[1].children[1].value;
+    var path = '/CRM/PlayAudio?Filename=' + Filename + "&LinkUrl="+LinkUrl;
+    gfg = document.createElement("AUDIO");
+    gfg.setAttribute("src", path);
+    gfg.setAttribute("controls", "controls");
+    gfg.crossOrigin = 'anonymous';
+    gfg.id = 'AUDIO'
+    gfg.play();
+    $(rowid).append(gfg);
+
+}
+$(document).ready(function () {
+    //var d = $("#fvalue").val();
+    //var m = [];
+    //m = d.split("|");
+    //var l;
+    //for (i = 0; i <= m.length - 1; i = i + 1) {
+    //    l = m[i].split("~");
+    //    var dropdown = $("#filter");
+    //    $('#filter').append($('<option>', {
+    //        value: l[1] + ":" + l[2],
+    //        text: l[0]
+    //    }));
+    //};
+    $('a').tooltip();
+    var a = 1;
+    sessionStorage.setItem("start", 0);
+    var t = sessionStorage.getItem("RegPageSize");
+    if (t == null) { t = 50 }
+    var SelectedRows = "";
+    //GetEmployeeData(a, 0, t);
+    sessionStorage.setItem("search", null);
+    setInterval(ReloadGrid(), 15 * 60 * 1000);//setting Interval of 15 minutes by which every 15 minutes grid is getting refresh.
+    $("#Prev").on("click", function () {
+        var a = sessionStorage.getItem("RegPageSize");
+        var b = sessionStorage.getItem("search");
+        if (b == "null") {
+            b = "";
+        }
+        var d = sessionStorage.getItem("start");
+        var o = sessionStorage.getItem("order");
+        var total = sessionStorage.getItem("Total");
+        //if (o != undefined && o != "null") {
+        //    order = o.split(":");
+        //    var orderid = "tbody tr:last td:nth-child(" + order[0] + ")";
+        //    ordervalue = $(orderid).text();
+        //    o = order[1] + "~" + ordervalue + "~" + order[2];
+        //    JSON.stringify(o);
+        //}
+        if (a != null) { d = (d - a) - 1; } else { d = (d - 50) - 1; }
+        $("#example div").remove();
+        $('#loading').show();
+        $('#loadingmessage').show();
+        $('#Msg').hide();
+        if (d >= 0) {
+            $.post('/CRM/ajaxGetCallRecordingOfRegCalls', { id: "", start: d, pSize: a, search: b, order: o, ServerOrderValue: "" }, function (data) {
+                loadData(data);
+            })
+        }
+    });
+    $("#Next").on("click", function () {
+        var total = sessionStorage.getItem("Total");
+        var a = sessionStorage.getItem("RegPageSize");
+        var c = sessionStorage.getItem("search");
+        if (c == "null") {
+            c = "";
+        }
+        var d = sessionStorage.getItem("start");
+        var o = sessionStorage.getItem("order");
+        //if (o != undefined && o != "null") {
+        //    order = o.split(":");
+        //    var orderid = "tbody tr:last td:nth-child(" + order[0] + ")";
+        //    ordervalue = $(orderid).text();
+        //    o = order[1] + "~" + ordervalue + "~" + order[2];
+        //    JSON.stringify(o);
+        //}
+        if (a != null) { d = parseInt(d) + parseInt(a) - 1; } else { d = parseInt(d) + 50 - 1; }
+        $("#example div").remove();
+        $('#loading').show();
+        $('#loadingmessage').show();
+        $('#Msg').hide();
+        if (d < total) {
+            $.post('/CRM/ajaxGetCallRecordingOfRegCalls', { id: "", start: d, pSize: a, search: c, order: o, ServerOrderValue: "" }, function (data) {
+                loadData(data);
+            })
+        }
+    });
+
+    $("#IssueFilter").on("change", function () {
+        var text = $("#IssueFilter option:selected").text();
+        var value = $("#IssueFilter").val();
+        var col = "Issuetype";
+        var search = value + "," + col + ":integer";
+
+        JSON.stringify(search);
+        sessionStorage.setItem("search", search);
+        var pSize = sessionStorage.getItem("RegPageSize");
+        $("#example div").remove();
+        $("#loading").show();
+        $('#loadingmessage').show();
+
+        $.ajax({
+            url: '/CRM/ajaxGetCallRecordingOfRegCalls',
+            type: "POST",
+            data: { start: 0, pSize: pSize, search: search },
+            success: function (data) {
+                $("#fText").text(text);
+                $("#FilterText").show();
+                $(".filterDiv").css("display", "none")
+                sessionStorage.setItem("Total", data.recordsTotal);
+                loadData(data);
+            },
+            error: function (data) {
+                alert("Failed");
+            }
+        });
+    });
+    $("#P_dealers").on("change", function () {
+
+        var value = $("#P_dealers").val();
+        var text = $("#P_dealers option:selected").text();
+        var col = "p_dealers";
+        var search = value + "," + col + ":integer";
+
+        JSON.stringify(search);
+        sessionStorage.setItem("search", search);
+        var pSize = sessionStorage.getItem("RegPageSize");
+        $("#example div").remove();
+        $("#loading").show();
+        $('#loadingmessage').show();
+
+        $.ajax({
+            url: '/CRM/ajaxGetCallRecordingOfRegCalls',
+            type: "POST",
+            data: { start: 0, pSize: pSize, search: search },
+            success: function (data) {
+                $(".filterDiv").css("display", "none")
+                $("#fText").text(text);
+                $("#FilterText").show();
+                sessionStorage.setItem("Total", data.recordsTotal);
+                loadData(data);
+            },
+            error: function (data) {
+                alert("Failed");
+            }
+        });
+    });
+    $("#assignto").on("change", function () {
+        var text = $("#assignto option:selected").text();
+        var value = $("#assignto").val();
+        var col = "assignedto";
+        var search = value + "," + col + ":integer";
+
+        JSON.stringify(search);
+        sessionStorage.setItem("search", search);
+        var pSize = sessionStorage.getItem("RegPageSize");
+        $("#example div").remove();
+        $("#loading").show();
+        $('#loadingmessage').show();
+
+        $.ajax({
+            url: '/CRM/ajaxGetCallRecordingOfRegCalls',
+            type: "POST",
+            data: { start: 0, pSize: pSize, search: search },
+            success: function (data) {
+                $("#fText").text(text);
+                $("#FilterText").show();
+                $(".filterDiv").css("display", "none")
+                sessionStorage.setItem("Total", data.recordsTotal);
+                loadData(data);
+            },
+            error: function (data) {
+                alert("Failed");
+            }
+        });
+    });
+    //for filtering on hometown
+    $("#HomeTownfilter").submit(function () {
+        //$('#ModelHomeTownFilter').modal('toggle');
+        $('#ModelHomeTownFilter .close').click()
+        var m = document.getElementById("homeTown");
+        if (m.value != 0 || m.value != "undefined") {
+            var hometown = document.getElementsByName("searchString");
+            var empName = hometown["0"].value;
+            var col = "HomeTown";
+            var search = m.value + "," + col + ":integer";
+            JSON.stringify(search);
+            var pSize = sessionStorage.getItem("RegPageSize");
+            alert(search);
+            $("tbody").empty();
+            $("#loading").show();
+            $('#loadingmessage').show();
+            gf1 = "HomeTown";
+            $.ajax({
+                url: '/CRM/ajaxGetCallRecordingOfRegCalls',
+                type: "POST",
+                data: { start: 0, pSize: pSize, search: search },
+                success: function (data) {
+                    $("#fText").text(empName);
+                    $("#FilterText").show();
+                    sessionStorage.setItem("Total", data.recordsTotal);
+                    loadData(data);
+                },
+                error: function (data) {
+                    alert("Failed");
+                }
+            });
+        }
+        return false;
+    });
+
+    $("#filter").on("change", function () {
+        var a = $("#filter").val();
+        $(".filterDiv").css("display", "none")
+        if (a != "0" && a != "1") {
+            b = a.split(":");
+            if (b[0] == 2) {
+                var a = document.getElementById("dateC")
+                a.style.display = "";
+            } else if (b[0] == 3 || b[0] == 5 || b[0] == 9) {
+                $("#TextC").css("display", "");
+            } else if (b[0] == 6) {
+                var a = document.getElementById("IssueC")
+                a.style.display = "";
+            }
+            else if (b[0] == 4) {
+                var a = document.getElementById("DealerC")
+                a.style.display = "";
+            }
+            else if (b[0] == 7) {
+                var a = document.getElementById("assigntoC")
+                a.style.display = "";
+            }
+            else if (b[0] == 8) {
+                $("#TextC").css("display", "");
+            }
+        }
+    });
+});
+
+
+function removeFilter() {
+    $(".filterDiv").css("display", "none")
+    $("#P_dealers").val(0);
+    $("#IssueFilter").val(0);
+    $("#assignto").val(0);
+    $("#filter").val(0);
+    $("#filterText").val("");
+    $("#min").val("");
+    $("#max").val("");
+}
+
+function DoSearch() {
+    var ValueToSearch = $("#filterText").val().trim();
+    var filterSelected = $("#filter").val();
+    var filter = filterSelected.split(":")
+    var col = ""
+    var search = ""
+    if ($("#filterText").val() != "" || $("#filterText").val() != "undefined") {
+        if (filter[0] == 3) {
+            value = $("#filterText").val();
+            col = "Firmname";
+            search = ValueToSearch + "," + col + ":string";
+        }
+        if (filter[0] == 6) {
+            value = $("#filterText").val();
+            col = "Location";
+            search = ValueToSearch + "," + col + ":string";
+        }
+        if (filter[0] == 8) {
+            value = $("#filterText").val();
+            col = "P_issuesfilegst";
+            search = ValueToSearch + "," + col + ":integer";
+        }
+        if (filter[0] == 9) {
+            value = $("#filterText").val();
+            col = "Mobileno";
+            search = ValueToSearch + "," + col + ":string";
+        }
+        JSON.stringify(search);
+        sessionStorage.setItem("search", search);
+        var pSize = sessionStorage.getItem("RegPageSize");
+        $("#example div").remove();
+        $("#loading").show();
+        $('#loadingmessage').show();
+
+        $.ajax({
+            url: '/CRM/ajaxGetCallRecordingOfRegCalls',
+            type: "POST",
+            data: { start: 0, pSize: pSize, search: search },
+            success: function (data) {
+                $(".filterDiv").css("display", "none")
+                $("#fText").text(ValueToSearch);
+                $("#FilterText").show();
+                sessionStorage.setItem("Total", data.recordsTotal);
+                loadData(data);
+            },
+            error: function (data) {
+                alert("Failed");
+            }
+        });
+    }
+    return false;
+}
+function DateSearch() {
+
+    value1 = $("#min").val();
+    value2 = $("#max").val();
+    col = "registerdate";
+    search = value1 + "," + value2 + "," + col + ":date";
+
+    JSON.stringify(search);
+    sessionStorage.setItem("search", search);
+    var pSize = sessionStorage.getItem("RegPageSize");
+    $("#example div").remove();
+    $("#loading").show();
+    $('#loadingmessage').show();
+
+    $.ajax({
+        url: '/CRM/ajaxGetCallRecordingOfRegCalls',
+        type: "POST",
+        data: { start: 0, pSize: pSize, search: search },
+        success: function (data) {
+            // $("#fText").text(value);
+            // $("#FilterText").show();
+            sessionStorage.setItem("Total", data.recordsTotal);
+            loadData(data);
+        },
+        error: function (data) {
+            alert("Failed");
+        }
+    });
+
+
+}
+
+function hoverId(ctrl) {
+    // $(ctrl).find('.MoreDetails').show()
+    if (popOverOpen == true) {
+        $(".MoreDetails").not(CurrentHoverRowId).hide;
+    } else {
+        $(ctrl).find('.MoreDetails').show();
+        $(ctrl).find('.MoreDetails').css("display", "inline-flex");
+    }
+}
+
+function hoverNot(ctrl) {
+    $('.MoreDetails').hide();
+    if (popOverOpen == true) {
+        $(CurrentHoverRowId).find('.MoreDetails').show();
+    }
+    // $("#AUDIO").remove();
+}
+
+function GetEmployeeData(pageNumber, start, PSize) {
+    $('#loading').show();
+    $('#loadingmessage').show();
+    $.ajax({
+        type: "POST",
+        url: "/CRM/ajaxGetCallRecordingOfRegCalls",
+        data: { id: "", start: start, pSize: PSize },
+        success: function (data) {
+            
+            sessionStorage.setItem("Total", data.recordsTotal);
+            loadData(data);
+        },
+        error: function () {
+            alert("Error in loading data")
+        }
+    });
+}
+
+// function to close button on popover
+function popoverClose() {
+    popOverOpen = false
+    $('.popover').hide();
+    $('.MoreDetails').popover('hide');
+    $("#ShowSubTaskControlDiv").popover('hide');
+    $(".ShowRemark").popover('hide');
+}
+function ReloadGrid() {
+    removeFilter();
+    $("#example div").remove();
+    sessionStorage.setItem("start", 0);
+    var t = sessionStorage.getItem("RegPageSize");
+    if (t == null) { t = 50 }
+    GetEmployeeData(1, 0, 50);
+    $("#fText").text("");
+    $("#FilterText").hide();
+}
+
+function PageSize() {
+    var a = $("#size").val();
+    sessionStorage.setItem("RegPageSize", a);
+    $(".yy").hide();
+    var b = sessionStorage.getItem("search");
+    var o = sessionStorage.getItem("order");
+    if (o != undefined && o != "null") {
+        order = o.split(":");
+        var orderid = "tbody tr:last td:nth-child(" + order[0] + ")";
+        ordervalue = "";
+        o = order[1] + "~" + ordervalue + "~" + order[2];
+        JSON.stringify(o);
+    }
+    $("#example tbody tr").remove();
+    $('#loading').show();
+    $('#loadingmessage').show();
+    $('#Msg').hide();
+    $('#p').css("display", "none");
+
+    $.post('/CRM/ajaxGetCallRecordingOfRegCalls', { id: "", start: 1, pSize: a, search: b, order: o, ServerOrderValue: firmname }, function (data) {
+        loadData(data);
+    })
+}
+$('#example').on('contextmenu', 'div.parentdiv', function (e) {
+    console.log("right clicked");
+});
+

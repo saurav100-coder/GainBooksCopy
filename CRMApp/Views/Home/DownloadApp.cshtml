@@ -1,0 +1,105 @@
+﻿@{
+	Layout = "~/Views/Shared/_Nav.cshtml";
+	ViewData["Title"] = "DownloadApp";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GVPR11ZTNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GVPR11ZTNT');
+</script>
+
+<script>
+	$(document).ready(function () {
+		$("#navDownloadApp").addClass("navActive");
+		$("#navDownloadApp").css("padding-top", "5px");
+		$("#navDownloadApp").css("padding-bottom", "5px");
+		$("#navDownloadApp").css("margin-top", "10px");
+	})
+</script>
+
+<style>
+	.clickable:hover {
+		box-shadow: 10px 11px 28px -10px gray;
+
+	}
+	.label-up {
+  display:inline-block;
+  height:30px;
+  position:relative;
+  top:-15%;
+  transition:0.3s;
+  margin-left:10px;
+}
+
+
+	body {
+		overflow-x: hidden;
+	}
+
+	.footer {
+		position: absolute !important;
+	}
+
+	@@media all and (min-width: 768px) {
+		.footer {
+			position: absolute;
+		}
+
+		.content {
+			background-color: white;
+		}
+	}
+
+	 @@media only screen and (max-width: 768px) {
+		/*.clickable  {
+			padding:15px 27px !important;
+			font-size:15px !important;
+		}*/
+		@@media only screen and (max-width: 375px) {
+		.clickable  {
+			padding:7px 12px !important;
+			font-size:13px !important;
+		}
+		
+
+	}
+</style>
+
+	<div class="hidden-sm hidden-xs">
+		<div class="hidden-sm hidden-xs row" style="background:#fff; margin-left:12%; margin-right:12%; margin-top:50px;box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);border-radius: 15px;position:relative">
+			<img src="~/images/DownloadApp2.png" alt="Gainbooks App" style="width:100%;border-radius: 15px;" />
+			<div class="hidden-sm hidden-xs" style="display:flex; flex-direction:column; position: absolute;top: 47%;left: 62%;">
+			<div style="display:flex; justify-content:center;">
+				<a href='https://play.google.com/store/apps/details?id=com.techno.gb_pharma' class="clickable" element-layer="button"  title="@ViewBag.saralApkDate" style="display: inline-block;border:2px solid;overflow:hidden;height:45px;width:250px;margin-bottom:25px; padding: 10px 20px;color: #36a2cc;text-decoration: none;font-size: 18px;font-weight: 500;background:white;font-family: 'Roboto', sans-serif;text-align: center;border-radius: 60px 60px;"><i class="fa fa-download" style="font-size:22px;"></i><span class="label-up">Saral - Gainbooks</span></a>
+				<a href="/pdf/SaralGBRelease.pdf" target="_blank" style="padding-top:20px; padding-left:10px; cursor:pointer; color:#337ab7;font-family:system-ui;font-weight:600;">What's new</a>
+				</div>
+			<div style="display:flex; justify-content:center;">
+				<a href='@Url.Action("downloadGainbooksApp", "Home", new { Appname = "gbpos" })' class="clickable" element-layer="button" title="@ViewBag.gbApkDate"  style="display: inline-block;border:2px solid; overflow:hidden;padding: 10px 20px;background: white;height:45px;width:250px;text-decoration: none;font-size: 18px;font-weight: 500;color:green;font-family: 'Roboto', sans-serif;text-align: center;border-radius: 60px  60px;"><i class="fa fa-download" style="font-size:22px;"></i><span class="label-up">Gainbooks - POS</span></a>
+				<a href="/pdf/GBPOSRelease.pdf" target="_blank" style="padding-top:20px; padding-left:10px;cursor:pointer; color:#337ab7;font-family:system-ui;font-weight:600;">What's new</a>
+			</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="hidden-lg hidden-md">
+		<div class="hidden-lg hidden-md row" style="background:#fff; margin-left:12%; margin-right:12%; margin-top:50px;box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);border-radius: 15px;position:relative">
+			<img src="~/images/DownloadAppMV.png" alt="Gainbooks App" style="width:100%;border-radius: 15px;" />
+		  <div style="position: absolute;top: 68%;left: 7%;">
+			 <div style="display:flex; justify-content:center; flex-direction:column;">
+				<a href='@Url.Action("downloadGainbooksApp", "Home", new { Appname = "saralgb" })' class="clickable" element-layer="button" title="@ViewBag.saralApkDate"  style="display: inline-block;border:2px solid;overflow:hidden;height:45px;width:250px;padding: 10px 20px;color: #36a2cc;text-decoration: none;font-size: 18px;font-weight: 500;background:white;font-family: 'Roboto', sans-serif;text-align: center;border-radius: 60px"><i class="fa fa-download" style="font-size:22px;"></i><span class="label-up">Saral - Gainbooks</span></a>
+				<a href="/pdf/SaralGBRelease.pdf" target="_blank" style="padding-left:10px; width:250px; text-align:right; cursor:pointer; font-family:system-ui;font-weight:600;">What's new</a>
+			</div>
+			 <div style="display:flex; justify-content:center; flex-direction:column;">
+				<a href='@Url.Action("downloadGainbooksApp", "Home", new { Appname = "gbpos" })' class="clickable" element-layer="button" title="@ViewBag.gbApkDate" style="display: inline-block;border:2px solid; overflow:hidden;padding: 10px 20px;background: white;height:45px;width:250px;text-decoration: none;font-size: 18px;font-weight: 500;color:green;font-family: 'Roboto', sans-serif;text-align: center;border-radius: 60px"><i class="fa fa-download" style="font-size:22px;"></i><span class="label-up">Gainbooks - POS</span></a>
+				<a href="/pdf/GBPOSRelease.pdf" target="_blank" style="padding-left:10px; width:250px; text-align:right; cursor:pointer; font-family:system-ui;font-weight:600;">What's new</a>
+			</div>
+		  </div>
+		</div>
+
+	</div>
+
+

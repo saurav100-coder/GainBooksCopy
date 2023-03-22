@@ -1,0 +1,1381 @@
+﻿@import url('managependingtasks.css');
+
+* html {
+    scroll-behavior: smooth !important;
+}
+
+body {
+    cursor: default;
+}
+
+.style {
+    background-color: white !important;
+    box-shadow: 0px 1px 4px 0px #33333359;
+}
+
+.transparent:hover {
+    background-color: red;
+}
+
+.DatesMargin {
+    margin-top: 0px !important;
+}
+
+.filterclose {
+    display: none;
+    margin-left: 10px;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    place-self: center;
+    cursor: pointer;
+    color: #808080;
+    text-align: center;
+    margin-top: 9px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    border: none;
+    border-bottom: 4px solid green;
+}
+
+.nav-tabs > li > a:hover {
+    border: none;
+    background-color: transparent;
+}
+
+.nav-tabs > li > a {
+    border: none;
+    background-color: transparent;
+}
+
+.modalbutton {
+    background-color: #337ab7;
+    color: white;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+.modalbutton:hover {
+    color: white;
+}
+
+.modalbuttonsecondary {
+    background-color: #efefef;
+    color: #555;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+.searchButton1 {
+    display: inline-flex;
+    color: #337ab7;
+    height: 30px;
+    border-radius: 0px;
+    padding-bottom: 11px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+.tno {
+    width: 4% !important;
+}
+
+.sno {
+    width: 3% !important;
+}
+
+.id {
+    width: 5% !important;
+}
+
+.tasktitle {
+    width: 20% !important;
+    font-size: 12px !important;
+}
+
+.taskdesc {
+    width: 21% !important;
+    max-width: 21% !important;
+    font-size: 12px !important;
+}
+
+.taskstat {
+    width: 7% !important;
+    font-size: 12px !important;
+}
+
+.date {
+    width: 15% !important;
+    font-size: 12px !important;
+}
+
+.assign {
+    width: 13% !important;
+    font-size: 12px !important;
+    height: 20px;
+    overflow: hidden;
+}
+
+.create {
+    width: 13% !important;
+    font-size: 12px !important;
+    height: 20px;
+    overflow: hidden;
+    padding-left: 8px !important;
+}
+
+.ssno {
+    width: 6% !important;
+    padding: 0 !important;
+}
+
+.sid {
+    width: 7% !important;
+    padding: 0 8px 0 0 !important;
+}
+
+.stitle {
+    width: 19% !important;
+}
+
+.sdesc {
+    width: 19% !important;
+}
+
+.sstat {
+    width: 6% !important;
+}
+
+.sdue {
+    width: 13% !important;
+}
+
+.sassign {
+    width: 14% !important;
+}
+
+.screate {
+    width: 14% !important;
+}
+
+.searchButton1:hover {
+    background-color: #337ab7;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+#SearchText {
+    display: inline-flex;
+    height: 30px;
+    padding-left: 5px;
+    width: 85%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+    font-size: 11px;
+    bottom: 5px;
+}
+
+#filter:focus {
+    border-bottom: 1px solid #337ab7;
+}
+
+table td {
+    border-style: none;
+    border: none !important;
+}
+
+table th {
+    border-style: none;
+    padding: 2px;
+    border:none !important;
+}
+
+/*table tr td {
+    border-collapse: collapse;
+    padding: 2px;
+    border-style: none;
+}*/
+
+/*td {
+    padding-bottom: 30px !important;
+}*/
+/*
+table thead tr th {
+    border-collapse: collapse;
+    padding: 2px;
+    border-style: none;
+    vertical-align: middle !important;
+}*/
+
+/*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 0px solid #ffff;
+}*/
+
+.searchButton {
+    color: #337ab7;
+    height: 28px;
+    border-radius: 0px;
+    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.searchButton:hover {
+    background-color: #246399;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.filterRemove {
+    color: #337ab7;
+    height: 30px;
+    border-radius: 0px;
+    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.filterRemove:hover {
+    background-color: #246399;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.r i {
+    color: #337ab7;
+}
+
+#right1 {
+    width: 100%;
+    float: left;
+    background-color: white;
+    padding: 4%;
+    display: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: auto;
+}
+
+.row {
+}
+
+
+.Status select {
+    color: #3c8dbc;
+    border-color: #3c8dbc;
+    padding: 3px 15px;
+}
+
+.Status select option {
+    color: #3c8dbc;
+    border-color: #3c8dbc;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.Status label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3c8dbc;
+    padding-right: 10px;
+    padding-top: 4px;
+}
+
+
+.icon img {
+    padding-right: 18px;
+    width: 40px;
+}
+
+.icon img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.icon {
+    margin-top: 5%;
+}
+
+
+.right-end {
+    float: right;
+    color: #3c8dbc;
+}
+
+.right-end a {
+    background-color: #edeeef;
+    padding: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.right-end a:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.right-end span {
+    padding-right: 8px;
+}
+
+.hidden_row {
+    display: none;
+}
+
+.icon img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.row {
+}
+
+.task-cap {
+    color: #337ab7;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.col-md-6 .task-cap .dates {
+    padding: 20px;
+}
+
+.Status {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.tab {
+    margin-top: 3%;
+}
+
+.tab .tab-pane {
+    padding-bottom: 15px;
+    border: none;
+    display: inline-flex;
+}
+
+.tab .tab-pane button {
+    border: none;
+    border-radius: 50px;
+    font-size: 12px;
+    background-color: transparent;
+    font-weight: 500;
+    color: #4f5250;
+    padding-left: 19px;
+    padding-right: 19px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 3px;
+}
+
+.tab .tab-pane button:focus {
+    border: transparent;
+}
+
+.tab .tab-pane button:hover {
+    background-color: #edeeef;
+}
+
+.tab .history {
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px #ddd solid;
+    border-bottom: 1px #ddd solid;
+    margin-right: 7px;
+}
+
+.tab .history p {
+    font-size: 13px;
+}
+
+.tab .history p span {
+    font-weight: 500;
+}
+
+.dashfolio-tag {
+    cursor: pointer;
+    padding: 10px 15px 15px 15px;
+    display: inline-block;
+    margin-top: 3px; /*incase tags go in next line, will space */
+    color: #fff;
+    padding-right: 20px; /* adds space inside the tags for the 'x' button */
+}
+
+.dashfolio-tag:hover {
+    opacity: 0.7;
+}
+
+.dashfolio-tag:after {
+    position: absolute;
+    content: "×";
+    padding: 2px 2px;
+    margin-left: 2px;
+    font-size: 11px;
+}
+
+#add-tag-input {
+    background: transparent;
+    border: 0;
+    padding: 5px;
+    width: 100%;
+    margin-top: auto;
+}
+
+textarea {
+    width: 100%;
+    border-color: #ddd;
+    color: #555;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 10px;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #105faf;
+}
+
+/*li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}*/
+li {
+    display: list-item;
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+
+    .tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px #ddd solid;
+    padding-bottom: 15px;
+}
+
+.tabs-nav .tab-active a {
+    background: #337ab7;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tabs-nav a {
+    background: hsl(120, 11%, 96%);
+    border-radius: 50px;
+    color: #3c8dbc;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    height: auto;
+    /*line-height: 44px;*/
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+
+.tabs-nav li {
+    float: left;
+}
+
+.tabs-stage {
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #ddd solid;
+    border-top: 0;
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+    top: 1px;
+    width: auto;
+}
+
+.tabs-stage p {
+    margin: 0;
+    padding: 5px;
+    color: #3c8dbc;
+}
+
+.clr:after {
+    background-color: white;
+}
+
+.viewd img {
+    display: none;
+}
+
+.col-md-1 {
+    width: 11.11%;
+}
+
+.filter, #min, #max, #filterText, #filterDropdown, .sort, .sortOrders {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+}
+
+.filter:focus, #max:focus, #min:focus, #filterText:focus, #filterDropdown:focus {
+    border-bottom: 1px solid #337ab7;
+}
+
+.highlight {
+    background-color: #568CA7;
+    color: white;
+}
+
+select option {
+    padding: 30px !important;
+}
+
+select {
+    height: 22px;
+    font-family: verdana,arial,sans-serif;
+    font-size: 11px;
+    width: 165px;
+}
+
+#filterText {
+    height: 30px;
+    font-family: open sans,arial,sans-serif;
+    font-size: 11px;
+    margin-left: 4px;
+    margin-top: 10px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+
+
+.container {
+    width: 100%;
+}
+
+h4 {
+    margin: 0px;
+    padding: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+#drop {
+    width: 35%;
+    margin: 0px auto;
+    text-align: left;
+    float: right;
+}
+
+.col-md-3 #main1 {
+    text-align: center;
+}
+
+.content-wrapper, .right-side {
+    background-color: white;
+}
+
+.panel-default {
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
+.panel-body {
+    font-family: verdana,arial,sans-serif;
+    font-size: 11px;
+    padding: 0px;
+    height: auto;
+    border: none;
+}
+
+input[type=date] {
+    padding: 0px;
+}
+
+#filter {
+    height: 20px;
+    padding: 0px;
+    width: 18%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.panel {
+    margin-bottom: 0px;
+    border: none;
+}
+
+#min {
+    margin-top: 10px;
+    height: 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+#max {
+    margin-top: 10px;
+    height: 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.ee, .ww {
+    margin-top: 15px;
+}
+
+.bb {
+    padding: 0px;
+    height: auto;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.icon-bar {
+    width: 100%;
+    overflow: auto;
+}
+
+    .icon-bar a {
+        float: left;
+        text-align: center;
+        padding: 12px 0px;
+        transition: all 0.3s ease;
+        font-size: 20px;
+    }
+
+        .icon-bar a:hover {
+            background-color: #EAEDEF;
+        }
+
+.col-md-12.horizontal {
+    /*overflow:auto;*/
+    /*height:620px;*/
+    padding-right: 5px;
+    margin-right: 10px;
+}
+
+
+
+/* create tooltip after each menu item  */
+/*.menu__item::after {
+        position: absolute;
+        display: inline-block;*/ /* ::before, ::after are inline as default
+  
+  /*  makes tooltip vertically center within each one of menu items  */
+/*top: 50%;
+        transform: translateY(-50%);*/
+/* starting tooltip 100% left of menu item (just the right of them)   */
+/*left: 100%
+            ;*/
+/* linked to the HTML attribute value  */
+/* 使用 ::before 和 ::after 一定要有 content 否則不會發生作用。 */
+/*content: attr(data-tooltip);*/
+/* set margin between menu item and tooltip  */
+/*margin-left: 15px;*/
+/* makes words in same line   */
+/*white-space: nowrap;
+        padding: 7px 12px;*/
+/* 90% of current font size   */
+/*font-size: 0.9em;
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 15px;
+        color: #fff;*/
+/*  invisible (can't see it but can click on it)  */
+/*opacity: 0;*/
+/* can't click  */
+/*visibility: hidden;
+        transition: opacity 1s;
+    }*/
+
+/* show tooltip if hover on menu item */
+/*.menu__item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}*/
+
+/*.SubTasksMoreDetails         {position:absolute; padding-top:5px; z-index:2; display:none; background-color:lightblue; width:200px; height:40px; padding-left:20px; margin-left:880px;}
+    */
+/* Tabs */
+
+
+/* Just for CodePen styling - don't include if you copy paste */
+
+.icon-row img {
+    padding-right: 18px;
+}
+
+.icon-row img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.icon-row {
+    padding-left: 3%;
+}
+
+.ShowRemarksValues:first-child {
+    margin-top: 30px;
+}
+
+.ShowRemarksValues:last-child {
+    margin-bottom: 20px;
+}
+
+.clickable {
+    transition: box-shadow 0.5s;
+}
+
+.clickable:hover {
+    box-shadow: 2px 2px 0px 0px #33333359;
+}
+
+.Tasktitle, .Taskdescription {
+    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+}
+
+@media only screen and (max-width:600px) {
+
+    /*Task File View*/
+
+    .SELECt{
+      width:10% !important;
+    }
+    .SNO{
+        display:none;
+    }
+    .TASKID {
+        width: 13% !important;
+    }
+    .FILE {
+        width: 18% !important;
+    }
+    .DATE {
+        width: 20% !important;
+    }
+    .NOTE {
+        width: 24% !important;
+    }
+    .TAGS {
+        width: 15% !important;
+    }
+   .tasknotes{
+        width:24% !important;
+   }
+    .tasktags {
+        width: 15% !important;
+        text-align:left !important
+    }
+
+    /*Task File View End*/
+
+    td:nth-last-child(2) {
+        display: grid !important;
+    }
+
+/*    td:nth-last-child(1) {
+        text-align: right;
+    }*/
+
+    .tab-pane {
+        margin-left: -15px !important;
+    }
+
+    .icons {
+        margin-bottom: 25px;
+    }
+
+    .u {
+        margin-right: 40px;
+    }
+
+    .ShowRemarksValues {
+        width: 350px !important;
+    }
+
+    .tabs-nav a {
+        width: auto;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 4px;
+        display: flex;
+    }
+
+    .tabs-navWeb a {
+        width: auto;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 4px;
+        display: flex;
+    }
+
+    .ShowRemarksValues:last-child {
+        margin-bottom: 20px;
+    }
+
+    .ShowRemarksValues div {
+        padding-left: 15px;
+    }
+
+    .remarkview {
+        width: 350px !important;
+        display: flex;
+    }
+
+    .modal-content {
+        width: 100% !important;
+    }
+
+    .modal-dialog {
+        width: 100% !important;
+        margin-left: 1px;
+        margin-right: 1px;
+        height: 300px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    input[type=date] {
+        width: 100%;
+        padding: 0px;
+    }
+
+    #max {
+        margin-top: 0px;
+        height: 20px;
+        margin-bottom: 0px;
+    }
+
+    #min {
+        margin-top: 0px;
+        height: 20px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+
+    .ee, .ww {
+        margin-top: 0px;
+        padding: 0px;
+    }
+
+    .FromDiv, .ToDiv {
+        width: 20%;
+    }
+
+    #filterText {
+        font-family: open sans,sans-serif;
+        font-size: 11px;
+        /*margin-top: 5px;*/
+        height: 20px;
+        padding: 0px;
+        margin-left: 5px;
+    }
+
+ /*   input[type=text] {
+        width: 100%;
+    }*/
+
+    .filterclose {
+        margin-left: 0px !important;
+    }
+        .col-md-12.horizontal{
+    height: 380px;
+}
+/*.MoreDetails                 {margin-left:520px; background-color:white; float:right;}*/
+.SubTasksMoreDetails {
+    margin-left: 520px;
+    display: none;
+}
+
+.container {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+/*.Sno {
+    text-align: left;
+    display: none;
+}
+
+.SNo {
+    display: none;
+}
+
+h4 {
+    margin-left: 10px;
+}
+
+.DueDate {
+    margin-left: 25px !important;
+    padding-right: 0px;
+    padding-left: 20px;
+}
+
+.Duedate {
+    margin-right: 0px !important;
+    margin-left: 28px !important;
+    min-width: 10%;
+}
+
+.Startdate {
+}
+
+.TaskTitle {
+    margin-left: 20px !important;
+}
+
+.Tasktitle {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0px;
+    min-width: 10%;
+}
+
+.Startdate {
+    display: none;
+}
+
+.StartDate {
+    display: none;
+}
+
+.Taskid {
+    margin-left: 0px;
+    text-align: center;
+}
+
+.TaskId {
+    margin-left: 40px !important;
+}
+
+.TaskDescription {
+    display: none;
+}
+
+.Taskdescription {
+    display: none;
+}
+
+.SubTaskSno {
+    display: none;
+}
+
+.SubTaskid {
+    margin-left: 30px !important;
+    width: 5% !important;
+}
+
+.SubTaskdescription {
+    display: none;
+}
+
+.SubTaskStartdate {
+    display: none;
+}
+
+.SubTaskstatus {
+    display: none;
+}
+
+.SubTasktitle {
+    margin-left: 30px !important;
+}
+
+.SubTaskDuedate {
+    margin-left: 30px !important;
+}
+
+.TaskAssignedto {
+    display: none;
+}
+
+.Taskstatus {
+    display: none;
+}
+
+.TaskStatus {
+    display: none;
+}
+
+.AssignedTo {
+    display: none;
+}
+
+.TaskAssignedto {
+    display: none;
+}
+
+.CreatedBy {
+}
+
+.viewd img {*/
+    /*display: inline-flex;
+
+        margin-left: 5px;*/
+/*}
+
+.CreatedBy {
+    margin-left: 25px;
+    padding-left: 25px;
+}
+
+.Taskcreateby {*/
+    /*margin-left: -18px !important;
+        margin-right: 20px !important;*/
+    /*min-width: 10%;
+}
+
+.Addremarks {
+    width: 500px;
+    margin-left: 100px;
+}
+
+
+.Addcollaborators {
+    text-align: center;
+}
+
+#dropdown {
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+ }
+
+
+}
+
+.MoreDetails {
+    display: none;
+}*/
+/*.sub:hover{
+    color:#337ab7 !important;
+    background-color:white !important;
+
+}*/
+@media screen and (max-width:520px) {
+    #dropdown {
+        /*width: 38% !important;*/
+        margin-top: 10px;
+    }
+    .basicFilterTitle {
+        width: 122px;
+        max-width: 88px;
+    }
+    .myTaskBtn{
+        margin-left:10px !important;
+    }
+    /*.sorting {*/
+        /*margin-top: 0 !important;*/
+        /*margin-left: 10px !important;
+    }*/
+    .Sno {
+        width: 8% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .Taskid {
+        width: 10% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .Tasktitle {
+        width: 30% !important;
+        padding: 0 0 0 3px !important;
+        word-wrap: break-word;
+        font-size: 12px !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical;
+    }
+
+    .Taskstatus {
+        width: 12% !important;
+        padding: 0 !important;
+        /*text-align:left !important;*/
+        font-size: 12px !important;
+    }
+
+    .Duedate {
+        width: 19% !important;
+        padding: 0 0 0 5px !important;
+        font-size: 12px !important;
+    }
+
+    .Taskcreateby {
+        width: 20% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .Taskdescription {
+        display: none !important;
+    }
+
+    .TaskDescription {
+        display: none !important;
+    }
+
+    .Startdate {
+        display: none;
+    }
+
+    .u {
+        margin-right: 0 !important;
+    }
+
+    .StartDate {
+        display: none;
+    }
+
+    .SNo {
+        /*width: 9% !important;*/
+        width: 11% !important;
+        /*margin-left:4px;*/
+        text-align: right !important;
+        padding: 0 !important;
+    }
+
+    .TaskId {
+        width: 13% !important;
+        padding: 0 !important;
+        padding-left: 8px !important;
+    }
+
+    .TaskTitle {
+        /*width: 28% !important;*/
+        width: 40% !important;
+        /*padding: 0 0 0 4px !important;*/
+        padding: 0 0 0 12px !important;
+        text-align: left !important;
+    }
+
+    .TaskStatus {
+        width: 13% !important;
+        padding: 0 !important;
+        padding-left: 5px !important;
+    }
+
+    .DueDate {
+        width: 18% !important;
+        padding: 0 !important;
+    }
+
+    .AssignedTo {
+        /*width: 18% !important;*/
+        display: block !important;
+        width: 20% !important;
+        padding: 0 !important;
+        /*width: 21% !important;*/
+    }
+ 
+
+    .SubTaskSno {
+        width: 8% !important;
+        padding: 0 !important;
+    }
+
+    .SubTaskid {
+        width: 10% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .SubTasktitle {
+        width: 30% !important;
+        padding: 0 0 0 3px !important;
+        /*word-wrap: break-word;*/
+        font-size: 12px !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical;
+    }
+
+    .SubTaskstatus {
+        /*width: 12% !important;*/
+        width: 10% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        /*text-align:left !important;*/
+    }
+
+    .SubTaskDuedate {
+        width: 20% !important;
+        padding: 0 0 0 5px !important;
+        font-size: 12px !important;
+    }
+
+    .TaskAssignedto {
+        /*width: 20% !important;*/
+        display: block !important;
+        width: 28% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        padding-left: 10px !important;
+    }
+
+    .SubTaskdescription {
+        display: none !important;
+    }
+    
+
+    .SubTaskStartdate {
+        display: none;
+    }
+
+    .Taskcreateby {
+        display: none;
+    }
+    
+    .stno {
+        /*width: 4% !important;*/
+        width: 2% !important;
+        font-size: 12px !important;
+    }
+
+    .Tno {
+        /*width: 7% !important;*/
+        width: 6% !important;
+        font-size: 12px !important;
+    }
+    .CreatedBy {
+        display: none;
+    }
+    .basicfilterDiv {
+        width: 98% !important;
+        left: 5px;
+        top: 70px !important;
+        padding: 5px !important;
+    }
+        /* td:nth-last-child(1) {
+        text-align: right;
+    }*/
+        .basicfilterDiv tr td:nth-child(2) {
+            width: 20%;
+        }
+
+        .basicfilterDiv input[type=date] {
+            width: auto !important;
+        }
+
+        .basicfilterDiv input[type=datetime-local] {
+            width: 35% !important;
+        }
+
+        .basicfilterDiv .min, .minDT {
+            margin-left: 2px !important;
+        }
+
+        .basicfilterDiv .max, .maxDT {
+            margin-left: 2px !important;
+        }
+
+    #basicFilterTable tr td {
+        max-width: none !important;
+    }
+    #basicFilterTable{
+        width:100%;
+    }
+
+    .sorting {
+        margin-left: 15px !important;
+    }
+}
+
+@media only screen and (max-width:1201px) {
+    .TaskAssignedto {
+        display: none;
+    }
+
+    .AssignedTo {
+        display: none;
+    }
+
+    .SubTaskdescription {
+        display: none;
+    }
+}
+
+@media only screen and (min-width:481px) and (max-width:1000px) {
+
+    .Taskid {
+        margin-left: 0px;
+        text-align: left;
+    }
+
+    .TaskId {
+        margin-left: 0px;
+    }
+
+    .Taskdescription {
+        display: none;
+    }
+
+    .TaskDescription {
+        display: none;
+    }
+
+    .TaskStatus {
+        margin-left: 0px;
+    }
+
+    .viewd img {
+        /*display: inline-flex;
+        margin-left: 5px*/
+    }
+
+    .CreatedBy {
+    }
+
+    .Taskcreateby {
+        float: right;
+        margin-right: 10px;
+        margin-left: 35px;
+        padding-left: 30%;
+    }
+}

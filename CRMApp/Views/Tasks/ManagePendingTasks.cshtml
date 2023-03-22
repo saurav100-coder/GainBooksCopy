@@ -1,0 +1,1265 @@
+﻿@model CRMApp.Models.CRMTasksMaster
+@{
+    ViewData["Title"] = "PendingTasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string desktop = ".right";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+    int under = ViewBag.under;
+}
+
+@*Added by aslam for multiselect dropdown css*@
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.1.6/sumoselect.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.1.6/jquery.sumoselect.min.js"></script>*@
+
+@*<link href="~/Content/Custom/sumoselect.min.css" rel="stylesheet" />
+<script src="~/scripts/Custom/sumoselect.min.js"></script>*@
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+
+
+@*Added by aslam*@
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+@*Laveena Starts*@
+<link rel="stylesheet" href="~/Content/Custom/managePendingTasks.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+
+@*<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />*@
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+@*<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>*@
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManagePendingTasks.js"></script>
+<script src="~/scripts/Custom/BasicFilter.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+
+@*<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />*@
+@*<script src="~/Scripts/Custom/dropdown.js"></script>*@
+@*<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />*@
+
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+<style>
+    .bootstrap-select > .dropdown-toggle {
+        margin: 10px 0px 0px 2px;
+        font-size: 11px;
+        outline: none;
+        border: none;
+    }
+
+    .mainpanel {
+        width: auto;
+    }
+
+    .close {
+        opacity: 0.8;
+    }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+    .SubTask {
+        color: #333;
+    }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    /*[data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';*/
+    /* hides the tooltip when not hovered*/
+    /*display: none;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 4px 25px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 1.55em;
+            height: 28px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;*/
+    /*place-items: start;*/
+    /*}
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }*/
+
+        
+.select-btn.select-filterDropdown, .select-filterDropdown ~ .list-items{
+    width: auto;
+    margin: 0px 17px;
+    margin-left: 10px;
+}
+
+/*.select-filterDropdown ~ .list-items {
+    width: auto;
+    margin: 0px 17px;
+    margin-left: 10px;
+}*/
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+
+    tr:hover:not(.highlight) td {
+        background-color: transparent;
+    }
+
+    /*.sub:hover {
+        background-color: #3c8dbc;
+        color: white;
+    }*/
+
+    .u {
+        padding: 18px;
+        padding-right: 20px;
+    }
+
+    .collapse {
+        background-color: transparent;
+        width: 100%;
+        padding-top: 10px;
+        padding: 10px;
+        margin-right: 0px;
+        margin-right: 3px;
+        padding-right: 10px;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+    .arrowicon .fa-caret-up{
+        height:12px;
+        margin-top:-2px;
+    }
+
+    .asidenav {
+        height: 87%;
+    }
+
+    .menu {
+        height: 106%;
+    }
+
+    					   
+/*.select-btn{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1) !important;
+    width:260px;*/
+    /*margin:0 auto;*/
+/*}
+.select-btn .btn-text{
+    font-size: 17px;
+    font-weight: 400;
+    color: #333;
+}
+.select-btn .arrow-dwn{
+    display: flex;
+    height: 21px;
+    width: 21px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50%;
+    background: #6e93f7;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.select-btn.open .arrow-dwn{
+    transform: rotate(-180deg);
+}*/
+/*.list-items{
+    height:260px;
+    overflow-y:scroll;
+    position: relative;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    width:260px;
+}
+.select-btn.open ~ .list-items{
+    display: block;
+}
+.list-items .item{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 40px;
+    cursor: pointer;
+    transition: 0.3s;*/
+  /*  padding: 0 15px;*/
+   /* border-radius: 8px;
+}
+.list-items .item:hover{
+    background-color: #e7edfe;
+}
+.item .item-text{
+    font-size: 15px;
+    font-weight: 400;
+    color: #333;
+    width: 100%;
+    height: 100%;
+    padding-top: 9px;
+    padding-left: 20px;
+}
+.item .checkbox {*/
+       /* display: flex;
+        align-items: center;*/
+        /* justify-content: center; */
+        /* height: 16px; */
+        /*height: 100%;*/
+        /* width: 16px; */
+        /*border-radius: 4px;*/
+        /* margin-right: 12px; */
+        /* border: 1.5px solid #c0c0c0; */
+      /*  transition: all 0.3s ease-in-out;
+        padding-left: 30px;
+        margin-top:7px;
+}
+
+    .main-item {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        height: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 0 10px;
+        border-radius: 8px;
+    }
+
+.button-list{
+    list-style: none;
+    text-align: center;
+     margin-top: 10px;
+}
+.applybtn{
+    background-color:#6e93f7;
+    color: white;
+    border: none;
+    padding: 4px 30px;
+    border-radius: 5px;
+}
+.cancelbtn{
+    background-color:#f24c6d;
+    color: white;
+    border: none;
+    padding: 4px 30px; 
+    border-radius: 5px;
+    margin:5px;
+}*/
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+
+    .DateBtn {
+        height: 26px;
+        margin-top: 10px;
+        border-radius: 0px;
+        padding: 3px 6px 6px 6px;
+        width: 29px;
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+
+    .content {
+        height: 480px;
+        padding:0 !important;
+
+    }
+
+    .subSelected {
+        background-color: orange !important;
+    }
+
+    option {
+        transform: translateY(1);
+        transition: transform 0.5s ease;
+    }
+
+    /*tr:hover:not(.highlight, .subSelected) td {
+        background-color: lightblue;
+    }*/
+
+    .arrowicon {
+    display: flex;
+    flex-direction: column;
+}
+/*.sorting {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 32px;
+    align-items: center;
+    width: 110px;
+    margin-top: 0px !important;
+    padding: 2px 8px !important;
+    margin-left: 30px;
+}
+*/
+</style>
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+<div class="con">
+    <div class="row mainWrapper">
+        <div class="left">
+            <div class="calHeightIcon">
+                <div class="icon-div">
+                    <div class="search2">
+                        <a class="top btn-CreateTask" title="Create Task" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" style="text-align:left;">
+                            <img src="~/images/icon-plus.png" />
+                        </a>
+                        <a class="top" title="Refresh" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" onclick="reloadGrid()">
+                            <img src="~/images/icon-refresh.png" />
+                        </a>
+                        <a class="top" title="Import" data-placement="bottom" data-toggle="tooltip" data-trigger="hover">
+                            <img src="~/images/icon-import.png" />
+                        </a>
+                        <a class="top" title="Export" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" onclick="ExportPendingTasks();">
+                            <img src="~/images/icon-export.png" />
+                        </a>
+                        <a class="top" title="Add Tags" data-placement="bottom" data-toggle="tooltip" data-trigger="hover"  onclick="ShowMultiTaskAddTagsModal();">
+                            <img src="~/images/tag.png" />
+                        </a>
+                        <a class="top" title="Filter" data-placement="bottom" data-toggle="tooltip" data-trigger="hover"  onclick="ShowFilters();">
+                            <img src="~/images/icon-filter.png" />
+                        </a>
+                        <a class="top" title="Delete" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" >
+                            <img src="~/images/icon-delete.png" />
+                        </a>
+                        <a class="top" title="Close Task" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" onclick="ShowMultiTaskCloseModal();">
+                            <img src="~/images/icon-close.png" />
+                        </a>
+
+                        <div class="confirmationBox MultiClose" id="MultiTaskCloseModal">
+                            <div style="padding-bottom: 8px;">
+                                <p>Do you want to close these tasks?</p>
+                            </div>
+                            <input type="hidden" name="taskKeys" value="" id="taskKeys" />
+                            <div>
+                                <span type="button" Class="btn btn-primary btnYes" onclick="CloseMultipleTask()"> Yes </span>
+                                <span type="button" class="btn btn-default btnNo"  onclick="CloseDiv('#MultiTaskCloseModal')"> No</span>
+                            </div>
+                        </div>
+
+                        @*<div class="select-btn" id="" style="display:none;">
+                           <div style="width:90%">
+                             <div class="main-item">
+                                <span class="checkbox" style="margin-right: 12px; margin-top:0; margin-bottom:0;">
+                                    <input type="checkbox" name="" id="" class="select-checkbox">
+                                </span>
+                                <input type="text" placeholder="Search...." id="myInput" onkeyup="filterFunction()">
+                             </div>
+                              <span class="btn-text">Select Tags</span>
+                           </div>
+                           <span class="arrow-dwn"><i class="fa fa-chevron-down"></i> </span>
+                        </div>
+                        <div class="list-items">
+                         @Html.List_Search_Multi("multiTags", "68", "-Select Tags-", 0,"", new {@class = "lims"}, false)
+                          <div class="button-list">
+
+                            <p onclick="cancel()" class="cancelbtn">Cancel</p>
+                            <p onclick="apply()" class="applybtn">Apply</p>
+                          </div>
+                       </div>*@
+
+                        <div class="confirmationBox" id="MultiTagsAddModal">
+                            <input type="hidden" name="taskids" value="" id="taskids" />
+                            @*@Html.List_Search("ddlmultiTags", "68", "-Select Tag-", 0,"", new {@class = "form-control"}, false, true, true)*@
+                            @Html.List_Search_Multi("ddlmultiTags", "68", "-Select Tags-", 0,"", new {@class = ""}, false)
+                        </div>
+                    </div>
+                   
+
+                    <input type="text" id="taskidFilter" class="quickSearch" onkeyup="searchByTaskId(event);"  placeholder="Search by TaskId">
+                  
+                      @*back color 428bca1f   V-nav-color-#0a243e *@
+                    <div id="dropdown" class="search" style="display: inline-flex;margin-left: 0px; padding-left:10px; position:relative;align-items: center;">
+                        @*<select class="" id="filter" style="cursor: pointer; height: 26px; top: 10px; padding-left: 5px; width: auto; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 13px; ">
+                            <option value="0">Filter By</option>
+                        </select>*@
+
+                        <p class="basicFilterTitle"  onclick="ShowCloseBasicFilter();"><span>Select Filter</span> <i class="fa fa-caret-down"></i></p>
+                        <div id="filterDiv" class="basicfilterDiv">
+                            <table id="basicFilterTable">
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                    <td colspan="3" style="text-align:center">
+                                        <div id="search1" onclick="ApplyBasicFilters();" class="btn modalbutton ">Apply<i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                                        <button type="button" class="btn modalbuttonsecondary" onclick="ShowCloseBasicFilter();">Close</button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                       
+                      @*Now basic filter is dynamic type so i commented all these divs*@
+                      @*<div id="startDateC" style="display: none;  " class="filterDiv">
+                            <div class="datedisplay" style="display: flex;">
+                                <div class="FromDiv" style="margin-left:15px;">
+                                    <label class="ee" style="margin-bottom: -5px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                                    <input type="date" id="min" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+
+                                </div>
+                                <div class="ToDiv" style="margin-left: 15px;">
+                                    <label class="ww" style="margin-bottom:0px; margin-right: 0px;  font-size: 10px; color: #337ab7; ">  To </label>
+                                    <input type="date" id="max" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div id="search2" onclick="StartDateSearch();" class="searchButton date" style="margin-left: 0px; margin-top: 0px; place-self: center; "><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+                        <div id="dueDateC" style="display: none;  " class="filterDiv">
+                            <div class="datedisplay" style="display: flex;">
+                                <div class="FromDiv" style="margin-left:15px;">
+                                    <label class="ee" style="margin-bottom: -5px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                                    <input type="date" id="min" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div class="ToDiv" style="margin-left: 15px;">
+                                    <label class="ww" style="margin-bottom:0px; margin-right: 0px; font-size: 10px; color: #337ab7; ">  To </label>
+                                    <input type="date" id="max" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div id="search2" onclick="DueDateSearch();" class="searchButton date" style="margin-left: 0px; margin-top: 0px; place-self: center; "><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+                        <div id="TextC" class="filterDiv" style="display: none; width: auto;">
+                            <div style="display:flex">
+                                <input type="text" id="filterText" class="" placeholder="Type to search" style="height:26px; padding-left:5px; margin-left:20px; width:120px; border:none; border-bottom:1px solid #ddd; padding-bottom:0px; outline:none; font-size:11px;" />
+                                <div id="search1" onclick="DoSearch();" class="searchButton"><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+                        <div id="StatusC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("StatusFilter", "49", "-Select Status-",0,"", new {.class = "", .style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px;  border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, false)
+                            </div>
+                        </div>
+                        <div id="assignedtoC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("assignedTo", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0,, new {.class = "", .style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)
+                            </div>
+                        </div>
+                        <div id="createdByC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("CreatedBy", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0,, new {.class = "", .style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true                                
+                            </div>
+                        </div>
+                        <div id="teamEmployeeC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("teamEmployee", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null) and under=" & under & "", 0,, new {.class = "", .style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)
+                            </div>
+                        </div>
+                        <div id="tagsC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("Tags", "68", "-Select Tag-", 0,, new {.class = "", .style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, false, true)
+                                <div id="btnTagSearch" onclick="tagSearch();" class="searchButton" style="display:none;"><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+                        <div id="priorityC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("Priority", "78", "-Select Priority-", 0,, new {.class = "", .style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, false, true)
+                                <div id="btnPrioritySearch" onclick="prioritySearch();" class="searchButton" style="display:none;"><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>
+                        <a class="closebn filterclose" id="closefilter" onclick="removeFilter()" title="" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" data-original-title="Remove Filter" style="display:none;margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;margin-top: 9px;">&times;</a>
+                       *@
+
+
+                        <div id="FilterText" class="" style="float:left; display:none; margin-top: 10px;margin-left:15px;font-size:13px;border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+
+                            <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                            <a class='' id='' onclick='ReloadGrid();'>
+                                <i class='glyphicon glyphicon-remove'></i>
+                            </a>
+                        </div>
+                        <button onclick="getMyTasks();" class="btn btn-default  myTaskBtn">MyTasks</button>
+                        @if(ViewBag.showAllTasks=="Y")
+                        {
+                            <button onclick="getAllTasks();" class="btn btn-default myTaskBtn">AllTasks</button>
+                        }
+                        
+                        @*<button type="button" onclick="startDateSort(this)" class="myTaskBtn sorting"><span>StartDate</span><span class="arrowicon"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></button>*@
+                        @*<button type="button" onclick="lastActionTimeSort(this)" class="myTaskBtn sorting"><span>LastActionTime</span><span class="arrowicon"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></button>*@
+                    </div>
+
+
+
+                    <div class="search1">
+                        <div class="g">
+                            <label id="info">0-00 of 00 </label>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Previous" id="Prev" data-original-title="Newer" >
+                                <i class="fa fa-angle-left" style="font-size:23px"></i>
+                            </a>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Next" id="Next" data-original-title="Older" >
+                                <i class="fa fa-angle-right" style="font-size:23px"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="resultDiv" style="display:none;">
+                    <div class="resultContent">
+                        <div class="result-msg">
+                        </div>
+                        <p class="clearFilter" onclick="removeFilter();">Clear Filter</p>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <input type="hidden" name="Logintype" id="Logintype" value="@httpContextAccessor.HttpContext?.Session.GetString("Logintype")" />
+                <input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+            </div>
+            <div id="subDiv">
+                <label id="subDivLable" onclick="Allselection();"></label>
+            </div>
+
+            <div class="col-md-12 text-center Table-Dive">
+                <div class="calHeightTaskBar">
+                    <div class="TaskBar tr bg-primary" id="taskb">
+                        <input type="checkbox" id="selectall" class="css-checkbox" name="selectall" />
+                        <div class="SNo td tbHead" style="width: 6%; text-align: right; padding: 0 10px 0 8px;"><b>SNo.</b></div>
+                        <div class="TaskId td tbHead" style="width: 5%; padding: 0 8px 0 0px;"><b>TaskId</b></div>
+                        @*<div class="TaskTitle td tbHead" style="width: 20%;padding: 0 8px 0 5px;"><b>Title</b></div>*@
+                        <div class="TaskTitle td tbHead" style="width: 23%;padding: 0 8px 0 13px;"><b>Title</b></div>
+                        @*<div class="TaskDescription td tbHead" style="width: 20%; padding: 0 8px 0 8px;"><b>Description</b></div>*@
+                        <div class="TaskPriority td tbHead" style="width:7%; padding: 0 8px 0 5px;"><b>Priority</b></div>
+                        <div class="StartDate td h tbHead" style="width: 8%;" onclick="startDateSort(this)"><b>StartDate</b><span class="arrowicon" style="float:right; margin-right:10px;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></div>
+                        <div class="DueDate td h tbHead" style="width: 8%; padding: 0 8px 0 8px;"><b>DueDate</b></div>
+                        <div class="LastActionTime td h tbHead" style="width: 10%;" onclick="lastActionTimeSort(this)"><b>LastActionTime</b><span class="arrowicon" style="float:right;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></div>
+                        <div class="AssignedTo h td tbHead" style="width: 10%; padding: 0 8px 0 8px;"><b>AssignedTo</b></div>
+                        <div class="CreatedBy td tbHead" style="width: 11%;  padding: 0 6px 0 6px;"><b>CreatedBy</b></div>
+                        <div class="TaskStatus td h tbHead" style="width: 11%; padding: 0 8px 0 5px;"><b>Tag</b></div>
+                        <div class="TaskStatus td tbHead" style="width: 6%; padding: 0 8px 0 5px;"><b>Status</b></div>
+                        
+                        @*<div class="NextActionDate col-md-1" style=" width: 15%; text-align: center; padding-left: 25px"><b>Next Action Date</b></div>*@
+                        
+                    </div>
+                </div>
+                <div id="loading" style="padding:10px; margin-top:10%;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div></div>
+                <div class="" id="example"></div>
+            </div>
+        </div>
+
+        @*Right side Section*@
+        <div class="right">
+            <div class="detailPane">
+                <div class="row detailpaneIconrow">
+                    <i class="fa fa-arrow-right" id="RightShift" aria-hidden="true"></i>
+                    <div class="save">
+                        @*<span id="CloseTask" onclick="ShowCloseTaskModal('@desktop');"><img src="~/images/close-task-150.png" alt="CloseTask" class="detailpaneIcon" style="width:15px;"></span>
+                        <span id="ShareLink" onclick="CreateLink('@desktop');"><img src="~/images/share-icon.png" alt="Share" class="detailpaneIcon" style="width:15px;"></span>
+                        <span id="addSubTask" onclick="AddSubTask('@desktop');"><img src="~/images/new-task1.png" alt="CreatesubTask" class="detailpaneIcon" style="width:19px;"></span>
+                        <span id="editIcon" onclick="ShowEditTask('@desktop');"><img src="~/images/edit-icon.png" alt="Edit" class="detailpaneIcon" style="width:16px;margin-right:0px"></span>
+                        <button id="SaveTask" onclick="SubmitEditTask('@desktop');" class="btn button btnSave" type="button">Save</button>
+                        <span id="CancleEdit" onclick="CancleEditTask('@desktop');" style="display:none;color: #808080; padding-top:2px;"><img src="~/images/close.png" alt="Cancle" class="detailpaneIcon" style="width:13px;margin-right:0px"></span>*@
+
+                        <a id="CloseTask" onclick="ShowCloseTaskModal('@desktop');"><img src="~/images/i-close.png" alt="CloseTask" class="detailpaneIcon tooltips"><span class="tooltiptext closetask">Close Task</span></a>
+                        <a id="ShareLink" onclick="CreateLink('@desktop');"><img src="~/images/icon-share.png" alt="Share" class="detailpaneIcon tooltips" ><span class="tooltiptext share">Share</span></a>
+                        <a id="addSubTask" onclick="AddSubTask('@desktop');"><img src="~/images/copy.png" alt="CreatesubTask" class="detailpaneIcon tooltips" ><span class="tooltiptext createsub">Add subtask</span></a>
+                        <span id="editIcon" onclick="ShowEditTask('@desktop');"><img src="~/images/edit2.png" alt="Edit" class="detailpaneIcon tooltips" style="margin-right:0px; width:22px; margin-top:-2px;"><span class="tooltiptext edit">Edit</span></span>
+                        @*<button id="SaveTask" onclick="SubmitEditTask('@desktop');" class="btn button btnSave" type="button">Save</button>*@
+                        <span id="SaveTask" onclick="SubmitEditTask('@desktop');" style="display: none;"><img src="~/images/save.png" alt="Save" class="detailpaneIcon tooltips"><span class="tooltiptext saveedit">Save</span></span>
+                        <span id="CancleEdit" onclick="CancleEditTask('@desktop');" style="display:none;"><img src="~/images/icon-cancel.png" alt="Cancle" class="detailpaneIcon tooltips" style="margin-right:0px"><span class="tooltiptext cancel">Cancel</span></span>
+
+                        <div class="confirmationBox" id="TaskCloseModal">
+                            <div style="padding-bottom: 8px;">
+                                <p>Do you want to close this task?</p>
+                                <input type="hidden" name="destinationName" value="" id="destinationName" />
+                            </div>
+                            <div>
+                                <span type="button" Class="btn btn-primary btnYes" onclick="CloseTask()"> Yes </span>
+                                <span type="button" class="btn btn-default btnNo" onclick="CloseDiv('#TaskCloseModal')"> No</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ShareBox">
+                    <label>Share Link</label> <span class="closebn" onclick="this.parentElement.style.display = 'none';">&times;</span>
+                    <div class="Box">
+                        <input type="text" class="shareLinkTextBox" />
+                        <button id="copylinkbtn" class="btn btn-primary copyBtn" type="button" data-clipboard-target="#downloadlink">Copy link</button>
+                    </div>
+                </div>
+
+                @*TopNavBar in Detail pane*@
+                <div class="topnavbar">
+                    <a class="active" onclick="homedata()" id="homedata">Home</a>
+                    <a class="unactive" onclick="progressdata()" id="progressdata">Progress</a>
+                    <a class="unactive" onclick="edithistorydata()" id="edithistorydata">History</a>
+                    <a class="unactive" onclick="collaboratordata()" id="collaboratordata">Collaborator</a>
+                    <a class="unactive" onclick="classificationdata()" id="classificationdata">Classification</a>
+                </div>
+
+                @*Detail Show or Edit Section*@
+                <section class="editSection editSectiondata" id="details">
+                   
+                    <div class="x-id">
+                        
+                        <p><span id="tasktitle"></span> <span>( Id -</span> <span id="taskid"></span><span>)</span></p>
+                        <span style="display:none" id="taskkey"></span>
+                        @*<span style="float:right; font-weight:normal; font-size:12px;" id="subtask"></span>*@
+                    </div>
+
+                        <div class="x-title">
+                           
+                            <textarea id="txttasktitle" class="x-TextArea" rows="2" cols="10"> </textarea>
+                        </div>
+                   
+
+                        <div class="x-desc">
+                            @*<span id="spc">Task Description</span>*@
+                            <textarea id="txttaskdescription" class="x-TextArea" rows="4" cols="10"></textarea>
+                            <p id="taskdescription"></p>
+                        </div>
+
+                        <div class="dates">
+                            <p>Start  <span id="startdate"></span></p>
+                            <p>Due  <span id="duedate"></span><span style="float: right;"><input type="datetime-local" id="dtduedate" name="dtduedate" class="x-datePicker"></span></p>
+                            <p>
+                                Status
+                                <span id="taskstatus"></span>
+                                <span style="float:right;">
+                                    @Html.List_Search("ddlTaskStatus", "49", "- Select Status -",0 ,"", new {@class = "x-select"}, false)
+                                </span>
+                            </p>
+                            <p>
+                                TaskPriority
+                                <span id="taskPriority"></span>
+                                <span style="float:right;">
+                                    @Html.List_Search("ddlTaskPriority", "78", "- Select Priority -", 0,"", new {@class = "x-select"}, false)
+                                </span>
+                            </p>
+
+                            @*<p>Next Action Date <span id="mNextActionDate"></span><span style="float:right; font-size:10px; border:1px; font-weight:lighter;"><input type="date" id="dtmNextActionDate" name="dtmNextActionDate" width="1" style="display: none;"></span></p>*@
+                            <p>
+                                Assigned To
+                                <span id="assignedto"></span>
+                                <span style="float:right;">
+                                    @Html.List_Search("ddlAssignedto", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)",0 , "", new {@class = "x-select"})
+                                </span>
+                            </p>
+                            <p>Created By<span id="creadtedby"></span></p>
+                        </div>
+
+</section>
+
+                @*Remark Add Section*@
+                <section class="AddRemarkDetailView" id="remarks">
+                    <div class="collapse-progress-div">
+                        <div class="remarklabel">Progress Notes</div>
+                        <form id="frmRemarkRight">
+                            <textarea id="txtRemark"></textarea>
+                            <div class="row">
+                                <input type="file" name="remarkfile" id="remarkfile" class="x-fileInput">
+                                @*<i class="fa fa-paperclip attach" aria-hidden="true"></i>*@
+                                <button class="btn btnAddRemark " type="button" onclick="SubmitTaskRemarkNew('@desktop');">Add</button> @*Add Progress Note*@
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                @*Tab Section*@
+                <section class="tabSection">
+                    <ul class="tabs-navWeb row">
+                        <li class="" id="list1">
+                            <a href="#remarkTab" rel="nofollow">Progress Notes</a>
+                        </li>
+                        <li class="tab-activeWeb " id="list2">
+                            <a href="#Webtab-2" rel="nofollow">Assignment History</a>
+                        </li>
+                        <li class="tab-activeWeb " id="list4">
+                            <a href="#taskeditTab" rel="nofollow" onclick="showEditHistoryTab();" id="list3">Edit History</a>
+                            <h3 id="edithead">Edit History</h3>
+                        </li>
+                    </ul>
+                    <div class="tabs-stageWeb bgImage">
+                        <div class="div" id="remarkTab">
+                            <div id="boxLoading">
+                                <div colspan="5">
+                                    <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="AllRemarks"></div>
+                        </div>
+
+                        <div class="div" id="Webtab-2" style="display: none;"></div>
+
+                        <div class="div" id="taskeditTab" style="display: none;">
+                            <div id="boxLoading">
+                                <div colspan="5">
+                                    <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="allActivity"></div>
+                        </div>
+                    </div>
+                </section>
+
+                @*Collborator Section*@
+                <div class="SectionCollaborators" id="collaborators">
+                    <div class="row">
+                        @*<i class="fa fa-users x-icon"></i>*@
+                        <img src="~/images/icon-Collaborators.png" class="icon-image" />
+                        <span class="x-heading">Collaborators</span>
+                        <span id="AddCollabFromList">
+                            @Html.List_Search("ddlCollab", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)",0 , "", new {@onChange = "SubmitCollaboratorsNew( '" + desktop + "');", @class = "x-select", @style = "width:auto!important;vertical-align: text-bottom;"})
+                            @*<span class="closebn closeAdd" id="closeAddCollab" onclick="closeAddCollab('@desktop')">&times;</span>*@
+                            <img src="/images/icon-cancel.png" alt="Cancle" class="deleteCollabIcon closeAdd"id="closeAddCollab" onclick="closeAddCollab('@desktop')" @*style="margin-right:12px;margin-top:4px;"*@>
+                        </span>
+                        <span id="AddCollab" class="addIcon" onclick="AddCollaboratorsNew('@desktop');">
+                            @*<i class="fa fa-user-plus"></i>*@
+                            <img src="~/images/add-collaborator.png" class="icon-image"/>
+                        </span>
+                    </div>
+                    <div class="boxx">
+                        <div id="boxLoading">
+                            <div colspan="5">
+                                <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="AllCollab" class="bgImage"></div>
+                    </div>
+                </div>
+
+                @*Tags Section*@
+                <div class="task-classification" id="classification">
+                    <div class="row">
+                        @*<i class="fa fa-tag x-icon"></i>*@
+                        <img src="~/images/tag.png" class="icon-image" />
+                        <span class="x-heading">Classification</span>
+                        <span id="AddTagFromList">
+                            @Html.List_Search("ddlTags", "68", "-Select Tag-",0,"", new {@onChange = "SubmitTagsNew('" + desktop + "');", @class = "x-select", @style = "width:auto!important;vertical-align: text-bottom;"}, false)
+                            @*<span class="closebn closeAdd" id="closeTag" onclick="closeTag('@desktop')">&times;</span>*@
+                            <img src="/images/icon-cancel.png" alt="Cancle" class="deleteCollabIcon closeAdd" id="closeTag" onclick="closeTag('@desktop')">
+                        </span>
+                        <span id="PlusTag" class="addIcon" onclick="AddTagsNew('@desktop');">
+                        @*    <i class="fa fa-plus"></i>*@
+                            <img  src="~/images/classification.png" class="icon-image iconAddTag"/>
+                        </span>
+                    </div>
+                    <div class="boxx">
+                        <div id="boxLoading">
+                            <div colspan="5">
+                                <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tag-container bgImage" id="tag-container"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            @*asideNav*@
+            <section class="asidenav">
+                <nav class="menu">
+                    <a href="#" id="detailtop" onclick="asidenavActive('#detailtop', '#details')" class="menu__item menu__item--active asidenav-tab">
+                        @*<i class="fa fa-home"></i>*@
+                        <img src="~/images/icon-home.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="remarktop" onclick="asidenavActive('#remarktop', '#remarks')">
+                        @*<i class="fa fa-envelope" aria-hidden="true"></i>*@
+                        <img src="~/images/icon-progress note.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="collabtop" onclick="asidenavActive('#collabtop', '#collaborators')">
+                        @*<i class="fa fa-users"></i>*@
+                        <img src="~/images/icon-Collaborators.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="tagtop" onclick="asidenavActive('#tagtop', '#classification')">
+                        @*<i class="fa fa-tags"></i>*@
+                        <img src="~/images/tag.png" />
+                    </a>
+                </nav>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<input type="hidden" id="type2" value="@ViewBag.Message" />
+<div class="modal fade" id="Remark">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close">*@@*<span class="close">&times;</span>*@
+                <span class="close" data-dismiss="modal" style="padding: 6px 12px 10px 12px; font-size: 25px;width: 54px;height: 46px; text-align: center;">&times;</span>
+
+            </div>
+
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; margin-top:0px;" class="modal-title"> </h4>
+                <div id="myRemark" class="col-md-12">
+                    @*<form Class="form-horizontal" action="@Url.Action("AddTasksRemark")" role="form" method="post" id="RemarkForm" enctype="multipart/form-data" style="margin-top:0px;">*@
+                    <form Class="form-horizontal" role="form" method="post" id="RemarkForm" enctype="multipart/form-data" style="margin-top:0px;">
+                        @*@Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {.class = "text-danger"})*@
+                        <p class="text-center text-success">@TempData["Message"]</p>
+                        <br />
+                        @*<div Class="" style="margin-bottom:25px">*@
+                        <div Class="" style="margin-bottom:10px">
+                            @* Added by Shweta*@
+                            <input type="hidden" name="taskId" id="RemarkTaskId" value="" />
+                            @*<Label for="inputEmail1"-+ class="col-sm-3 control-label" style="margin-top:25px; text-align:left">Remark</Label>*@
+                            <Label for="inputEmail1" -+ class="col-sm-3 control-label" style="margin-top:10px; text-align:left">Remark</Label>
+                            <textarea cols="30" rows="4" id="RemarkText" name="Remark" style="width:234px; margin-left:15px"></textarea>
+                        </div>
+                        @*<div Class="" style="margin-bottom:40px">*@
+                        <div Class="" style="margin-bottom:10px">
+                            <label class="col-sm-3 control-label" style="padding-top:0px; padding-right:0px; text-align:left">Upload Document</label>
+                            <input type="file" name="file1" id="file1" class="col-sm-6" style="margin-bottom:10px;">
+                            <Button type="button" Class=" btn btn-primary" onclick="SubmitTaskRemark();" style="margin-right: 12px; margin-left: 15px; padding: 0px; width: 102px; height: 26px; margin-top: 15px;">Submit</Button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; margin-bottom:40px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="LoaderOverlay">
+    <div class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px"></div>
+</div>
+
+<div class="modal fade" id="TaskCollaborators">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                <span class="close" data-dismiss="modal" style="padding: 6px 12px 10px 12px; font-size: 25px;width: 54px;height: 46px;text-align: center;">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; font-size:18px; margin-top:0px; margin-bottom:20px; margin-left: 40px; " class="modal-title"> Add Collaborators </h4>
+                @*<hr style="margin-top:10px; margin-bottom:30px; width:80%" />*@
+                <div id="myCollaborators" class="col-md-12">
+
+                    <div class="container-fluid ">
+                        <div class="row">
+                            <div>
+                                <form Class="form-horizontal" action="@Url.Action("AddTaskCollaborators")" role="form" method="post" id="CollabForm">
+                                    <input type="hidden" name="PTask" id="PTask" value="">
+                                    <input type="hidden" name="Taskkey" id="Taskkey" value="">
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                                    <div class="form-group text-center">
+                                        <label class="col-sm-4 control-label" style="padding-top:0px">Add Collaborator</label>
+                                        @Html.List_Search("collaboratorId", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:202px; margin-left: 130px;"})
+                                    </div>
+
+                                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                                        <Button type="button" Class="btn btn-primary" onclick="SubmitTaskCollaborator(this);" style="margin-right:25px; margin-top:20px">Submit</Button>
+                                        @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default" style="margin-right:50px; margin-top:20px">Cancel</a>*@
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px; position:fixed">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="TaskClose">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                @*<h4 style="text-align:center; font-size:18px; margin-top:0px;" class="modal-title"></h4>*@
+                <div id="TaskClosedContent" class="col-md-12"></div>
+                @*<div class="form-group text-center" style="clear:both; margin:0px 0px 10px 50px">
+                        <a  Class="btn btn-primary" data-dismiss="modal" style="margin-top:20px; width:66px; margin-right:30px">Ok</a>
+                    </div>*@
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:15px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EmployeeTasks">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; font-size:18px; margin-top:0px;" class="modal-title">Select Team Member</h4>
+                <hr style="margin-top:10px; margin-bottom:30px; width:80%" />
+                <form Class="form-horizontal" role="form" method="post" id="EmployeeTasks">
+                    <input type="hidden" name="PTask" id="PTask" value="">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="padding-top:0px">Select Employee</label>
+                        @Html.List_Search("EmployeeId", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0, "", new {@onChange = "", @class = "form-control input-sm", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:202px"})
+                    </div>
+
+                    <div Class="text-center" style="margin:20px 0px 10px 50px">
+                        <Button type="submit" Class="btn btn-primary" style="margin-right:15px; margin-top:20px">Submit</Button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:50px; margin-top:20px"> Cancel </button>
+                        @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default">Cancel</a>*@
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CreateTasks">
+    <div class="modal-dialog" role="form" style="width:30%">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close">*@@*<span class="close">&times;</span>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 class="modal-title"> </h4>
+
+                <div id="CreateCRMTasks" class="col-md-12" style="padding-left:0px">
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="CreateSubTasks">
+    <div class="modal-dialog" role="form" style="width:350px">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close">*@@*<span class="close">&times;</span>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 class="modal-title"> </h4>
+
+                <div id="CreateCRMSubTasks" class="col-md-12" style="padding-left:0px">
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DeferTask">
+    <div class="modal-dialog" role="form" style="width:350px">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close">*@@*<span class="close">&times;</span>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 class="modal-title"> </h4>
+
+                <div id="DeferTask" class="col-md-12" style="padding-left:0px">
+                    <div class="dateTime">
+                        <label> Select Date </label>
+                        <input id="datetimepicker" name="NextActionDate" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ViewCollaborator">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content" style="width:400px; margin-left:100px;min-height:210px;">
+            <div class="modal-header" style="border:none; padding:0px">
+                @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom:0px; padding-top:0px;">
+                <h4 style="text-align:center; font-size:22px; margin-top:0px; margin-bottom:15px" class="modal-title">Collaborators </h4>
+                <div class="col-md-12" style="height:30px; margin-bottom:8px">
+                    <div class="col-md-3" style="margin-top:5px;margin-top: 5px;width: 110px;"><b>Sno.</b></div>
+                    <div class="col-md-9" style="padding-left: 0px;width: 170px;margin-top:5px;text-align:left;padding-right: 30px;"><b>Employee Name</b></div>
+                </div>
+                <div id="loading1">
+                    <div colspan="8" style="padding:0px"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div>
+                </div>
+                @*<span class="close" onclick="popoverClose();" style="font-size:14px; text-align:right; padding-left:5px;"> &times; </span>*@
+                @*<hr style="margin-top:10px; margin-bottom:30px; width:80%" />*@
+                <div id="ShowCollaborators" class="col-md-12"></div>
+
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade ShowRemark" id="ViewRemarks">
+    <div class="modal-dialog" role="form" style="width:500px">
+        <div class="modal-content" style="width: 550px; height: auto; overflow-y: scroll; overflow-x: hidden; ">
+            <div class="modal-header" style="border:none; padding:0px">
+
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body " style="padding-bottom: 10px; padding-top: 0px; margin-bottom: 5%; height:500px">
+                <h4 style="text-align: center; font-size: 18px; margin-top: 0px; margin-bottom: 15px; " class="modal-title">Remarks</h4>
+                <div class="col-md-6 remarkview" style="display: flex; height: 25px; color: #325faf; padding-left: 0px; margin-bottom: 15px; background-color: white; position: absolute; z-index: 10; width: 730px;">
+                    <div class="col-md-1" style="text-align: center;padding-top:10px; margin-bottom:5px;"><b>Sno.</b></div>
+                    <div class="col-md-2" style="text-align: center; padding-left: 20px; padding-top: 10px; margin-bottom: 5px;"><b>Remark</b></div>
+                    <div class="col-md-1" style="text-align: center; padding-top: 10px; margin-bottom: 5px; padding-left: 0px; padding-left: 0px;"><b>Date</b></div>
+                    <div class="col-md-1" style="padding-left: 10px; text-align:center;padding-top:10px;margin-bottom:5px;"><b>Created by</b></div>
+                    <div class="col-md-1 filename" style="text-align:center; padding-top:10px;margin-bottom:5px;"><b>File Name</b></div>
+
+                </div>
+                @*<div id="loading1">
+                        <div colspan="8" style="padding:0px"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div>
+
+
+                    </div>*@
+
+                <div class="ShowRemark col-md-6" id="RemarkModalContent" style="margin-top: 20px;  height: 550px"></div>
+
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+
+<!--new design-->
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 2px; width: 670px;">
+            <div class="modal-body" style="height: 400px;  overflow-y:scroll;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            <div id="addfilter" onclick="AddFilters();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer;">New Filter <i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            <div id="addsortOptions" onclick="AddSortingOptions();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer; ">New Sort Option<i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                @*<div id="clearFilters" onclick="removeFilter2();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>*@
+                <div id="clearFilters" onclick="removeFilter();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>
+                <div id="search1" onclick="ApplyFilters2();" class="btn modalbutton ">Apply <i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal">Close</button> @*close modal popup*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<div class="modal fade" id="TaskCloseModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to Close This Task?</p>
+                <input type="hidden" name="destinationName" value="" id="destinationName" />
+            </div>
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="CloseTask()"> Close </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<div class="modal fade" id="MultiTaskCloseModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <div style="text-align: center;">
+                <p>Do you want to Close These Task?</p>
+            </div>
+            <input type="hidden" name="taskKeys" value="" id="taskKeys" />
+            <div Class="text-center" style="margin:1.25em 0px 0.625em 3.125em">
+                <Button type="button" Class="btn btn-primary" style="background-color: #105faf; margin-right: 8px; margin-top: 1.25em " onclick="CloseMultipleTask()"> Close </Button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right:3.125em; margin-top:1.25em"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+@*<div class="modal fade" id="MultiTagsAddModal">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content modal-body">
+            <span class="close" data-dismiss="modal">&times;</span>
+            <h4 class="modal-title" style="text-align: center;padding-top: 10px;padding-left: 30px;"></h4>
+            <input type="hidden" name="taskids" value="" id="taskids" />
+            <div style="display:flex;justify-content: center;align-items: center;height:100px;">
+                <label style="margin-top:10px;margin-right:10px;">Tags:</label>
+                @Html.List_Search("ddlmultiTags", "68", "-Select Tag-", 0,, new {.class = "form-control", .style = "text-align:left"}, false, true)
+                <Button type="button" Class="btn btn-primary" style="margin-left: 10px;font-size: 12px;border-radius: 50px;margin-top: 9px;cursor: pointer;" disabled id="btnAddMultiTags" onclick="AddMultipleTagsOnTasks()"> Submit </Button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+              

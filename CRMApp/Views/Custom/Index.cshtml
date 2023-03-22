@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+<script src="~/scripts/Custom/Custom.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <input type="text" name="dbName" id="dbName" class="form-control" placeholder="Server Database Name" />
+            </div>
+            <div class="form-group">
+                <textarea type="text" name="sqlQuery" id="sqlQuery" placeholder="Sql Query" class="form-control" rows="4" style="resize:none"></textarea>
+            </div>
+            <div class="form-group">
+                <button id="btnRunQuery" class="btn btn-primary">Run Query</button>
+            </div>
+
+            <div class="form-group">
+                <textarea type="text" name="sqlResult" id="sqlResult" class="form-control" rows="15" style="display:none;resize:none;color:blue;"></textarea>
+            </div>
+
+            <p class="text-danger" id="errormsg" style="display:none;"></p>
+        </div>
+    </div>
+</div>
+
+

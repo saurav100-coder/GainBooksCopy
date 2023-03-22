@@ -1,0 +1,14 @@
+﻿
+/*table {width: 500px;border-collapse: collapse;}
+    thead.TableHead{display: block; overflow: auto;}
+    tbody.TableBody{display: block; overflow: auto; height:150px}
+    #example1{border:none}
+    tr{border-right:1px solid #ddd}*/
+
+ #example1 {width: 500px;border-collapse: collapse;}
+    #example1 thead.TableHead{display: block; overflow: auto;}
+    #example1 tbody.TableBody{display: block; overflow: auto; height :250px;   /* height:150px */   /*height:320px;*/
+                              word-wrap: break-word; word-break: break-all;  
+    }
+    #example1{border:none}
+    #example1 tr{border-right:1px solid #ddd}

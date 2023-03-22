@@ -1,0 +1,355 @@
+﻿@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SharableCustomerDetails</title>
+    <script src="~/Scripts/FrameWork/jquery-1.10.2.js" type="text/javascript"></script>
+    @*@Optimization.Styles.Render("~/Content/Admin_Styles_Main")*@
+    <link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/FrameWork/AdminLTE.min.css" />
+
+
+    <script src="~/Scripts/Custom/CustomerDetailsIndex.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+    <link rel="stylesheet" href="~/Content/Custom/PageLoader.css" />
+    <link rel="stylesheet" href="~/Content/Custom/GridLoader.css" />
+    <link rel="stylesheet" href="~/Content/Custom/CustomerDetailsIndex.css" />
+    
+    @*@Optimization.Scripts.Render("~/bundles/Admin_Scripts_Main")*@
+    <script src="~/Scripts/FrameWork/bootstrap.min.js"></script>
+    <script src="~/Scripts/FrameWork/fastclick.js"></script>
+    <script src="~/Scripts/FrameWork/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/FrameWork/adminlte.min.js"></script>
+    <script src="~/Scripts/FrameWork/modernizr-2.6.2.js"></script>
+
+    <script>
+    $(document).ready(function () {      
+        $(".CustCodeDiv").hide();
+        var CustCode = '@TempData["CustCode"]'
+        if (CustCode == '' || CustCode == 'undefined' || CustCode == 'null' ) {
+        } else {
+            LoadCustomerData("CustCode", CustCode)
+        }
+               
+        //click on see more button of call Module
+        $("#CallsSeeMore").click(function () {
+            location.href = '/CustomerDetails/CallDetails/'
+        });
+        //click on see more button of registration Module
+        $("#RegistrationSeeMore").click(function () {
+            location.href = '/CustomerDetails/RegistrationDetails/'
+        });
+        //click on see more button of payment Module
+        $("#PaymentSeeMore").click(function () {
+            location.href = '/CustomerDetails/PaymentDetails/'
+        });
+        //click on see more button of Order Module
+        $("#OrderSeeMore").click(function () {
+            location.href = '/CustomerDetails/OrderDetails/'
+        });
+       
+    });
+    function LoadCustomerData(SearchBy,value){
+        var data;      
+        data = { Colname: "CustCode", value: value };
+        $.post('/CustomerDetails/SearchCustomerDetails',
+            data = data,
+            success = function (data) {
+                console.log(data)
+                if (data != "Error") {
+                    $(".NoRecord").hide();
+                    $("#P_Customers").val(data.data[0].P_Customers);
+                    $("#CustomerId").text(data.data[0].P_Customers);
+                    $("#AllowUpTo").text(data.data[0].FrmtAllowUpto);
+                    $("#ServicingDealer").text(data.data[0].TextServicingAgentCode)
+                    $("#InstallDate").text(data.data[0].FirstInstallDate)
+                    $("#Name").text(data.data[0].CustName)
+                    $("#CustCode").text(data.data[0].CustCode)
+                    $("#AmcMonth").text(data.data[0].amcmonth)
+                    $("#OnsiteFlag").text(data.data[0].onsiteflag)
+                    $("#MobileNo").text(data.data[0].MobNo)
+                    $("#Address").text(data.data[0].PostalAddress1)
+                    $("#City").text(data.data[0].TextHomeTown)
+                    $("#BusType").text(data.data[0].TextMainBussCode)
+                    //var SharableLink = document.getElementById('SharableLink');
+
+                    //SharableLink.href = '/CustomerDetails/SharableCustomerDetails?CustCode=' + data.data[0].CustCode;
+                    //$("#SharableLink").css("display", "");
+
+
+                    //Fill controls needed for RegisterCalls
+                    $("#pcustomers").val(data.data[0].P_Customers);
+                    $("#CustName").val(data.data[0].CustName)
+                    $("#EmailId").val(data.data[0].Email)
+                    $("#Mobileno").val(data.data[0].MobNo)
+                    $("#BusinessTypes").val(data.data[0].MainBussCode)
+                    $("#Location").val(data.data[0].TextHomeTown)
+                    $.post('/CustomerDetails/GetCallData', { P_Customers: data.data[0].P_Customers }, function (Calldata) {
+                        loadCallData(Calldata);
+                        document.getElementById("loadspin").style.display = "none";
+                        document.getElementById("overlay").style.display = "none";
+                        document.getElementById("CustomerDetails").style.display = "block"
+                    });
+                    $.post('/CustomerDetails/GetNoOfCalls', { P_Customers: data.data[0].P_Customers }, function (NoOfCalls) {
+                        $("#NoOfRegCalls").text(NoOfCalls);
+                    });
+                    $.post('/CustomerDetails/GetNoOfOnsiteVisits', { P_Customers: data.data[0].P_Customers }, function (TotalOnsiteVisits) {
+                        $("#NoOfOnsiteVisit").text(TotalOnsiteVisits);
+                    });
+                    $.post('/CustomerDetails/GetBilledUpto', { P_Customers: data.data[0].P_Customers }, function (BilledUpto) {
+                        $("#BilledUptoText").text(BilledUpto);
+                    });
+                    $.post('/CustomerDetails/GetOpenedUpto', { P_Customers: data.data[0].P_Customers }, function (OpenedUpto) {
+                        $("#OpenedUptoText").text(OpenedUpto);
+                    });
+                    $.post('/CustomerDetails/GetPaymentData', { P_Customers: data.data[0].P_Customers }, function (paymentData) {
+                        loadPaymentData(paymentData);
+                        document.getElementById("loadspin").style.display = "none";
+                        document.getElementById("overlay").style.display = "none";
+                        document.getElementById("CustomerDetails").style.display = "block"
+                    });
+                    $.post('/CustomerDetails/GetRegistrationData', { P_Customers: data.data[0].P_Customers, start: 1, pSize: 5 }, function (RegistrationData) {
+                        loadRegistrationData(RegistrationData);
+                        document.getElementById("loadspin").style.display = "none";
+                        document.getElementById("overlay").style.display = "none";
+                        document.getElementById("CustomerDetails").style.display = "block"
+                    });
+                    $.post('/CustomerDetails/GetOrderData', { P_Customers: data.data[0].P_Customers }, function (OrderData) {
+                        loadOrderData(OrderData);
+                        document.getElementById("loadspin").style.display = "none";
+                        document.getElementById("overlay").style.display = "none";
+                        document.getElementById("CustomerDetails").style.display = "block"
+                    });
+
+                    if (data.data[0].onsiteflag == "" || data.data[0].onsiteflag == undefined || data.data[0].onsiteflag == null) {
+                        $("#OnsiteFlag").text("Not Available")
+
+                    }
+                } else {
+                    $(".NoRecord").show();
+                    $("#CustomerDetails").hide();
+                    document.getElementById("loadspin").style.display = "none";
+                    document.getElementById("overlay").style.display = "none";
+                }
+
+
+
+            });
+    }
+    </script>
+</head>
+<body>
+    <div id="overlay">
+        <div class="loading" id="loadspin" style="text-align:center; margin-left:500px; margin-bottom:50px; display:none "></div>
+    </div>
+
+    <div id="CustomerDetails" style="display:none">
+        <div class="row">
+            <div class="col-md-3" style="margin-top:40px">
+                <div class="TotalCallRegister" style="height:auto; overflow:auto; background-color:white; border-radius:5px; border:2px solid #f5f2f2; box-shadow: 5px 5px 5px #aaaaaa;">
+                    <div class="col-md-4" style="background-color:brown; text-align:center"><i class="fa fa-phone" style="font-size:40px; line-height:90px; color:white"></i></div>
+                    <div class="col-md-8">
+                        <h5 style="font-size:17px; font-weight:bold">Total Calls Registered</h5>
+                        <h4 style="font-size:17px" id="NoOfRegCalls"></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-top:40px">
+                <div class="TotalCallRegister" style="height:auto; overflow:auto; background-color:white; border-radius:5px; border:2px solid #f5f2f2; box-shadow: 5px 5px 5px #aaaaaa;">
+                    <div class="col-md-4" style="background-color:black; text-align:center"><i class="fa fa-suitcase" style="line-height:90px; font-size:40px; color:white"></i></div>
+                    <div class="col-md-8">
+                        <h5 style="font-size:17px; font-weight:bold">Total Onsite Visits</h5>
+                        <h4 style="font-size:17px" id="NoOfOnsiteVisit">0</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-top:40px">
+                <div class="TotalCallRegister" style="background-color:white; height:auto; overflow:auto; border-radius:5px; border:2px solid #f5f2f2; box-shadow: 5px 5px 5px #aaaaaa;">
+                    <div class="col-md-4" style="background-color:forestgreen; text-align:center"><i class="fa fa-calendar" style="font-size:40px; line-height:90px; color:white"></i></div>
+                    <div class="col-md-8">
+                        <h5 style="font-size:17px; font-weight:bold">Billed Upto Date</h5>
+                        <h4 style="font-size:17px" id="BilledUptoText"></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="margin-top:40px">
+                <div class="TotalCallRegister" style="height:auto; overflow:auto; background-color:white; border-radius:5px; border:2px solid #f5f2f2; box-shadow: 5px 5px 5px #aaaaaa;">
+                    <div class="col-md-4" style="background-color:midnightblue; text-align:center"><i class="fa fa-download" style="font-size:40px; line-height:90px; color:white"></i></div>
+                    <div class="col-md-8">
+                        <h5 style="font-size:17px; font-weight:bold">Opened Upto Date</h5>
+                        <h4 style="font-size:17px" id="OpenedUptoText"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*RegCalls Block*@
+        <div class="row" data-aos="fade" style="margin-top:30px; padding:0px; margin-left:20px">
+            <div class="col-md-6">
+                <div>
+                    <div class="col-md-11 main_block">
+                        <div class="col-md-12" style="padding:0px">
+                            <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white">Register Calls Details</h4>
+                            <div id="ParentCallDiv">
+                            </div>
+                            <div class="col-md-6 text-left " style="margin-top:20px; margin-bottom:20px">
+                                <button class="btn btn-primary" id="RegCallModelOpenBtn"> Register Call</button>
+                            </div>
+                            <div class="col-md-6 text-right seeMoreDiv" style="margin-top:20px; margin-bottom:20px">
+                                <button class="btn btn-primary " id="CallsSeeMore">See More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*Payment Block*@
+                <div class="col-md-11 main_block" style="margin-top:20px">
+                    <div class="col-md-12" style="padding:0px">
+                        <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white"> Payment Details</h4>
+                        <div id="ParentPaymentDiv">
+                        </div>
+                        <div class="col-md-12 text-right" style="margin-top:20px; margin-bottom:20px">
+                            <button class="btn btn-primary" id="PaymentSeeMore">See More</button>
+                        </div>
+                    </div>
+                </div>
+                @*Other Details Module*@
+                <div class="col-md-11 main_block" style="margin-top:20px">
+                    <div class="col-md-12" style="padding:0px">
+                        <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white"> Other Details</h4>
+
+                        <div class="col-md-12" style="padding:0px; height:auto; margin-top:20px;">
+                            <div class="col-md-12" style="height:auto; overflow:auto">
+                                <label class="col-md-4" style="font-weight:800;">Name:</label>
+                                <span class="col-md-8" id="Name"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">CustomerId:</label>
+                                <span class="col-md-8" id="CustomerId"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">CustCode:</label>
+                                <span class="col-md-8" id="CustCode"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">AMC Month:</label>
+                                <span class="col-md-8" id="AmcMonth"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px;">
+                                <label class="col-md-4" style="font-weight:800;">BusType:</label>
+                                <span class="col-md-8" id="BusType"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px;">
+                                <label class="col-md-4" style="font-weight:800;">Ist Installation:</label>
+                                <span class="col-md-8" id="InstallDate"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">Allow Upto:</label>
+                                <span class="col-md-8" id="AllowUpTo"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">Servicing Dealer:</label>
+                                <span class="col-md-8" id="ServicingDealer"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">OnSite Flag:</label>
+                                <span class="col-md-8" id="OnsiteFlag"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">Mobile No:</label>
+                                <span class="col-md-8" id="MobileNo"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px">
+                                <label class="col-md-4" style="font-weight:800;">Address:</label>
+                                <span class="col-md-8" id="Address"></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto; overflow:auto; margin-top:10px;  margin-bottom:20px">
+                                <label class="col-md-4" style="font-weight:800;">City: </label>
+                                <span class="col-md-8" id="City"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Registration Block*@
+            <div class="col-md-6 SecondBlock">
+                <div class="col-md-11 main_block">
+                    <div class="col-md-12" style="padding:0px">
+                        <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white"> Registration Details</h4>
+                        <div id="ParentRegDiv">
+                        </div>
+                        <div class="col-md-12 text-right" style="margin-top:20px; margin-bottom:20px">
+                            <button class="btn btn-primary " id="RegistrationSeeMore">See More</button>
+                        </div>
+                    </div>
+                </div>
+                @*Order Details Module*@
+                <div class="col-md-11 main_block" style="margin-top:20px">
+                    <div class="col-md-12" style="padding:0px">
+                        <h4 style="font-size:22px; text-align:center; margin-top:0px; padding-bottom:10px; padding-top:10px; background-color:#3c8dbc; color:white"> Order Details</h4>
+                        <div id="ParentOrderDiv">
+                        </div>
+                        <div class="col-md-12 text-right" style="margin-top:20px; margin-bottom:20px">
+                            <button class="btn btn-primary" id="OrderSeeMore">See More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*RegisterCalls Modal*@
+
+    <div class="modal fade" id="RegCallsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="border:none; padding:0px">
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn close">*@@*<span class="close">&times;</span>*@
+                    <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+                </div>
+                <div class="modal-body" style="padding-bottom:0px; padding-top:0px">
+                    <h3 style="text-align:center; margin-top:10px;">Register Call</h3>
+                    <hr style="margin-top:10px; width:80%" />
+                    <form Class="form-horizontal" action="@Url.Action("RegisterCalls")" role="form" method="post" id="RegForm">
+                        <input type="hidden" name="pcustomers" id="pcustomers" />
+                        <input type="hidden" name="CustName" id="CustName" />
+                        <input type="hidden" name="EmailId" id="EmailId" />
+                        <input type="hidden" name="Mobileno" id="Mobileno" />
+                        <input type="hidden" name="BusinessTypes" id="BusinessTypes" />
+                        <input type="hidden" name="Location" id="Location" />
+                        <div class="col-md-12" style="height:auto; overflow:auto; margin-top:40px">
+                            <div Class="form-group col-md-12" style="height:auto; overflow:auto">
+                                <Label for="inputEmail1" class="col-sm-4 control-label">Issue Type</Label>
+                                <div Class="col-sm-4">
+                                    @Html.List_Search("IssueType", "38", "-Select Issue Types-", 0, "", new {@class = "form-control input-sm", @style = "padding-left:1px"})
+                                </div>
+                            </div>
+                            <div Class="form-group col-md-12" style="height:auto; overflow:auto">
+                                <Label for="inputEmail1" class="col-sm-4 control-label" style="padding-top:25px">Issue description</Label>
+                                <div Class="col-sm-4">
+                                    <textarea class="col-sm-12 form-control input-sm" name="IssueDescription" id="IssueDescription"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center" style="margin:20px 0px 20px 0px;">
+                            <button type="submit" id="ConfirmButton" class="btn btn-primary"> Submit </button>
+                            <button type="button" data-dismiss="modal" class="btn btn-default" style="margin-left:20px"> Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border:none; text-align:center; padding-bottom:20px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

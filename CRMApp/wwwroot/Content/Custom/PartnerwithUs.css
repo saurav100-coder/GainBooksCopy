@@ -1,0 +1,54 @@
+﻿.partner-container {
+    background: url(/images/main/PW-us.png);
+    background-size: cover;
+    margin-bottom:15px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 69px;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.para {
+    font-size: 16px;
+}
+
+.homebtn {
+    color: rgb(16,108,200);
+    background: white;
+    padding: 10px 35px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: sans-serif;
+    margin-top: 30px;
+}
+
+.copyright {
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Roboto','sans-serif';
+    padding-bottom: 15px;
+    margin-top: 65px;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 480px) {
+
+    .para {
+        padding: 0 20px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 54px;
+    }
+
+    .copyright {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+}

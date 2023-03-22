@@ -1,0 +1,253 @@
+﻿@{
+    ViewData["Title"] = "ManageTripRemb";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+}
+
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/Custom/ManageContacts.css" />
+<link rel="stylesheet " href="~/Content/Custom/ManagePayments.css" />
+<script src="~/Scripts/Custom/ManageTripRemb.js"></script>
+
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script>
+    function ViewImage(id) {
+        var imagekey = id;
+        var options = {
+            "backdrop": "static",
+            keyboard: true
+        };
+        $('#ImageModal').modal(options);
+        $('#ImageModal').modal('show');
+        $("#overlay").show();
+        $("#loadspin").show();
+        var path = "/CRM/ajaxTripRembImage?imagekey=" + imagekey;
+        $('#tripImg').attr("src", path);
+        setTimeout(function () {
+            $("#overlay").hide();
+            $("#loadspin").hide();
+        }, 60000);
+    }
+</script>
+<style>
+
+    .clickable:hover {
+        background-color: white !important;
+        -webkit-box-shadow: 0 0 6px 1px #33333359;
+        -moz-box-shadow: 0 0 6px 1px #33333359;
+        box-shadow: 0 0 6px 1px #33333359;
+        z-index: 100;
+    }
+    .LoaderSpin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        margin-top: 300px;
+        margin-left: 700px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    #overlay {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+    .icon-bar a{
+        padding:10px;
+        font-size:14px;
+    }
+    .icon-bar a:first-child{
+        padding-left:0px;
+    }
+    .table > thead > tr > th{
+        vertical-align:middle !important;
+    }
+</style>
+
+<div Class="container">
+
+</div>
+
+<div class="row" style=" padding-bottom: 5px;">
+        <div class="panelbody">
+            <div id="main" class="col-md-12" style="padding-right:25px; display:block;">
+                <div Class="icon-bar col-md-2" style=" width:auto; margin-right:18px;">
+                    <a class="top" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Create New" onclick="window.location = '@Url.Action("PaymentDetails", new {@exitmode = "create", @CalledFrom = "ManagePayments"})'">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </a>
+                    <a Class="top btn-edit" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Edit" onclick="dd();">
+                        <i Class="glyphicon glyphicon-pencil"></i>
+                    </a>
+                    <a Class="top btn-delete" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete" onclick="deleteRow();">
+                        <i Class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </div>
+                <div id="dropdown" class="col-md-4 search " style="margin-top:-10px;">
+                    <select class="col-md-2" id="filter" style="height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none;">
+                        <option value="0">Filter</option>
+                        <option value="1">Reset Filter</option>
+                    </select>
+                    <div id="dateC" style="display:none">
+                        <div class="col-md-1">
+                            <label class="ee">   From: </label>
+                        </div>
+                        <input type="date" value="@D" id="min" class="col-md-9" style="height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none;" />
+
+                        <div class="col-md-1">
+                            <label class="ww">  To: </label>
+                        </div>
+                        <input type="date" value="@D" id="max" class="col-md-9" style="height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none;" />
+                        <div id="search2" onclick="DateSearch();" class="btn btn-primary col-md-3 date"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <div id="TextC" style="display:none">
+                        <input type="text" id="filterText" class="col-md-3" placeholder="Type to search" style="height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; margin-top: 10px; margin-left: 20px" /><div id="search1" onclick="DoSearch();" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                    <p class="text-danger" id="message" style="text-align:right; font-size:13px">@TempData["Message"]</p>
+                </div>
+                <div class="col-md-4" style="text-align: right; padding-right: 0px; float: right; margin-top: -10px;">
+                    <label id="info" style=" font-size: 12px; padding-right:8px;  color: #808080;"> </label>
+                    <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Prev" data-original-title="Newer" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                        <i class="fa fa-angle-left" style="font-size:19px"></i>
+                    </div>
+                    <div class="btn btn-default" title="" data-placement="bottom" data-toggle="tooltip" id="Next" data-original-title="Older" style="margin-top:10px; width:27px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                        <i class="fa fa-angle-right" style="font-size:19px"></i>
+                    </div>
+                    @*<div class="btn btn-default" style="color:#337ab7; margin-left:10px; width:30px; height:25px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; border-radius:0px; margin-top:10px">
+                        <p id="popover1" data-placement="bottom" style="margin-top:0px;"><i class="fa fa-gear xx" style="font-size:20px; margin-top:2px"></i></p>
+                        <div id="popover_content_wrapper1" style="display: none">
+                            <ul style="list-style:none; padding-left:0px">
+                                <li id="popover2" data-placement="left" style="left:-90px; width:90px;">Set Page Size</li>
+                            </ul>
+                        </div>
+                        <div id="popover_content_wrapper2" style="display:none; width:148px">
+                            <input type="number" id="size" style="padding:2px 2px 3px 5px; width:70%;height:25px" /><div id="pageS" onclick="PageSize();" class="btn btn-primary" style="width:23px;border-radius:0px; padding-left:3px; padding-top:3px; padding-bottom:0px; padding-right:6px ;margin-top:0px;margin-bottom: 2px;"> <i class="glyphicon glyphicon-ok"></i></div>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+@*<div Class="row" style=" padding-top:10px;">
+    <div id="main" Class="col-md-12" style="margin-bottom:0px !important;">
+       <div Class=" icons col-md-2" style=" margin-right: 8px; margin-left: 0px; padding-top: 0px; display: inline-block; width: auto; margin-right: 28px; bottom: 5px; padding-left: 0px;">
+
+                <a id="CreateCustomer" href='/Configuration/CustomerForm' title="" data-placement="bottom" data-toggle="Create New Customer" style="text-align:left">
+                    <i Class="glyphicon glyphicon-plus" style="font-size: 18px; margin-right: 10px; padding: 5px;"></i>
+                </a>
+                <a Class="top" title="" onclick="dd()" data-toggle="Edit">
+                    <i Class="glyphicon glyphicon-pencil" style="font-size: 17px; margin-right: 10px; padding: 5px;"></i>
+                </a>
+                <a class="top btn-Filter" title="" data-placement="bottom" data-toggle="Remove" onclick="deleteRow();" style="text-align:left" id="filterIcon" onclick="ShowFilters();">
+                    <i class="glyphicon glyphicon-trash" id="filterIcon" style="font-size: 17px; margin-right: 10px; padding: 5px;"></i>
+                </a>
+            </div>
+
+        <form class="col-md-7 search-container" style="display:inline-block; padding-left:0px; bottom:9px;">
+            <div id="Text" class="SearchDiv" style=" width: 100%; position: relative; display: flex;">
+                <input type="text" id="SearchText" class="" placeholder="Type to search" style=" " />
+                <div id="search1" onclick="DoSearch();" class="searchButton1"><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+        </form>
+
+        <div class="col-md-2" style="text-align:right; padding:0px; float:right;bottom: 26px;padding-top:10px;">
+            <label id="info"> </label>
+            <div class="btn btn-default" title="" data-placement="bottom" data-toggle="Newer" id="Prev" data-original-title="Newer" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px; color:#337ab7; border-radius:0px">
+                <i class="fa fa-angle-left" style="font-size:20px"></i>
+            </div>
+            <div Class="btn btn-default" title="" data-placement="bottom" data-toggle="Older" id="Next" data-original-title="Older" style="margin-top:10px; width:30px; padding-top:0px; padding-left:0px; padding-right:0px; padding-bottom:0px; margin-bottom:10px;color:#337ab7; margin-left:0px;  border-radius:0px">
+                <i Class="fa fa-angle-right" style="font-size:20px"></i>
+            </div>
+        </div>
+    </div>
+</div>*@
+<input type="hidden" id="Fvalue" value="@ViewBag.filter">
+<input type="hidden" name="grid1" id="grid1" value="">
+@*<hr />*@
+<div class="col-md-12" style="height:475px;overflow:auto; padding:0px;">
+    <table id="example" class="table " cellspacing="0" style="margin-bottom: 0px; ">
+        <thead>
+            <tr style="text-align: center; border-bottom: 6px solid #ffffff; padding-bottom: 27px; color: #337ab7; background-color: #f3f8fa; height: 50px; ">
+                <th style="width:10%">Select</th>
+                <th style="width:15%">FirmName</th>
+                <th style="width:10%">TripName</th>
+                <th style="width:15%; text-align:center">TxtStartDate</th>
+                <th style="width:13%">TxtEndDate</th>
+                <th style="width:10%">StartLocation</th>
+                <th style="width:15%">EndLocation</th>
+                <th style="width:10%">Distance Covered</th>
+                <th style="width:15%">Path</th>
+                <th></th>
+            </tr>
+
+            <tr id="loading"><td colspan="10"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="ImageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding-bottom:0px">
+                <span class="close" data-dismiss="modal">&times;</span>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px">
+                @*<h4 style="text-align:center; font-size:18px; margin-top:20px;" id="WarningText"> </h4>*@
+                <div class="col-md-12" style="height:500px; width:500px; margin-top:20px;">
+                    <img id="tripImg" src="#" style="height:500px; width:500px;" />
+                </div>
+                @*<div class="col-md-12 text-center" style="margin:20px 0px 0px 0px;">
+                    <input type="button" data-dismiss="modal" id="WarningButton" class="btn btn-primary" value="Ok" style="width:76px">*@
+                @*<button type="button"  class="btn btn-default" style="margin-left:20px"> Cancel</button>*@
+                @*</div>*@
+            </div>
+            <div Class="modal-footer" style="border:none; text-align:center; padding-bottom:0px; margin-top:0px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="LoaderSpin" id="loadspin" style="text-align:center; margin-bottom:50px; display:none "></div>
+
+
+
+
+

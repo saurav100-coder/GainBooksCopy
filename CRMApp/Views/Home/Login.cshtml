@@ -1,0 +1,122 @@
+@model CRMApp.Models.UserLoginTable
+@{
+    Layout = "~/Views/Shared/_Navbar.cshtml";
+    ViewData["Title"] = "Log in";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/Custom/Loginform.css">
+<link rel="stylesheet" href="~/Content/Custom/PageLoaderLogin.css" />
+<script src="~/scripts/Custom/LoginForm.js"></script>
+
+<div id="overlay">
+    <div class="loading" id="loadspin" style="text-align : center;display:none"></div>
+</div>
+<p class="text-center text-success" style="margin-block-start:0; margin-block-end:0;">@TempData["Message"]</p>
+
+<div class="container main">
+    <div class="row main-container">
+        <div class="col-lg-6 col-md-6 left-side">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <h5 style="font-size: 44px; font-weight: 400; margin: 0;">Welcome to</h5>
+                    <h1 style="font-size: 60px; font-weight: 700; margin: 0;">GAINBOOKS</h1>
+                    <p style="font-size: 18px; padding-left: 5px;">Login to access your account</p>
+                </div>
+            </div>
+            <div class="contact-div">
+                <div class="phone">
+                    <p><i class="fa fa-phone"></i><span style="font-size: 12px;">+91 9414184250</span></p>
+                    <p><i class="fa fa-envelope-o" style="font-size: 12px;"></i><span>info@saralerp.com</span></p>
+                </div>
+               @* <div class="social">
+                    <img src="/images/main/logo-ig.png" alt="" style="height: 30px;">
+                    <img src="/images/main/logo-fb.png" alt="" style="height: 24px;">
+                    <img src="/images/main/logo-ln.png" alt="" style="height: 24px; padding-left: 5px;">
+                </div>*@
+            </div>
+
+        </div>
+        <div class="col-lg-6 col-md-6 right-side">
+            <div class="logo-head">
+                <a class="navbar-brand" href="@Url.Action("Index","Home")"
+                   style="display:flex; align-items: center; justify-content: center; ">
+                    <img src="~/images/gainbooks_logo.png" alt="..." height="74px">
+                    <h4 style="font-size: 34px; font-weight: 400; color:rgb(16,108,200); margin: 0;">GainBooks</h4>
+                </a>
+            </div>
+            <form class="loginform" action="@Url.Action("Login","Home")" method="post" style="" id="LoginForm">
+                <input type="hidden" id="deviceType" name="deviceType" />
+                @*<div class="select" style="margin-bottom: 29px;">
+                    <div style="background:#fff" class="bg"></div>
+                    <div style="padding:13px 20px" class="main-side">
+                        <div style="background:#f2f2f2; border-radius:10px;" class="bg"></div>
+                        <div data-inactive-color="#000" style="color:#000" class="content">
+                            <span class="text">Business</span>
+                            <i class="fa fa-caret-down icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div style="padding:10px 0;" class="back-side">
+                        <div style="padding:10px 20px; float:left; width:100%;">
+                            <div style="background:white; border-radius:10px;" class="bg"></div>
+                            <div data-inactive-color="#000" style="color:#000" class="content">
+                                <span class="text">Select Business Type</span>
+                                <i class="fa fa-caret-down icon" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <ul style="color:#000">
+                            <li data-id="Individual">
+                                <a style="padding: 2px 20px">
+                                    <i class="fa fa-user" style="margin-right:5px;"></i>Individual
+                                </a>
+                            </li>
+                            <li data-id="Business">
+                                <a style="padding: 2px 20px">
+                                    <i class="fa fa-users" style="margin-right:5px;margin-left:-8px;"></i>Business
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>*@
+                
+                <p class="text-center text-danger">@ViewBag.Message</p>
+                
+                <select id="UserType" name="UserType" class="form-select" required style="margin-bottom:15px;">
+                    <option value="0">-Select Account Type-</option>
+                    <option value="I">Individual</option>
+                    <option value="B" selected>Business</option>
+                </select>
+                <div class="form-group CorporateID" style="margin-bottom:15px;">
+                    <div class="input-group">
+                        <span class="input-group-icon">
+                            <i class="fa-regular fa-address-card" style="font-weight: 900; font-family: 'FontAwesome'; font-style: initial;"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Corporate Id" value="@Model.Corpid" name="Corpid">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <div class="input-group">
+                        <span class="input-group-icon">
+                            <i class="fa fa-user" style="font-size:16px;"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="User Id" value="@Model.userid" name="userid" required>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <div class="input-group">
+                        <span class="input-group-icon">
+                            <img src="/images/main/lock.png" style="height: 20px;">
+                        </span>
+                        <input type="password" class="form-control" placeholder="Password" value="@Model.Password" name="Password" required>
+                    </div>
+                </div>
+                <button class="login-btn Submit">Login</button>
+            </form>
+
+        </div>
+
+    </div>
+  
+</div>
+

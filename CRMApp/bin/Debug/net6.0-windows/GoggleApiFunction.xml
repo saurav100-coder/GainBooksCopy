@@ -1,0 +1,253 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+GoggleApiFunction
+</name>
+</assembly>
+<members>
+<member name="T:GoggleApiFunction.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:GoggleApiFunction.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:GoggleApiFunction.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:GoggleApiFunction.Class1.SaveFileOnGoogleDriveFolder(System.String,System.String,System.String,System.String,System.String)">
+ <summary> 
+ To upload file on goggle drive using  Google.Apis.Drive.v3 and get shareablelink of the file
+ </summary>
+ <param name="filepath"></param>represents the file path to be uploaded
+ <param name="foldername"></param>>represents the foldername on drive where file is to be uploaded
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.SaveFileOnGoogleDriveFolder(System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ To upload file on goggle drive using  Google.Apis.Drive.v3 and get shareablelink of the file
+ </summary>
+ <param name="filepath"></param>represents the file path to be uploaded
+ <param name="foldername"></param>>represents the foldername on drive where file is to be uploaded
+ <param name="credentialfileFullPath">txt file full path to read/write credentials</param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetFolderId(Google.Apis.Drive.v3.DriveService,System.String)">
+ <summary>
+ To get the folderid by the foldername from the drive
+ </summary>
+ <param name="service"></param>represnts the service as DriveService
+ <param name="foldername"></param>>represents the foldername on drive where file is to be uploaded
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.CreatePermissionforFileId(Google.Apis.Drive.v3.DriveService,System.String,System.String,System.String,System.String)">
+ <summary>
+ To create permission for the fileid
+ </summary>
+ <param name="service"></param>represents the service as DriveService
+ <param name="FileId"></param>Represent the fileid of the file
+ <param name="Role"></param>Represent the role for the file-writer,commenter,reader,owner,organizer,fileOrganizer
+ <param name="Type"></param>Represent the type for the file-anyone,user,group,domain
+ <param name="Value"></param>>Represent the emailaddress(user), groupemailaddress(group),domainaddress(domain)
+</member>
+<member name="M:GoggleApiFunction.Class1.CreateFolderOnGoogleDrive(System.String,System.String)">
+ <summary>
+ To create folder on goggle drive
+ </summary>
+ <param name="foldername"></param>folder name
+ <returns>File Id </returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.CreateFolderOnGoogleDrive(System.String,System.String,System.String)">
+ <summary>
+ To create folder on goggle drive
+ </summary>
+ <param name="foldername"></param>folder name
+ <returns>File Id </returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.SaveFileOnGoogleDrive(System.String)">
+ <summary>
+ To upload file on goggle drive using  Google.Apis.Drive.v3
+ </summary>
+ <param name="filepath"></param>represents the file path to be uploaded
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.uploadFile(Google.Apis.Drive.v3.DriveService,System.String,System.String,System.String,System.String)">
+ <summary>
+ To upload file on goggle drive
+ </summary>
+ <param name="service"></param>represnts the service as DriveService
+ <param name="filepath"></param>represents the file path to be uploaded
+ <param name="Role"></param>Represent the role for the file-writer,commenter,reader,owner,organizer,fileOrganizer
+ <param name="Type1"></param>Represent the type for the file-anyone,user,group,domain
+ <param name="Value"></param>>Represent the emailaddress(user), groupemailaddress(group),domainaddress(domain)
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.uploadFile(Google.Apis.Drive.v3.DriveService,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ To upload file in a folder on goggle drive
+ </summary>
+ <param name="service"></param>represents the service as DriveService
+ <param name="filepath"></param>represents the file path to be uploaded
+ <param name="folderid"></param>represents the folderid fo the folder
+ <param name="Role"></param>Represents the role for the file-writer,commenter,reader,owner,organizer,fileOrganizer
+ <param name="Type1"></param>Represents the type for the file-anyone,user,group,domain
+ <param name="Value"></param>>Represents the emailaddress(user), groupemailaddress(group),domainaddress(domain)
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetMimeType(System.String)">
+ <summary>
+ To get the MimeType of a file
+ </summary>
+ <param name="fileName"></param>represents the file path
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.SaveFilefromGoogleDrive(System.String,System.String)">
+ <summary>
+  To download file from goggle drive using  Google.Apis.Drive.v3
+ </summary>
+ <param name="FileNamewithExt"></param>represents the file name with extension to be downloaded
+ <param name="savetofolder"></param>represents the folder in which file is to be saved
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.DownloadFile(Google.Apis.Drive.v3.DriveService,Google.Apis.Drive.v3.Data.File,System.String)">
+ <summary>
+ To download file from goggle drive
+ </summary>
+ <param name="service"></param>represnts the service as DriveService
+ <param name="file"></param>represnts the file path
+ <param name="savetopath"></param>
+</member>
+<member name="M:GoggleApiFunction.Class1.SaveStream(System.IO.MemoryStream,System.String)">
+ <summary>
+ to save the file on the required path
+ </summary>
+ <param name="stream"></param>represents the stream
+ <param name="savetopath"></param>represents the path where file is to be saved
+</member>
+<member name="M:GoggleApiFunction.Class1.GetMail(System.String)">
+ <summary>
+ To get mails from the user's gmail account using Google.Apis.Gmail.v1
+ </summary>
+ <param name="query"></param>represents the query by which the mail will be filtered
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.FromBase64ForUrlString(System.String)">
+ <summary>
+ To convert a base64 to string format
+ </summary>
+ <param name="base64ForUrlInput"></param>represents the base64 string
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.CreateCalenderEvent(System.String,System.String,System.String,System.DateTime,System.DateTime,System.String[],System.Int32)">
+ <summary>
+ To create event in calender using Google.Apis.Gmail.v1
+ </summary>
+ <param name="Summary"></param>represents the summary
+ <param name="Location"></param>represents the location
+ <param name="Description"></param>represents the description
+ <param name="StartDate"></param>represents the StartDate
+ <param name="EndDate"></param>represents the EndDate
+ <param name="attandancearr"></param>represents the Attendees list
+ <param name="Remindermin"></param>represents the minutes by which reminder is to be set(value between 0 to 60)
+</member>
+<member name="M:GoggleApiFunction.Class1.WriteToFile(System.String,System.String)">
+ <summary>
+ write in a specific file whose path is probided
+ </summary>
+ <param name="text">text to write </param>
+ <param name="filefullPath"></param>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetDriveService(System.String)">
+ <summary>
+ To get user's drive service authentication
+ </summary>
+ <param name="credentialFileWithFullPath">file from which credential to be read</param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetServiceCredentialsFromTxtFile(System.String)">
+ <summary>
+ get the credentials from credential file
+ </summary>
+ <param name="TextFile"></param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetDriveService">
+ <summary>
+ To get user's drive service authentication
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetMailService">
+ <summary>
+ To get user's mail service authentication
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetCalendarService">
+ <summary>
+ To get user's calender service authentication
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.SendEmail(System.String,System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+Send Email by googleApi.
+ </summary>
+ <param name="to"> email address of the receiver (comma separated multiple addresses)</param>
+ <param name="subject"> subject of the email </param>
+ <param name="bodyText"> body text of the email </param>
+ <param name="FullFilePath">attachment file full path(comma separated multiple paths)</param>
+</member>
+<member name="M:GoggleApiFunction.Class1.Base64UrlEncode(System.String)">
+ <summary>
+ function to encode string to base 64 format
+ </summary>
+ <param name="input"></param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GrantAccess(System.String)">
+ <summary>
+ function to grant access to a folder to create or read files in that folder
+ </summary>
+ <param name="fullPath">ex:-C:\data</param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetGmailService(System.String)">
+ <summary>
+ To get user's gmailservice authentication for sendingEmail
+ </summary>
+  ''' <param name="credentialFileWithFullPath">file from which credential to be read</param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetGmailCredentialsFromTxtFile(System.String)">
+ <summary>
+ get the credentials from credential file
+ </summary>
+ <param name="TextFile"></param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.GetSheetService(System.String)">
+ <summary>
+ Get GoogleSheet Service
+ </summary>
+ <param name="credentialFileWithFullPath"></param>
+ <returns></returns>
+</member>
+<member name="M:GoggleApiFunction.Class1.ReadAllDataFromGoogleSheet(System.String,System.String,System.String)">
+ <summary>
+ Get all rows from google sheet
+ </summary>
+ <param name="spreadsheetId"></param>
+ <param name="credentialfileFullPath"></param>
+ <param name="sheetNameWithRange"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

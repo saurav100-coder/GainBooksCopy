@@ -1,0 +1,459 @@
+﻿@model CRMApp.Models.RegCalls
+@{
+    ViewData["Title"] = "EditRegCalls";
+}
+@*<link rel="stylesheet" href="~/Content/CompactForm.css" />*@
+
+
+@*@Optimization.Styles.Render("~/Content/EditRegCalls")
+@Optimization.Scripts.Render("~/bundles/EditRegCalls")*@
+
+<link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+<link rel="stylesheet" href="~/Content/Custom/EditRegCalls.css" />
+<script src="~/Scripts/Custom/EditRegCalls.js" ></script>
+<script src="~/Scripts/Custom/CompositeControls.js"></script>
+
+<style>
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+</style>
+<script>
+$(document).ready(function () {
+        //Added by aslam for compositefield
+        if ("@Model.InfoString" != "null" && "@Model.InfoString" != "undefined" && "@Model.InfoString" != "") {
+            createControls("@Model.InfoString");
+            
+        }
+});
+
+function createControls(infostring) {
+        var ctrlsArr = infostring.split("#");
+        if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != "") {
+            var CompositeFieldString = "@Model.Compositefield";
+            fieldsArr = CompositeFieldString.split("#");
+        }
+        for (var i = 0; i < ctrlsArr.length; i++) {
+            var ctrlarr = ctrlsArr[i].split("~");
+            var container = $('<div></div>');
+           
+            var fieldLabel = $.trim(ctrlarr[0]);
+            var fieldType = $.trim(ctrlarr[1]);
+            var fieldName = $.trim(ctrlarr[2]);
+            var infotype = $.trim(ctrlarr[3]);
+            var defaultvalue = $.trim(ctrlarr[4]);
+            var formGroup = $("<div class='form-group'>");
+            formGroup.append("<Label class='col-sm-4 control-label'>" + fieldLabel + "</Label>");
+            var fieldWrapper = $("<div class='col-sm-4'>");
+            fieldWrapper.append(makeCompositeFieldHtml(fieldLabel, fieldType, fieldName, infotype, defaultvalue));
+            formGroup.append(fieldWrapper);
+            container.append(formGroup);
+            $("#RegForm1Div").append(container);
+
+            if (fieldType == "text" || fieldType == "date" || fieldType == "password" || fieldType == "email" || fieldType == "number") {
+                if (fieldsArr.length > 0) {
+                    $.each(fieldsArr, function (index, item) {
+                        var fieldarr = item.split("~")
+                        if (fieldarr[1] == fieldName) {
+                            setCompositeFieldValue(fieldarr);
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    ////Added by aslam for compositefield
+    //function createControls(infostring) {
+    //    var ctrlsArr = infostring.split("#");
+    //    var fieldsArr = "";
+    //    if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != "") {
+    //        var CompositeFieldString = "@Model.Compositefield";
+    //        fieldsArr = CompositeFieldString.split("#");
+    //    }
+    //    for (var i = 0; i < ctrlsArr.length; i++) {
+    //        var ctrlarr = ctrlsArr[i].split("~");
+    //        var container = $("<div></div>");
+    //        if (ctrlarr[1] == "text" || ctrlarr[1] == "date" || ctrlarr[1] == "password" || ctrlarr[1] == "email" || ctrlarr[1] == "number") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'>"
+    //                              + "<input type='" + ctrlarr[1] + "' name='" + ctrlarr[2] + "' id='" + ctrlarr[2] + "' value='" + $.trim(ctrlarr[4]) + "' class='form-control input-sm' />"
+    //                              + "</div>"
+    //                              + "</div>");
+    //            $("#RegForm1Div").append(container)
+
+    //            if (fieldsArr.length > 0) {
+    //                $.each(fieldsArr, function (index, item) {
+    //                    var fieldarr = item.split("~")
+    //                    if (fieldarr[0] == ctrlarr[1]) {
+    //                        setCompositeFieldValue(fieldarr);
+    //                    }
+    //                });
+    //            }
+    //        }
+    //        else if (ctrlarr[1] == "dropdown") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'>"
+    //                     + "<select type='" + ctrlarr[1] + "' name='" + ctrlarr[2] + "' id='" + ctrlarr[2] + "'  class='form-control input-sm' style='padding-left:1px;'></select>"
+    //                      + "</div></div>");
+    //            $("#RegForm1Div").append(container)
+
+    //            var ddid = "#" + ctrlarr[2];
+    //            var ddvalue = $.trim(ctrlarr[4]);
+    //            var ddType = ctrlarr[1];
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var ddloptions = "<option value=0>--Select--</option>";
+    //                if (data != "error") {
+    //                    $.each(data.data, function (index, item) {
+    //                        ddloptions += "<option value=" + item.P_infotable + ">" + item.NameOfInfo + "</option>";
+    //                    });
+    //                }
+    //                $(ddid).append(ddloptions);
+    //                if (ddvalue != "") {
+    //                    $(ddid).val(ddvalue);
+    //                }
+    //                else {
+    //                    $(ddid).val(0);
+    //                }
+
+    //                if (fieldsArr.length > 0) {
+    //                    $.each(fieldsArr, function (index, item) {
+    //                        var fieldarr = item.split("~")
+    //                        if (fieldarr[0] == ddType) {
+    //                            setCompositeFieldValue(fieldarr);
+    //                        }
+    //                    });
+    //                }
+
+    //            });
+
+    //        }
+    //        else if (ctrlarr[1] == "radio") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4' id='radio-" + i + "'>"
+    //                          + "</div></div>");
+    //            $("#RegForm1Div").append(container)
+    //            var radioname = ctrlarr[2];
+    //            var defval = $.trim(ctrlarr[4]);
+    //            var radiotype = ctrlarr[1];
+    //            var radiodivid = "#radio-" + i;
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var radiooptions = "";
+    //                if (data != 'error') {
+    //                    $.each(data.data, function (index, item) {
+    //                        radiooptions += "<input  name='" + radioname + "' id='" + radioname + "' style='margin-right:5px;margin-left:5px;' type='" + radiotype + "' value='" + item.P_infotable + "' "
+    //                        if (defval == item.P_infotable) {
+    //                            radiooptions += "checked"
+    //                        };
+    //                        radiooptions += "/>" + item.NameOfInfo;
+    //                    });
+    //                    $(radiodivid).append(radiooptions);
+    //                }
+
+    //                if (fieldsArr.length > 0) {
+    //                    $.each(fieldsArr, function (index, item) {
+    //                        var fieldarr = item.split("~")
+    //                        if (fieldarr[0] == radiotype) {
+    //                            setCompositeFieldValue(fieldarr);
+    //                        }
+    //                    });
+    //                }
+    //            });
+    //        }
+    //        else if (ctrlarr[1] == "checkbox") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'  id='checkbox-" + i + "'>"
+    //                           + "</div></div>");
+    //            $("#RegForm1Div").append(container)
+
+    //            var checkboxname = ctrlarr[2];
+    //            var checkboxtype = ctrlarr[1];
+    //            var checkboxdivid = "#checkbox-" + i;
+    //            var valueArr = $.trim(ctrlarr[4]).split(",");
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var checkoptions = "";
+    //                if (data != "error") {
+    //                    $.each(data.data, function (index, item) {
+    //                        checkoptions += "<label class='checkbox-inline'><input  type='" + checkboxtype + "' id='" + checkboxname + "' name='" + checkboxname + "' value='" + item.P_infotable + "' />" + item.NameOfInfo + "</label>";
+    //                    });
+    //                    $(checkboxdivid).append(checkoptions);
+
+    //                    $.each(valueArr, function (index, item) {
+    //                        $("input[type=" + checkboxtype + "][name=" + checkboxname + "][value=" + item + "]").attr("checked", true);
+
+    //                    });
+    //                }
+    //                if (fieldsArr.length > 0) {
+    //                    $.each(fieldsArr, function (index, item) {
+    //                        var fieldarr = item.split("~")
+    //                        if (fieldarr[0] == checkboxtype) {
+    //                            setCompositeFieldValue(fieldarr);
+    //                        }
+    //                    });
+    //                }
+
+    //            });
+    //        }
+    //    }
+
+    //}
+
+    //function setCompositeFieldValue(fieldarr) {
+    //    if (fieldarr[0] == "text" || fieldarr[0] == "date" || fieldarr[0] == "password" || fieldarr[0] == "email" || fieldarr[0] == "number" || fieldarr[0] == "dropdown") {
+    //        $("#" + fieldarr[1]).val($.trim(fieldarr[2]));
+    //    }
+    //    else if (fieldarr[0] == "radio") {
+    //        $("input[type=" + fieldarr[0] + "][name=" + fieldarr[1] + "][value=" + $.trim(fieldarr[2]) + "]").attr("checked", true);
+    //    }
+    //    else if (fieldarr[0] == "checkbox") {
+    //        $("input[type=" + fieldarr[0] + "][name=" + fieldarr[1] + "]:checked").attr("checked", false);
+    //        var valArr = $.trim(fieldarr[2]).split(",");
+    //        $.each(valArr, function (index, item) {
+    //            $("input[type=" + fieldarr[0] + "][name=" + fieldarr[1] + "][value=" + item + "]").attr("checked", true);
+    //        });
+    //    }
+    //}
+
+
+</script>
+
+<div class="container">
+    <div class="icon-bar">
+        <a class="top btn-Remark" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Remarks">
+            <i class="glyphicon glyphicon-comment"></i>
+        </a>
+
+        <a class="top btn-MsgSend" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Message to Customer">
+            <i class="glyphicon glyphicon-phone"></i>
+        </a>
+
+        <a class="top btn-MailCustomer" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Mail to Customer">
+            <i class="glyphicon glyphicon-envelope"></i>
+        </a>
+
+        <a class="top btn-MailDealer" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Mail to Dealer">
+            <img src="~/images/Untitled-2.png" style="height:30px" />
+        </a>
+        @*<a class="top btn-LinkCustomer" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Link Customer">
+                <img src="~/images/Untitled-2.png" style="height:30px" />
+            </a>*@
+    </div>
+</div>
+
+<input type="hidden" name="grid1" id="grid1" value="">
+@*<div class="text-center"><button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#MsgCustomer">Send Message to Customer</button> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#MailCustomer">Send Email to Customer</button> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#MailDealer">Send Email to Dealer</button> </div>*@
+<form Class="form-horizontal" action="@Url.Action("EditRegCalls")" role="form" method="post" id="RegForm1">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.",new {@class = "text-danger"})
+    @*<h2 Class="text-center text-info">Registered Call</h2>
+        <hr />*@
+    @*@Code  to change color of message for call closed
+        If ViewData("color") = "Error" Then
+                @<p Class="text-center text-alert">@ViewContext.TempData("Message")</p>
+            Else
+                @<p Class="text-center text-success">@ViewContext.TempData("Message")</p>
+            End If
+        End Code*@
+
+    <p class="text-center text-success">@TempData["Message"]</p>
+
+    <br />
+    <div id="RegForm1Div">
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Firm Name<strong style="color:red;">*</strong></Label>
+        <div Class="col-sm-4" data-tip="Please provide correct firm name so that we can help you.">
+            @Html.HiddenFor(model=> model.AllCallsReg_key)
+            @Html.HiddenFor(model=> model.P_AllCallsReg)
+            @Html.HiddenFor(model=> model.P_Customers)
+            @Html.TextBoxFor(model=> model.Firmname,new {@class = "form-control input-sm"})
+            @Html.ValidationMessageFor(model=> Model.Firmname, "",new {@class = "text-danger"})
+        </div>
+    </div>
+    @Html.TextBoxFor(model=> model.registerdate,new {@class = "form-control input-sm", @type = "hidden"})
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Contact Person</Label>
+        <div Class="col-sm-4">
+            @Html.TextBoxFor(model=> model.Contactperson,new {@class = "form-control input-sm"})
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Email</Label>
+        <div Class="col-sm-4">
+            @Html.TextBoxFor(model=> model.Emailid,new {@class = "form-control input-sm", @type = "email"})
+            @Html.ValidationMessageFor(model=> Model.Emailid, "",new {@class = "text-danger"})
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Contact No<strong style="color:red;">*</strong></Label>
+        <div Class="col-sm-4" data-tip="This Contact number will be used to send notification about progress of your issue.Please provide correct Number.">
+            @Html.TextBoxFor(model=> model.Mobileno,new {@class = "form-control input-sm", @maxlength = "10", @placeholder = "Enter 10 digit number Only"})
+            @Html.ValidationMessageFor(model=> Model.Mobileno, "",new {@class = "text-danger"})
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Bussiness Type</Label>
+        <div Class="col-sm-4">
+            @Html.List_Search("Buss", "7", "-Select Business Types-", Model.Businesstype,"",new {@class = "form-control input-sm"})
+
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Location</Label>
+        <div Class="col-sm-4">
+            @Html.TextBoxFor(model=> model.Location,new {@class = "form-control input-sm", @PlaceHolder = "District,State"})
+            @Html.ValidationMessageFor(model=> Model.Location, "",new {@class = "text-danger"})
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Issue Type</Label>
+        <div Class="col-sm-4">
+            @Html.List_Search("IssueType", "38", "-Select Issue Types-", Model.Issuetype,"",new {@class = "form-control input-sm"})
+
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Issue description</Label>
+        <div Class="col-sm-4">
+            @Html.TextAreaFor(model=> model.Issuedescription, 4, 63,new {@class = "form-control input-sm"})
+        </div>
+    </div>
+    </div>
+    <div id="Management">
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Upload File Name</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.UploadfileName,new {@class = "form-control input-sm", @readonly = "true"})
+                @{
+                    if (Model.UploadfileName.Trim().ToLower() != "none")
+                    {
+                        string[] FileNames;
+                        FileNames = Model.UploadfileName.Split(",");
+                        for (int i=0; i<=FileNames.Length - 1;i++)
+                        {
+                            @Html.ActionLink(FileNames[i], "download",new {@FileName = FileNames[i]}) 
+                            <br />
+                        }
+                    }
+                }
+                @*@Html.ActionLink("download", "download",new {.FileName = Model.FileName})*@
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Status</Label>
+            <div Class="col-sm-4">
+                @Html.List_Search("Status", "39", "-Select Issue Status-", Model.Status,"",new {@class = "form-control input-sm"})
+
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Date</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Creationdate,new {@class = "form-control input-sm", @readonly = "true"})
+            </div>
+        </div>
+    </div>
+
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Modified By</Label>
+        <div Class="col-sm-4">
+            @Html.List_Search("modifiedby", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y'", Model.modifiedby,"",new {@class = "form-control input-sm ", @style = "padding-left:1px; overflow-y:scroll; data-placement:bottom;"})
+
+        </div>
+    </div>
+
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Priority</Label>
+        <div Class="col-sm-4">
+            @Html.TextBoxFor(model=> model.PriorityOrder,new {@class = "form-control input-sm", @maxlength = "1"})
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">SARAL Remark</Label>
+        <div Class="col-sm-4">
+            @Html.TextAreaFor(model=> model.RemarkSaral, 4, 63,new {@class = "form-control input-sm"})
+        </div>
+    </div>
+    <hr />
+    <div Class="form-group text-center" style="margin-right:100px; margin-top:30px;">
+        <Button type="submit" Class="btn btn-primary btn-Submit" style="margin-right:20px">Submit</Button>
+        <a href="@Url.Action("ManageRegCalls")" Class="btn btn-default">Cancel</a>
+    </div>
+</form>
+<div class="modal fade" id="Remark">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                @*<a href="@Url.Action("ManageRegCalls")" Class="btn close"><span aria-hidden="true">&times;</span></a>*@
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Add Remark</h4>
+
+            </div>
+            <div class="modal-body" id="myRemark">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="MsgCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Message To Customer</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <div class="modal-body" id="myMsgCustomer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="MailToCustomer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Email To Customer</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <div class="modal-body" id="MailCustomerContent">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="MailToDealer">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Email To Dealer</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <div class="modal-body" id="MailDealerContent">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="LinkCustomer">
+    <div class="modal-dialog" role="form" style="width:750px;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:0px; border-bottom:0px">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="text-align:center">Link Customer</h4>
+                <hr style="width:70%; margin-top:10px" />
+            </div>
+            <div class="modal-body" id="LinkCustomerContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

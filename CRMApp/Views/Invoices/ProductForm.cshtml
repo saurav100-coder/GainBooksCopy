@@ -1,0 +1,182 @@
+﻿@model CRMApp.Models.ProductMaster
+@{
+    ViewData["Title"] = "ProductForm";
+    string CalledFrom = ViewBag.calledfrom;
+    if (CalledFrom == "manageproducts")
+    {
+        Layout = "";
+    }
+}
+
+
+@if (CalledFrom != "manageproducts")
+{
+    <link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+    <script src="~/Scripts/Custom/dropdown.js"></script>
+}
+
+<script src="~/Scripts/Custom/CompositeControls.js"></script>
+<script src="~/Scripts/Custom/ProductForm.js"></script>
+
+<style>
+    .btn-primary {
+        background-color: #105faf;
+        border-color: #367fa9;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        if ("@Model.infoString" != "null" && "@Model.infoString" != "undefined" && "@Model.infoString" != "") {
+            createControls("@Model.infoString");
+        }
+
+    });
+
+    function createControls(infostring) {
+        var ctrlsArr = infostring.split("#");
+        if ("@Model.compositefields" != "null" && "@Model.compositefields" != "undefined" && "@Model.compositefields" != "") {
+            var compositefieldsString = "@Model.compositefields";
+            fieldsArr = compositefieldsString.split("#");
+        }
+        for (var i = 0; i < ctrlsArr.length; i++) {
+            var ctrlarr = ctrlsArr[i].split("~");
+            var container = ""
+            if (i % 2 == 0) {
+                container = $('<div class="col-sm-12 col-md-12" style="overflow:hidden;"></div>');
+            }
+            else {
+                container = $("#fieldsDiv").children("div.col-sm-12.col-md-12").last();
+            }
+
+            var fieldLabel = $.trim(ctrlarr[0]);
+            var fieldType = $.trim(ctrlarr[1]);
+            var fieldName = $.trim(ctrlarr[2]);
+            var infotype = $.trim(ctrlarr[3]);
+            var defaultvalue = $.trim(ctrlarr[4]);
+            var fieldWrapper = $("<div class='col-sm-6 col-md-6'>");
+            var formGroup = $("<div style='margin-bottom:10px;' class='forminput'>");
+            fieldWrapper.append(formGroup);
+            formGroup.append("<Label class='text-info labeltext' style='color: #105faf;'>" + fieldLabel + "</Label>");
+            formGroup.append(makeCompositeFieldHtml(fieldLabel, fieldType, fieldName, infotype, defaultvalue));
+            container.append(fieldWrapper);
+            $("#fieldsDiv").append(container);
+
+            if (fieldType == "text" || fieldType == "date" || fieldType == "password" || fieldType == "email" || fieldType == "number") {
+                if (fieldsArr.length > 0) {
+                    $.each(fieldsArr, function (index, item) {
+                        var fieldarr = item.split("~")
+                        if (fieldarr[1] == fieldName) {
+                            setCompositeFieldValue(fieldarr);
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+</script>
+
+<h2 class="text-center text-primary Task" style="color: #105faf;">Product</h2>
+<div class="hr"></div>
+<div class="panel panel-default PanelForm" style="/*width:300px;*/ margin:0px auto">
+    <div class="panel-body">
+        <form action="@Url.Action("ProductForm")" method="post" id="frmAddProduct">
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessage("0", new {@class = "text-danger"})
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model=> model.prodcode)
+
+            <div class="row mainpanel" style="margin-left:20px">
+                <div id="fieldsDiv">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Product Name<strong style="color:red">*</strong> </label>
+                                @Html.TextBoxFor(model=> model.prodname, new {@class = "form-control input-sm"})
+                                <span id="productNameMsg" class="errorMsgSpan" style="color:red"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Display Code</label>
+                                @Html.TextBoxFor(model=> model.displcode, new {@class = "form-control input-sm"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Packing<strong style="color:red">*</strong> </label>
+                                @Html.TextBoxFor(model=> model.packing, new {@class = "form-control input-sm"})
+                                <span id="packingMsg" class="errorMsgSpan" style="color:red"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Locked</label>
+                                @Html.DropDownListFor(model=>model.locked, new List<SelectListItem>{new SelectListItem{Text="N", Value="n"}, new SelectListItem{Text="Y", Value="y"}},new{@class="form-control input-sm"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Mininum Order Quantity</label>
+                                @Html.TextBoxFor(model=> model.minorderqty, new {@class = "form-control input-sm"})
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Max Order Quantity</label>
+                                @Html.TextBoxFor(model=> model.maxorderqty, new {@class = "form-control input-sm"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">MRP<strong style="color:red">*</strong> </label>
+                                @Html.TextBoxFor(model=> model.mrp, new {@class = "form-control input-sm"})
+                                <span id="mrpMsg" class="errorMsgSpan" style="color:red"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">MSP<strong style="color:red">*</strong> </label>
+                                @Html.TextBoxFor(model=> model.baserate, new {@class = "form-control input-sm"})
+                                <span id="mspMsg" class="errorMsgSpan" style="color:red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">Selling Price </label>
+                                @Html.TextBoxFor(model=> model.ptr, new {@class = "form-control input-sm"})
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div style="margin-bottom:10px" class="forminput">
+                                <label class="text-info labeltext" style="color: #105faf;">User Product Code </label>
+                                @Html.TextBoxFor(model=> model.userprodcode, new {@class = "form-control input-sm"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="mainbutton text-center">
+                    <input type="button" name="Submit" value="Submit" class="btn btn-primary" id="Load" onclick="submitProductForm('frmAddProduct',this);" />
+                    <input type="button" name="Cancel" value="Cancel" class="btn btn-default" style="margin-left:20px" onclick="window.location.href = '/Invoices/ManageProducts';" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+

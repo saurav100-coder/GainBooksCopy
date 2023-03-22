@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "ManageCompositeFields";
+}
+
+<link href="~/Content/Custom/ManageCompositeFields.css" rel="stylesheet" />
+<script src="~/Scripts/Custom/ManageCompositeFields.js"></script>
+
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+@Html.List_Search("ddlViewid", "- Select View -", "viewsettings", "viewid", "p_viewsettings", "rowstatus=0 and infotype='compositestring' and userlogin_key=0 and (updateflag<>'D' or updateflag is null)",0,"",new {@class = "", @style = "width:230px;height:30px; outline:none; border-style:none; border-bottom:1px solid #ddd;margin-bottom:15px;", @onchange = "viewidChange();"},true)
+    
+
+
+<div class="loader" style="display: none; border-style: none !important; background-color: transparent; position: absolute; top: 50%; left: 55%;"><img src="~/Images/loader.gif" /></div>
+
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+@{
+    await Html.RenderPartialAsync("_CompositeFieldsForm");
+}
+
+

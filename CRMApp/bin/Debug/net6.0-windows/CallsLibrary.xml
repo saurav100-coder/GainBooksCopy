@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CallsLibrary
+</name>
+</assembly>
+<members>
+<member name="T:CallsLibrary.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CallsLibrary.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CallsLibrary.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetLastCallFreqDateForP_allcallsreg(System.Int32,System.String)">
+ <summary>
+ get Last call frequency calltime  corresponding to a p_allcallsreg from callFreq table
+ </summary>
+ <param name="Pid">p_allcallsreg</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getallcallsregrowfrommobilenoregdate(System.String,System.DateTime,System.String,System.String)">
+ <summary>
+ get allcallsreg row by mobileno and regdate
+ </summary>
+ <param name="MobileNo"></param>
+ <param name="regdate"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getLastcallFreqrowFromP_allcallsreg(System.Int32,System.String,System.String,System.String)">
+ <summary>
+ get Last call callfreq row from p_allcallsreg
+ </summary>
+ <param name="p_allcallsreg"></param>
+ <param name="linktype"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.PendingCalls(System.String,System.String)">
+ <summary>
+ creates datatable of pending calls from allcallsreg table according to creation date.
+ </summary>
+ <param name="datestr">creation date</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns>datatable</returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCountCallFreqForP_allcallsreg(System.Int32,System.DateTime,System.String,System.String)">
+ <summary>
+ get call frequency count corresponding to a p_allcallsreg from callFreq table
+ </summary>
+ <param name="Pid">p_allcallsreg</param>
+ <param name="LastRemarkDate">Creation Date of last remark on this call</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqRowFromcalltimeP_allcallsreg(System.String,System.Int32,System.String,System.String)">
+ <summary>
+ get callfreq row corresponding to a p_allcallsreg and calltime
+ </summary>
+ <param name="calltime"></param>
+ <param name="p_allcallsreg"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.EmailidFromTxtFile(System.String,System.String,System.String)">
+ <summary>
+ function which creates comma separated string if emailids from text file according to function name and type 
+ </summary>
+ <param name="EmailidTextFile">Path of text file from which emailids are to be searched.</param>
+ <param name="functionname">Function in which email is being sent</param>
+ <param name="type">type of publish test/production</param>
+ <returns>comma separated string of emailIds</returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.CallClose(System.Data.DataRow,System.Data.DataRow,System.String,System.Data.DataTable)">
+ <summary>
+ This function close the call by changing status in allcallsreg as well as CRMTask tables
+ </summary>
+ <param name="AllcalregRow">Row of allcallsreg to be closed from db.</param>
+ <param name="sessionRow">Websession Row of Current Session.</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.CallAssigntoEmp(System.Data.DataRow,System.Data.DataRow,System.Int32,System.String)">
+ <summary>
+ Function to assign a call to an employee
+ </summary>
+ <param name="AllcallregRow">Row to the allcallreg table</param>
+ <param name="sessionRow">sessionRow of the loggedIn User.</param>
+ <param name="p_acccode">Employee to which call is to be assigned.</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.DefferTask(System.Int32,System.String,System.Data.DataRow,System.String)">
+ <summary>
+ functionality to deffer a task
+ </summary>
+ <param name="taskid">CRMTasks_key of the row</param>
+ <param name="NextActionDate">NextActionDate from control</param>
+ <param name="sessionRow">sessionRow of loggedIn user</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getRowsCountAllCallsReg(System.Int32,System.String,System.String)">
+ <summary>
+ get total allcallsregrow's rows count 
+ </summary>
+ <param name="lcondition"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getRowsCountOfCompletedCalls(System.String,System.String)">
+ <summary>
+ get Completed allcallsregrow's rows count 
+ </summary>
+ <param name="lcondition"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getAllcallengagedStatusforp_issuesfilegst(System.Int32,System.String,System.String)">
+ <summary>
+ get callEngaged from P_allcallsReg
+ </summary>
+ <param name="p_allcallsreg"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getALLRegCallsGrid_new(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ to get allcallsreg rows from allcallsreg table
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="Order"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.sendCompletedCallsdt(System.Data.DataTable,System.Data.DataTable,System.DateTime,System.String)">
+ <summary>
+ to get completed call datatable
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="compcallsdate"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetDateTimeDiffFromTwoDates(System.DateTime,System.DateTime)">
+ <summary>
+ Get the dateTime difference between two dates in days,hrs,min format
+ </summary>
+ <param name="firstDate">smaller Date value</param>
+ <param name="secondDate">larger dateTime value</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCompletedCallsEmailFormat(System.Data.DataTable,System.DateTime)">
+ <summary>
+ function to create email body from Completedcalls dt
+ </summary>
+ <param name="dt">datatable</param>
+ <param name="Creationdate">creation date</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.SetCallEngageStatus(System.Int32,System.Int32,System.Data.DataRow,System.String)">
+ <summary>
+ function to set CallEngageStatus 
+ </summary>
+ <param name="CallId">P_issuesfilegst</param>
+ <param name="Engagestatus">Infotable_key</param>
+ <param name="SessionRow"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallengagedrowforp_issuesfilegst(System.Int32,System.String,System.String)">
+ <summary>
+ get callEngaged from P_issuesfilegst
+ </summary>
+ <param name="p_issuesfilegst">p_issuesfilegst/P_allcallsreg</param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getPendingRegCallsDataGrid_new(System.Int32,System.Int32,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ get pending registered calls data 
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="dtInfotableUser"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="Order"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getPendingCallsMorethanDays(System.String,System.String)">
+ <summary>
+ Get pending calls more than 3 days
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetSearchStringForPendingRegCalls(System.String)">
+ <summary>
+ Creates the search string which is used in paging method in grid
+ </summary>
+ <param name="search"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.DefferTask(System.Int32,System.String,System.Data.DataRow,System.String,System.String)">
+ <summary>
+ functionality to deffer a task
+ </summary>
+ <param name="taskid">CRMTasks_key of the row</param>
+ <param name="NextActionDate">NextActionDate from control</param>
+ <param name="sessionRow">sessionRow of loggedIn user</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <param name="LinkType">LinkType</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetPendingCallsCount(System.String)">
+ <summary>
+ Get the number of pending calls
+ </summary>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.UpdateOnsiteCount(System.Int32,System.Data.DataRow,System.String)">
+ <summary>
+ to update OnsiteCount in allcallsreg table
+ </summary>
+ <param name="callId"></param>
+ <param name="sessionRow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCallRowfromAllCallsReg_key(System.Int32,System.String,System.String)">
+ <summary>
+ to get allcallsreg Row from AllCallsReg_key
+ </summary>
+ <param name="id"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.InsertUpdateAllCallsReg(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Returns p_allcallsreg in case new row is inserted and number of rows effected in update transaction in case of update
+ </summary>
+ <param name="id">P_allcallsreg</param>
+ <param name="ChangedFieldsValuesPair">Hashtable of field values to be inserted or whose value has to be updated in case of update</param>
+ <param name="sessionrow">sessionrow</param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallengageddtforp_issuesfilegst(System.String,System.String@,System.String)">
+ <summary>
+ get callEngaged datatable for P_issuesfilegst comma-seperated-string
+ </summary>
+ <param name="p_issuesfilegst"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.ExportCallsToExcel(System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ to get calls information related datatable
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.sendPendingCallsReportWithPayment(System.DateTime,System.String,System.Data.DataRow,System.String)">
+ <summary>
+ to send Pending Calls Report With Payment
+ </summary>
+ <param name="pendingcallsDate"></param>
+ <param name="emailIdText"></param>
+ <param name="sessionRow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCompletedCallsDTforDailyCompletedCalls(System.DateTime,System.DateTime,System.String,System.Int32,System.Data.DataTable,System.Data.DataTable)">
+ <summary>
+ Get datatable for completed Calls between a time range
+ </summary>
+ <param name="MinDate">Start Date</param>
+ <param name="MaxDate">End Date</param>
+ <param name="serverdatabase">serverdatabase</param>
+ <param name="empID">empID</param>
+ <param name="dtinfoTable">dtinfoTable</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCallRowFromMobNoRegisterDate(System.String,System.String,System.String,System.String)">
+ <summary>
+ to get allcallsreg Row From MobNo and RegisterDate
+ </summary>
+ <param name="Mobileno"></param>
+ <param name="RegisterDate"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqRowFromcalltime(System.String,System.String,System.String)">
+ <summary>
+ return callfreq table  row based on calling time
+ </summary>
+ <param name="calltime"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getPendingCallRowFromMobNo(System.String,System.String,System.String,System.String,System.String)">
+ <summary>
+ get pending calls row  from mobileno
+ </summary>
+ <param name="Mobileno"></param>
+ <param name="RegisterDate"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <param name="condition"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.sendCompletedCallsReport(System.Data.DataTable,System.DateTime,System.String,System.Data.DataRow,System.String)">
+ <summary>
+ to send completed call report
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="compcallsdate"></param>
+ <param name="emailidtext"></param>
+ <param name="sessionrow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.sendMailcompletedcallsReport(System.Data.DataTable,System.Data.DataTable,System.DateTime,System.String,System.Data.DataRow,System.String)">
+ <summary>
+ send completed calls reports's mail
+ </summary>
+ <param name="dtinfotable"></param>
+ <param name="Calldate"></param>
+ <param name="emailIdText"></param>
+ <param name="sessionRow"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.InitialCallResponseTime(System.Int32,System.String)">
+ <summary>
+ function return response time in days,hrs,min format between call register date and first remark creation date
+ </summary>
+ <param name="id">allcallsreg_key of the call</param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.InsertIntoCallFreq(System.Data.DataTable,System.String)">
+ <summary>
+ Insert row into callfreqdt as per datatable
+ </summary>
+ <param name="callfreqdt"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.InsertUpdateCRMLead(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Returns P_CRMLead in case new row is inserted and number of rows effected in update transaction in case of update
+ </summary>
+ <param name="Leadid">P_CRMLead</param>
+ <param name="ChangedFieldsValuesPair">Hashtable of field values to be inserted or whose value has to be updated in case of update</param>
+ <param name="sessionrow">sessionrow</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getPendingLeadRowFromMobNo(System.String,System.String,System.String)">
+ <summary>
+ get pending crmlead  row 
+ </summary>
+ <param name="Mobileno"></param>
+ <param name="columnstr"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCRMAccountsRowFromMobNo(System.String,System.String,System.String)">
+ <summary>
+ Get crmaccounts Row for a particular mobile number
+ </summary>
+ <param name="mobileno"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.RegisterLeadCallforAllCall(System.Data.DataRow,System.Data.DataRow,System.String,System.DateTime,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Data.DataRow)">
+ <summary>
+ register sale related remarks calls
+ </summary>
+ <param name="sessionrow"></param>
+ <param name="userloginrow"></param>
+ <param name="mobileno"></param>
+ <param name="calldate"></param>
+ <param name="source"></param>
+ <param name="calltype"></param>
+ <param name="callduration"></param>
+ <param name="callsource"></param>
+ <param name="assignedto"></param>
+ <param name="logincode"></param>
+ <param name="logintype"></param>
+ <param name="remark"></param>
+ <param name="leadrow"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getleadrowfromp_crmlead(System.Int32,System.String,System.String)">
+ <summary>
+ to get lead row from p_crmlead
+ </summary>
+ <param name="p_crmlead"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.ConvertIssuerowtoLeadrow(System.Data.DataRow,System.Data.DataRow,System.String)">
+ <summary>
+ to convert issuesfilegst row to crmlead row
+ </summary>
+ <param name="issuerow"></param>
+ <param name="sessionrow"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.ConvertLeadrowtoIssuerow(System.Data.DataRow,System.Data.DataRow,System.String)">
+ <summary>
+ to convert crmlead row to issuesfilegst row
+ </summary>
+ <param name="leadrow"></param>
+ <param name="sessionrow"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.deleterows(System.String,System.String,System.String)">
+ <summary>
+ to delete rows from a table based on condition
+ </summary>
+ <param name="tablename"></param>
+ <param name="wherestr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.updaterows(System.String,System.String,System.String,System.String)">
+ <summary>
+ to update rows from a table based on update and where condition
+ </summary>
+ <param name="updatestr"></param>
+ <param name="wherestr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getleadcalldata(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ to get Previous lead calls registered according to the p_crmaccounts.
+ </summary>
+ <param name="p_crmaccounts">p_crmaccounts from the crmaccounts</param>
+ <param name="dtinfotable">dt containing data of InfoTable.</param>
+ <param name="noofrecord">No of record to bring "3","4".Default ="*" bring all records.</param>
+ <returns>dt containing call related data of a customer</returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.InsertUpdateCRMAccounts(System.Int32@,System.Collections.Hashtable@,System.Data.DataRow,System.String)">
+ <summary>
+ Returns P_CRMAccounts in case new row is inserted and number of rows effected in update transaction in case of update
+ </summary>
+ <param name="P_CRMAccounts">P_CRMAccounts</param>
+ <param name="ChangedFieldsValuesPair">Hashtable of field values to be inserted or whose value has to be updated in case of update</param>
+ <param name="sessionrow">sessionrow</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCRMAccountRowFromP_CRMAccounts(System.Int32,System.String,System.String)">
+ <summary>
+ Get CRMAccount Row corresponding to a particular p_acccode
+ </summary>
+ <param name="p_CRMAccounts"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.LeadCallAssigntoEmp(System.Data.DataRow,System.Data.DataRow,System.Int32,System.String)">
+ <summary>
+ Function to assign a call to an employee
+ </summary>
+ <param name="CRMLeadRow">Row to the issueFilegst table</param>
+ <param name="sessionRow">sessionRow of the loggedIn User.</param>
+ <param name="p_acccode">Employee to which call is to be assigned.</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCallRowfromCrmlead_key(System.Int32,System.String,System.String)">
+ <summary>
+ function to get crmlead row from crmlead_key
+ </summary>
+ <param name="id">crmlead_key</param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.deleteCall(System.String,System.String,System.String)">
+ <summary>
+ functon to delete a call from issuesfilegst/crmlead and crmtasks
+ </summary>
+ <param name="callId"></param>
+ <param name="calltype">"L" or "C"</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCallRowfromP_crmlead(System.Int32,System.String,System.String)">
+ <summary>
+ get Row from CRMLEAD table
+ </summary>
+ <param name="Pid">P_crmlead</param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.CreateCallFreqDT(System.Int32,System.DateTime,System.String,System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+ <summary>
+ Create datatable as per arguments provided of callfreq
+ </summary>
+ <param name="p_allcallsreg"></param>
+ <param name="calltime"></param>
+ <param name="websessions_key"></param>
+ <param name="MobileNo"></param>
+ <param name="callsource"></param>
+ <param name="Userlogin_key"></param>
+ <param name="callduration"></param>
+ <param name="calltype"></param>
+ <param name="LinkType"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCallRowfromP_allcallsreg(System.Int32,System.String,System.String)">
+ <summary>
+ to get allcallsreg from P_allcallsreg
+ </summary>
+ <param name="id"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCallCollaboratorsByCallId(System.Int32,System.String)">
+ <summary>
+ to get Call Collaborators By CallId
+ </summary>
+ <param name="CallId"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCallDurationReport(System.String,System.String,System.String,System.String,System.Int32,System.String)">
+ <summary>
+ get call duration report 
+ </summary>
+ <param name="fromdate"></param>
+ <param name="todate"></param>
+ <param name="filepath"></param>
+ <param name="serverdatabase"></param>
+ <param name="userlogin_key"></param>
+ <param name="calltype"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqrowfrommobilenocalltimecalltype(System.String,System.DateTime,System.String,System.String,System.String)">
+ <summary>
+ get callfreq row by mobileno and calltime
+ </summary>
+ <param name="MobileNo"></param>
+ <param name="calltime"></param>
+ <param name="calltype"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getUserRolesdatafromserviceroles(System.String,System.String,System.String)">
+ <summary>
+ get userroles datatable using serviceroles
+ </summary>
+ <param name="serviceroles"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.ExportDataToExcel(System.Data.DataTable,System.String,System.Data.DataTable)">
+ <summary>
+ Function creates the excel file from the datatable in the provided filepath with file name mentioned in the path.
+ </summary>
+ <param name="dt">datatable from which excel is to be created</param>
+ <param name="filepath">Fullfile path with file name on which file is to be created.</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallsourcenumberdt(System.String)">
+ <summary>
+ get call source number datatable
+ </summary>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallFreqData(System.String,System.String,System.Int32,System.String,System.String[],System.String,System.String)">
+ <summary>
+ get call freq data 
+ </summary>
+ <param name="fromdate"></param>
+ <param name="todate"></param>
+ <param name="userlogin_key"></param>
+ <param name="calltype"></param>
+ <param name="calltypearr"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallsnumber(System.String,System.String,System.Int32,System.String,System.String)">
+ <summary>
+ return the number of calls 
+ </summary>
+ <param name="fromdate"></param>
+ <param name="todate"></param>
+ <param name="userlogin_key"></param>
+ <param name="calltype"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqRowFromcalltimep_allcallsregcalltype(System.String,System.Int32,System.String,System.String,System.String)">
+ <summary>
+ get call freq row from calltime,p_allcallsreg and calltype
+ </summary>
+ <param name="calltime"></param>
+ <param name="p_allcallsreg"></param>
+ <param name="calltype"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getPendingwaitingCallRowFromMobNoCalltime(System.String,System.String,System.String,System.String)">
+ <summary>
+ get pending waiting call row 
+ </summary>
+ <param name="mobileno"></param>
+ <param name="calltime"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.registerednotregcalls(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ for registered not registered calls 
+ </summary>
+ <param name="websessions_key"></param>
+ <param name="Userlogin_key"></param>
+ <param name="mobno"></param>
+ <param name="calldatestr"></param>
+ <param name="sourcestr"></param>
+ <param name="callduration"></param>
+ <param name="calltype"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallFreqDataFromP_allcallsreg(System.Int32,System.String,System.String)">
+ <summary>
+ get callfreq data from p_allcallsreg
+ </summary>
+ <param name="p_allcallsreg"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqrowfromcallfreq_key(System.Int32,System.String,System.String)">
+ <summary>
+ get callfreq row from callfreq_key
+ </summary>
+ <param name="callfreq_key"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getPendingcrmleadCallsDataGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ get pending registered calls data
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="lcondition"></param>
+ <param name="Order"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getCRMAccountsDataGrid(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ get CRMAccounts  data
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="serverdatabase"></param>
+ <param name="lcondition"></param>
+ <param name="Order"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getRowsCountPendingCRMLead(System.String,System.String)">
+ <summary>
+ get total pending CRMLead rows count (join is used so that count can be matched with search results)
+ </summary>
+ <param name="lcondition"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqrowfromp_callfreq(System.Int32,System.String,System.String)">
+ <summary>
+ get callfreq row from p_callfreq
+ </summary>
+ <param name="p_callfreq"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqrow(System.String,System.String,System.String)">
+ <summary>
+ to get callfreq row based on condition
+ </summary>
+ <param name="condition"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCallData(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String,System.String)">
+ <summary>
+ function to get call registered according to the P_Customers.
+ </summary>
+ <param name="P_Customers">P_Customers of the Customer</param>
+ <param name="DtInfoTable">dt containing data of InfoTable.</param>
+ <param name="serverdatabase"></param>
+ <param name="NoOfRecord">No of record to bring "3","4".Default ="*" bring all records.</param>
+ <returns>dt containing call related data of a customer</returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getAssignedtoDataFromP_allcallsregLinktype(System.Int32,System.String,System.String,System.String)">
+ <summary>
+ get AssignedTo data from P_allcallsreg and Linktype
+ </summary>
+ <param name="p_allcallsreg"></param>
+ <param name="linktype"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallfreqrowfrommobilenocalltime(System.String,System.DateTime,System.String,System.String)">
+ <summary>
+ get callfreq row by mobileno and calltime
+ </summary>
+ <param name="MobileNo"></param>
+ <param name="calltime"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcalltypeinfodt(System.String,System.String)">
+ <summary>
+ to get calltype infoatable datatable
+ </summary>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallenagegedreportfromcallid(System.DateTime,System.DateTime,System.String,System.Int32)">
+ <summary>
+ get callengaged report from callid
+ </summary>
+ <param name="starttime"></param>
+ <param name="endtime"></param>
+ <param name="serverdatabase"></param>
+ <param name="callid"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallenagagedreportfromempid(System.DateTime,System.DateTime,System.String,System.Int32)">
+ <summary>
+ get callengaged report from empid
+ </summary>
+ <param name="starttime"></param>
+ <param name="endtime"></param>
+ <param name="serverdatabase"></param>
+ <param name="empid"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallenagegeddtfromstarttimelogincode(System.DateTime,System.DateTime,System.String,System.Int32,System.String)">
+ <summary>
+ get callengaged dt from starttimerange and callid
+ </summary>
+ <param name="starttime"></param>
+ <param name="endtime"></param>
+ <param name="serverdatabase"></param>
+ <param name="empid"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallengaedreportfromcustcode(System.DateTime,System.DateTime,System.String,System.String)">
+ <summary>
+ to get callengaed report from custcode
+ </summary>
+ <param name="starttime"></param>
+ <param name="endtime"></param>
+ <param name="serverdatabase"></param>
+ <param name="custcode"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallengageddtfromcallid(System.Int32,System.Int32,System.String)">
+ <summary>
+ to get call engaged dt from callid
+ </summary>
+ <param name="callid"></param>
+ <param name="status"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallenagegeddtfromstarttimecallid(System.DateTime,System.DateTime,System.String,System.Int32,System.String)">
+ <summary>
+ get callengaged dt from starttimerange and callid
+ </summary>
+ <param name="starttime"></param>
+ <param name="endtime"></param>
+ <param name="serverdatabase"></param>
+ <param name="callid"></param>
+ <param name="columnStr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.deleteCall(System.Int32,System.String)">
+ <summary>
+ functon to delete a call from issuesfilegst as well as crmtasks
+ </summary>
+ <param name="callId"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.CreateCallRecordDT(System.String,System.Int32,System.String,System.Int32,System.String,System.String,System.Int32,System.Int32)">
+ <summary>
+  Create datatable as per arguments provided of callrecord
+ </summary>
+ <param name="linktype"></param>
+ <param name="linkcode"></param>
+ <param name="source"></param>
+ <param name="linkcustactid"></param>
+ <param name="filename"></param>
+ <param name="linkurl"></param>
+ <param name="websessions_key"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.InsertIntoCallRecord(System.Data.DataTable,System.String)">
+ <summary>
+ Insert row into callrecorddt as per datatable
+ </summary>
+ <param name="callrecorddt"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns> 
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getcallrecordingsrow(System.String,System.String,System.String)">
+ <summary>
+ to get callrecordings row based on condition
+ </summary>
+ <param name="condition"></param>
+ <param name="serverdatabase"></param>
+ <param name="columnstr"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCallRecordingOfRegCalls(System.Int32,System.Int32,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.String,System.String,System.String,System.Int32)">
+ <summary>
+ get pending registered calls data
+ </summary>
+ <param name="start"></param>
+ <param name="dtinfotable"></param>
+ <param name="lcondition"></param>
+ <param name="Order"></param>
+ <param name="psize"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.evaluateMsg(System.Int32,System.Data.DataRow,System.String)">
+ <summary>
+ Function to fetch Message  from msgTemplateTable according to P_msgtemplate
+ </summary>
+ <param name="P_msgtemplate"></param>
+ <param name="sessionRow"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.evaluateVariable(System.String,System.Data.DataRow,System.String)">
+ <summary>
+ Function to evaluate variables value if a variable occurs in Message
+ </summary>
+ <param name="MsgText"></param>
+ <param name="dataRow">Row  from which values are to be fetched</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getlastcallidrowbyp_customers(System.Int32,System.String,System.Int32)">
+ <summary>
+ to get last callid row by p_customers
+ </summary>
+ <param name="p_customers"></param>
+ <param name="noofdays"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.UpdateCallIdinCallFreq(System.Int32,System.Int32,System.String,System.String)">
+ <summary>
+ Update /Transfer callfreq to another Call
+ </summary>
+ <param name="DupliacteCallId">callId whose calls are being transferred</param>
+ <param name="MainCallId">callId to which call are being transferred</param>
+ <param name="linktype">calltype L for crmlead and C for issusfilegst</param>
+ <param name="serverdatabase">ServerDatabase in form of 0_srv_0.0_mdf_0</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCallsCommDataForGrid(System.Int32,System.Nullable{System.Int32},System.Data.DataTable,System.Data.DataTable,System.String,System.Int32,System.String,System.String)">
+ <summary>
+ This function return Call and its remarks details 
+ </summary>
+ <param name="loginkey"></param>
+ <param name="start"></param>
+ <param name="serverdatabase"></param>
+ <param name="pSize"></param>
+ <param name="search"></param>
+ <param name="order"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetRowsCountCallsCommDataForGrid(System.Int32,System.String,System.String)">
+ <summary>
+ Count Total Rows for CallsCommDataGrid
+ </summary>
+ <param name="loginkey"></param>
+ <param name="serverdatabase"></param>
+ <param name="search"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.NumberOfCallsedWorkedOnWithCloseCalls(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+ get the no of calls Worked on (added remarks+closed) of employee at a particular date range
+ </summary>
+ <param name="LoginCode">P_acccode of the customer service employee</param>
+ <param name="startDate">date of which pending calls are wanted</param>
+ <param name="enddate">No of days by which calls are pending</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.pendingCallsDueFormorethanDays(System.Int32,System.DateTime,System.String,System.Int16)">
+ <summary>
+ get the no of pending calls which arepending for  more than a partcular days
+ </summary>
+ <param name="LoginCode">P_acccode of the customer service employee</param>
+ <param name="enddate">date of which pending calls are wanted</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <param name="WorkingDays">No of days by which calls are pending</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.pendingCallsAtTheEndOfTheDay(System.Int32,System.DateTime,System.String)">
+ <summary>
+ function to get the dt of pending calls at the end of a particular date
+ </summary>
+ <param name="LoginCode">P_accode of customer service employee</param>
+ <param name="currentDate">date of which pending calls are calculated</param>
+   ''' <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getRemarksofCalls(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+ get remarks count except UnlinkCustomer of a particular date range and of a particular employee
+ </summary>
+ <param name="LoginCode">P_acccode of employee/0 for all employees</param>
+ <param name="startDate">start date of dateRange</param>
+ <param name="enddate">end date of dateRange</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getActiveWorkingCalls(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+ get active WorkingCalls(remarks + not closed) count except UnlinkCustomer of a particular date range and of a particular employee
+ </summary>
+ <param name="LoginCode">P_acccode of employee/0 for all employees</param>
+ <param name="startDate">start date of dateRange</param>
+ <param name="enddate">end date of dateRange</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.Averagetimeworkedbycallengagestatus(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+ Average Time worked on by call engage status in a particular date range of employee
+ </summary>
+ <param name="LoginCode">P_acccode of the employee</param>
+ <param name="startDate">start date of the date range</param>
+ <param name="enddate">start date of the date range</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.AverageTimetakenToCompleteCall(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+ Average Time taken to complete a call in a particular date range of employee
+ </summary>
+ <param name="LoginCode">P_acccode of the employee</param>
+ <param name="startDate">start date of the date range</param>
+ <param name="enddate">end date of the date range</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getTotalWorkingCalls(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+ getTotalWorkingCalls count except UnlinkCustomer of a particular date range and of a particular employee
+ </summary>
+ <param name="LoginCode">P_acccode of employee/0 for all employees</param>
+ <param name="startDate">start date of dateRange</param>
+ <param name="enddate">end date of dateRange</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.getNoOfClosedCallsExcludingUnlinkCustomers(System.DateTime,System.DateTime,System.String,System.Int32)">
+ <summary>
+ function to get closed calls except unlinkCustomers calls
+ </summary>
+ <param name="creationdateMin">start date of dateRange</param>
+ <param name="creationdateMax">end date of dateRange</param>
+ <param name="empId">P_acccode of employee/0 for all employees</param>
+ <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.TotalNoOfCallsAssignToanEmployee(System.Int32,System.DateTime,System.DateTime,System.String)">
+ <summary>
+get the no of calls assign to employee at in a particular date range
+ </summary>
+ <param name="LoginCode">P_acccode of employee/0 for all employees</param>
+ <param name="startDate">start date of dateRange</param>
+ <param name="enddate">end date of dateRange</param>
+  <param name="serverdatabase">serverdatabase name as string</param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetDocumentDataOfCalls(System.String,System.String)">
+ <summary>
+ Retrun Calls Remarks and Related Document data for comma seperated P_Allcallsreg
+ </summary>
+ <param name="P_Allcallsreg"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetTripRembData(System.String,System.Int32,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="logintype"></param>
+ <param name="logincode"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetDataForReimbursement(System.String,System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="startdate"></param>
+ <param name="enddate"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetDataForReimbursement(System.String,System.String,System.Int32,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="startdate"></param>
+ <param name="enddate"></param>
+ <param name="empid"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetTagsOfACall(System.Int32,System.Data.DataTable,System.Data.DataTable,System.String)">
+ <summary>
+ Return tags data for a call using callid
+ </summary>
+ <param name="callid"></param>
+ <param name="dtinfotable"></param>
+ <param name="dtInfotableUser"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.deleteTag(System.Int32,System.String)">
+ <summary>
+ Delete Call tag data from tags table using p_tags
+ </summary>
+ <param name="p_tags"></param>
+ <param name="serverdatabase"></param>
+ <returns></returns>
+</member>
+<member name="M:CallsLibrary.CallsFunctions.GetCallActivityData(System.Int32,System.Int32,System.String)">
+ <summary>
+ Retrun Call Edit,Remark,Documents and Collaborator history
+ </summary>
+ <param name="callid"></param>
+ <param name="logincode"></param>
+ <param name="serverdatabasename"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

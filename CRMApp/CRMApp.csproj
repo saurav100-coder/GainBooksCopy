@@ -1,0 +1,293 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Accmaster">
+      <HintPath>bin\Debug\net6.0-windows\Accmaster.dll</HintPath>
+    </Reference>
+    <Reference Include="AllCallsReg">
+      <HintPath>bin\Debug\net6.0-windows\AllCallsReg.dll</HintPath>
+    </Reference>
+    <Reference Include="billheader">
+      <HintPath>bin\Debug\net6.0-windows\billheader.dll</HintPath>
+    </Reference>
+    <Reference Include="billheaderpharma">
+      <HintPath>bin\Debug\net6.0-windows\billheaderpharma.dll</HintPath>
+    </Reference>
+    <Reference Include="billitems">
+      <HintPath>bin\Debug\net6.0-windows\billitems.dll</HintPath>
+    </Reference>
+    <Reference Include="billitemspharma">
+      <HintPath>bin\Debug\net6.0-windows\billitemspharma.dll</HintPath>
+    </Reference>
+    <Reference Include="callEngaged">
+      <HintPath>bin\Debug\net6.0-windows\callEngaged.dll</HintPath>
+    </Reference>
+    <Reference Include="CallFreq">
+      <HintPath>bin\Debug\net6.0-windows\CallFreq.dll</HintPath>
+    </Reference>
+    <Reference Include="Callrecordings">
+      <HintPath>bin\Debug\net6.0-windows\Callrecordings.dll</HintPath>
+    </Reference>
+    <Reference Include="CallsLibrary">
+      <HintPath>bin\Debug\net6.0-windows\CallsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>bin\Debug\net6.0-windows\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonFunctionsCloud">
+      <HintPath>bin\Debug\net6.0-windows\CommonFunctionsCloud.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMAccounts">
+      <HintPath>bin\Debug\net6.0-windows\CRMAccounts.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMAutoTaskConfig">
+      <HintPath>bin\Debug\net6.0-windows\CRMAutoTaskConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMCollaborator">
+      <HintPath>bin\Debug\net6.0-windows\CRMCollaborator.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMCommunication">
+      <HintPath>bin\Debug\net6.0-windows\CRMCommunication.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMContacts">
+      <HintPath>bin\Debug\net6.0-windows\CRMContacts.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMDocumentsLink">
+      <HintPath>bin\Debug\net6.0-windows\CRMDocumentsLink.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMLead">
+      <HintPath>bin\Debug\net6.0-windows\CRMLead.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMPhone">
+      <HintPath>bin\Debug\net6.0-windows\CRMPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMStagesMaster">
+      <HintPath>bin\Debug\net6.0-windows\CRMStagesMaster.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMTasks">
+      <HintPath>bin\Debug\net6.0-windows\CRMTasks.dll</HintPath>
+    </Reference>
+    <Reference Include="CRMTasksLibrary">
+      <HintPath>bin\Debug\net6.0-windows\CRMTasksLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomerControl">
+      <HintPath>bin\Debug\net6.0-windows\CustomerControl.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomerFeatureLib">
+      <HintPath>bin\Debug\net6.0-windows\CustomerFeatureLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Customers">
+      <HintPath>bin\Debug\net6.0-windows\Customers.dll</HintPath>
+    </Reference>
+    <Reference Include="DataFunctions">
+      <HintPath>bin\Debug\net6.0-windows\DataFunctions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataSynchStatus">
+      <HintPath>bin\Debug\net6.0-windows\DataSynchStatus.dll</HintPath>
+    </Reference>
+    <Reference Include="DataTypeConversionLib">
+      <HintPath>bin\Debug\net6.0-windows\DataTypeConversionLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>bin\Debug\net6.0-windows\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EmployeeLib">
+      <HintPath>bin\Debug\net6.0-windows\EmployeeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Employees">
+      <HintPath>bin\Debug\net6.0-windows\Employees.dll</HintPath>
+    </Reference>
+    <Reference Include="Enquiry">
+      <HintPath>bin\Debug\net6.0-windows\Enquiry.dll</HintPath>
+    </Reference>
+    <Reference Include="finalattendance">
+      <HintPath>bin\Debug\net6.0-windows\finalattendance.dll</HintPath>
+    </Reference>
+    <Reference Include="GlobalControl">
+      <HintPath>bin\Debug\net6.0-windows\GlobalControl.dll</HintPath>
+    </Reference>
+    <Reference Include="GlobalFunction1">
+      <HintPath>bin\Debug\net6.0-windows\GlobalFunction1.dll</HintPath>
+    </Reference>
+    <Reference Include="GlobalFunction2">
+      <HintPath>bin\Debug\net6.0-windows\GlobalFunction2.dll</HintPath>
+    </Reference>
+    <Reference Include="GoggleApiFunction">
+      <HintPath>bin\Debug\net6.0-windows\GoggleApiFunction.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis">
+      <HintPath>bin\Debug\net6.0-windows\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth">
+      <HintPath>bin\Debug\net6.0-windows\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Calendar.v3">
+      <HintPath>bin\Debug\net6.0-windows\Google.Apis.Calendar.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core">
+      <HintPath>bin\Debug\net6.0-windows\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3">
+      <HintPath>bin\Debug\net6.0-windows\Google.Apis.Drive.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Gmail.v1">
+      <HintPath>bin\Debug\net6.0-windows\Google.Apis.Gmail.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="IemsClassLibrary">
+      <HintPath>bin\Debug\net6.0-windows\IemsClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="iemsgroups">
+      <HintPath>bin\Debug\net6.0-windows\iemsgroups.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageFile">
+      <HintPath>bin\Debug\net6.0-windows\ImageFile.dll</HintPath>
+    </Reference>
+    <Reference Include="InfoTable">
+      <HintPath>bin\Debug\net6.0-windows\InfoTable.dll</HintPath>
+    </Reference>
+    <Reference Include="infotableuser">
+      <HintPath>bin\Debug\net6.0-windows\infotableuser.dll</HintPath>
+    </Reference>
+    <Reference Include="infotypedes">
+      <HintPath>bin\Debug\net6.0-windows\infotypedes.dll</HintPath>
+    </Reference>
+    <Reference Include="Issuesfilegst">
+      <HintPath>bin\Debug\net6.0-windows\Issuesfilegst.dll</HintPath>
+    </Reference>
+    <Reference Include="locationupdates">
+      <HintPath>bin\Debug\net6.0-windows\locationupdates.dll</HintPath>
+    </Reference>
+    <Reference Include="MargDecryptLibrary">
+      <HintPath>bin\Debug\net6.0-windows\MargDecryptLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="mastersynchcontrol">
+      <HintPath>bin\Debug\net6.0-windows\mastersynchcontrol.dll</HintPath>
+    </Reference>
+    <Reference Include="MenuMaster">
+      <HintPath>bin\Debug\net6.0-windows\MenuMaster.dll</HintPath>
+    </Reference>
+    <Reference Include="MobileNotificationLib">
+      <HintPath>bin\Debug\net6.0-windows\MobileNotificationLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MobNotification">
+      <HintPath>bin\Debug\net6.0-windows\MobNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Msgqueue">
+      <HintPath>bin\Debug\net6.0-windows\Msgqueue.dll</HintPath>
+    </Reference>
+    <Reference Include="msgtemplate">
+      <HintPath>bin\Debug\net6.0-windows\msgtemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>bin\Debug\net6.0-windows\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Notification">
+      <HintPath>bin\Debug\net6.0-windows\Notification.dll</HintPath>
+    </Reference>
+    <Reference Include="Notificationcontrol">
+      <HintPath>bin\Debug\net6.0-windows\Notificationcontrol.dll</HintPath>
+    </Reference>
+    <Reference Include="NotificationLib">
+      <HintPath>bin\Debug\net6.0-windows\NotificationLib.dll</HintPath>
+    </Reference>
+    <Reference Include="paytm">
+      <HintPath>bin\Debug\net6.0-windows\paytm.dll</HintPath>
+    </Reference>
+    <Reference Include="Printlibrary">
+      <HintPath>bin\Debug\net6.0-windows\Printlibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="RegisterDllClass">
+      <HintPath>bin\Debug\net6.0-windows\RegisterDllClass.dll</HintPath>
+    </Reference>
+    <Reference Include="RegistrationLib">
+      <HintPath>bin\Debug\net6.0-windows\RegistrationLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ReimbVisit">
+      <HintPath>bin\Debug\net6.0-windows\ReimbVisit.dll</HintPath>
+    </Reference>
+    <Reference Include="saleiems">
+      <HintPath>bin\Debug\net6.0-windows\saleiems.dll</HintPath>
+    </Reference>
+    <Reference Include="SalesOrderLibrary">
+      <HintPath>bin\Debug\net6.0-windows\SalesOrderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SaralAuthLib">
+      <HintPath>bin\Debug\net6.0-windows\SaralAuthLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SetPropertyClass">
+      <HintPath>bin\Debug\net6.0-windows\SetPropertyClass.dll</HintPath>
+    </Reference>
+    <Reference Include="shopcontrol">
+      <HintPath>bin\Debug\net6.0-windows\shopcontrol.dll</HintPath>
+    </Reference>
+    <Reference Include="srl_bch">
+      <HintPath>bin\Debug\net6.0-windows\srl_bch.dll</HintPath>
+    </Reference>
+    <Reference Include="srl_bchpharma">
+      <HintPath>bin\Debug\net6.0-windows\srl_bchpharma.dll</HintPath>
+    </Reference>
+    <Reference Include="srl_ord">
+      <HintPath>bin\Debug\net6.0-windows\srl_ord.dll</HintPath>
+    </Reference>
+    <Reference Include="srl_pro">
+      <HintPath>bin\Debug\net6.0-windows\srl_pro.dll</HintPath>
+    </Reference>
+    <Reference Include="srl_propharma">
+      <HintPath>bin\Debug\net6.0-windows\srl_propharma.dll</HintPath>
+    </Reference>
+    <Reference Include="stdole">
+      <HintPath>bin\Debug\net6.0-windows\stdole.dll</HintPath>
+    </Reference>
+    <Reference Include="tags">
+      <HintPath>bin\Debug\net6.0-windows\tags.dll</HintPath>
+    </Reference>
+    <Reference Include="tasktemplate">
+      <HintPath>bin\Debug\net6.0-windows\tasktemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Tripinfo">
+      <HintPath>bin\Debug\net6.0-windows\Tripinfo.dll</HintPath>
+    </Reference>
+    <Reference Include="TripLog">
+      <HintPath>bin\Debug\net6.0-windows\TripLog.dll</HintPath>
+    </Reference>
+    <Reference Include="UserLogin">
+      <HintPath>bin\Debug\net6.0-windows\UserLogin.dll</HintPath>
+    </Reference>
+    <Reference Include="UserNotification">
+      <HintPath>bin\Debug\net6.0-windows\UserNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Userroles">
+      <HintPath>bin\Debug\net6.0-windows\Userroles.dll</HintPath>
+    </Reference>
+    <Reference Include="UserSettings">
+      <HintPath>bin\Debug\net6.0-windows\UserSettings.dll</HintPath>
+    </Reference>
+    <Reference Include="ValidateMachine">
+      <HintPath>bin\Debug\net6.0-windows\ValidateMachine.dll</HintPath>
+    </Reference>
+    <Reference Include="variabletable">
+      <HintPath>bin\Debug\net6.0-windows\variabletable.dll</HintPath>
+    </Reference>
+    <Reference Include="ViewSettings">
+      <HintPath>bin\Debug\net6.0-windows\ViewSettings.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>bin\Debug\net6.0-windows\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSessions">
+      <HintPath>bin\Debug\net6.0-windows\WebSessions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

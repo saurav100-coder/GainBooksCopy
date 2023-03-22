@@ -1,0 +1,7 @@
+﻿.table > thead > tr > th {border-top: none;border-left: none;border-right: none;}
+    .table > tbody > tr > td {border: none;}
+    .container {width: 90%;}
+    .table > thead > tr > th {padding-left: 2px;padding-right: 2px;border-top: none;border-left: none;border-right: none;}
+    .table > thead > tr > td {padding-left: 2px;padding-right: 2px;border: none;}
+   .content-wrapper {background-color: white;}
+   .disabled {pointer-events: none;opacity: 0.4;}

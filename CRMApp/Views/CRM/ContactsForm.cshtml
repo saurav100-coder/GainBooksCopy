@@ -1,0 +1,270 @@
+﻿@model CRMApp.Models.CRMContactsViewModel
+@{
+    ViewData["Title"] = "ContactsForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link rel="stylesheet" href="~/Content/bootstrap.css" />
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>*@
+@*<link rel="stylesheet" href="~/Content/ContactsForm.css" />
+<script src="~/Scripts/ContactsForm.js" ></script>*@
+
+@*
+@Optimization.Scripts.Render("~/Scripts/Contacts_Form")
+@Optimization.Styles.Render("~/Content/Contacts_Form")*@
+
+
+<script src="~/Scripts/Custom/DealerRegForm.js"></script>
+<script src="~/Scripts/Custom/ContactsForm.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/bootstrap.css" />
+<link rel="stylesheet" href="~/Content/Custom/ContactsForm.css"/>
+
+
+
+<div class="cont" style="margin-bottom:30px">
+    <div class="row">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header">
+                <div class="rr">
+                    <h2 class="box-title text-primary">Contact Form  </h2>
+                    <div class="panel uu">
+                        <a href="#collapseOne" class="active" id="gd"> General Details </a>
+                        <a href="#collapseTwo" id="od"> Other Details </a>
+                    </div>
+                </div>
+            </div>
+            @*<h3 class="alert-primary text-center">Contact Form</h3>*@
+            <form action="@Url.Action("ContactsForm")" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.", new{@class = "text-danger"})
+                @Html.HiddenFor(model=> model.CRMContacts_Key)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-group" id="accordion">
+                            <div id="collapseOne">
+                                <div class="panel-body">
+                                    <p class="text-center extra" style="margin-bottom:0px; font-size:20px; background-color:lightsteelblue; margin-top:10px">General Details</p>
+                                    <div class="row" id="gen">
+                                       
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">Full Name</label>  <br />
+                                                @Html.TextBoxFor(model=> model.Fullname, new{@class = "form-control input-sm"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">Designation</label><br />
+                                                @Html.List_Search("JobTitle", "17", "Select Designation", Model.JobTitle,"", new{@onChange = "ShowText(this.id)", @class = "form-control input-sm"}, false)
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">Phone</label><br />
+                                                @Html.TextBoxFor(model=> model.BusinessPhone, new{@class = "form-control input-sm"})
+                                            </div>                                      
+                                            <div class="form-group">
+                                                <label class="text-info">Address Line 1</label>
+                                                @Html.TextBoxFor(model=> model.Address1, new{@class = "form-control input-sm", @style = "padding-left:5px"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">LinkedIn</label>
+                                                @Html.TextBoxFor(model=> model.Linkedin, new{@class = "form-control input-sm"})
+                                            </div>
+                                            <div class="col-sm-12 col-md-12" style="padding:0px">
+
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 ">
+
+                                         
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">Mobile No</label><br />
+                                                @Html.TextBoxFor(model=> model.MobilePhone, new{@class = "form-control input-sm"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPassword" class="text-info">Email</label><br />
+                                                @Html.TextBoxFor(model=> model.Email, new{@class = "form-control input-sm"})
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:0px">
+                                                <label class="text-info">Home Town </label>
+                                                @Html.TextBoxFor(model=> model.TextHomeTown, new{@class = "form-control input-sm", @style = "width:270px;"})
+                                                <div class="ii">
+                                                    @*Aslam_ Commented at this time, but need to update it after*@
+                                                    @*@Html.Action("LocationGrid", "CRM", new{.id = "LocationGrid"})*@
+                                                    @await Component.InvokeAsync("LocationGrid")
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" style="margin-top:15px;">
+                                                <label class="text-info" style="margin-top:15px; margin-right:30px">Address Line 2</label>
+                                                @Html.TextBoxFor(model=> model.Address2, new{@class = "form-control input-sm", @style = "padding-left:5px"})
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="text-center form-group ne">
+                                        <input type="button" class="btn btn-primary btn-1" onclick="next()" value="Next" style="padding:0px" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="collapseTwo" style="display:none">
+                                <div class="panel-body">
+
+                                    <p class="text-center extra" style="margin-bottom:0px; font-size:20px; background-color:lightsteelblue">Others Details</p>
+
+                                    <div class="row" id="gen">
+                                        <div class="col-sm-12 col-md-6">
+
+                                            <div class="form-group">
+                                                <label class="text-info">Communication Method</label>
+                                                @Html.List_Search("ContactMethod", "35", "Select Communication Method", Model.ContactMethod,"", new{@onChange = "ShowText(this.id)", @class = "form-control input-sm"}, false)
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                <label class="text-info">Date Of Birth</label>
+                                                @Html.TextBoxFor(model=> model.Birthday, new{@type = "date", @class = "form-control input-sm"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-info">Anniversary</label>
+                                                @Html.TextBoxFor(model=> model.Anniversary, new{@type = "date", @class = "form-control input-sm"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-info">Spouse Name</label>
+                                                @Html.TextBoxFor(model=> model.Spouse, new{@class = "form-control input-sm"})
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">Facebook</label><br />
+                                                @Html.TextBoxFor(model=> model.Facebook, new{@class = "form-control input-sm"})
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="text-info">Twitter</label><br />
+                                                @Html.TextBoxFor(model=> model.Twitter, new{@class = "form-control input-sm"})
+                                            </div>
+
+                                            <div class="form-group" id="Mar">
+                                                <label class="text-info">Marital Status</label>
+                                                @Html.List_Search("MaritalStatus", "37", "Select Martial Status", Model.MaritalStatus,"", new{@onChange = "ShowText(this.id)", @class = "form-control input-sm"}, false)
+                                                @*<select class="form-control input-sm" id="MaritalStatus" name="MaritalStatus" style="height:22px;padding:0">
+                                                    <option value='0' Selected>Select Marital Status</option>
+                                                    <option value='2720'>UnMarried</option>
+                                                    <option value='2719'>Married</option>
+                                                     <option value='2721'>Widow/Widower</option>
+                                                     <option value='2722'>Separated</option>
+                                                      <option value='2723'>Divorced</option>
+                                                      </select>*@
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="text-info">personal Notes</label>
+                                                @Html.TextAreaFor(model=> model.Personalnotes, 3, 1, new{@class = "form-control input-sm", @style = "height:70px"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center form-group">
+                                        <button type="submit" onclick="ConfirmSubmit();" class="btn btn-primary">Submit</button>
+                                        <button type="Button" class="btn btn-default" onclick="window.location.href='@Url.Action("Cancel", new{@id = "Contacts"})';">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    <br /> <br /> <br />
+</div>
+<input type="hidden" id="Htype" value="@Model.Hometown" />
+
+@*<script>
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 40) {
+            $(".rr").addClass("fixed-pos");
+        } else {
+            $(".rr").removeClass("fixed-pos");
+        }
+    });
+
+    function next() {
+        var div = document.getElementById("collapseTwo");
+        if (div.style.display !== "block") {
+            div.style.display = "block";
+        }
+        else {
+            div.style.display = "none";
+        }
+
+    }
+
+    $("input[type=button]").click(function () {
+        $('html,body').animate({
+            scrollTop: $("#collapseTwo").offset().top
+        },
+            'slow');
+
+
+    });
+
+    $("input[type=button]").click(function () {
+        $(".uu a").removeClass("active");
+        $(".uu a").not("a:first").addClass("active");
+
+    });
+
+    $(document).ready(function () {
+        var home = "";
+        home = $("#TextHomeTown").val();
+        $("#searchString").val(home);
+        $(".ii").show();
+        $("#TextHomeTown").hide();
+        $(".btn-1").click(function () {
+            $(this).hide();
+        });
+    });
+
+
+    window.onscroll = function () { myFunction() };
+
+    function myFunction() {
+        if (document.body.scrollTop || document.documentElement.scrollTop > 50) {
+            document.getElementById("gd").className = "";
+
+
+        } else {
+            document.getElementById("gd").className = "active";*@
+            @*document.getElementById("od").className = "";
+        }
+
+
+    }
+    $(".uu a").click(function () {
+        $(".active").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    function ConfirmSubmit() {
+        var b = $("#homeTown").val();
+        var b1 = $("#Htype").val();
+        if (b == 0 || b == "null" || b == "undefined" || b == "") {
+            $("#homeTown").val(b1);
+        }
+        var d = $("#ContactsForm");
+        d.submit();
+
+    }
+
+</script>*@

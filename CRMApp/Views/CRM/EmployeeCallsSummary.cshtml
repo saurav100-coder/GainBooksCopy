@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "EmployeeCallsSummary";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+}
+
+
+
+
+@*@Optimization.Scripts.Render("~/bundles/jquery")*@
+<script src="~/Scripts/FrameWork/jquery.min.js"></script>
+
+
+<h2 class="text-center text-primary">Calls Summary Report</h2>
+<p class="text-center text-success">@TempData["Message"]</p>
+<br />
+<div class="col-md-12">
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="@Url.Action("EmployeeCallsSummary")" method="post">
+                <div Class="form-group" style="margin-bottom:30px;margin-top:15px;">
+                    <Label for="inputEmail1" class="col-sm-5 control-label" style="text-align:right">From Date</Label>
+                    <input type="date" id="FromDate" name="FromDate" placeholder="Set Date" style="width:160px" MaxDate="@D" />
+                </div>
+                <div Class="form-group" style="margin-bottom:30px;margin-top:15px;">
+                    <Label for="inputEmail1" class="col-sm-5 control-label" style="text-align:right">To Date</Label>
+                    <input type="date" id="ToDate" name="ToDate" placeholder="Set Date" style="width:160px" MaxDate="@D" />
+                </div>
+                <div Class="form-group" style="margin:15px 10px 30px 0px ;">
+                    <Label class="col-sm-5 control-label" style="text-align:right; margin-left:5px">Select Employees</Label>
+                    @Html.List_Search("LoginCode", "- All Employees -", "AccMaster", "AccName", "Accmaster_key", "rowstatus=0 and acctype = 3042 and status='Y'", 0, "",new {@onChange = "", @style = "padding-left:2px; border-radius:0px; padding-right:0px; margin:0px; width:160px; height:24px"})
+                </div>
+                <div Class="form-group" style="margin:15px 30px 30px 0px; text-align:center">
+                    <input type="Submit" id="SendCompTasks" class="btn btn-primary" name="SendCompTasks" value="Download" style="border-radius: 0px;width: 100px; padding-left: 5px;height: 27px;padding-top: 0px; padding-right: 5px;margin-left: 5px;padding-bottom: 0px;margin-bottom: 0px; " />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

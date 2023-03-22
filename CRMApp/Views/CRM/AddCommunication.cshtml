@@ -1,0 +1,60 @@
+﻿@{
+    Layout = ""; 
+}
+
+
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+<script src="~/Scripts/Custom/AddCommunication.js"></script>
+
+<style>
+    .xdsoft_datetimepicker {
+        height: 212px;
+    }
+
+    td.xdsoft_date div {
+        padding: 0px 9px 0px 9px;
+    }
+</style>
+<div class="container-fluid ">
+    <div class="row">
+        <div>
+            <table id="example1" class="table table-bordered" cellspacing="0" style="width:100%;">
+                <thead class="TableHead">
+                    <tr style="text-align:center; border:1px solid #ddd; text-align:center">
+                        <th style="width:2%; text-align:center; border:none">No</th>
+                        <th style="width:7%; text-align:center; border:none">Remark</th>
+                        <th style="width:2%; border:none; text-align:center">Date</th>
+                        <th style="width:4%; border:none; text-align:center">CreatedBy</th>
+                        <th style="width:9%; border:none; text-align:center">FileName</th>
+                    </tr>
+                </thead>
+                <tbody class="TableBody" style="height:0px"></tbody>
+            </table>
+        </div>
+        <div>
+            <form Class="form-horizontal" action="@Url.Action("AddGeneralTasksRemark")" role="form" method="post" id="RegForm" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.",new{@class = "text-danger"})
+                <p class="text-center text-success">@TempData["Message"]</p>
+                <br />              
+                <div Class="form-group">                    
+                    <Label for="inputEmail1" class="col-sm-4 control-label">Remark</Label>
+                    <textarea cols="30" rows="4" name="Remark" style="width:234px"></textarea>
+                </div>
+                <div Class="form-group">
+                    <label class="col-sm-4 control-label" style="padding-top:0px">Select Project</label>
+                    <input type="file" name="file1" id="file1">
+                </div>
+                <div Class="text-center" style="margin:20px 0px 10px 50px">
+                    <Button type="submit" Class="btn btn-primary" style="margin-right:15px">Submit</Button>
+                    @*<a href="@Url.Action("ManagePendingTasks")" Class="btn btn-default">Cancel</a>*@
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

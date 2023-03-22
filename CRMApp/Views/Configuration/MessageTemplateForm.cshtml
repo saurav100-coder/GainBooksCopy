@@ -1,0 +1,80 @@
+﻿@model CRMApp.Models.MsgTemplateMater
+
+@{
+    Layout = "";
+}
+
+<style>
+    .modalbutton {
+        background-color: #337ab7;
+        color: white;
+        border-radius: 25px;
+        margin-bottom: 1px;
+        margin-left: -4px;
+        font-size: 13px;
+    }
+
+        .modalbutton:hover {
+            color: white;
+        }
+
+    .modalbuttonsecondary {
+        background-color: #efefef;
+        color: #555;
+        border-radius: 25px;
+        margin-bottom: 1px;
+        margin-left: -4px;
+        font-size: 13px;
+    }
+ 
+</style>
+<h3 class="text-center text-primary Task">Message Template</h3>
+<div class="hr"></div>
+<div class="panel panel-default PanelForm" style="width:300px; margin:0px auto">
+    <div class="panel-body">
+        <form action="@Url.Action("MessageTemplateForm")" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessage("0", new {@class = "text-danger"})
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model=> model.P_msgtemplate)
+            <div class="col-md-12 mainpanel" style="margin-left:20px">
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext">Template Type</label>
+                    @Html.List_Search("Templatetype", "59", "--Select Type--", Model.Templatetype,"", new {@class = "form-control input-sm", @style = "padding-left:2px;border-radius:0px; width:202px"}, false)
+                </div>
+
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext">Template Title </label>
+                    @Html.TextBoxFor(model=> model.Title, new {@class = "form-control input-sm", @style = "width:202px; border-radius:0px", @required = true})
+                </div>
+
+                <div style="margin-bottom:10px" class="forminput">
+                    <label class="text-info labeltext">Your Message </label>
+                    @Html.TextAreaFor(model=> model.Text, new {@class = "form-control input-sm", @rows = 9, @style = "width:202px;border-radius:0px", @required =true, @oncontextmenu = "return ShowContextmenu(event)"})
+                </div>
+
+                <label class="text-info labeltext">Active</label>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model=> model.Active, "Y", new {@checked = "checked"})
+                        Yes
+                    </label>
+
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model=> model.Active, "N")
+                        No
+                    </label>
+                </div>
+
+                <div style="margin:20px 0px 10px 30px" class="mainbutton">
+                    <input type="submit" name="Submit" value="Submit" class="btn modalbutton" id="Load" />
+                    <input type="button" name="Cancel" value="Cancel" class="btn modalbuttonsecondary cancel" style="margin-left:20px" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

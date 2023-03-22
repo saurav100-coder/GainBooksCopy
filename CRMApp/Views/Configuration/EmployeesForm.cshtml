@@ -1,0 +1,479 @@
+﻿@model CRMApp.Models.EmployeesMaster
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "EmployeesForm";
+    var  cc1 = new CustomerControl.Variables("WebGodaddy");
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+
+}
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Custom/CompactForm.css" />
+<script src="~/Scripts/Custom/CompositeControls.js"></script>
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var modules ="@Model.moduleassigned";
+        if(modules!="")
+        {
+          SetValue(modules.split(","), "moduleassigned");
+        }
+        
+        var home = "";
+        //home = $("#TxtHomeTown").val();
+        home = "@Model.TxtHomeTown";
+        $("#searchString").val(home);
+        $("#searchString").css("height", "30px");
+        $("#searchString").css("left", "15px");
+        $("#searchString").css("padding-left", "3px");
+        $("#searchString").css("margin-bottom", "15px");
+       // $("#searchString").css("width", "343px");
+        $("#searchString").addClass("form-control control-sm");
+        $(".ii").show();
+        $("#TxtHomeTown").css("display","none");
+        $("#search").css("margin-left", "200px");
+
+        $("input[name='Sex']").filter('[value="@Model.Sex"]').prop('checked', true);
+        $("input[name='MaryStatus']").filter('[value="@Model.MaryStatus"]').prop('checked', true);
+
+        //var msg= "@ViewBag.message" ;
+        var msg = "@TempData["message"]";
+        if(msg!== null && msg!=="")
+        {
+            ShowMsg(msg,"info");
+        }
+
+        //Added by aslam for compositefield
+        if ("@Model.InfoString" != "null" && "@Model.InfoString" != "undefined" && "@Model.InfoString" != "") {
+            createControls("@Model.InfoString");
+        }
+    })
+
+    function ConfirmSubmit() {
+        $("#Dept-errMsg").css("display", "none");
+        $("#Mob-errMsg").css("display", "none");
+        $("#status-errMsg").css("display", "none");
+        $("#email-errMsg").css("display", "none");
+        $("#empname-errMsg").css("display", "none");
+
+
+        var b = $("#homeTown").val();
+        var c = $("#hdn-hometown").val();
+        var mobno = $("#MobNo").val().trim();
+        var email=$("#Email").val();
+        var empname = $("#EmpName").val();
+        if (b == 0 || b == "null" || b == "undefined" || b == "") {
+                $("#homeTown").val(c);
+            }
+
+        //if (b != 0 && b != "null" && b != "undefined" && b != "") {
+        //    if (c != 0 && c != "null" && c != "undefined" && c != "") {
+        //        var HomeTownTrim = c.trim();
+        //        $("#homeTown").val(c);
+        //    }
+        //    if (c!=="undefined") {
+        //        $("#hdn-hometown").val(b);
+        //    }
+        //}
+
+
+        if ($("#Department").val() == "0"){ $("#Dept-errMsg").css("display", "block"); return;}
+        if ($("#moduleassigned").val() == "") { $("#module-errMsg").css("display", "block"); return; }
+        if (empname.trim() == "") { $("#empname-errMsg").css("display", "block"); return; }
+        if (mobno.length != 10) {$("#Mob-errMsg").css("display", "block"); return;}
+        if (email.trim() == "") { $("#email-errMsg").css("display", "block"); return; } 
+        if ($("#Status").val() == "0"){ $("#status-errMsg").css("display", "block"); return;}
+       
+       
+        var d = $("#employeeform");
+        d.submit();
+    }
+
+     //Show Messages
+function ShowMsg(msg, msgType) {
+    var bgColor = "";
+    switch ($.trim(msgType).toLowerCase()) {
+        case "success":
+            bgColor = "#4abc4a";
+            break;
+
+        case "info":
+            bgColor = "#53bcf1";
+            break;
+
+        case "warning":
+            bgColor = "#d0b62d";
+            break;
+
+        case "error":
+            bgColor = "#e82121";
+            break;
+
+        default:
+            bgColor = "#53bcf1";
+    }
+
+    $(".RemarkMessage").css("background-color", bgColor);
+    $(".RemarkMessage #Content").text(msg);
+    $('.RemarkMessage').show();
+    setTimeout(function () { $('.RemarkMessage').hide(); }, 7000);
+}
+
+
+function createControls(infostring) {
+        var ctrlsArr = infostring.split("#");
+        if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != "") {
+            var CompositeFieldString = "@Model.Compositefield";
+            fieldsArr = CompositeFieldString.split("#");
+        }
+        for (var i = 0; i < ctrlsArr.length; i++) {
+            var ctrlarr = ctrlsArr[i].split("~");
+            var container = $('<div></div>');
+           
+            var fieldLabel = $.trim(ctrlarr[0]);
+            var fieldType = $.trim(ctrlarr[1]);
+            var fieldName = $.trim(ctrlarr[2]);
+            var infotype = $.trim(ctrlarr[3]);
+            var defaultvalue = $.trim(ctrlarr[4]);
+            var formGroup = $("<div class='form-group'>");
+            formGroup.append("<Label class='col-sm-4 control-label'>" + fieldLabel + "</Label>");
+            var fieldWrapper = $("<div class='col-sm-4'>");
+            fieldWrapper.append(makeCompositeFieldHtml(fieldLabel, fieldType, fieldName, infotype, defaultvalue));
+            formGroup.append(fieldWrapper);
+            container.append(formGroup);
+            $("#employeeformDiv").append(container);
+
+            if (fieldType == "text" || fieldType == "date" || fieldType == "password" || fieldType == "email" || fieldType == "number") {
+                if (fieldsArr.length > 0) {
+                    $.each(fieldsArr, function (index, item) {
+                        var fieldarr = item.split("~")
+                        if (fieldarr[1] == fieldName) {
+                            setCompositeFieldValue(fieldarr);
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+
+    //function createControls(infostring) {
+    //    var ctrlsArr = infostring.split("#");
+    //    var fieldsArr = "";
+    //    if ("@Model.Compositefield" != "null" && "@Model.Compositefield" != "undefined" && "@Model.Compositefield" != "") {
+    //        var CompositeFieldString = "@Model.Compositefield";
+    //        fieldsArr = CompositeFieldString.split("#");
+    //    }
+    //    for (var i = 0; i < ctrlsArr.length; i++) {
+    //        var ctrlarr = ctrlsArr[i].split("~");
+    //        var container = $("<div></div>");
+           
+    //        if (ctrlarr[1] == "text" || ctrlarr[1] == "date" || ctrlarr[1] == "password" || ctrlarr[1] == "email" || ctrlarr[1] == "number") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label>"
+    //                              + "<div class='col-sm-4'><input type='" + ctrlarr[1] + "' name='" + ctrlarr[2] + "' id='" + ctrlarr[2] + "' value='" + $.trim(ctrlarr[4]) + "' class='form-control input-sm' style='height: 30px;padding-left: 3px;'/></div></div>");
+    //            $("#employeeformDiv").append(container)
+
+    //            if (fieldsArr.length > 0) {
+    //                $.each(fieldsArr, function (index, item) {
+    //                    var fieldarr = item.split("~")
+    //                    if (fieldarr[0] == ctrlarr[1]) {
+    //                        setCompositeFieldValue(fieldarr);
+    //                    }
+    //                });
+    //            }
+    //        }
+    //        else if (ctrlarr[1] == "dropdown") {
+    //            container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label>"
+    //                + "<div class='col-sm-4'><select type='" + ctrlarr[1] + "' name='" + ctrlarr[2] + "' id='" + ctrlarr[2] + "'  class='form-control input-sm' style='padding-left:1px;'></select></div></div>");
+    //            $("#employeeformDiv").append(container)
+
+    //            var ddid = "#" + ctrlarr[2];
+    //            var ddvalue = $.trim(ctrlarr[4]);
+    //            var ddType = ctrlarr[1];
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var ddloptions = "<option value=0>--Select--</option>";
+    //                if (data != "error") {
+    //                    $.each(data.data, function (index, item) {
+    //                        ddloptions += "<option value=" + item.P_infotable + ">" + item.NameOfInfo + "</option>";
+    //                    });
+    //                }
+    //                $(ddid).append(ddloptions);
+    //                if (ddvalue != "") {
+    //                    $(ddid).val(ddvalue);
+    //                }
+    //                else {
+    //                    $(ddid).val(0);
+    //                }
+
+    //                if (fieldsArr.length > 0) {
+    //                    $.each(fieldsArr, function (index, item) {
+    //                        var fieldarr = item.split("~")
+    //                        if (fieldarr[0] == ddType) {
+    //                            setCompositeFieldValue(fieldarr);
+    //                        }
+    //                    });
+    //                }
+
+    //            });
+
+    //        }
+    //        else if (ctrlarr[1] == "radio") {
+    //           container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4' id='radio-" + i + "'></div></div>");
+    //            $("#employeeformDiv").append(container)
+    //            var radioname = ctrlarr[2];
+    //            var defval = $.trim(ctrlarr[4]);
+    //            var radiotype = ctrlarr[1];
+    //            var radiodivid = "#radio-" + i;
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var radiooptions = "";
+    //                if (data != 'error') {
+    //                    $.each(data.data, function (index, item) {
+    //                        radiooptions += "<input  name='" + radioname + "' id='" + radioname + "' style='margin-right:5px;margin-left:5px;' type='" + radiotype + "' value='" + item.P_infotable + "' "
+    //                        if (defval == item.P_infotable) {
+    //                            radiooptions += "checked"
+    //                        };
+    //                        radiooptions += "/>" + item.NameOfInfo ;
+    //                    });
+    //                    $(radiodivid).append(radiooptions);
+    //                }
+
+    //                if (fieldsArr.length > 0) {
+    //                    $.each(fieldsArr, function (index, item) {
+    //                        var fieldarr = item.split("~")
+    //                        if (fieldarr[0] == radiotype) {
+    //                            setCompositeFieldValue(fieldarr);
+    //                        }
+    //                    });
+    //                }
+    //            });
+    //        }
+    //        else if (ctrlarr[1] == "checkbox") {
+    //           container.html("<div class='form-group'><Label class='col-sm-4 control-label'>" + ctrlarr[0] + "</Label><div class='col-sm-4'  id='checkbox-" + i + "'></div></div>");
+    //            $("#employeeformDiv").append(container)
+
+    //            var checkboxname = ctrlarr[2];
+    //            var checkboxtype = ctrlarr[1];
+    //            var checkboxdivid = "#checkbox-" + i;
+    //            var valueArr = $.trim(ctrlarr[4]).split(",");
+    //            $.post('/sales/AjaxGetdataFromInfotableByInfotype', { infotype: ctrlarr[3] }, function (data) {
+    //                var checkoptions = "";
+    //                if (data != "error") {
+    //                    $.each(data.data, function (index, item) {
+    //                        checkoptions += "<label class='checkbox-inline'><input  type='" + checkboxtype + "' id='" + checkboxname + "' name='" + checkboxname + "' value='" + item.P_infotable + "' />" + item.NameOfInfo + "</label>";
+    //                    });
+    //                    $(checkboxdivid).append(checkoptions);
+
+    //                    $.each(valueArr, function (index, item) {
+    //                        $("input[type=" + checkboxtype + "][name=" + checkboxname + "][value=" + item + "]").attr("checked", true);
+
+    //                    });
+    //                }
+
+    //                if (fieldsArr.length > 0) {
+    //                    $.each(fieldsArr, function (index, item) {
+    //                        var fieldarr = item.split("~")
+    //                        if (fieldarr[0] == checkboxtype) {
+    //                            setCompositeFieldValue(fieldarr);
+    //                        }
+    //                    });
+    //                }
+
+    //            });
+    //        }
+    //    }
+    //}
+
+
+
+    //function setCompositeFieldValue(fieldarr) {
+    //    if (fieldarr[0] == "text" || fieldarr[0] == "date" || fieldarr[0] == "password" || fieldarr[0] == "email" || fieldarr[0] == "number" || fieldarr[0] == "dropdown") {
+    //        $("#" + fieldarr[1]).val($.trim(fieldarr[2]));
+    //    }
+    //    else if (fieldarr[0] == "radio") {
+    //        $("input[type=" + fieldarr[0] + "][name=" + fieldarr[1] + "][value=" + $.trim(fieldarr[2]) + "]").attr("checked", true);
+    //    }
+    //    else if (fieldarr[0] == "checkbox") {
+    //        $("input[type=" + fieldarr[0] + "][name=" + fieldarr[1] + "]:checked").attr("checked", false);
+    //        var valArr = $.trim(fieldarr[2]).split(",");
+    //        $.each(valArr, function (index, item) {
+    //            $("input[type=" + fieldarr[0] + "][name=" + fieldarr[1] + "][value=" + item + "]").attr("checked", true);
+    //        });
+    //    }
+    //}
+
+</script>
+
+<div class="RemarkMessage">
+    <span id="Content"> </span>
+    <span class="closebn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+<div class="container" style="width: 100%;"></div>
+<form Class="form-horizontal" action="@Url.Action("EmployeesForm")" role="form" method="post" id="employeeform">
+    @Html.AntiForgeryToken()
+       @Html.ValidationSummary(true, " check details. Please Fill Form Correctly.", new {@class = "text-danger"})
+    @Html.HiddenFor(model=> model.Employees_Key)
+    @Html.HiddenFor(model=> model.P_Employees)
+    @Html.HiddenFor(model=> model.exitmode)
+    @Html.HiddenFor(model=> model.ActiveYN)
+    @Html.HiddenFor(model=> model.P_acccode)
+    <h3 Class="text-center text-info" style="margin-right: 90px;margin-bottom: 20px;">Employees Form</h3>
+    <div id="employeeformDiv">
+        <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Department<strong style="color:red;">*</strong></Label>
+        <div Class="col-sm-4">
+            @Html.List_Search("Department", "28", "-Select Employee Sector-", Model.Department,"", new {@class = "form-control input-sm", @style = "padding-left:1px"}, false)
+             @* @Html.List_Search_Multi("moduleassigned","28","-Select Department-",0,"",new {@class = ""}, false)*@
+        </div>
+        
+    </div>
+    <div class="col-md-12 col-sm-12"><p id="Dept-errMsg" class="text-center text-danger" style="display:none;">Department field is required!</p></div>
+    
+    <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Module<strong style="color:red;">*</strong></Label>
+        <div Class="col-sm-4">
+             @Html.List_Search_Multi("moduleassigned","84","-Select Module-",0,"",new {@class = ""}, false)
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12"><p id="module-errMsg" class="text-center text-danger" style="display:none;">Module field is required!</p></div>
+
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Designation</Label>
+        <div Class="col-sm-4">
+            @Html.List_Search("Designation", "24", "-Select Employee Post-", Model.Designation,"",new {@class = "form-control input-sm", @style = "padding-left:1px"}, false)
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Manager</Label>
+        <div Class="col-sm-4">
+            @Html.List_Search("under", "- Select Manager -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", Model.Under, "", new {@class = "form-control input-sm", @style = "padding-left:1px"}, true)
+        </div>
+    </div>
+    <div Class="form-group">
+        <Label for="inputEmail1" class="col-sm-4 control-label">Employee Name<strong style="color:red;">*</strong></Label>
+        <div Class="col-sm-4">
+            @Html.TextBoxFor(model=> model.EmpName,new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;"})
+        </div>       
+    </div>
+    <div class="col-md-12 col-sm-12"><p id="empname-errMsg" class="text-center text-danger" style="display:none;">Name field is required!</p></div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Father's Name</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.FatherName, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Date of Birth</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.DtBirth, "{0:yyyy-MM-dd}", new {@Class = "form-control input-sm", @style = "height: 30px; padding-left:3px;", @type = "date"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Sex</Label>
+
+            <div Class="col-sm-4" style="padding-top: 6px;">
+                <input TYPE="Radio" Name="Sex" Value="M" style="margin-right:4px;">Male
+                <input TYPE="Radio" Name="Sex" Value="F" style="margin-left:30px; margin-right: 4px;">Female
+
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Marital Status</Label>
+            <div Class="col-sm-4" style="padding-top: 6px;">
+                <input TYPE="Radio" Name="MaryStatus" Value="M" style="margin-right: 4px;">Married
+                <input TYPE="Radio" Name="MaryStatus" Value="U" style="margin-left:13.5px; margin-right: 4px;">Unmarried
+
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Address</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.PostalAddress1, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px; margin-bottom:7px;", @value = ""})
+                @Html.TextBoxFor(model=> model.PostalAddress2, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;margin-bottom:7px;", @value = ""})
+                @Html.TextBoxFor(model=> model.PostalAddress3, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;margin-bottom:7px;", @value = ""})
+                @Html.TextBoxFor(model=> model.PostalAddress4, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;margin-bottom:7px;", @value = ""})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Pincode</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Pincode, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;", @value = ""})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Mobile No.<strong style="color:red;">*</strong></Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.MobNo, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;", @maxlength = "10", @required = "required"})
+            </div>
+            
+        </div>
+    <div class="col-md-12 col-sm-12"><p id="Mob-errMsg" class="text-center text-danger" style="display:none;">Mobile No should be of 10 digits</p></div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Alternate No.</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Alternatenumber, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Phone No</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Phone, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;", @maxlength = "30"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Email<strong style="color:red;">*</strong></Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.Email, new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;", @type = "email", @required = "required"})
+            </div>
+            
+        </div>
+    <div class="col-md-12 col-sm-12"><p id="email-errMsg" class="text-center text-danger" style="display:none;">Email field is required!</p></div>
+        <div class="form-group" style="margin-bottom:0px">
+            <label for="inputEmail1" class="col-sm-4 control-label">Home Town </label>
+            @*@Html.TextBoxFor(model=> model.TxtHomeTown, new {.class = "form-control input-sm", .style = "width:240px; height: 30px; padding-left:3px;"})*@
+            <input type="hidden" id="hdn-hometown"  value="@Model.HomeTown" />
+            <div class="ii">
+                 @*Aslam_ Commented at this time, but need to update it after*@
+                @*@Html.Action("LocationGrid", "CRM", new {@id = "LocationGrid"})*@
+                @await Component.InvokeAsync("LocationGrid")
+            </div>
+        </div>
+
+        @*<div Class="form-group">
+                <Label for="inputEmail1" class="col-sm-4 control-label">Employee Type</Label>
+                <div Class="col-sm-4">
+                    <INPUT TYPE="Radio" Name="EmplType" Value="C" style="margin-right:4px;">Customer Service
+                    <INPUT TYPE="Radio" Name="EmplType" Value="D" style="margin-left:10px; margin-right: 4px;">Development
+                </div>
+            </div>*@
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Date of Joining</Label>
+            <div Class="col-sm-4">
+                @Html.TextBoxFor(model=> model.DateOfJoining, "{0:yyyy-MM-dd}", new {@class = "form-control input-sm", @style = "height: 30px; padding-left:3px;", @type = "date"})
+            </div>
+        </div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Status<strong style="color:red;">*</strong></Label>
+            <div Class="col-sm-4">
+                @Html.List_Search("Status", "31", "-Select status-", Model.Status,"", new {@class = "form-control input-sm", @style = "padding-left:1px"}, false)
+            </div>
+           
+        </div>
+    <div class="col-md-12 col-sm-12"><p id="status-errMsg" class="text-center text-danger" style="display:none;">Status field is required!</p></div>
+        <div Class="form-group">
+            <Label for="inputEmail1" class="col-sm-4 control-label">Proceedings</Label>
+            <div Class="col-sm-4">
+                @Html.TextAreaFor(model=> model.Proceedings, new {@class = "form-control input-sm", @style = "padding-left:3px;", @type = "text", @rows = 5})
+            </div>
+        </div>
+    </div>
+   
+        <div Class="form-group text-center" style="margin-right:100px; margin-top:30px;">
+            <Button type="Button" Class="btn btn-primary btn-Submit" style="margin-right:20px" onclick="ConfirmSubmit()">Submit</Button>
+            <Button type="Button" Class="btn btn-default" onclick="window.location.href = '/CRM/Home';">Cancel</Button>
+        </div>
+</form>
+

@@ -1,0 +1,525 @@
+﻿body {
+}
+.highlight {
+    background-color: #a0b3c5 !important;
+    color: white;
+    /* border: solid 1px #ddd;*/
+}
+.paddingforClearFilter{
+    padding:3px 10px 3px 10px;
+}
+.colorwhite {
+    color: white !important;
+}
+.content {
+    padding:0;
+}
+.clamptr {
+    width: 20%;
+    font-size: 13px !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+    #SearchText {
+    display: inline-flex;
+    height: 30px;
+    padding-left: 5px;
+    width: 85%;
+    /*border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 2px 0px 0px 2px;*/
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+    font-size: 11px;
+    bottom: 5px;
+}
+
+#filter:focus {
+    border-bottom: 1px solid #337ab7;
+}
+
+table td {
+    border-style: none;
+    /*overflow-x: auto;*/
+}
+
+table th {
+    border-style: none;
+    padding: 2px;
+}
+
+table tr td {
+    border-collapse: collapse;
+    padding: 2px;
+    border-style: none
+}
+
+td {
+    padding-bottom: 30px !important;
+}
+
+table thead tr th {
+    border-collapse: collapse;
+    padding: 2px;
+    border-style: none;
+    vertical-align: middle !important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 0px solid #ffff;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    border: none;
+    border-bottom: 4px solid green;
+}
+
+.nav-tabs > li > a:hover {
+    border: none;
+    background-color: transparent;
+}
+
+.nav-tabs > li > a {
+    border: none;
+    background-color: transparent;
+}
+.close {
+    margin-top: 4px;
+    background-color: #f1f3f4;
+    color: #a9abab;
+    opacity: 1;
+    padding: 3px;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    z-index: 1;
+}
+/*.TaskBar {
+    padding: 20px;
+    padding-left: 15px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+    display: flex;
+    padding-right: 28px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    color: #337ab7;
+    background-color: #f3f8fa;
+    width: 100%;
+    border-bottom: 3px solid white;
+    margin-bottom: 3px;
+    font-family: open sans,sans-serif;
+}*/
+.clickable {
+    transition: box-shadow 0.5s;
+}
+
+    .clickable:hover {
+        box-shadow: 0 0 6px 1px #33333359;
+    }
+/*.search2 {
+    padding-left: 10px;
+    padding-right: 10px;
+}*/
+   /* .search2 a {
+        padding-right: 18px;
+    }
+
+        .search2 a:first-child {
+            padding-left: 10px;
+        }*/
+
+.filter, #min, #max, #filterText, #filterDropdown, .sort, .sortOrders {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+}
+
+    .filter:focus, #max:focus, #min:focus, #filterText:focus, #filterDropdown:focus {
+        border-bottom: 1px solid #337ab7;
+    }
+
+#filterText {
+    height: 30px;
+    font-family: open sans,arial,sans-serif;
+    font-size: 11px;
+    margin-left: 4px;
+    margin-top: 10px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+#min {
+    margin-top: 10px;
+    height: 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+#max {
+    margin-top: 10px;
+    height: 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.ee, .ww {
+    margin-top: 15px;
+}
+input[type=date] {
+    padding: 0px;
+}
+
+#filter {
+    height: 20px;
+    padding: 0px;
+    width: 18%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.icon-bar {
+    width: 100%;
+    overflow: auto;
+}
+
+    .icon-bar a {
+        float: left;
+        text-align: center;
+        padding: 12px 0px;
+        transition: all 0.3s ease;
+        font-size: 20px;
+    }
+
+        .icon-bar a:hover {
+            background-color: #EAEDEF;
+        }
+.filter, #min, #max, #filterText, #filterDropdown, .sort, .sortOrders {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+}
+
+    .filter:focus, #max:focus, #min:focus, #filterText:focus, #filterDropdown:focus {
+        border-bottom: 1px solid #337ab7;
+    }
+.modalbutton {
+    background-color: #337ab7;
+    color: white;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+    .modalbutton:hover {
+        color: white;
+    }
+
+.modalbuttonsecondary {
+    background-color: #efefef;
+    color: #555;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+.AudioDiv {
+    position: absolute !important;
+    right:10px;
+
+}
+/*.loader, .loader:after {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}*/
+
+/*#loading {
+    margin-top: 15%;
+    margin-left: 45%;
+    position: absolute;
+}
+
+.loader {*/
+    /*margin: 60px auto;*/
+    /*font-size: 10px;*/
+    /*top: 50%;
+    
+    position: absolute;*/
+    /*text-indent: -9999em;
+    border-top: 3px solid rgba(0,0,0, 0.2);
+    border-right: 3px solid rgba(0,0,0, 0.2);
+    border-bottom: 3px solid rgba(0,0,0, 0.2);
+    border-left: 3px solid #1DA3E6;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}*/
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+/*loader done*/
+@media only screen and (max-width:800px) {
+    .AudioDiv {
+        position: fixed !important;
+        z-index: 1;
+    }
+}
+    @media only screen and (max-width:600px) {
+       #loading{
+               margin-top: 50% !important;
+       }
+
+        td:nth-last-child(2) {
+            display: grid !important;
+        }
+
+     /*   td:nth-last-child(1) {
+            text-align: right;
+        }*/
+
+        .tab-pane {
+            margin-left: -15px !important;
+        }
+
+        .modal-content {
+            width: 100% !important;
+        }
+
+        .modal-dialog {
+            width: 100% !important;
+            margin-left: 1px;
+            margin-right: 1px;
+            height: 300px;
+        }
+
+        #max {
+            margin-left: 0px !important;
+        }
+
+        input[type=date] {
+            width: 100%;
+            padding: 0px;
+        }
+
+        #max {
+            margin-top: 0px;
+            height: 20px;
+            margin-bottom: 0px;
+        }
+
+        #min {
+            margin-top: 0px;
+            height: 20px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        .ee, .ww {
+            margin-top: 0px;
+            padding: 0px
+        }
+
+        #filterText {
+            font-family: open sans,sans-serif;
+            font-size: 11px;
+            /*margin-top: 5px;*/
+            height: 20px;
+            padding: 0px;
+            margin-left: 5px;
+        }
+
+        input[type=text] {
+            width: 100%;
+        }
+
+        .g {
+            top: -70px;
+        }
+
+        /*.Location {
+            width: 13% !important;
+            text-align: center !important;
+        }*/
+        .basicTr{
+           padding:0;
+        }
+        .checkboxall{
+           margin-right:4px !important;
+        }
+        .location {
+            display: none;
+            /* width: 13% !important;
+            text-align: center !important;*/
+        }
+        .sno{
+            width:11% !important;
+        }
+        .call {
+            width: 12% !important;
+            text-align:left;
+        }
+        .time {
+            width: 19% !important;
+      
+        }
+        .firm{
+            display:none;
+        }
+        .mobile {
+            display: none;
+        }
+        .type {
+            width: 28% !important;
+            padding:0 5px 0 5px !important;
+            word-break:break-all;
+        }
+        .desc {
+            display: none;
+        }
+        .status{
+            display:none;
+        }
+        .source {
+            width: 31% !important;
+        }
+        .assign {
+            display: none;
+        }
+        .tbHead{
+            padding:0;
+        }
+
+        .Issue {
+            width: 28% !important;
+        }
+
+        .Description {
+            display: none;
+        }
+
+        .Status {
+            display: none;
+        }
+        .SNo {
+            width: 13% !important;
+        }
+        .CallId {
+            width: 12% !important;
+        }
+        .Date {
+            width: 18% !important;
+        }
+        .Firm {
+            display: none;
+        }
+        .Name {
+            display: none;
+        }
+        .Location {
+            display: none;
+        }
+        
+        .Source {
+            width: 28% !important;
+        }
+
+        .Employee {
+            display: none;
+        }
+
+        /*
+        .MoreDetails {
+            display: none !important;
+        }*/
+  
+        .AudioDiv {
+            position: fixed !important;
+            z-index: 1;
+        }
+        #dropdown{
+            width:105% !important;
+        }
+
+        .basicfilterDiv {
+            width: 98% !important;
+            left: 5px;
+            top: 30px !important;
+            padding: 5px !important;
+        }
+            
+            .basicfilterDiv tr td:nth-child(2) {
+                width: 20%;
+            }
+
+            .basicfilterDiv input[type=date] {
+                width: auto !important;
+            }
+
+            .basicfilterDiv input[type=datetime-local] {
+                width: 35% !important;
+            }
+
+            .basicfilterDiv .min, .minDT {
+                margin-left: 2px !important;
+            }
+
+            .basicfilterDiv .max, .maxDT {
+                margin-left: 2px !important;
+            }
+
+        #basicFilterTable tr td {
+            max-width: none !important;
+        }
+
+        #basicFilterTable {
+            width: 100%;
+        }
+
+        .basicfilterDiv tr td:nth-child(3) {
+            width: 80%;
+        }
+
+        .MoreDetails{
+            width:110px !important;
+            right:5px !important;
+        }
+
+    }

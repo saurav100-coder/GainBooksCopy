@@ -1,0 +1,86 @@
+﻿@{
+    Layout = ""; 
+}
+
+@*@Optimization.Scripts.Render("~/Scripts/Add_Remark_View")*@
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/Custom/AddRemarkView.js"></script>
+
+
+<style>
+    .xdsoft_datetimepicker {
+        height: 212px;
+    }
+
+    td.xdsoft_date div {
+        padding: 0px 9px 0px 9px;
+    }
+
+    div.tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 8px 23.4px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+            <form Class="form-horizontal" action="@Url.Action("AddRemarkView")" role="form" method="post" id="RegForm" style="margin-top:0px;">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, " Check details. Please Fill Form Correctly.",new {@class = "text-danger"})          
+                <p class="text-center text-success">@TempData["Message"]</p>
+                @*<br />
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding-top:0px">Defer Task</label>
+                    <input type="radio" name="Defer" value="Yes" style="margin-left:10px" />Yes
+                    <input type="radio" name="Defer" value="No" style="margin-left:10px" />No
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding-top:0px">Date/ Time  </label>
+                    <input id="datetimepicker" name="NextActionDate"type="text" style="width:234px">
+                </div>*@
+
+                <div Class="form-group">
+                    <input type="hidden" name="issueId" value="@httpContextAccessor.HttpContext?.Session.GetString("issueid")" />
+                    <Label for="inputEmail1" class="col-sm-4 control-label">Remark</Label>
+                    <textarea cols="30" rows="4" name="Remark"></textarea>             
+                    <Button type="submit" Class="btn btn-primary" style="margin-right:15px; padding:0px; width:102px; height:26px">Submit</Button>
+                    @*<a href="@Url.Action("ManageRegCalls")" Class="btn btn-default">Cancel</a>*@
+                </div>
+            </form>
+
+
+<div class="tab" style="margin-bottom:20px">
+    <button class="tablinks ShowGrid" style="padding-left:15px"> <b>Refer Previous Remarks </b></button>
+</div>
+<div>
+    <table id="example1" class="table table-bordered" cellspacing="0" style="width:100%; height:300px; display:none">
+        @*<table id="example1" class=""  style="width:100%;display:none">*@
+            <thead class="TableHead">
+                <tr style="text-align:center;">
+                    <th style="width:2%">No</th>
+                    <th style="width:12%">Remark</th>
+                    <th style="width:6%">Comm. Type</th>
+                    <th style="width:10%">Date</th>
+                    <th style="width:7%">CreatedBy</th>
+                </tr>
+            </thead>
+            <tbody class="TableBody"></tbody>
+        </table>
+</div>

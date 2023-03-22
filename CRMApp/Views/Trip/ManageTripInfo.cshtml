@@ -1,0 +1,261 @@
+﻿@{
+    ViewData["Title"] = "ManageTrip";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+}
+
+
+<script src="~/scripts/FrameWork/jquery.min.js"></script>
+<script src="~/scripts/FrameWork/bootstrap.min.js"></script>
+<script src="~/scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/scripts/Custom/ManageTripInfo.js"></script>
+<link rel="stylesheet" href="~/Content/Custom/ManageTripInfo.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<link rel="stylesheet" href="~/Content/Custom/ManageRegCalls_Context.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    thead {
+        display: block;
+        overflow: auto;
+    }
+
+    tbody {
+        display: block;
+        overflow-y: scroll;
+    }
+
+    /*   .table > tbody > tr > td {
+            border-bottom: 1px solid grey;
+        }
+    */
+    /*.container {
+            width: 100%;
+        }*/
+    .content {
+        height: 480px;
+    }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+      .resultContent {
+   
+    border: #d9d5d0 1px solid;
+    margin: 15px;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+        .resultContent p {
+            margin: 0px !important;
+            padding: 6px;
+            font-size: 12px;
+        }
+
+    .closebn:hover {
+    background-color: #ddd;
+    border-radius: 50%;
+    color: #246399;
+}
+    [data-toggle] {
+        position: relative;
+    }
+
+        [data-toggle]:before {
+            content: '';
+            /* hides the tooltip when not hovered */
+            display: none;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #2e2e2e;
+            position: absolute;
+            top: 30px;
+            left: 10px;
+            z-index: 8;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 35px;
+            left: 0px;
+            padding: 0 5px;
+            background: #2e2e2e;
+            color: #fff;
+            z-index: 9;
+            font-size: 11px;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }
+
+</style>
+@*<div Class="container">
+        <h3 class="text-center">Tasks Communication Log</h3>
+    </div>*@
+<div class="container">
+</div>
+<div class="calHeightIcon" style="margin: 0 0 0 0; padding:0 0 0 0;">
+    <div class="row icon-div" style="margin-top: 5px; margin-bottom: 6px; padding-left: 35px; padding-right: 30px; ">
+        <div class="search2" style="margin-bottom: 0px; margin-right: 10px; margin-bottom: 5px; padding-bottom: 0px; padding-top: 10px; float: left; color: #3c8dbc; display: inline-block; ">
+            <a class="top" title="" data-placement="bottom" data-toggle="Refresh" data-trigger="hover" style="text-align:left;cursor:pointer;" onclick="ReloadGrid()">
+                <i class="fa fa-refresh" style="font-size: 16px;"></i>
+            </a>
+            <a class="top btn-Filter" title="" data-placement="bottom" data-toggle="Advance Filter" data-trigger="hover" style="text-align:left;cursor:pointer;" onclick="ShowFilters();">
+                <i class="glyphicon glyphicon-filter" id="filterIcon" style="font-size:14px;"></i>
+            </a>
+
+        </div>
+        <div id="dropdown" class="search" style="font-size:14px; display: inline-flex; bottom: 12px; height: 40px; margin-left: 0px;">
+            <select class="" id="filter" style="height: 26px; top: 10px; padding-left: 5px; width: auto; border: none; border-bottom: solid 1px #ddd; outline:none;">
+                <option value="0">Filter By</option>
+                @*<option value="1">No filter</option>*@
+            </select>
+            <div id="dateC" style="display:none; " class="filterDiv">
+                <div style="display:flex;">
+                <div class="" style="top: 10px; display:inline-flex;">
+                    <label class="ee" style="top: 10px; margin-left: 10px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                </div>
+                <input type="date" id="min" class="" style="display: inline-flex; height: 26px; top: 10px; border: none; border-bottom: solid 1px #ddd; outline: none;" value="@D" max="@D" />
+                <div class="" style="top: 10px; display: inline-flex;">
+                    <label class="ww" style="top: 10px; margin-left: 8px; margin-right: 7px; font-size: 10px; color: #337ab7;">  To </label>
+                </div>
+                <input type="date" id="max" class="" style="display: inline-flex; height: 26px; top: 10px; border: none; border-bottom: solid 1px #ddd; outline: none;" value="@D" max="@D" />
+                <div id="search2" onclick="DateSearch();" style="cursor:pointer" class="searchButton date"><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+            </div>
+            <div id="TextC" class="filterDiv" style="display:none; ">
+                <input type="text" id="filterText" class="" placeholder="Type to search" style="border: none; border-bottom: solid 1px #ddd; outline: none; display: inline-flex; height: 26px; padding-left: 5px; margin-left: 20px; width: 120px;  border-radius: 3px 0px 0px 3px;" />
+                <div id="search1" onclick="DoSearch();" style="cursor:pointer" class="searchButton"><i class="glyphicon glyphicon-search"></i></div>
+            </div>
+            <span class="closebn filterclose" onclick="removeFilter()" title="" data-placement="bottom" data-toggle="Clear Filter" data-trigger="hover" style="display:none;margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;margin-top: 9px;">&times;</span>
+
+
+            <div id="FilterText" class="" style="float: left; display: none; margin-top: 10px; margin-left: 15px; font-size: 13px; border: none; border-bottom: solid 1px #ddd; outline: none; width: auto; padding: 2px 5px 0px 5px; height: 26px; top: 10px; bottom: 34px;">
+                <b>
+                    <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                    <a class='' id='' onclick='ReloadGrid();'>
+                        <i class='glyphicon glyphicon-remove'></i>
+                    </a>
+                </b>
+            </div>
+        </div>
+       
+        <div class="search1" style="text-align: right; float: right; border: none; display: inline-block; position: absolute; right: 15px; ">
+            <label id="info" style="font-size:12px; color:#808080; padding-right:10px;"> </label>
+            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Previous" id="Prev" data-original-title="Prev" style="margin-top: 10px; width: 27px; padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; margin-bottom: 10px; color: #3c8dbc; border-radius: 0px">
+                <i class="fa fa-angle-left" style="font-size:19px"></i>
+            </a>
+            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Next" id="Next" data-original-title="Next" style="margin-top: 10px; width: 27px; padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; margin-bottom: 10px; color: #3c8dbc; margin-left: 0px; border-radius: 0px">
+                <i class="fa fa-angle-right" style="font-size:19px"></i>
+            </a>
+        </div>
+    </div>
+    <div class="resultDiv" style="display:none;">
+        <div class="resultContent">
+            <div class="result-msg">
+
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="Logintype" id="Logintype" value="@httpContextAccessor.HttpContext?.Session.GetString("logintype")" />
+<form action="" method="post" id="customer">
+    @Html.AntiForgeryToken()
+    @*<input type="hidden" name="grid1" id="fvalue" value="@ViewBag.filter">*@
+    <input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+
+    <div class="col-md-12 horizontal">
+        <table id="example" class="table " cellspacing="0" style="margin-bottom:0px;height:450px;">
+            <thead>
+                <tr class="calHeightTaskBar" style="text-align: center; color: #337ab7; width:100%; border-bottom:6px solid white; height:50px; ">
+                    <th class="select" style="width:50px">SNo.</th>
+                    <th class="TripId" style="width:160px">Trip Id</th>
+                    <th class="TripName" style="width:200px">Trip Name</th>
+                    <th class="Date" style="width:200px">Start Date</th>
+                    <th class="Date" style="width:200px">End Date</th>
+                    <th class="TripName" style="width:160px">Duration</th>
+                    <th class="TripName" style="width:150px;">Avg. Speed</th>
+                    <th class="TripName" style="width:150px;text-align:left;">Convered Distance</th>
+                    <th class="TripName" style="width:150px;text-align:left;">Employee Name</th>
+                </tr>
+                <tr id="loading"><td colspan="8"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></td></tr>
+            </thead>
+            <tbody style=""></tbody>
+        </table>
+    </div>
+</form>
+
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+<!--new design-->
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:800px;">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            New Filter<div id="addfilter" onclick="AddFilters();" style="margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 11px; font-weight: normal; vertical-align: top;" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            New Sort Option<div id="addsortOptions" onclick="AddSortingOptions();" style="margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 11px; font-weight: normal; vertical-align: top;" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> @*close modal popup*@
+                <div id="clearFilters" onclick="removeFilter2();" class="btn btn-primary">Clear Filters <i class="glyphicon glyphicon-remove"></i></div>@*clear filter values*@
+                <div id="search1" onclick="ApplyFilters2();" class="btn btn-primary">Apply Filters / Sorting <i class="glyphicon glyphicon-search"></i></div>
+            </div>
+        </div>
+    </div>
+</div>

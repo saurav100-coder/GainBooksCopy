@@ -1,0 +1,57 @@
+@media screen and (max-width:480px){
+    .sno{
+        width: 10% !important;
+    }
+    .Sno{
+        width: 9% !important;
+    }
+    .customer {
+        display: none;
+    }
+    .Customer {
+        display: none;
+    }
+    .custcode {
+        width: 19% !important;
+    }
+    .Custcode {
+        width: 21% !important;
+    }
+    .custname {
+        width: 29% !important;
+    }
+    .Custname {
+        width: 30% !important;
+    }
+    .mobno{
+        width:20% !important;
+    }
+    .Mobno {
+        width: 22% !important;
+    }
+    .hometown{
+        display:none;
+    }
+    .Hometown {
+        display: none;
+    }
+    .otp{
+        width:20% !important;
+    }
+    .Otp {
+        width: 18% !important;
+    }
+    .timestamp {
+        display: none;
+    }
+    .Timestamp {
+        display: none;
+    }
+}
+.clamp {
+    font-size: 13px !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}

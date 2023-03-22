@@ -1,0 +1,237 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CallFreq
+</name>
+</assembly>
+<members>
+<member name="T:CallFreq.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:CallFreq.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:CallFreq.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.RowStatusFlag">
+ <summary>
+ True, if all rows are defined with RowStatus, active rowstatus is 0, previous history in 1,2,3...etc
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.HeaderRowStatusFlag">
+ <summary>
+ If it is a subtable of headertable ,Hold rowstatusflag of header table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.HeaderRowStatusNo">
+ <summary>
+ If it is a subtable of headertable ,hold  last RowStatusNo of header table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.SqlUpdation">
+ <summary>
+ True, if  modifications in the table are taken place for this table therefore sql statements are executed.
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.CurrDt">
+ <summary>
+ Current DataTable associated to sql Table with final values of fields of sql table used in sql querry.(MultyRowsSqlHandling=True)
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.CurrRow">
+ <summary>
+Current DataRow associated to sql Table with final values of fields of sql table used in sql querry.(MultyRowsSqlHandling=False)
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.CurrRowsArray">
+ <summary>
+An array of Current DataRows associated to sql Table with final values of fields of sql table used in sql querry.(MultyRowsSqlHandling=False)
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PrevDt">
+ <summary>
+ Previous DataTable associated to sql Table with old values of fields from sql table used in sql querry.(MultyRowsSqlHandling=True) 
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PrevRow">
+ <summary>
+ Previous DataRow associated to sql Table with old values of fields from sql table used in sql querry.(MultyRowsSqlHandling=Flase) 
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.FieldsFinalValues">
+ <summary>
+ To hold final values of Table Fields ,Values are AutoAssinged for Y,O,R,S,D,A type fields
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.TableOpenMode">
+ <summary>
+ TableOpenMode of Parent table ,acceptable values Append=A,Modify=M,Delete=D,View=V
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.WhereClauseDefault">
+ <summary>
+ WhereClauseDefault is a default condition to fetch active datarow/datatable from sql table )
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.TableType">
+ <summary>
+ Table Type=M (Main Table), S=Sub Table,H=Header Table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.ParentTables">
+ <summary>
+ Comma separated Names of ParentTables Tables for this table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.RepeatAsNew">
+ <summary>
+ True if  previous row is added as new row with new primary key
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.TableEntryType">
+ <summary>
+ TableEntryFlag(A=Append,M=Modify,D=Delete,S=Initial Flag) 
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.FieldsPlusCollection">
+ <summary>
+ An array of collection having the values of keys are [Table,LastKeyField,Condition,Variables] where all are string and varibles as hashtable(Keys are variablenames and values are variable values] 
+ </summary>
+</member>
+<member name="T:CallFreq.CallFreq.CallFreq.Fields">
+ <summary>
+ Enumeration of all fields of table.
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.GroupFieldsType">
+ <summary>
+ A hashtable with Key of row (PrimaryKey types Y=Always,R=Key with row status,S=RowStatus,O=OtherKey,D=Increase In DataTable(StartValue will be  LastValue from SqlTable),E=ExcludeToCompare,C=Common value in datatable,I=Value Input by user,C=Calculated value,T=Default Text field),P=Increase in datatable (Start value will be 1 ) ,A=AutoPick Field Value of other table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.AllFields">
+ <summary>
+ Comma separated all fields with m1 table alias.
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.AllColumns">
+ <summary>
+ Comma separated all fields without table alias.
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PrimaryKey">
+ <summary>
+Primary key of table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PrimaryKeyValue">
+ <summary>
+Primary key value of table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PreviousSameRows">
+ <summary>
+RowNos. of PrevDt which are same in CurrDt
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PreviousExtraRows">
+ <summary>
+RowNos. of PrevDt which are not available in CurrDt
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.CurrentSameRows">
+ <summary>
+RowNos. of CurrDt which are same in PrevDt
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.CurrentExtraRows">
+ <summary>
+RowNos. of CurrDt which are not available in PrevDt
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.ServerDatabase">
+ <summary>
+ ServerDatabase in the format 0_srv_0.0_mdf_0
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.Server">
+ <summary>
+ Server in the format 0_srv_0
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.Database">
+ <summary>
+ Database in the format 0_mdf_0
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.TableWithSQLPath">
+ <summary>
+Full sqlpath of table
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.TableName">
+ <summary>
+Table Name as string
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.ExcludeFromCompare">
+ <summary>
+Comma separated fields excluded from comparing datarows
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PlusOneFields">
+ <summary>
+Comma separated Fields of Table which will be set as increamental values starts from  last field's value of stored sql table. 
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.PlusOneColumns">
+ <summary>
+Comma separated Columns of CurrDt DataTable which  will be set as increamental values starts from  last column value of datatable
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.SameValueFields">
+ <summary>
+Comma separated Columns of CurrDt DataTable which  will be set as same values for all rows of currdt
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.TextField">
+ <summary>
+TextField of data table used for default sorting
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.KeyPlusGroups">
+ <summary>
+KeyPlusGroups of increamenting fields for sql querry,permissible groups are Y,R,S,O,D
+ </summary>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.SchemaTable">
+ <summary>
+ SchemaTable as datatable with columns Column_Name,Data_Type,Size
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.MultyRowsSqlHandling">
+ <summary>
+ Type of rows insertion/updation for sql querry 
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:CallFreq.CallFreq.CallFreq.NewRow">
+ <summary>
+New row created for CurrDt association
+ </summary>
+</member>
+</members>
+</doc>

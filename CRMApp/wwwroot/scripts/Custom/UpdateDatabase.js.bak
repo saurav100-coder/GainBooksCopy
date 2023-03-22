@@ -1,0 +1,19 @@
+﻿var options = { "backdrop": "static", keyboard: true };
+
+
+function showUpdateDbCtrl() {
+    $("#updateDbModel").modal(options);
+    $("#updateDbModel").modal("show");
+}
+
+function UpdateDatabse() {
+    $("#updateDbModel").modal("hide");
+    $("#loadspin,#overlay").show();
+    var destserverdb = $("#destserverdb").val();
+
+    $.post('/DevUtility/callUpdatefunction', { CorpId: destserverdb }, function () {
+        $("#loadspin,#overlay").hide();
+    });
+}
+
+

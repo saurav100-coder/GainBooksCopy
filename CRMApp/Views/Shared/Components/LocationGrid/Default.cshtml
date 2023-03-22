@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "";
+}
+@*@Optimization.Scripts.Render("~/Scripts/LocationGrid")*@
+<script src="~/Scripts/FrameWork/jquery.min.js"></script>
+<script src="~/Scripts/FrameWork/bootstrap.js"></script>
+<script src="~/Scripts/Custom/LocationGrid.js"></script>
+
+<style>
+    tr:hover td {
+        background-color: lightblue;
+        color: #666;
+    }
+
+    table {
+        font-family: verdana,arial,sans-serif;
+        font-size: 11px;
+        border-collapse: collapse;
+    }
+
+    table {
+        font-family: verdana,arial,sans-serif;
+        font-size: 11px;
+    }
+
+    foot {
+        text-align: center;
+    }
+</style>
+
+<div class="col-md-12" style="padding-left:0; padding-right:0px">
+    <input type="text" name="searchString" id="searchString" class="form-control input-sm col-md-6 col-sm-12" />
+</div>
+<input type="hidden" name="homeTown" id="homeTown" />
+<div id="search" style="display:none;overflow-y:scroll; background-color:white; width:540px;height:214px; padding-left:0px" class="col-md-12">
+    <table id="example" class="table nowrap" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr style="text-align:center;">
+                <th>SNo</th>
+                <th>HomeTown</th>
+                <th>District</th>
+                <th>State</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

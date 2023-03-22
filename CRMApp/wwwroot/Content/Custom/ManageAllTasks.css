@@ -1,0 +1,1549 @@
+﻿body{
+    cursor:default;
+}
+/*.SubtaskBox {
+    background-color:#e9f0f3;
+}*/
+
+/*.resultContent {
+    
+    border: #d9d5d0 1px solid;
+    margin: 15px 15px;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}*/
+.DatesMargin {
+    margin-top: 0px !important;
+    
+}
+
+.filterclose {
+    display: none;
+    margin-left: 10px;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    place-self: center;
+    cursor: pointer;
+    color: #808080;
+    text-align: center;
+    margin-top: 9px;
+}
+    /*.resultContent p {
+        margin: 0px !important;
+        padding: 6px;
+        font-size: 12px;
+    }*/
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        color: #555;
+        cursor: default;
+        border: none;
+        border-bottom: 4px solid green;
+    }
+.nav-tabs > li > a:hover {
+    
+    border:none;
+    background-color:transparent;
+}
+.nav-tabs > li >a {
+    border: none;
+    background-color: transparent;
+}
+
+/*.setStyle {
+    width: 100% !important;
+    padding-top: 20px;
+}*/
+.modalbutton {
+   background-color: #337ab7;
+   color:white;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+    .modalbutton:hover{
+        color:white;
+    }
+
+.modalbuttonsecondary {
+    background-color: #efefef;
+    color: #555;
+    border-radius: 25px;
+    margin-bottom: 1px;
+    margin-left: -4px;
+    font-size: 13px;
+}
+.searchButton1 {
+    display: inline-flex;
+    color: #337ab7;
+    height: 30px;
+    border-radius: 0px;
+    padding-bottom: 11px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    margin-left: -4px;
+    font-size: 13px;
+}
+
+    .searchButton1:hover {
+        background-color: #337ab7;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+    }
+
+#SearchText {
+    display: inline-flex;
+    height: 30px;
+    padding-left: 5px;
+    width: 85%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+    font-size: 11px;
+    bottom: 5px;
+}
+
+    #filter:focus {
+        border-bottom: 1px solid #337ab7;
+    }
+table td {
+    border-style: none;
+}
+
+table th {
+    border-style: none;
+    padding: 2px;
+}
+
+table tr td {
+    
+    border-collapse: collapse;
+    padding: 2px;
+    border-style: none
+}
+td{
+    padding-bottom:30px !important;
+}
+table thead tr th {
+    
+    
+    border-collapse: collapse;
+    padding: 2px;
+    border-style: none;
+    vertical-align:middle !important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 0px solid #ffff;
+}
+
+.searchButton {
+    
+    color: #337ab7;
+    height: 28px;
+    border-radius: 0px;
+    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 8px;
+   margin-top:10px;
+   font-size:12px;
+}
+
+    .searchButton:hover {
+        background-color: #246399;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+    }
+.filterRemove {
+    color: #337ab7;
+    height: 30px;
+    border-radius: 0px;
+    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+    .filterRemove:hover {
+        background-color: #246399;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+    }
+
+/*.top img {
+    width: 22px;
+}*/
+
+.content{
+    padding-top:0px;
+}
+
+/*.RemarkMessage {
+    display: none;
+    background-color: #4BB543 !important;
+    color: white !important;
+    padding: 7px !important;
+    border-radius: 3px;
+}*/
+
+.remarklabel {
+    color: #337ab7;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .closebtn:hover {
+        color: black;
+    }
+
+/*.left {
+    width: 100%;
+    display: inline-block;
+    transition-duration: 0.5s;
+    transition-timing-function: ease, linear, ease;
+    transition-delay: 0, 0, 0.7s;
+}*/
+.r i {   
+    color: #337ab7;
+}
+.right i {
+    color: #337ab7;
+}
+.move {
+    width: 67% !important;
+}
+.mov {
+    
+    margin-left: 30px !important;
+}
+
+.right {
+    width: 33%;
+    float: right;
+    background-color: white;
+    padding-left: 0%;
+    padding-right: 17px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 700px;
+
+}
+#right1 {
+    width: 100%;
+    float: left;
+    background-color: white;
+    
+    padding: 4%;
+ 
+   
+    display: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: auto;
+   
+}
+.row {
+    
+}
+
+
+.Status select {
+    color: #3c8dbc;
+    border-color: #3c8dbc;
+    padding: 3px 15px;
+}
+
+    .Status select option {
+        color: #3c8dbc;
+        border-color: #3c8dbc;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+.Status label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3c8dbc;
+    padding-right: 10px;
+    padding-top: 4px;
+}
+
+/*.search2 {
+    padding-left: 10px;
+    padding-right: 10px;
+}*/
+.icon img {
+    padding-right: 18px;
+    width:40px;
+}
+
+    .icon img:hover {
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+
+.icon {
+    margin-top: 5%;
+}
+
+
+.right-end {
+    float: right;
+    color: #3c8dbc;
+}
+
+    .right-end a {
+        background-color: #edeeef;
+        padding: 5px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+        .right-end a:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+    .right-end span {
+        padding-right: 8px;
+    }
+
+
+.hidden_row {
+    display: none;
+}
+
+
+
+
+    .icon img:hover {
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+
+
+.task-title {
+    margin-top: 4%;
+  
+    padding-bottom:10px;
+   
+}
+
+
+.task-title h3 {
+    color: #337ab7;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.task-id span {
+    font-weight: bold;
+    font-size: 15px;
+    color: #4f5250;
+    
+}
+
+.task-id {
+    margin-top: 2%;
+    margin-bottom: 5px;
+}
+
+.task-desc {
+    color: #4f5250;
+    font-size: 14px;
+    margin-top: 3%;
+    
+}
+    .task-desc #spc {
+        font-weight: 600;
+        color: #337ab7;
+        font-size: 15px;
+    }
+    .task-desc p {
+        padding-top: 5px;
+    }
+
+.task-cap {
+    color: #337ab7;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.col-md-6 .task-cap .dates {
+    padding: 20px;
+}
+
+.Status {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dates {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: #337ab7;
+    font-size: 15px;
+    font-weight: 600;
+    padding-right: 7px;
+}
+
+    .dates p {
+      margin-top:22px;
+    }
+
+        .dates span {
+            float: right;
+            font-weight: lighter;
+            color: #4f5250;
+            word-spacing: 8px;
+            font-size: 13px;
+        }
+
+.tab {
+    margin-top: 3%;
+}
+
+    .tab .tab-pane {
+        padding-bottom: 15px;
+        border: none;
+        display: inline-flex;
+    }
+
+        .tab .tab-pane button {
+            border: none;
+            border-radius: 50px;
+            font-size: 12px;
+            background-color: transparent;
+            font-weight: 500;
+            color: #4f5250;
+            padding-left: 19px;
+            padding-right: 19px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 3px;
+        }
+
+            .tab .tab-pane button:focus {
+                border: transparent;
+            }
+
+            .tab .tab-pane button:hover {
+                background-color: #edeeef;
+            }
+
+    .tab .history {
+        height: 150px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 1px #ddd solid;
+        border-bottom: 1px #ddd solid;
+        margin-right:7px;
+    }
+
+        .tab .history p {
+            font-size: 13px;
+        }
+
+            .tab .history p span {
+                font-weight: 500;
+            }
+
+
+/*.SectionCollaborators {
+    margin-top: 3%;
+}*/
+
+  /*  .SectionCollaborators span {
+        font-size: 15px;
+        font-weight: 600;
+        color: #337ab7;
+        padding: 7px;
+    }
+    .SectionCollaborators .fa-user-plus:hover {
+        cursor:pointer;
+        color: #246399;
+    }*/
+#frmRemarkRight button:hover {
+    background-color: #246399;
+}
+/*
+.CollaboratorsBoxx {
+    padding: 10px;
+    padding-top: 0px;
+}*/
+  /*  .CollaboratorsBoxx:first-child {
+        padding-top: 10px;
+    }
+
+    .boxx {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        height: 150px;
+        overflow-y: scroll;
+
+    }*/
+
+.closebn:hover {
+    background-color: #ddd;
+    border-radius: 50%;
+    color: #246399;
+}
+
+.task-classification {
+    margin-top: 5%;
+}
+
+  /*  .task-classification span {
+        font-size: 15px;
+        font-weight: 600;
+        color: #337ab7;
+        padding: 7px;
+        padding-top: 10px;
+    }*/
+
+/*.boxx{
+    margin-top:5px;
+}
+.boxx .tag-container {
+    padding: 5px;
+    height: 100px;
+    width: 100%;
+}*/
+.mobileDetailPane {
+    width: 100%;
+    padding: 15px;
+    margin-right: 0px;
+}
+.style {
+    background-color: white !important;
+    box-shadow: 0px 1px 4px 0px #33333359;    
+}
+
+.dashfolio-tag {
+    cursor: pointer;
+    padding: 10px 15px 15px 15px;
+    display: inline-block;
+    margin-top: 3px; /*incase tags go in next line, will space */
+    color: #fff;
+    padding-right: 20px; /* adds space inside the tags for the 'x' button */
+}
+
+.dashfolio-tag:hover {
+    opacity: 0.7;
+}
+
+.dashfolio-tag:after {
+    position: absolute;
+    content: "×";
+    padding: 2px 2px;
+    margin-left: 2px;
+    font-size: 11px;
+}
+
+#add-tag-input {
+    background: transparent;
+    border: 0;
+    padding: 5px;
+    width: 100%;
+    margin-top: auto;
+}
+.line2 span {
+    font-size: 12px;
+}
+
+.line1 span {
+    padding-right: 15px;
+}
+
+.line1 i {
+    padding-right: 3px;
+}
+
+.line2, .line3 {
+    margin-top: 8px;
+    margin-left: 24px;
+}
+
+.upload {
+    font-size: 12px;
+}
+
+.filenam {
+    color: #3c8dbc;
+    padding-left: 5px;
+}
+
+.line2 i {
+    padding-right: 7px;
+}
+
+textarea {
+    width: 100%;
+    border-color: #ddd;
+    color: #555;
+    margin-bottom: 8px;
+    margin-top: 6px;
+    height: 100px;
+    border-radius: 4px;
+    padding: 15px;
+    outline: none;
+}
+    textarea:focus {
+        border-color: #105faf;
+    }
+    /* Tab View*/
+    li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+
+.tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px #ddd solid;
+    padding-bottom: 15px;
+}
+
+/*.tabs-navWeb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px #ddd solid;
+    padding-bottom: 10px;
+}*/
+
+   /* .tabs-navWeb .tab-activeWeb a {
+        background: #337ab7;
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+    }*/
+
+   /* .tabs-navWeb a {
+        background: hsl(120, 11%, 96%);
+        border-radius: 50px;
+        color: #337ab7;
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        height: auto;
+        padding: 4px;
+        text-align: center;
+        width: 124px;
+        margin-left: 4px;
+    }
+
+    .tabs-navWeb li {
+        float: left;
+    }*/
+/*
+.tabs-stageWeb {
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #ddd solid;
+    border-top: 0;
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+    top: 1px;
+    width: auto;
+}*/
+
+.tabs-nav .tab-active a {
+    background: #337ab7;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tabs-nav a {
+    background: hsl(120, 11%, 96%);
+    border-radius: 50px;
+    color: #3c8dbc;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    height: auto;
+    /*line-height: 44px;*/
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+
+.tabs-nav li {
+    float: left;
+}
+
+.tabs-stage {
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #ddd solid;
+    border-top: 0;
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+    top: 1px;
+    width: auto;
+}
+
+    .tabs-stage p {
+        margin: 0;
+        padding: 5px;
+        color: #3c8dbc;
+    }
+
+
+
+
+/*.search2 a {
+    padding-right: 18px;
+}
+.search2 a:first-child {
+    padding-left: 10px;
+} */
+.clr:after{
+    background-color: white;
+}
+.viewd img {
+    display: none;
+}
+
+.col-md-1 {
+    width: 11.11%;
+}
+.filter, #min, #max, #filterText, #filterDropdown, .sort, .sortOrders {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0px;
+    outline: none;
+}
+
+    .filter:focus, #max:focus, #min:focus, #filterText:focus, #filterDropdown:focus {
+        border-bottom: 1px solid #337ab7;
+    }
+
+.highlight {
+    background-color: #568CA7;
+    color: white;
+}
+select option{
+    padding:30px !important;
+}
+select {
+    height: 35px;
+    font-family: verdana,arial,sans-serif;
+    font-size: 11px;
+    width: 165px;
+}
+#filterText {height:30px;font-family: open sans,arial,sans-serif;font-size: 11px;margin-left: 4px;margin-top: 10px;height: 20px;margin-bottom: 5px;}
+
+
+
+.container {width: 100%;}
+h4 {margin: 0px;padding: 5px;}
+/*a {text-decoration: none;}*/
+#drop {width: 35%;margin: 0px auto;text-align: left;float: right;}
+.col-md-3 #main1 {text-align: center;}
+.content-wrapper, .right-side {background-color: white;}
+.panel-default {width: 100%;height: auto; border:none;}
+.panel-body {font-family: verdana,arial,sans-serif;font-size: 11px;padding: 0px;height: auto; border:none;}
+input[type=date] {padding: 0px;}
+#filter {height: 20px;padding: 0px;width: 18%;margin-top: 10px;margin-bottom: 5px;}
+.panel {margin-bottom: 0px; border:none;}
+#min {margin-top: 10px;height: 20px;margin-left: 10px;margin-bottom: 5px;}
+#max {
+    margin-top: 10px;
+    height: 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+.ee, .ww {margin-top: 15px;}
+
+.bb {padding: 0px;height: auto;margin: 0px auto;text-align: center;}
+.icon-bar {width: 100%;   overflow: auto;}
+.icon-bar a {float: left;text-align: center;padding: 12px 0px;transition: all 0.3s ease;font-size: 20px;}
+.icon-bar a:hover {background-color:#EAEDEF;}
+
+.col-md-12.horizontal{
+
+    padding-right:5px;
+    margin-right:10px;
+}
+ /*loader*/
+    .loader, .loader:after {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+/*#loading {
+    
+    margin-top:15%;
+    margin-left: 45%;
+    position: absolute !important;
+}*/
+    .loader {
+        /*margin: 60px auto;*/
+        /*margin:0 auto;*/
+        font-size: 10px;
+        /*position: relative;*/
+        text-indent: -9999em;
+        border-top: 3px solid rgba(0,0,0, 0.2);
+        border-right: 3px solid rgba(0,0,0, 0.2);
+        border-bottom: 3px solid rgba(0,0,0, 0.2);
+        border-left: 3px solid #1DA3E6;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+    }
+
+    @-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    /*loader done*/
+
+/*.SubTasksMoreDetails         {position:absolute; padding-top:5px; z-index:2; display:none; background-color:lightblue; width:200px; height:40px; padding-left:20px; margin-left:880px;}
+    */
+/* Tabs */
+
+
+
+/* Just for CodePen styling - don't include if you copy paste */
+
+/*.TaskBar {
+    padding: 20px;
+    padding-left: 15px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+    display: flex;
+    padding-right: 28px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    color: #337ab7;
+    background-color: #f3f8fa;
+    width: 100%;
+    border-bottom: 3px solid white;
+    margin-bottom: 3px;
+    font-family: open sans,sans-serif;
+}*/
+.icon-row img {
+    padding-right: 18px;
+}
+
+    .icon-row img:hover {
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+.icon-row {
+    padding-left: 3%;
+}
+
+
+
+
+.ShowRemarksValues:first-child {
+   margin-top: 30px;
+}
+.ShowRemarksValues:last-child {
+    margin-bottom: 20px;
+}
+.AddRemarkDetailView{
+    
+}
+#RightShift:hover {
+    color: #246399;
+}
+
+.clickable {
+    transition: box-shadow 0.5s;
+}
+    .clickable:hover {
+        box-shadow: 0 0 6px 1px #33333359;
+    }
+.Tasktitle, .Taskdescription {
+    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+}
+@media only screen and (max-width:600px) {
+   /* .resultDiv {
+        margin-top: 70px;
+    }*/
+
+    td:nth-last-child(2) {
+        display: grid !important;
+    }
+    /*td:nth-last-child(1) {
+        text-align: right;
+    }*/
+    .tab-pane {
+        margin-left: -15px !important;
+    }
+    .loader {
+        margin: 60px auto;
+    }
+        .icons {
+        margin-bottom: 25px;
+    }
+    .u {
+        margin-right: 40px;
+       
+    }
+/*    .loader{
+        left:43%;
+        
+    }*/
+    .ShowRemarksValues {
+        width: 350px !important;
+    }
+    .tabs-nav a {
+        width: auto;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 4px;
+        display: flex;
+    }
+    .tabs-navWeb a {
+        width: auto;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 4px;
+        display: flex;
+    }
+  
+    .ShowRemarksValues:last-child {
+        margin-bottom: 20px;
+    }
+
+    .ShowRemarksValues div {
+        padding-left: 15px;
+    }
+
+    .RemarkHistoryItem i {
+        color: #0F5FAF;
+    }
+    .EditHistoryItem i {
+        color: #0F5FAF;
+    }
+
+    .remarkview {
+        width: 350px !important;
+        display: flex;
+    }
+
+    .filename {
+        margin-left: 25px;
+    }
+
+   .modal-content {
+        width: 100% !important;
+    }
+
+    .modal-dialog {
+        width: 100% !important;
+        margin-left: 1px;
+        margin-right: 1px;
+        height: 300px;
+    }
+
+    .right {
+        display: none;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    input[type=date] {
+        width: 100%;
+        padding: 0px;
+    }
+
+    #max {
+        margin-top: 0px;
+        height: 20px;
+        margin-bottom: 0px;
+    }
+
+    #min {
+        margin-top: 0px;
+        height: 20px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+
+    .ee, .ww {
+        margin-top: 0px;
+        padding: 0px
+    }
+    .FromDiv, .ToDiv{
+        width:20%;
+    }
+
+    #filterText {
+        font-family: open sans,sans-serif;
+        font-size: 11px;
+        /*margin-top: 5px;*/
+        height: 20px;
+        padding: 0px;
+        margin-left: 5px;
+    }
+
+    input[type=text] {
+        width: 100%;
+    }
+
+    .filterclose {
+        margin-left: 0px !important;
+    }
+    .search2{
+        padding-top:5px !important;
+    }
+
+
+    /*.search1{width:50%}  */
+    .col-md-12.horizontal {
+        height: 380px
+    }
+    /*.MoreDetails                 {margin-left:520px; background-color:white; float:right;}*/
+    .SubTasksMoreDetails {
+        margin-left: 520px;
+        display:none;
+    }
+
+    .TaskBar {
+        font-size: 11px;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-right: 0px;
+        width: 100%;
+        color: #337ab7;
+        background-color: #f3f8fa;
+        margin-left: 0px;
+        border-bottom: 3px solid white;
+        margin-bottom: 3px;
+        font-family: open sans,sans-serif;
+    }
+
+    .container {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .search2 {
+        padding-left: 0px !important;
+        margin-bottom: 0px;
+    }
+
+   
+
+    .Sno {
+        text-align: left;
+
+       /* display: none;*/
+    }
+
+    .SNo {
+       /* display: none;*/
+
+    }
+
+    .search1 {
+        margin-top: 10px;
+        margin-right: 0px !important;
+        padding-right: 10px;
+    }
+
+    .search2 a {
+        padding-right: 15px;
+        padding-bottom: 15px;
+    }
+
+    .search2 {
+        padding-bottom: 15px;
+    }
+
+    h4 {
+        margin-left: 10px;
+    }
+
+    .DueDate {
+        margin-left: 25px !important;
+        padding-right:0px;
+        padding-left:20px;
+    }
+
+    .Duedate {
+        margin-right: 0px !important;
+        margin-left: 28px !important;
+        min-width: 10%;
+    }
+
+    .Startdate {
+    }
+
+ /*   .TaskTitle {
+        margin-left: 20px !important;
+    }*/
+
+   /* .Tasktitle {
+        float: right;
+        margin-left: 20px;
+        margin-right: 0px;
+        min-width:10%;
+    }*/
+
+    .Startdate {
+        display: none;
+    }
+
+    .StartDate {
+        display: none;
+    }
+
+    .Taskid {
+        margin-left: 0px;
+        text-align: center;
+    }
+
+   /* .TaskId {
+        margin-left: 40px !important;
+    }*/
+
+    .TaskDescription {
+        display: none;
+    }
+
+    .Taskdescription {
+        display: none;
+    }
+
+    .SubTaskSno {
+       
+        display:none;
+    }
+
+    .SubTaskid {
+        margin-left: 30px !important;
+        width:5% !important;
+    }
+
+    .SubTaskdescription {
+        display: none;
+    }
+
+    .SubTaskStartdate {
+        display: none;
+    }
+
+    .SubTaskstatus {
+        display: none;
+    }
+
+    .SubTasktitle {
+        margin-left: 30px !important;
+    }
+
+    .SubTaskDuedate {
+        margin-left: 30px !important;
+    }
+
+    .TaskAssignedto {
+        display: none;
+    }
+
+   /* .Taskstatus {
+        display: none;
+    }*/
+
+   /* .TaskStatus {
+        display: none;
+    }*/
+
+/*    .AssignedTo {
+        display: none;
+    }*/
+
+ /*   .TaskAssignedto {
+        display: none;
+    }
+*/
+    .CreatedBy {
+    }
+
+    .viewd img {
+        /*display: inline-flex;
+
+        margin-left: 5px;*/
+    }
+
+    .CreatedBy {
+        margin-left:25px;
+        padding-left: 25px;
+    }
+
+    .Taskcreateby {
+        /*margin-left: -18px !important;
+        margin-right: 20px !important;*/
+        min-width: 10%;
+    }
+
+    .Addremarks {
+        width: 500px;
+        margin-left: 100px
+    }
+
+
+    .Addcollaborators {
+        text-align: center
+    }
+    #dropdown {
+        /*float: left;*/
+        margin-top: 20px;
+        width:100%;
+    }
+
+}
+.MoreDetails{
+    display:none;
+}
+/*.sub:hover{
+    color:#337ab7 !important;
+    background-color:white !important;
+
+}*/
+
+@media only screen and  (max-width:1201px) {
+ 
+    .SubTaskdescription{
+        display:none;
+    }
+
+}
+@media only screen and (max-width:1000px) {
+    .search{
+        width:100% !important;
+    }
+    .Taskid {
+        margin-left: 0px;
+        text-align: left;
+    }
+
+    .TaskId {
+        margin-left: 0px;
+    }
+    .Taskdescription{
+        display:none;
+    }
+    .TaskDescription{
+        display:none;
+    }
+    .TaskStatus{
+        margin-left:0px;
+    }
+
+    .viewd img {
+        /*display: inline-flex;
+        margin-left: 5px*/
+    }
+
+    .CreatedBy {
+    }
+
+    .Taskcreateby {
+        float: right;
+        margin-right: 10px;
+        margin-left: 35px;
+        padding-left: 30%;
+    }
+}
+@media screen and (max-width:500px) {
+    .Sno {
+        width: 8% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .Taskid {
+        width: 10% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        display:block !important;
+    }
+
+    .Tasktitle {
+        width: 30% !important;
+        padding: 0 0 0 3px !important;
+        word-wrap: break-word;
+        font-size: 12px !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical;
+    }
+
+    .Taskstatus {
+        width: 12% !important;
+        padding: 0 !important;
+        /*text-align:left !important;*/
+        font-size: 12px !important;
+    }
+
+    .Duedate {
+        width: 19% !important;
+        padding: 0 0 0 5px !important;
+        font-size: 12px !important;
+    }
+
+    .Taskcreateby {
+        width: 20% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .Taskdescription {
+        display: none !important;
+    }
+
+    .TaskDescription {
+        display: none !important;
+    }
+
+    .Startdate {
+        display: none;
+    }
+
+    .u {
+        margin-right: 0 !important;
+    }
+
+    .StartDate {
+        display: none;
+    }
+
+    .SNo {
+
+        width: 11% !important;
+        display:block !important;
+        text-align: right !important;
+        padding: 0 !important;
+    }
+
+    .TaskId {
+        width: 13% !important;
+        padding: 0 !important;
+        padding-left: 2px !important;
+    }
+
+    .TaskTitle {
+        width: 36% !important;
+        padding: 0 0 0 4px !important;
+        text-align: left !important;
+    }
+
+    .TaskStatus {
+        width: 13% !important;
+        padding: 0 !important;
+        /*padding-left: 0px !important;*/
+    }
+
+    .DueDate {
+        width: 18% !important;
+        padding: 0 !important;
+    }
+
+    .AssignedTo {  
+        display: block !important;
+        width: 23% !important;
+        padding: 0 !important;
+    }
+
+
+    .SubTaskSno {
+        width: 8% !important;
+        padding: 0 !important;
+    }
+
+    .SubTaskid {
+        width: 10% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .SubTasktitle {
+        width: 30% !important;
+        padding: 0 0 0 3px !important;
+        /*word-wrap: break-word;*/
+        font-size: 12px !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical;
+    }
+
+    .SubTaskstatus {
+        /*width: 12% !important;*/
+        width: 10% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        /*text-align:left !important;*/
+    }
+
+    .SubTaskDuedate {
+        width: 20% !important;
+        padding: 0 0 0 5px !important;
+        font-size: 12px !important;
+    }
+
+    .TaskAssignedto {
+        /*width: 20% !important;*/
+        display: block !important;
+        width: 28% !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        padding-left: 10px !important;
+    }
+
+    .SubTaskdescription {
+        display: none !important;
+    }
+
+
+    .SubTaskStartdate {
+        display: none;
+    }
+
+    .Taskcreateby {
+        display: none;
+    }
+
+    .stno {
+        /*width: 4% !important;*/
+        width: 2% !important;
+        font-size: 12px !important;
+        display:none;
+    }
+
+    .Tno {
+        /*width: 7% !important;*/
+        width: 6% !important;
+        font-size: 12px !important;
+    }
+
+    .CreatedBy {
+        display: none;
+    }
+    .search {
+        width: 106% !important;
+        margin-top:10px !important;
+    }
+    .basicfilterDiv {
+        width: 98% !important;
+        left: 5px;
+        top: 65px !important;
+        padding: 5px !important;
+    }
+        /* td:nth-last-child(1) {
+        text-align: right;
+    }*/
+        .basicfilterDiv tr td:nth-child(2) {
+            width: 20%;
+        }
+
+        .basicfilterDiv input[type=date] {
+            width: auto !important;
+        }
+
+        .basicfilterDiv input[type=datetime-local] {
+            width: 35% !important;
+        }
+
+        .basicfilterDiv .min, .minDT {
+            margin-left: 2px !important;
+        }
+
+        .basicfilterDiv .max, .maxDT {
+            margin-left: 2px !important;
+        }
+
+    #basicFilterTable tr td {
+        max-width: none !important;
+    }
+
+    #basicFilterTable {
+        width: 100%;
+    }
+
+    .sorting, .myTaskBtn {
+        margin-left: 10px !important;
+    }
+}

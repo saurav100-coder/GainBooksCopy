@@ -1,0 +1,672 @@
+﻿@model CRMApp.Models.CRMTasksMaster
+@{
+    ViewData["Title"] = "AllTasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string desktop = ".right"; 
+    string mobile  = "#right1";
+    var cc1 = new CustomerControl.Variables("WebGodaddy"); 
+    var df1 = new DataFunctions.DataFunctions(ref cc1);
+    var D = df1.GetDateTimeISTNow().ToString("yyyy-MM-dd");
+    int under = ViewBag.under;
+}
+
+@*Added by aslam for multiselect dropdown css*@
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+*@
+
+<link rel="stylesheet" href="~/Content/Custom/dropdown.css" />
+<script src="~/Scripts/Custom/dropdown.js"></script>
+@*Laveena Starts*@
+<link href="~/Content/Custom/ManageAllTasks.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link href="~/Content/Custom/CommonPage.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="~/Content/FrameWork/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.contextMenu.css" />
+<script src="~/Scripts/FrameWork/jquery.datetimepicker.full.min.js"></script>
+<script src="~/Scripts/FrameWork/jquery.contextMenu.js"></script>
+<script src="~/Scripts/Custom/ManageAllTasks.js"></script>
+<script src="~/scripts/Custom/BasicFilter.js"></script>
+<script src="~/Scripts/Custom/SortnFilterGrid.js"></script>
+<link rel="stylesheet" href="~/Content/FrameWork/jquery.datetimepicker.min.css" />
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+<style>
+    .bootstrap-select > .dropdown-toggle {
+        margin: 10px 0px 0px 2px;
+        font-size: 11px;
+        outline: none;
+        border: none;
+    }
+
+    .mainpanel {
+        width: auto;
+    }
+
+    .close {
+        opacity: 0.8;
+    }
+
+        .close:hover {
+            opacity: 0.8;
+        }
+
+    .SubTask {
+        color: #333;
+    }
+
+    .disabledbutton {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+    
+    .select-btn.select-filterDropdown, .select-filterDropdown ~ .list-items{
+    width: auto;
+    margin: 0px 17px;
+    margin-left: 10px;
+}
+
+
+
+
+    /* hides the tooltip when not hovered */
+
+    /*  display: none;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #1a1a1a;
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+        }
+
+        [data-toggle]:after {
+            display: none;
+            content: attr(data-toggle);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            padding: 0 8px;
+            background: #1a1a1a;
+            color: #fff;
+            z-index: 9;
+            font-size: 0.85em;
+            height: 18px;
+            max-width: none;
+            text-align: center;
+            line-height: 18px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            word-wrap: normal;
+            place-items: start;
+        }
+
+        [data-toggle]:hover:before,
+        [data-toggle]:hover:after {
+            display: block;
+        }
+
+        [data-toggle].data-toggle-inner {
+            max-width: none;
+        }*/
+
+    .MoreDetails:hover i {
+        opacity: 0.5;
+    }
+
+        .MoreDetails:hover i:hover {
+            opacity: 1;
+        }
+
+
+    tr:hover:not(.highlight) td {
+        background-color: transparent;
+    }
+
+    /*.sub:hover {
+        background-color: #3c8dbc;
+        color: white;
+    }*/
+
+    .u {
+        padding: 18px;
+        padding-right: 20px;
+    }
+
+    .collapse {
+        background-color: transparent;
+        width: 100%;
+        padding-top: 10px;
+        padding: 10px;
+        margin-right: 0px;
+        margin-right: 3px;
+        padding-right: 10px;
+    }
+
+    .loaderspin {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3380cc;
+        border-bottom: 16px solid #99ccff;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .LoaderOverlay {
+        background: #f3f3f3;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+    }
+
+    .DateBtn {
+        height: 26px;
+        margin-top: 10px;
+        border-radius: 0px;
+        padding: 3px 6px 6px 6px;
+        width: 29px;
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+
+    .content {
+        height: 480px;
+        padding:0;
+    }
+
+    .subSelected {
+        background-color: orange !important;
+    }
+
+    option {
+        transform: translateY(1);
+        transition: transform 0.5s ease;
+    }
+
+    .arrowicon {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .arrowicon .fa-caret-up {
+        margin-top:-2px;
+    }
+
+    .asidenav {
+        height: 87%;
+    }
+
+    .menu {
+        height: 106%;
+    }
+
+
+</style>
+  <div class="RemarkMessage" >
+     <span id="Content"> </span>
+     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+ </div>
+
+<div class="con">
+    <div class="row mainWrapper">
+        <div class="left left1">
+            <div class="calHeightIcon">
+                <div class="icon-div">
+                    <div class="search2">
+                        <a class="top" title="Refresh" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" style="cursor:pointer;" onclick="reloadGrid()">
+                            <img src="~/images/icon-refresh.png" />
+                        </a>
+                        <a class="top" title="Export" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" style="cursor:pointer;" onclick="ExportAllTasks();">
+                            <img src="~/images/icon-export.png" />
+                        </a>
+                        <a class="top" title="Filter" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" style="cursor:pointer;" onclick="ShowFilters();">
+                            <img src="~/images/icon-filter.png" />
+                        </a>
+                    </div>
+
+                    <input type="text" id="taskidFilter" class="quickSearch" onkeyup="searchByTaskId(event);" placeholder="Search by TaskId">
+
+                    @*back color 428bca1f   V-nav-color-#0a243e *@
+                    <div id="dropdown" class="search" style="display: inline-flex;   margin-left: 0px; padding-left:10px; position: relative;align-items: center; ">
+                       @* <select class="" id="filter" style="cursor: pointer; height: 26px; top: 10px; padding-left: 5px; width: auto; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px; ">
+                            <option value="0">Filter By</option>
+                            <option value="1">No filter</option>
+                        </select>*@
+
+                         <p class="basicFilterTitle"  onclick="ShowCloseBasicFilter();"><span>Select Filter</span> <i class="fa fa-caret-down"></i></p>
+                        <div id="filterDiv" class="basicfilterDiv">
+                            <table id="basicFilterTable">
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                    <td colspan="3" style="text-align:center">
+                                        <div id="search1" onclick="ApplyBasicFilters();" class="btn modalbutton ">Apply<i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                                        <button type="button" class="btn modalbuttonsecondary" onclick="ShowCloseBasicFilter();">Close</button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                       @* <div id="startDateC" style="display: none;  " class="filterDiv">
+                            <div class="datedisplay" style="display: flex;">
+                                <div class="FromDiv" style="margin-left:15px;">
+                                    <label class="ee" style="margin-bottom: -5px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                                    <input type="date" id="min" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div class="ToDiv" style="margin-left: 15px;">
+                                    <label class="ww" style="margin-bottom:0px; margin-right: 0px;  font-size: 10px; color: #337ab7; ">  To </label>
+                                    <input type="date" id="max" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div id="search2" onclick="StartDateSearch();" class="searchButton date" style="margin-left: 0px; margin-top: 0px; place-self: center; "><i class="glyphicon glyphicon-search"></i></div>*@
+                                @*<span class="closebn filterclose" onclick="removeFilter()" style="margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                        @*    </div>
+                     
+                        
+                        
+                        </div>
+                        <div id="dueDateC" style="display: none;  " class="filterDiv">
+                            <div class="datedisplay" style="display: flex;">
+                                <div class="FromDiv" style="margin-left:15px;">
+                                    <label class="ee" style="margin-bottom: -5px; margin-right: 0px; font-size: 10px; color: #337ab7;">   From </label>
+                                    <input type="date" id="min" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div class="ToDiv" style="margin-left: 15px;">
+                                    <label class="ww" style="margin-bottom:0px; margin-right: 0px; font-size: 10px; color: #337ab7; ">  To </label>
+                                    <input type="date" id="max" class="" style="display: inline-flex; height: 26px; border: none; border-bottom: 1px solid #ddd; padding-bottom: 0px; outline: none; font-size: 11px;" value="@D" max="@D" />
+                                </div>
+                                <div id="search2" onclick="DueDateSearch();" class="searchButton date" style="margin-left: 0px; margin-top: 0px; place-self: center; "><i class="glyphicon glyphicon-search"></i></div>*@
+                                @*<span class="closebn filterclose" onclick="removeFilter()" style="margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                          @*  </div>
+                        </div>
+
+
+                        <div id="TextC" class="filterDiv" style="display: none; width: auto;">
+                            <div style="display:flex">
+                                <input type="text" id="filterText" class="" placeholder="Type to search" style="height:26px; padding-left:5px; margin-left:20px; width:120px; border:none; border-bottom:1px solid #ddd; padding-bottom:0px; outline:none; font-size:11px;" />
+                                <div id="search1" onclick="DoSearch();" class="searchButton"><i class="glyphicon glyphicon-search"></i></div>*@
+                                @*<span class="closebn filterclose" onclick="removeFilter()" style="margin-top: 8px; margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                          @*  </div>
+
+                        </div>
+                        <div id="StatusC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("StatusFilter", "49", "-Select Status-",0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px;  border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, false)*@
+                                @*<span class="closebn filterclose" onclick="removeFilter()" style="height:32px; margin-top:7px; margin-left: 10px; font-size: 20px; padding: 3px 10px 3px 10px; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                           @* </div>
+                            </div>
+
+                        <div id="assignedtoC" class="filterDiv" style="display:none;">
+                                <div style="display:inline-flex; ">
+                                    @Html.List_Search("assignedTo", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)*@
+                                    @*<span class="closebn filterclose" onclick="removeFilter()" style="height:32px; margin-top:7px; margin-left: 10px; font-size: 20px; padding: 3px 10px 3px 10px; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                       @*         </div>
+                            </div>
+
+                        <div id="createdByC" class="filterDiv" style="display:none;">
+                                <div style="display:inline-flex; ">*@
+                                    @*@Html.List_Search("CreatedBy", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null)", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)*@
+                                    @*<span class="closebn filterclose" onclick="removeFilter()" style="height:32px; margin-top:7px; margin-left: 10px; font-size: 20px; padding: 3px 10px 3px 10px; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                           @*     </div>
+                            </div>
+
+                        <div id="teamEmployeeC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("teamEmployee", "- Select Employee -", "accmaster", "accname", "p_acccode", "rowstatus=0 and acctype = 3042 and status='Y' and (updateflag<>'D' or updateflag is null) and under=" + under + "", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, true)
+                            </div>
+                        </div>
+
+                        <div id="tagsC" class="filterDiv" style="display:none;">
+                            <div style="display:inline-flex; ">
+                                @Html.List_Search("Tags", "68", "-Select Tag-", 0,"", new {@class = "", @style = "height:26px; margin:10px 0px 0px 20px; width:auto; padding-left:0px;top:10px; border: none; border-bottom: 1px solid #ddd;padding-bottom: 0px;outline: none;font-size: 11px;"}, false, true)
+                                <div id="btnTagSearch" onclick="tagSearch();" class="searchButton" style="display:none;"><i class="glyphicon glyphicon-search"></i></div>
+                            </div>
+                        </div>*@
+
+                        @*<a class="closebn filterclose" id="closefilter" onclick="removeFilter()">&times;</a>*@
+                        @*<a class="closebn filterclose" id="closefilter" onclick="removeFilter()" title="" data-placement="bottom" data-toggle="tooltip" data-trigger="hover" data-original-title="Remove Filter" style="display:none;margin-left: 10px; font-size: 20px; height:30px; width:30px; place-self: center; cursor:pointer; color:#808080; text-align:center;margin-top: 9px;">&times;</a>*@
+                        <div id="FilterText" class="" style="float:left; display:none; margin-top: 10px;margin-left:15px;font-size:13px;border:1px solid lightgray; width: auto; padding:2px 5px 0px 5px; height:26px;top: 10px;bottom:34px;">
+
+                            <p id="fText" style="float:left; margin-bottom:0px; margin-right:10px;  margin-top :-1px;"></p>
+                            <a class='' id='' onclick='ReloadGrid();'>
+                                <i class='glyphicon glyphicon-remove'></i>
+                            </a>
+                        </div>
+                        <button onclick="getMyTasks();" class="btn btn-default myTaskBtn" style="margin-top:0;">MyTasks</button>
+                        @if (ViewBag.showAllTasks == "Y")
+                        {
+                            <button onclick="getAllTasks();" class="btn btn-default myTaskBtn">AllTasks</button>
+                        }
+                      @*  <button type="button" onclick="startDateSort(this)" class="myTaskBtn sorting"><span>StartDate</span><span class="arrowicon"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></button>
+                        <button type="button" onclick="lastActionTimeSort(this)" class="myTaskBtn sorting"><span>LastActionTime</span><span class="arrowicon"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></button>*@
+                   </div>
+
+                    
+
+                    <div class="search1">
+                        <div class="g">
+                            <label id="info">0-00 of 00 </label>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Previous" id="Prev" data-original-title="Newer">
+                                <i class="fa fa-angle-left" style="font-size:23px"></i>
+                            </a>
+                            <a class="btn btn-default" title="" data-placement="bottom" data-toggle="Next" id="Next" data-original-title="Older">
+                                <i class="fa fa-angle-right" style="font-size:23px"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="resultDiv" style="display:none;">
+                    <div class="resultContent">
+                        <div class="result-msg">
+                        </div>
+                        <p class="clearFilter" onclick="removeFilter();">Clear Filter</p>
+                        @*<span class="closebtn" onclick="this.parentElement.style.display = 'none';" style="float:right; cursor:pointer; color:#808080; text-align:center;">&times;</span>*@
+                    </div>
+                </div>
+
+                </div>
+                <div>
+                    <input type="hidden" name="Logintype" id="Logintype" value="@httpContextAccessor.HttpContext?.Session.GetString("logintype")"/>
+                    <input type="hidden" name="grid1" id="fvalue" value="@ViewBag.Message">
+                </div>
+            <div id="subDiv" style="background-color: #f3f8fa;  width: 100%; margin-bottom: 15px; padding: 13px; border-radius: 5px;  font-family: verdana,arial,sans-serif;display:none;">
+                <label id="subDivLable" onclick="Allselection();" style="vertical-align: baseline; font-size: 11px; font-weight: 600; text-align: left; margin-top: 2px; margin-bottom: 0px;cursor:pointer;color: #337ab7; "></label>
+            </div>
+                <div class="col-md-12 text-center Table-Dive">
+                    <div class="calHeightTaskBar">
+                        <div class="TaskBar tr" id="taskb">
+                            <input type="checkbox" id="selectall" class="css-checkbox" name="selectall" />
+                        <div class="SNo td tbHead" style="width: 6%; text-align: right; padding: 0 10px 0 8px;"><b>SNo.</b></div>
+                        <div class="TaskId td tbHead" style="width: 5%; padding: 0 8px 0 0px;"><b>TaskId</b></div>
+                        @*<div class="TaskTitle td tbHead" style="width: 20%;padding: 0 8px 0 5px;"><b>Title</b></div>*@
+                        <div class="TaskTitle td tbHead" style="width: 23%;padding: 0 8px 0 13px;"><b>Title</b></div>
+                        @*<div class="TaskDescription td tbHead" style="width: 20%; padding: 0 8px 0 8px;"><b>Description</b></div>*@
+                        <div class="TaskPriority td tbHead" style="width:7%; padding: 0 8px 0 5px;"><b>Priority</b></div>
+                        <div class="StartDate td h tbHead" style="width: 8%;" onclick="startDateSort(this)"><b>StartDate</b><span class="arrowicon" style="float:right; margin-right:10px;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></div>
+                        <div class="DueDate td h tbHead" style="width: 8%; padding: 0 8px 0 8px;"><b>DueDate</b></div>
+                        <div class="LastActionTime td h tbHead" style="width: 10%;" onclick="lastActionTimeSort(this)"><b>LastActionTime</b><span class="arrowicon" style="float:right;"><i class="fa fa-caret-up"></i><i class="fa fa-caret-down"></i></span></div>
+                        <div class="AssignedTo  td tbHead" style="width: 10%; padding: 0 8px 0 13px;"><b>AssignedTo</b></div>
+                        <div class="CreatedBy h td tbHead" style="width: 11%;  padding: 0 6px 0 6px;"><b>CreatedBy</b></div>
+                        <div class="TaskStatus td h tbHead" style="width: 11%; padding: 0 8px 0 5px;"><b>Tag</b></div>
+                        <div class="TaskStatus td tbHead" style="width: 6%; padding: 0 8px 0 5px;"><b>Status</b></div>
+                        </div>
+                    </div>
+                    <div id="loading" style="padding:10px; margin-top:10%;"><div colspan="5"><div id="loadingmessage" class="loader overlay col-md-offset-6"></div><p id="Msg"></p></div></div>
+                    <div class="" id="example"></div>
+                </div>
+            </div>
+
+        @*For Desktop View*@
+        <div class="right">
+          <div class="detailPane">
+            <div class="row detailpaneIconrow">
+                <i class="fa fa-arrow-right" id="RightShift" aria-hidden="true"></i>
+                <div class="save">
+                    <a id="ShareLink" onclick="CreateLink('@desktop');"><img src="~/images/icon-share.png" alt="Share" class="detailpaneIcon tooltips" ><span class="tooltiptext share" style="right:2%">Share</span></a>
+                </div>
+            </div>
+            <div class="ShareBox">
+                <label>Share Link</label> <span class="closebn" onclick="this.parentElement.style.display = 'none';">&times;</span>
+                <div class="Box">
+                        <input type="text" class="shareLinkTextBox" />
+                    <button id="copylinkbtn" class="btn btn-primary copyBtn" type="button" data-clipboard-target="#downloadlink">Copy link</button>
+                </div>
+           </div>
+           @*TopNavBar in Detail pane*@
+            <div class="topnavbar" style="z-index:1;">
+                    <a class="active" onclick="homedata()" id="homedata">Home</a>
+                    <a class="unactive" onclick="progressdata()" id="progressdata">Progress</a>
+                    <a class="unactive" onclick="edithistorydata()" id="edithistorydata">History</a>
+                    <a class="unactive" onclick="collaboratordata()" id="collaboratordata">Collaborator</a>
+                    <a class="unactive" onclick="classificationdata()" id="classificationdata">Classification</a>
+             </div>
+
+            <section class="editSection editSectiondata" id="details">
+                <div class="x-id">
+                    
+                        <p><span id="tasktitle"></span> <span>( Id -</span> <span id="taskid"></span><span>)</span></p>
+                        <span style="display:none" id="taskkey"></span>
+                        @*<span style="float:right; font-weight:normal; font-size:12px;" id="subtask"></span>*@
+                 </div>
+               
+                <div class="x-desc">
+                     @*<span id="spc">Task Description</span>*@
+                    @* <textarea id="txttaskdescription" class="x-TextArea" rows="4" cols="10"></textarea>*@
+                     <p id="taskdescription"></p>
+                </div>
+
+                <div class="dates">
+                    <p>Start Date <span id="startdate"></span></p>
+                    <p>Due Date <span id="duedate"></span></p>
+                    <p>TaskStatus<span id="taskstatus"></span></p>
+                    <p>TaskPriority<span id="taskPriority"></span></p>
+                    <p>Assigned To<span id="assignedto"></span></p>
+                    <p>Created By<span id="creadtedby"></span></p>
+                </div>
+            </section>
+
+            
+
+            <section class="tabSection" style="margin-top:10px;" id="remarks">
+               <ul class="tabs-navWeb row">
+                        <li class="" id="list1">
+                            <a href="#remarkTab" rel="nofollow">Progress Notes</a>
+                        </li>
+                        <li class="tab-activeWeb " id="list2">
+                            <a href="#Webtab-2" rel="nofollow">Assignment History</a>
+                        </li>
+                        <li class="tab-activeWeb " id="list4">
+                            <a href="#taskeditTab" rel="nofollow" onclick="showEditHistoryTab();" id="list3">Edit History</a>
+                            <h3 id="edithead">Edit History</h3>
+                        </li>
+                    </ul>
+                <div class="tabs-stageWeb bgImage">
+                    <div class="div" id="remarkTab">
+                        <div id="boxLoading" @*style="padding:10px;"*@>
+                            <div colspan="5">
+                                <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="AllRemarks"></div>
+                    </div>
+
+                    <div class="div" id="Webtab-2" style="display: none;"></div>
+                                        
+                    <div class="div" id="taskeditTab" style="display: none;">
+                        <div id="boxLoading">
+                            <div colspan="5">
+                                <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="allActivity"></div>
+                    </div>
+                </div>
+            </section>
+
+                <div class="SectionCollaborators" id="collaborators">
+                <div class="row">
+                    @*<i class="fa fa-users"></i>*@
+                    <img src="~/images/icon-Collaborators.png" class="icon-image" />
+
+                     <span class="x-heading">Collaborators</span>
+                    @*<span style="display:inline-flex;">Collaborators</span>*@
+                </div>
+                <div class="boxx">
+                    <div id="boxLoading" @*style="padding:10px;"*@>
+                        <div colspan="5">
+                            <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                            </div>
+                        </div>
+                    </div>
+                        <div id="AllCollab" class="bgImage"></div>
+                </div>
+            </div>
+
+            <div class="task-classification" id="classification">
+                <div class="row">
+                    @*<i class="fa fa-tag"></i>*@
+                    <img src="~/images/tag.png" class="icon-image" />
+
+                    <span class="x-heading">Task Classification</span>
+                </div>
+                <div class="boxx">
+                    <div id="boxLoading">
+                        <div colspan="5">
+                            <div id="boxLoadingMessage" class="loader overlay col-md-offset-6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tag-container bgImage" id="tag-container"></div>
+                </div>
+            </div>
+
+        </div>
+          @*asideNav*@
+             <section class="asidenav">
+                <nav class="menu">
+                    <a href="#" id="detailtop" onclick="asidenavActive('#detailtop', '#details')" class="menu__item menu__item--active asidenav-tab">
+                        @*<i class="fa fa-home"></i>*@
+                        <img src="~/images/icon-home.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="remarktop" onclick="asidenavActive('#remarktop', '#remarks')">
+                        @*<i class="fa fa-envelope" aria-hidden="true"></i>*@
+                        <img src="~/images/icon-progress note.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="collabtop" onclick="asidenavActive('#collabtop', '#collaborators')">
+                        @*<i class="fa fa-users"></i>*@
+                        <img src="~/images/icon-Collaborators.png" />
+                    </a>
+                    <a href="#" class="menu__item asidenav-tab" id="tagtop" onclick="asidenavActive('#tagtop', '#classification')">
+                        @*<i class="fa fa-tags"></i>*@
+                        <img src="~/images/tag.png" />
+                    </a>
+                </nav>
+            </section>
+      </div>
+    </div>
+</div>
+
+
+
+<input type="hidden" id="type2" value="@ViewBag.Message" />
+
+
+
+<div class="LoaderOverlay">
+    <div class="loaderspin" id="loadspin" style="text-align:center; margin-left:700px; margin-bottom:50px; margin-top:300px"></div>
+</div>
+
+
+
+
+<div class="modal fade" id="TaskClose">
+    <div class="modal-dialog" role="form">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none; padding:0px">
+                <span class="close" data-dismiss="modal" style="padding:6px 12px 6px 12px">&times;</span>
+            </div>
+            <div class="modal-body" style="padding-bottom:0px; padding-top:0px;">
+                <div id="TaskClosedContent" class="col-md-12"></div>
+            </div>
+            <div class="modal-footer" style="border:none; text-align:center; padding-bottom:15px">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Advance filter Modal*@
+<input type="hidden" name="grid1" id="afvalue" value="@ViewBag.filterString">
+<input type="hidden" name="grid1" id="svalue" value="@ViewBag.sortString">
+
+
+<!--new design-->
+<div class="modal fade" id="FilterModel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 2px; width: 670px;">
+            <div class="modal-body" style="height: 400px;  overflow-y:scroll;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#filterTab" aria-controls="filterTab" role="tab" data-toggle="tab">Filters</a>
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#sortTab" aria-controls="sortTab" role="tab" data-toggle="tab">Sort</a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="filterTab">
+                            <div id="addfilter" onclick="AddFilters();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer;">New Filter <i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Filter Options dropdown*@
+                            <table id="filterTable"></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sortTab">
+                            <div id="addsortOptions" onclick="AddSortingOptions();" style="color: #337ab7; margin-left: 7px; margin-bottom: 10px; margin-left: 7px; margin-bottom: 10px; border-radius: 50px; padding: 2px 4px; font-size: 14px; font-weight: 500; vertical-align: top; cursor: pointer; ">New Sort Option<i class="glyphicon glyphicon-plus" style="padding-left:5px; font-size:11px; "></i> </div>@*Add Sort Options dropdown*@
+                            <table id="sortingTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div id="clearFilters" onclick="removeFilter2();" class="btn modalbutton">Clear<i class="glyphicon glyphicon-remove" style="top:3px; padding-left:5px;"></i></div>@*clear filter values*@
+                <div id="search1" onclick="ApplyFilters2();" class="btn modalbutton ">Apply <i class="glyphicon glyphicon-search" style="top:3px; padding-left:5px;"></i></div>
+                <button type="button" class="btn modalbuttonsecondary" data-dismiss="modal">Close</button> @*close modal popup*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+﻿.form-inline .form-group {margin-right: 10px;}
+.well-primary {color: rgb(255, 255, 255);background-color: rgb(66, 139, 202);border-color: rgb(53, 126, 189);}
+.glyphicon {margin-right: 5px;}
+.panel-group .panel {border-radius: 0;}
+.cont {margin-left: 25%;margin-right: 25%;}
+#accordion{margin-bottom:0px}
+#gen{margin-top:15px;}
+#b1, #b2{width:15%; margin-top:15px}
+.btn-primary{ margin-top:15px; }
+.btn-default{ margin:15px 0px 0px 10px; }            
+.box-header h2{text-align:center;}
+.box-header .box-title{ font-size:30px}
+.form-control.input-sm {height: 27px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 0px;width:100%}          
+.tt{margin-top:5px; margin-bottom:0px; font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}           
+#OtherCn-pref-contact, #OtherIndustry{margin-top:15px}         
+.fixed-pos{ position:fixed; top: 0px;  z-index:1000; width:30%}
+.panel.uu{margin-bottom:0px; background-color:#F3F3F3; font-size:16px; padding:10px; color:black; border-radius:0px}
+.uu a:hover{text-decoration:none; color:black}
+.uu a{color:black; text-decoration:none; font-family:'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:20px }
+h2{width:100%; background-color:white}
+.rr{width:100%; background-color:white; padding-right:15px} 
+ .rr.fixed-pos{width:41%}
+.uu{margin-top:15px; height:40px; }
+.active{ border-bottom:2px solid}      
+#gd, #od{padding-bottom:2px}      
+.uu a:active{text-decoration:none}
+#od{margin-left:20px}
+.ne{ margin-bottom:0px}
+p{font-family:'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:22px }
+.btn-1{width:20%; height:30px; padding:0px; font-size:13px}
+
+@media screen and (max-width:800px) {
+.cont{margin-left:5px;margin-right:5px;}
+.form-control {height: 25px;margin-right: 0;}
+.input-sm {padding: 5px 0;border-radius:0px}
+div #mar .form-group{margin-bottom:30px;   }
+.rr{width:100%; background-color:white; padding:0px}
+.form-control.input-sm {height: 27px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 0px;width:100%}
+.panel.uu{padding:10px 0px 10px 2px}
+#od{margin-left:5px}
+.rr.fixed-pos{width:225px}
+a#od{font-size:16px}
+a#gd{font-size:16px}
+.form-control.input-sm.acc{width:100%}
+}
+ 

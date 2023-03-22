@@ -1,0 +1,400 @@
+﻿body {
+}
+/*.setStyle {
+    width: 100% !important;
+    padding-top: 20px;
+}*/
+
+.RemarkMessage {
+    display: none;
+    background-color: #4BB543 !important;
+    color: white !important;
+    padding: 7px !important;
+    border-radius: 3px;
+}
+
+/*.remarklabel {
+    color: #337ab7;
+    font-size: 15px;
+    font-weight: 600;
+}*/
+
+/*.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+*/
+    .closebtn:hover {
+        color: black;
+    }
+
+
+.r i {
+    color: #337ab7;
+}
+
+
+
+.move {
+    width: 69.5% !important;
+}
+
+.mov {
+    margin-left: 30px !important;
+}
+
+
+
+#right1 {
+    width: 100%;
+    float: left;
+    background-color: white;
+    padding: 4%;
+    display: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: auto;
+}
+
+.row {
+}
+
+
+.Status select {
+    color: #3c8dbc;
+    border-color: #3c8dbc;
+    padding: 3px 15px;
+}
+
+    .Status select option {
+        color: #3c8dbc;
+        border-color: #3c8dbc;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+.Status label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3c8dbc;
+    padding-right: 10px;
+    padding-top: 4px;
+}
+
+
+
+.icon img {
+    padding-right: 18px;
+    width: 40px;
+}
+
+    .icon img:hover {
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+
+.icon {
+    margin-top: 5%;
+}
+
+
+.right-end {
+    float: right;
+    color: #3c8dbc;
+}
+
+    .right-end a {
+        background-color: #edeeef;
+        padding: 5px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+        .right-end a:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+    .right-end span {
+        padding-right: 8px;
+    }
+
+
+.hidden_row {
+    display: none;
+}
+
+
+
+
+.icon img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+
+
+.task-title {
+    margin-top: 4%;
+    padding-bottom: 10px;
+}
+
+.row {
+}
+
+.task-title h3 {
+    color: #337ab7;
+    font-size: 20px;
+    font-weight: 500;
+    /* font-family: 'Montserrat', sans-serif;*/
+}
+
+.task-id span {
+    font-weight: bold;
+    font-size: 15px;
+    color: #4f5250;
+}
+
+.task-id {
+    margin-top: 2%;
+    margin-bottom: 5px;
+}
+
+.task-desc {
+    color: #4f5250;
+    font-size: 14px;
+    margin-top: 3%;
+}
+
+    .task-desc #spc {
+        font-weight: 600;
+        color: #337ab7;
+        font-size: 15px;
+    }
+
+    .task-desc p {
+        padding-top: 5px;
+    }
+
+.task-cap {
+    color: #337ab7;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.col-md-6 .task-cap .dates {
+    padding: 20px;
+}
+
+.Status {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.tab {
+    margin-top: 3%;
+}
+
+    .tab .tab-pane {
+        padding-bottom: 15px;
+        border: none;
+        display: inline-flex;
+    }
+
+        .tab .tab-pane button {
+            border: none;
+            border-radius: 50px;
+            font-size: 12px;
+            background-color: transparent;
+            font-weight: 500;
+            color: #4f5250;
+            padding-left: 19px;
+            padding-right: 19px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 3px;
+        }
+
+            .tab .tab-pane button:focus {
+                border: transparent;
+            }
+
+            .tab .tab-pane button:hover {
+                background-color: #edeeef;
+            }
+
+    .tab .history {
+        height: 150px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 1px #ddd solid;
+        border-bottom: 1px #ddd solid;
+        margin-right: 7px;
+    }
+
+        .tab .history p {
+            font-size: 13px;
+        }
+
+            .tab .history p span {
+                font-weight: 500;
+            }
+
+
+    .CollaboratorsBoxx:first-child {
+        padding-top: 10px;
+    }
+
+
+
+.mobileDetailPane {
+    width: 100%;
+    padding: 15px;
+    margin-right: 0px;
+}
+
+
+.upload {
+    font-size: 12px;
+}
+
+.filenam {
+    color: #3c8dbc;
+    padding-left: 5px;
+}
+
+
+textarea {
+    width: 100%;
+    border-color: #ddd;
+    color: #555;
+    margin-bottom: 8px;
+    margin-top: 6px;
+   /* height: 100px;*/
+    border-radius: 4px;
+    padding: 15px;
+    outline: none;
+}
+    textarea:focus {
+        border-color: #3c8dbc;
+    }
+/* Tab View*/
+
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px #ddd solid;
+    padding-bottom: 15px;
+}
+
+
+
+    
+  
+
+.tabs-nav .tab-active a {
+    background: #337ab7;
+    /*border-bottom-color: hsla(0, 0%, 0%, 0);*/
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+  
+}
+
+.tabs-nav a {
+    background: hsl(120, 11%, 96%);
+    border-radius: 50px;
+    color: #3c8dbc;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    height: auto;
+    /*line-height: 44px;*/
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+
+.tabs-nav li {
+    float: left;
+}
+
+.tabs-stage {
+    
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #ddd solid;
+    border-top: 0;
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+    top: 1px;
+    width: auto;
+}
+
+    .tabs-stage p {
+        margin: 0;
+        padding: 5px;
+        color: #3c8dbc;
+    }
+
+.s {
+    width: 7% !important;
+}
+.i {
+    width: 7% !important;
+}
+.d {
+    width: 11% !important;
+}
+.t {
+    width: 28% !important;
+}
+.r {
+    width: 27% !important;
+}
+.b {
+    width: 20% !important;
+}
+
+
+ .sv{
+        width:7% !important;
+    }
+.iv {
+    width: 8% !important;
+}
+.dv {
+    width: 11% !important;
+}
+.tv {
+    width: 29% !important;
+}
+.rv {
+    width: 28% !important;
+}
+.bv {
+    width: 16% !important;
+}

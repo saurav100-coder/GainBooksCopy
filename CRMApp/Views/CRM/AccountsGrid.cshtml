@@ -1,0 +1,36 @@
+﻿
+@*@Optimization.Scripts.Render("~/Scripts/AccountsGrid")
+@Optimization.Styles.Render("~/Content/AccountsGrid")*@
+
+
+<script src="~/Scripts/FrameWork/jquery.min.js"></script>
+<script src="~/Scripts/FrameWork/bootstrap.js"></script>
+<script src="~/Scripts/Custom/AccountsGrid.js"></script>
+
+<link rel="stylesheet" href="~/Content/FrameWork/bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/Custom/GridCss.css" />
+<link rel="stylesheet" href="~/Content/Custom/AccountsGrid.css" />
+
+@{
+    Layout = "";
+}
+
+<div>
+    <input type="text" name="searchAccount" id="searchAccount" class="acc form-control input-sm col-md-6 col-sm-12" />
+</div>
+<input type="hidden" name="AccountName" id="AccountName" />
+<div id="searchA" style="display:none;overflow-y:scroll; width:750px;height:214px;">
+    <table id="Accounts" class="table" cellspacing="0" style="background-color:white;">
+        <thead>
+            <tr style="text-align:center;">
+                <th>S.No</th>
+                <th>AccountName</th>
+                <th>HomeTown</th>
+                <th>District</th>
+                <th>State</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

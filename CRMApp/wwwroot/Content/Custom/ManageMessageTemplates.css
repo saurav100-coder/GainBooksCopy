@@ -1,0 +1,307 @@
+﻿table td {border-bottom: 1px solid grey;border-style: none;overflow-x: auto;}
+table th {border-style: none;padding: 2px;}
+table tr td {border-top: 1px solid black;border-collapse: collapse; padding: 2px; border-style:none}
+table thead tr th {border-bottom: 1px solid grey;border-top: 1px solid black;border-collapse: collapse;padding: 2px; border-style:none}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    border-top: 1px solid #000000;
+}
+
+tr:hover:not(.highlight) td {
+    background-color: lightblue;
+}
+.highlight {background-color: #568CA7;color: white;}
+select {height: 30px;font-family: verdana,arial,sans-serif;font-size: 11px;}
+#filterText {height:30px;font-family: verdana,arial,sans-serif;font-size: 11px;margin-left: 4px;margin-top: 10px;height: 20px;margin-bottom: 5px;}
+#dropdown {width: 40%;}
+.search1 {width: 40%;}
+.content {padding: 0px;}
+.container {width: 60%;}
+h4 {margin: 0px;padding: 0px;}
+a {text-decoration: none;}
+#drop {width: 35%;margin: 0px auto;text-align: left;float: right;}
+.col-md-3 #main1 {text-align: center;}
+.content-wrapper, .right-side {background-color: white;}
+.panel-default {width: 100%;height: auto;}
+.panel-body {font-family: verdana,arial,sans-serif;font-size: 11px;padding: 0px;height: auto;}
+input[type=date] {width: 20%;padding: 0px;}
+#filter {height: 20px;padding: 0px;width: 18%;margin-top: 10px;margin-bottom: 5px;}
+.panel {margin-bottom: 0px;}
+#min {margin-top: 10px;height: 20px;margin-left: 10px;margin-bottom: 5px;}
+#max {margin-top: 10px;height: 20px;margin-bottom: 5px;}
+.ee, .ww {margin-top: 15px;}
+.search {padding: 0px;}
+.bb {padding: 0px;height: auto;margin: 0px auto;text-align: center;}
+hr {margin: 0px auto;padding: 0px;width: 97%;color: grey;}
+.icon-bar {width: 100%;   overflow: auto;}
+.icon-bar a {float: left;width: 12%;text-align: center;padding: 12px 0px;transition: all 0.3s ease;font-size: 20px;}
+.icon-bar a:hover {background-color:#EAEDEF;}
+.col-md-12.horizontal{overflow:auto;height:480px}
+ /*loader*/
+    .loader, .loader:after {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+#loading {
+    margin-top: 15%;
+    margin-left: 0%;
+    /*position: absolute;*/
+}
+
+.col-md-offset-6{
+    margin-left:50%;
+}
+.loader {
+    /*margin: 60px auto;*/
+   /* margin-top:15% !important;*/
+    font-size: 10px;
+    text-indent: -9999em;
+    border-top: 3px solid rgba(0,0,0, 0.2);
+    border-right: 3px solid rgba(0,0,0, 0.2);
+    border-bottom: 3px solid rgba(0,0,0, 0.2);
+    border-left: 3px solid #1DA3E6;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+    @-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    /*loader done*/
+
+
+/*.TaskBar {
+  
+    margin-right: 50px;
+    padding: 20px;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+    display: flex;
+    padding-right: 28px;
+    padding-top: 15px;
+    padding-bottom: 22px;
+    width: 100%;
+    color: #337ab7;
+    background-color: #f3f8fa;
+    width: 100%;
+    border-bottom: 7px solid white;
+    margin-top: 0px;
+    font-family: open sans,sans-serif;
+}*/
+.Sno                         {width:9%; padding-right:0px; text-align:left; padding-left:8px;}
+.Templateid                  {width:14%;padding-left:15px; padding-right:0px;}
+.TemplateType                {width:25%;padding-left:0px; padding-right:0px;}
+.TemplateTitle               {width:30%;padding-left:0px;}
+.TemplateText                {width:46%;padding-left:0px;}
+.Templatestatus              {width:14%;padding-left:10px;}
+.CreateDate                  {width:20%;padding-left:10px;}
+/*for headers*/
+.HSno                         {width:8%; padding-right:0px; text-align:left; padding-left:15px;}
+.HTemplateid                  {width:15%;padding-left:15px; padding-right:0px;}
+.HTemplateType                {width:24%;padding-left:0px; padding-right:0px;}
+.HTemplateTitle               {width:29%;padding-left:0px;}
+.HTemplateText                {width:45%;padding-left:0px;}
+.HTemplatestatus              {width:15%;text-align:left; }
+.HCreateDate                  {width:22%;padding-left:10px;}
+
+
+/*.clickable:hover {
+    background-color: white !important;
+   
+    box-shadow: 0 0 6px 1px #33333359;
+    z-index: 100;
+}*/
+.clickable {
+    transition: box-shadow 0.5s;
+    width:99%;
+}
+
+    .clickable:hover {
+        box-shadow: 0 0 6px 1px #33333359;
+    }
+
+.clamp {
+    font-size: 14px !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+@media only screen and (max-width:600px) {
+    /*.col-md-offset-6 {
+        margin-left: 5%;
+    }*/
+    .maindiv{
+        padding-left:0;
+    }
+    .MoreDetails{
+        display:none !important;
+    }
+    .Sno {
+        width: 9%;
+        padding-right: 0px;
+        text-align: left;
+        padding-left: 0px;
+    }
+    .Templateid {
+        display:none;
+    }
+    .TemplateType {
+        display: none;
+    }
+    .TemplateTitle {
+        width: 28%;
+        padding-left: 0px;
+    }
+    .TemplateText {
+        width: 46%;
+        padding-left: 0px;
+    }
+    .Templatestatus {
+        display: none;
+    }
+    .CreateDate {
+        width: 20%;
+        padding-left: 0px;
+    }
+    /*for headers*/
+    .HSno {
+        width: 8%;
+        padding-right: 0px;
+        text-align: left;
+        padding-left: 0px;
+    }
+    .HTemplateid {
+        display: none;
+    }
+    .HTemplateType {
+        display: none;
+    }
+    .HTemplateTitle {
+        width: 29%;
+        padding-left: 0px;
+    }
+    .HTemplateText {
+        width: 46%;
+        padding-left: 0px;
+    }
+    .HTemplatestatus {
+        display: none;
+    }
+    .HCreateDate {
+        width: 21%;
+        padding-left: 0;
+    }
+}   
+    @media only screen and (max-width:800px) {
+        /*.container {width: 100%;}
+#filter {height: 20px; padding: 0px; width: 75%; margin-top: 10px; margin-bottom: 5px;}
+input[type=date] {width: 100%;padding: 0px;}
+#max {margin-top: 0px;height: 20px;margin-bottom: 0px;}
+#min {margin-top: 0px;height: 20px;margin-left: 0px;margin-bottom: 0px;}
+.ee, .ww {margin-top: 0px;padding:0px}  
+.col-md-1{padding:0px}
+#filterText {font-family: verdana,arial,sans-serif;font-size: 11px;margin-top: 5px;height: 20px;padding:0px;margin:5px 0px 5px 0px}
+input[type=text] {width: 100%;}
+.col-md-3{padding:0px}   
+.search{width:40%} 
+.search1{width:50%}   
+.col-md-12.horizontal{height:380px}*/
+        /*.MoreDetails               {margin-left:600px; background-color:white; float:right;}
+.col-sm-12, .TaskBar       {width:800px;padding-left: 0px;padding-right: 0px;}*/
+
+
+    }
+
+    @media only screen and (min-width:992px) and (max-width:1024px) {
+
+        .MoreDetails {
+            position: absolute;
+            z-index: 2;
+            background-color: rgb(204, 230, 255);
+            width: 130px;
+            height: 30px;
+            right: 20px;
+            top: 3px;
+            border: none !important;
+            display: none;
+        }
+
+        .HTemplatestatus {
+            width: 14%;
+            text-align: center;
+            padding-left: 5px;
+        }
+
+        .HCreateDate {
+            width: 24%;
+            text-align: left;
+            padding-left: 20px;
+        }
+    }
+
+    @media only screen and (min-width:1025px) and (max-width:1200px) {
+
+        .MoreDetails {
+            position: absolute;
+            z-index: 2;
+            background-color: rgb(204, 230, 255);
+            width: 130px;
+            height: 30px;
+            right: 20px;
+            top: 3px;
+            border: none !important;
+            display: none;
+        }
+
+        .HTemplatestatus {
+            width: 14%;
+            text-align: center;
+            padding-left: 5px;
+        }
+
+        .HCreateDate {
+            width: 24%;
+            text-align: left;
+            padding-left: 20px;
+        }
+    }
+
+    @media only screen and (min-width:1201px) {
+        .MoreDetails {
+            position: absolute;
+            z-index: 2;
+            background-color: rgb(204, 230, 255);
+            width: 130px;
+            height: 30px;
+            right: 20px;
+            top: 3px;
+            border: none !important;
+            display: none;
+        }
+    }

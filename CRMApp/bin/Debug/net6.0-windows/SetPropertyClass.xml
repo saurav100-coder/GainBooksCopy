@@ -1,0 +1,1339 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SetPropertyClass
+</name>
+</assembly>
+<members>
+<member name="T:SetPropertyClass.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SetPropertyClass.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SetPropertyClass.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetColor(System.String)">
+ <summary>
+ To get Color object from color string type A~R~G~B   conv   code   "clr0"
+  </summary>
+ <param name="ColorString">Color string of type A~R~G~B eg 0~138~245~240  etc.</param>
+ <returns>Object as color</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetColorString(System.Drawing.Color)">
+ <summary>
+ To get A~R~G~B type string object from a color object
+ </summary>
+ <param name="ColorObject">Color object to be converted</param>
+ <returns>A~R~G~B type string object</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetBooleanString(System.Boolean,System.String)">
+ <summary>
+ To get boolean string value of masteroptions from a boolean object(BLN0),mkey=26
+ </summary>
+ <param name="BooleanObject">BooleanObject to be converted</param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetBoolean(System.String)">
+ <summary>
+ To get boolean string object from a boolean object
+ </summary>
+ <param name="BooleanValue">BooleanObjectString to be converted</param>
+ <returns>0=false,1=true</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPadding(System.String)">
+ <summary>
+ Get Padding object from padding string ((Left~Top~Right~Bottom)  or (All)) conversion type "PAD0"
+ </summary>
+ <param name="PaddingString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPaddingString(System.Windows.Forms.Padding)">
+ <summary>
+ Get Padding String from padding object ((Left~Top~Right~Bottom)  or (All)) conversion type "PAD0",41
+ </summary>
+ <param name="PaddingObject ">Padding object to be converted</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.AddComboBoxItems(System.String,System.Windows.Forms.ComboBox@,System.Data.DataTable)">
+ <summary>
+ Add items to a new or existing combobox , according to MasterOptionsString
+ </summary>
+ <param name="MasterOptionsString">RangeCode~Index ,Where RangeCode is the row element of Global datatable variable </param>
+ <param name="ComboObject"></param>
+ <param name="DtMasterOptions"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.AddListBoxItems(System.String,System.Windows.Forms.ListBox@,System.Data.DataTable)">
+ <summary>
+ Add items to a new or existing ListBox , according to MasterOptionsString
+ </summary>
+ <param name="MasterOptionsString">RangeCode~Index ,Where RangeCode is the row element of Global datatable variable </param>
+ <param name="ListObject"></param>
+ <param name="DtMasterOptions"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetToolTip(System.Object@,System.String)">
+ <summary>
+ Set ToolTip prompt to a control object
+ </summary>
+ <param name="LControl">control as object</param>
+ <param name="ToolTipStr">ToolTip prompt as string</param>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetToolTip(System.Object@,System.String,System.String)">
+ <summary>
+ Set ToolTip prompt to a control given by control name
+ </summary>
+ <param name="LForm">Parent form as object</param>
+ <param name="ControlName">Control name as string</param>
+ <param name="ToolTipStr">ToolTip prompt as string</param>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPictureObject(System.String@,System.String@,System.Collections.Hashtable@)">
+ <summary>
+ Get image object from a Property String in the format (R~ResourceTypeName~ImageName or R~ImageName)   or (F~ImageFileName or F~ImageFolder~ImageFileName) or   (S~FullSqlTableIdentifier~ImageKeyId~ImageStreamFieldName or S~ImageTableKey(from a fixed name ImageTable) conversion code img0
+ </summary>
+ <param name="PicttureIdentifier">String in the format (R~ResourceTypeName~ImageName or R~ImageName)   or (F~ImageFileName or F~ImageFolder~ImageFileName) or   (S~FullSqlTableIdentifier~ImageKeyId~ImageStreamFieldName or S~ImageTableKey(from a fixed name ImageTable) conversion code img0</param>
+ <param name="ImageType" >"image","icon","gifimage","blurredimage","video"</param>
+ <param name="PublicHashTable" >Public hashtable having type of  class holding image resources , key is classname</param>
+ <returns>Return image as object</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.ConvertImageToGifFormat(System.Drawing.Image@)">
+ <summary>
+ Convert Image (*.GIf) into display format.
+ </summary>
+ <param name="InputGifImage"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetImageFromImagesList(System.Int32,System.Data.DataTable,System.String)">
+ <summary>
+ Get image from ImagesList conversion code is img0
+ </summary>
+ <param name="id"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPictureFromImagesList(System.Int32,System.Data.DataTable)">
+ <summary>
+ Get Picture from ImageList conversion code 
+ </summary>
+ <param name="id">value of ImagesList_key to be found</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFonts(System.String)">
+ <summary>
+ Get Font object from Font string type FontName~FontSize~FontStyle1~FontStyle2 etc. conversion code "FNT0"
+ </summary>
+ <param name="FontString">Font string type FontName~FontSize~FontStyle1~FontStyle2 eg. (Microsoft Sans Serif~10~Regular)> </param>
+ <returns>Return Font as Object</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFontString(System.Drawing.Font)">
+ <summary>
+ Get String convention of Font object conversion code "FNT0"
+ 
+ </summary>
+ <param name="FontObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetBorderStyle(System.String)">
+ <summary>
+ Get windows.form.borderstyle from string value conversion type 'BST0' masterindex=16
+ </summary>
+ <param name="BorderStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetProgressBarStyle(System.String)">
+ <summary>
+ Get windows.form.ProgressBarStyle from string value conversion type 'PRO0' masterindex=29
+ </summary>
+ <param name="ProgressBarStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetProgressBarStyleString(System.Windows.Forms.ProgressBarStyle,System.String)">
+ <summary>
+ Get string value of windows.form.borderstyle object value conversion type 'PRO0',key=29
+ </summary>
+ <param name="ProgressBarStyleObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDateTimePickerFormat(System.String)">
+ <summary>
+ Get windows.form.DateTimePickerFormat from string value conversion type 'DTPF' masterindex=13
+ </summary>
+ <param name="DateTimePickerFormatString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDateTimePickerFormatString(System.Windows.Forms.DateTimePickerFormat,System.String)">
+ <summary>
+ Get string value of windows.form.DateTimePickerFormat object value conversion type 'DTPF',30
+ </summary>
+ <param name="DateTimePickerFormatObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetRightToLeft(System.String)">
+ <summary>
+ Get windows.form..RightToLeft from string value conversion type 'RTL0' masterindex=31
+ </summary>
+ <param name="RightToLeftString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetRightToLeftString(System.Windows.Forms.RightToLeft,System.String)">
+ <summary>
+ Get string value of windows.form.RightToLeftObject object value conversion type 'RTL0',31
+ </summary>
+ <param name="RightToLeftObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetToolStripGripStyle(System.String)">
+ <summary>
+ Get windows.form..ToolStripGripStyle from string value conversion type 'TSGS' masterindex=13
+ </summary>
+ <param name="ToolStripGripStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetToolStripGripStyleString(System.Windows.Forms.ToolStripGripStyle,System.String)">
+ <summary>
+ Get string value of windows.form.ToolStripGripStyle object value conversion type 'TSGS',13
+ </summary>
+ <param name="ToolStripGripStyleObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetWindowsStatus(System.String)">
+ <summary>
+ Get windows.form.FormWindowState from string value conversion type 'WST0' masterindex=62
+ </summary>
+ <param name="WindowsStatusString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetWindowsStatusString(System.Windows.Forms.FormWindowState,System.String)">
+ <summary>
+ Get string value of windows.form.FormWindowState object value conversion type 'WST0',32
+ </summary>
+ <param name="WindowsStateObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFormStartPosition(System.String)">
+ <summary>
+ Get windows.form.GetFormStartPosition from string value conversion type 'FSP0' masterindex=49
+ </summary>
+ <param name="FormStartPositionString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFormStartPositionString(System.Windows.Forms.FormStartPosition,System.String)">
+ <summary>
+ Get string value of windows.form.FormStartPosition object value conversion type 'FSP0'
+ </summary>
+ <param name="FormStartPosition"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDataGridViewAutoSizeColumnMode(System.String)">
+ <summary>
+ Get Windows.Forms.DataGridViewAutoSizeColumnMode from string value conversion type 'GSM0', MasterIndex=1
+ </summary>
+ <param name="AutoSizeMode"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDataGridViewAutoSizeColumnModeString(System.Windows.Forms.DataGridViewAutoSizeColumnMode,System.String)">
+ <summary>
+ Get  string value  from Windows.Forms.DataGridViewAutoSizeColumnMode conversion type 'GSM0',1
+ </summary>
+ <param name="AutoSizeModeObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetBorderStyleString(System.Windows.Forms.BorderStyle,System.String)">
+ <summary>
+ Get string value of windows.form.borderstyle object value conversion type 'BST0'
+ </summary>
+ <param name="BorderStyleObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDockStyle(System.String)">
+ <summary>
+ Get windows.form.dockstyle from string value conversion type 'DOC0',MasterOptionsKey=5
+ </summary>
+ <param name="DockStyleString "></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDockStyleString(System.Windows.Forms.BorderStyle,System.String)">
+ <summary>
+ Get string value of windows.form.Dockstyle object value conversion type 'DOC0',5
+ </summary>
+ <param name="DockStyleObject "></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAnchorStyles(System.String)">
+ <summary>
+ Get windows.form.Anchorstyles from string value conversion type 'ANCH',6
+ </summary>
+ <param name="AnchorStylesStringValues "></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAnchorStylesString(System.Windows.Forms.AnchorStyles,System.String)">
+ <summary>
+ Get string value of windows.form.Anchorstyles object value conversion type 'ANCH',6
+ </summary>
+ <param name="AnchorStylesObject  "></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetCursor(System.String)">
+ <summary>
+ Get cursor object from  string value  conversion type 'CRS0',4
+ </summary>
+ <param name="CursorString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetCursorString(System.Windows.Forms.Cursor,System.String)">
+ <summary>
+ Get cursor string value from  cusor object  conversion type 'CRS0',4
+ </summary>
+ <param name="CursorObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetImageLayout(System.String)">
+ <summary>
+ Get Windows.Form.GetImageLayout object from  string value  conversion type 'IML0',33
+ 
+ </summary>
+ <param name="ImageLayoutString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetImageLayoutString(System.Windows.Forms.ImageLayout,System.String)">
+ <summary>
+ Get String value of Windows.Form.GetImageLayout object , conversion type 'IML0',33
+ </summary>
+ <param name="ImageLayoutObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAppearance(System.String)">
+ <summary>
+ Get Appearance object from string value Conversion code 'APP0',34
+ </summary>
+ <param name="AppearanceString">Appearance object value as string</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAppearanceString(System.Windows.Forms.Appearance,System.String)">
+ <summary>
+ Get Appearance object string value of Windows.Form.Appearance   code 'APP0',34
+ </summary>
+ <param name="AppearanceObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetContentAlignment(System.String)">
+ <summary>
+ Get ContentAlignment object from string value Conversion code 'CAL0',24
+ 
+ </summary>
+ <param name="ContentAlignmentString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDGVContentAlignment(System.String)">
+ <summary>
+ Get ContentAlignment object from string value Conversion code 'CAL1' ,option 25
+ 
+ </summary>
+ <param name="ContentAlignmentString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetContentAlignmentString(System.Drawing.ContentAlignment,System.String)">
+ <summary>
+ Get String value of ContentAlignment object , Conversion code 'CAL0'
+ 
+ </summary>
+ <param name="ContentAlignmentObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDGVContentAlignmentString(System.Drawing.ContentAlignment,System.String)">
+ <summary>
+ Get String value of DGVContentAlignment object , Conversion code 'CAL1',25
+ 
+ </summary>
+ <param name="ContentAlignmentObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetHashTable(System.String)">
+ <summary>
+ Get HashTable from string,Separators are "~"  for keys and "=" for values type 'HAS0'
+ </summary>
+ <param name="HashTableString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetHashTableString(System.Collections.Hashtable)">
+ <summary>
+ Get HashTableString  from HashTable,Separators are "~"  for keys and "=" for values type 'HAS0'
+ </summary>
+ <param name="HashTableObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetHorizontalAlignment(System.String)">
+ <summary>
+ Get Windows.Form.HorizontalAlignment object from  string value  conversion type 'HAL0',35
+ 
+ </summary>
+ <param name="HorizontalAlignmentString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetHorizontalAlignmentString(System.Windows.Forms.HorizontalAlignment,System.String)">
+ <summary>
+ Get String value of Windows.Form.HorizontalAlignment object ,  conversion type 'HAL0',35
+ 
+ </summary>
+ <param name="HorizontalAlignmentObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetToolTipIcon(System.String)">
+ <summary>
+ Get System.Windows.Form.ToolTipIcon  object from  string value  conversion type 'TTI0',9
+ 
+ </summary>
+ <param name="ToolTipIconString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetToolTipIconString(System.Windows.Forms.ToolTipIcon,System.String)">
+ <summary>
+ Get String value of Windows.Form.ToolTipIcon object ,  conversion type 'TTI0',9
+ </summary>
+ <param name="ToolTipIconObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index from MasterOptions Table,'T'=if Text from MasterOption,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFlatStyle(System.String)">
+ <summary>
+ Get Windows.Form.FlatStyle object from string value conversion code 'FLS0',10
+ </summary>
+ <param name="FlatStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFlatStyleString(System.Windows.Forms.FlatStyle,System.String)">
+ <summary>
+ Get String value of Windows.Form.FlatStyle object, conversion code 'FLS0'
+ 
+ </summary>
+ <param name="FlatStyleObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if value is index in masteroptions,'T'=if value Text,F=FullText property</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetCheckBoxState(System.String)">
+ <summary>
+ Get  Windows.Form.CheckState object from string value conversion code 'CHS0'
+ </summary>
+ <param name="CheckBoxStateString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetCheckBoxStateString(System.Windows.Forms.CheckState,System.String)">
+ <summary>
+ Get String value of Windows.Form.CheckState object, conversion code 'CHS0'
+ 
+ </summary>
+ <param name="CheckStateObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if Index from MasterOptions,'T'=TextValue,F=Full String property</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetTextDirection(System.String)">
+ <summary>
+ Get  Windows.Form.ToolStripTextDirection object from string value conversion code 'TXD0',code 36
+ </summary>
+ <param name="TextDirectionString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetTextDirectionString(System.Windows.Forms.ToolStripTextDirection,System.String)">
+ <summary>
+ Get String value of Windows.Form.ToolStripTextDirection object, conversion code 'TXD0'
+ 
+ </summary>
+ <param name="ToolStripTextDirectionObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if Index from MasterOptions,'T'=TextValue,F=Full String property</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetTextImageRelation(System.String)">
+ <summary>
+ Get Windows.Form.TextImageRelation object from string value, conversion code 'TIR0',37
+ 
+ </summary>
+ <param name="TextImageRelationString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetTextImageRelationString(System.Windows.Forms.TextImageRelation,System.String)">
+ <summary>
+ Get String value of Windows.Form.TextImageRelation object , conversion code 'TIR0'
+ 
+ </summary>
+ <param name="TextImageRelationObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index,T=Text,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetColorFillBlend(System.Object)">
+ <summary>
+ Get ColorFillBlend object for userbutton from string value convention Conversion code 'CFB0'
+ </summary>
+ <param name="ColorFillBlendString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetColorFillBlendString(CButtonLib.cBlendItems)">
+ <summary>
+ Get String convension from ColorFillBlend object of cbuttonlib , Conversion code 'CFB0'
+ </summary>
+ <param name="ColorFillBlendObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFillTypeLinear(System.String)">
+ <summary>
+ It is used to draw shape on  control surface as diagonal ,vertical,horizontal etc. conv type FTL0,38
+ </summary>
+ <param name="FillTypeLinearString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFillTypeLinearString(System.Drawing.Drawing2D.LinearGradientMode,System.String)">
+ <summary>
+ Conversion of draw type object System.Drawing.Drawing2D.LinearGradientMode     to string conv type FTL0,38
+ </summary>
+ <param name="FillTypeLinearObject "></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index,T=Text,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetEShape(System.String)">
+ <summary>
+ Get Cbutton eshape object by string ,conv type ESHA,22
+ </summary>
+ <param name="EShapeString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetEShapeString(CButtonLib.CButton.eShape,System.String)">
+ <summary>
+ Get Cbutton eshape string by object,conv type ESHA,22
+ </summary>
+ <param name="EShapeObject "></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetEFillType(System.String)">
+ <summary>
+ Get EFillType object from EfillTypeString Conv Code   EFT0,12
+ </summary>
+ <param name="EFillTypeString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetEFillTypeString(CButtonLib.CButton.eFillType,System.String)">
+ <summary>
+ Get EFillType string from EfillType object Conv Code   EFT0,12
+ </summary>
+ <param name="EFillTypeObject "></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetImeMode(System.String)">
+ <summary>
+ Get Windows.Form.ImeMode object from  string value  conversion type 'IME0',2
+ 
+ </summary>
+ <param name="ImeModeString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetImeModeString(System.Windows.Forms.ImeMode,System.String)">
+ <summary>
+ Get Windows.Form.ImeMode object from  string value  conversion type 'IME0',2
+ </summary>
+ <param name="ImeModeObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetLocation(System.String)">
+ <summary>
+ Get Location as point string value,conversion type 'LOC0'
+ </summary>
+ <param name="LocationString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetLocationString(System.Drawing.Point)">
+ <summary>
+ Get Location as string from point ,conversion type 'LOC0'
+ 
+ </summary>
+ <param name="LocationObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetSize(System.String)">
+ <summary>
+ Get Size  as size string value,conversion type 'SIZ0'
+ 
+ </summary>
+ <param name="SizeString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetSizeString(System.Drawing.Size)">
+ <summary>
+ Get Size  as string value from size,conversion type 'SIZ0'
+ 
+ </summary>
+ <param name="SizeObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFormBorderStyle(System.String)">
+ <summary>
+ Get Windows.Form.FormBorderStyle  as Object from string value ,conversion type 'FBS0',17
+ 
+ </summary>
+ <param name="FormBorderStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPrintAction(System.String)">
+ <summary>
+ Get System.Drawing.Printing.PrintAction  object from string value ,conversion type 'PRA0' index 53
+ 
+ </summary>
+ <param name="PrintActionString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAutoSizeColumnsMode(System.String)">
+ <summary>
+ Get Windows.Form.DataGridViewAutoSizeColumnsMode  as Object from string value ,conversion type 'ASC0',45
+ 
+ </summary>
+ <param name="AutoSizeColumnsModeString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAutoSizeColumnsModeString(System.Windows.Forms.DataGridViewAutoSizeColumnsMode,System.String)">
+ <summary>
+ Get String value of Windows.Form.AutoSizeColumnsMode   ,conversion type 'ASC0',45
+ 
+ </summary>
+ <param name="AutoSizeColumnsMode"></param>
+ <param name="StringType" >StrinConvention code ,'I'=Index,'T'=Text ,F=Full String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPrintActionString(System.Drawing.Printing.PrintAction,System.String)">
+ <summary>
+ Get String value of System.Drawing.Printing.PrintAction   ,conversion type 'PRA0'
+ 
+ </summary>
+ <param name="GetPrintActionObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if value from MasterOptions Table(Key~Index),'T'=if value from MasterOption Table(Key~TextValue),S=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetFormBorderStyleSring(System.Windows.Forms.FormBorderStyle,System.String)">
+ <summary>
+ Get String value of Windows.Form.FormBorderStyle   ,conversion type 'FBS0',17
+ 
+ </summary>
+ <param name="FormBorderStyleObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetColumnHeadersBorderStyle(System.String)">
+ <summary>
+ Get Windows.Form.DataGridViewHeaderBorderStyle  as Object from string value ,conversion type 'CHB0'
+ 
+ </summary>
+ <param name="ColumnHeadersBorderStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetColumnHeadersBorderStyleString(System.Windows.Forms.DataGridViewHeaderBorderStyle,System.String)">
+ <summary>
+ Get String value of Windows.Form.ColumnHeadersBorderStyle   ,conversion type 'CHB0'
+ 
+ </summary>
+ <param name="ColumnHeadersBorderStyle"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if value from MasterOptions Table(Key~Index),'T'=if value from MasterOption Table(Key~TextValue),S=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetCellBorderStyle(System.String)">
+ <summary>
+ Get Windows.Form.DataGridViewCellBorderStyle  as Object from string value ,conversion type 'CBS0'
+ 
+ </summary>
+ <param name="CellBorderStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetCellBorderStyleString(System.Windows.Forms.DataGridViewCellBorderStyle,System.String)">
+ <summary>
+ Get String value of Windows.Form.ColumnHeadersBorderStyle   ,conversion type 'CHB0',47
+ 
+ </summary>
+ <param name="ColumnHeadersBorderStyle"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if value from MasterOptions Table(Key~Index),'T'=if value from MasterOption Table(Key~TextValue),S=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetLayoutStyle(System.String)">
+ <summary>
+ Get LayoutStyle object of contextmenustrip  conversion type 'LOS0'
+ </summary>
+ <param name="LayoutStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAlignCalender(System.String)">
+ <summary>
+ Gey AlignCalender conversion type   =LRA0,39
+ 
+ </summary>
+ <param name="AlignCalenderString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetAlignCalenderString(System.Windows.Forms.LeftRightAlignment,System.String)">
+ <summary>
+ Gey AlignCalender conversion type  = LRA0,39
+ </summary>
+ <param name="GetAlignCalenderObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetLayoutStyleSring(System.Windows.Forms.ToolStripLayoutStyle,System.String)">
+ <summary>
+ Get LayoutStyle string from LayoutStyle object of contextmenustrip  conversion type 'LOS0'
+ 
+ </summary>
+ <param name="LayoutStyleObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if value from MasterOptions Table(Key~Index),'T'=if value from MasterOption Table(Key~TextValue),S=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetSpecialFolder(System.String)">
+ <summary>
+ Get System.Environment.SpecialFolder  as Object from string value ,conversion type 'SPF0',3
+ 
+ </summary>
+ <param name="SpecialFolderString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetSpecialFolderString(System.Environment.SpecialFolder,System.String)">
+ <summary>
+ Get String value of System.Environment.SpecialFolder ,conversion type 'SPF0'
+ 
+ </summary>
+ <param name="SpecialFolderObject"></param>
+ <param name="StringType" >StrinConvention code ,'I'=if value from MasterOptions Table(Key~Index),'T'=if value from MasterOption Table(Key~TextValue),S=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDataGridViewCellStyle(System.String)">
+ <summary>
+ Get DataGridViewCellStyle object from string value convention conversion code 'GCS0' subproperies are sepa
+ </summary>
+ <param name="CellStyleString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDataGridViewCellStyleString(System.Windows.Forms.DataGridViewCellStyle,System.String)">
+ <summary>
+ Get String convention value of DataGridViewCellStyle object , conversion code 'GCS0'
+ </summary>
+ <param name="CellStyleObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDateTime(System.String,System.String)">
+ <summary>
+  Get DateTime type object from string value (YYYY~MM~DD~HH~MM~SS) conversion code 'DTP0'
+ </summary>
+ <param name="DateTimeString">Date Time string in the format (YYYY~MM~DD~HH~MM~SS) , @Now for current date time</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetDateTimeString(System.DateTime,System.Boolean,System.String)">
+ <summary>
+  Get DateTime String value (YYYY~MM~DD~HH~MM~SS) from DateTime object, conversion code 'DTP0'
+ 
+ </summary>
+ <param name="DateTimeObject">Date time object as date type</param>
+ <param name="WithTime">True, if String has time value</param>
+ <param name="Separator">default is ~</param>
+ <returns>string format as yyyy~mm~dd~hh~mm~ss</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetTimeSpan(System.String)">
+ <summary>
+  Get TimeSpan type object from string value (days~hh~mm~ss~miliseconds) conversion code 'TIM0'
+ </summary>
+ <param name="TimeSpanString"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetTimeSpanString(System.TimeSpan)">
+ <summary>
+  Get String days~hh~mm~ss~miliseconds  type time span object conversion code 'TIM0'
+ 
+ </summary>
+ <param name="TimeSpanObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetMasterOptionsValue(System.Int16,System.Int16)">
+ <summary>
+ Get Option Value as string from  MasterOptions datatable ,Conversion code "STR0"
+ </summary>
+ <param name="OptionKey"> MasterOption_key of datatable </param>
+ <param name="OptionIndex" >Index in text ValueSet</param>
+ <returns>String correspnding to Index in MasterOption_key row of MasterOptions datatable</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetMasterOptionsValue(System.Int16,System.String)">
+ <summary>
+ Get Option Value as string from  MasterOptions datatable ,Conversion code "STR0"
+ </summary>
+ <param name="OptionKey"> MasterOption_key of datatable </param>
+ <param name="OptionIndex" >Index in text ValueSet</param>
+ <returns>String correspnding to Index in MasterOption_key row of MasterOptions datatable</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetMasterOptionsIndex(System.Int16,System.String)">
+ <summary>
+ Get  index of a String in masteroptios table row.
+ </summary>
+ <param name="OptionKey">Range Code in value set </param>
+ <param name="TextValue">Value String for getting index</param>
+ <returns>Return Value Index from FixedValuesSet by ValueString</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetMasterOptionsValue(System.Int16,System.Object,System.String)">
+ <summary>
+ Get index Value within the MasterOption' s valueset field of specified value string"
+ </summary>
+ <param name="OptionKey">Range Code in value set </param>
+ <param name="PropertyValue">Value String for getting index</param>
+ <param name="StringType">StrinConvention code ,'I'=index from MasterOptions Table,'T'=if value from MasterOption Table,F=Only String Value</param>
+ <returns>Return Value Index from FixedValuesSet by ValueProperty</returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetIcon(System.String,System.String)">
+ <summary>
+ Get System.Drawing.Icon object from *.ico file  as ,Conversion code "ICO0"
+ </summary>
+ <param name="IconFileName "> Icon file name  </param>
+ <param name="FilePath" >Icon file path</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPropertyDetails(System.Object@,System.String,System.String,System.String,System.String,System.Data.DataTable@)">
+ <summary>
+ Get the characteristics of properties by names )
+ </summary>
+ <param name="ControlObject">Control Object as Object</param>
+ <param name="PropertyName">Property name  </param>
+<param name="sep1">Separator (default ++) between mtag,xtag,ztag (Three parts of tag property)(++) </param>
+<param name="sep2">Separator(default ! ) between keywords details Key1#Value1#Type1   [#AllowChange1#ConversionMethod1#KeyOfValues1#EventSets#InputControlType#InputLoadInterface] ( of tags</param>
+<param name="sep3">Separator(default #) between elements of keywords details of tags</param>
+ <returns>Return a hash table having the values of "PropertyName","ConversionMethod", "DefaultValue"</returns>
+ 
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FormattedValue(System.Object,System.String,System.Data.DataTable,System.Collections.Hashtable,System.Data.DataRow,System.Object@,System.Data.DataTable@)">
+ <summary>
+ To Convert a value in a formatted string or get value from DtMasterOptions or evaluate an expression
+ </summary>
+ <param name="mValue">Value to </param>
+ <param name="mFormatString">details in display codes conversion</param>
+ <param name="DtMasterOptions"></param>
+ <param name="PublicVariables"></param>
+ <param name="ColumnDetails">Used for  P and X type display formats  in grids this is column  row of dtgridcolumns datatable ( </param>
+ <param name="ControlObject">Control for which property to be set(used for V type display format)</param>
+ <param name="LinkDataTable">(used for H type display format, master datatable from which values to be fetched</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetKeywordValue(System.String,System.String,System.String,System.String)">
+ <summary>
+ Function to get value of a keyword from a composite fields value string
+ </summary>
+ <param name="CompositeFieldString">String value of composite fields, where default pair separator is ! and default key=value separtor is # </param>
+ <param name="Keyword">Keyword/field name to be searched</param>
+ <param name="sep2">separator between two fields,default is ! </param>
+ <param name="sep3">separator between  field and value ,default is # </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetKeywordValueFull(System.String,System.String,System.String,System.String)">
+ <summary>
+ Function to get value of a keyword from a composite fields value string ,eg1  keyword1#value1#Type1 etc
+ </summary>
+ <param name="CompositeFieldString">String value of composite fields, where default pair separator is ! and default key=value separtor is #</param>
+ <param name="Keyword">Keyword/field name to be searched</param>
+ <param name="sep2">separator (default !) between two fields,default is ! </param>
+ <param name="Sep3">separator (default #)  between  field and value ,default is # </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.RemoveKeywordValue(System.String,System.String,System.String,System.String)">
+ <summary>
+ Function to remove value of a keyword from a composite fields value string
+ </summary>
+ <param name="CompositeFieldString">String value of composite fields, where default pair separator is ! and default key=value separtor is #</param>
+ <param name="Keyword">Keyword/field name to be searched</param>
+ <param name="sep2">separator between two fields,default is ! </param>
+ <param name="Sep3">Deafault # </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FindKeyword(System.String,System.String,System.String,System.String)">
+ <summary>
+ Function to remove value of a keyword from a composite fields value string
+ </summary>
+ <param name="CompositeFieldString">String value of composite fields, where default pair separator is ! and default key=value separtor is #</param>
+ <param name="Keyword">Keyword/field name to be searched</param>
+ <param name="sep2">separator between two fields,default is ! </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.DecimalToString(System.Decimal,System.String)">
+ <summary>
+ Convert a decimal value in to a comma separated grouped value.
+ </summary>
+ <param name="NumericValue">Numeric value as decimal</param>
+ <param name="NumericFormat">NumericFormat as ##,##,###.##</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPropertyValue(System.Object,System.String)">
+ <summary>
+ Get property value of control object
+ </summary>
+ <param name="ControlObject">Control as Object</param>
+ <param name="PropName">Property name  </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetValueProperty(System.Object)">
+ <summary>
+ Get Value of control object ,property defined in ValueProperty Column
+ </summary>
+ <param name="ControlObject">Control as Object</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.CheckMethodName(System.Object@,System.String)">
+ <summary>
+ Get property value of control object ,property may defined as name or no or type((say 'DisplayProperty' and 'ValueProperty')
+ </summary>
+ <param name="ControlObject">Control type name as string</param>
+ <param name="MethodName">Property name or no or type(say 'DisplayProperty' and 'ValueProperty') to get characteristics </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetValueProperty(System.Object@,System.Object)">
+ <summary>
+ Set ValueProperty to control object from ERP-Control
+ </summary>
+ <param name="ControlObject"></param>
+ <param name="PropertyValue"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetProperties(System.Object@,System.Collections.Hashtable)">
+ <summary>
+ Set properties to a object , where property values  are in a hashtable, where key is property name and value is property value.
+ </summary>
+ <param name="ControlObject">Object by reference on which properties to be set</param>
+ <param name="PropertyHashTable">Properties value hash table, where key is property name and value is property value.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetProperties(System.Object@,System.String,System.String,System.String,System.String,System.Data.DataTable)">
+ <summary>
+ Set properties from propline to a control
+ </summary>
+ <param name="ControlObject"></param>
+ <param name="PropLine"></param>
+ <param name="sep2">Two properties separator default is ! </param>
+ <param name="sep3">PropertyName,Value ,type separator default is #</param>
+ <param name="sep1">Separator (default ++) between mtag,xtag,ztag (Three parts of tag property)(++)</param>
+ <param name="ERPControlsDt"></param>
+ <returns></returns>
+</member>
+<member name="M:SetPropertyClass.SetProperties.ConvertStringValueToProperty(System.String,System.String,System.Object,System.Collections.Hashtable@,System.Object@)">
+ <summary>
+ 
+ </summary>
+ <param name="ConvMethod">Convert String convention to property object</param>
+ <param name="PropVal"></param>
+ <param name="ControlContainerForm"> If conversion type is 'ctr0' , the name of container form</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetContextMenuStrip(System.Data.DataTable,System.Object@)">
+ <summary>
+ Get ContextMenuStrip or 
+ </summary>
+ <param name="ContextMenuDataTable"></param>
+ <param name="ContainerForm">Form on which ToolStripMenuItem Click events fired.
+ </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPropertyValueObject(System.Object,System.String)">
+ <summary>
+ Get property value of a control object
+ </summary>
+ <param name="ControlObject"></param>
+ <param name="PropertyName">Name of property</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetValueFromGlobalControl(System.String)">
+ <summary>
+ Get property value of from globalcontrol shared object
+ </summary>
+ <param name="PropertyName">Name of property</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPropertyString(System.Object,System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="propval"></param>
+ <param name="mConvMethod"></param>
+ <param name="StringType">StringType code ,'I'=Index ,'T'=Text,F=Only String Value</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.BytesToIcon(System.Byte[])">
+ <summary>
+ To convert bytes into system.drawing.icon
+ </summary>
+ <param name="bytes">Bytes to be converted</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.IconToBytes(System.String)">
+ <summary>
+ To convert icon into bytes.
+ </summary>
+ <param name="fileName"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.BytesToImage(System.Byte[])">
+ <summary>
+ To convert bytes array into Image 
+ </summary>
+ <param name="BytesArray">Bytes array to be converted</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.ImageToBytes(System.Drawing.Image,System.String)">
+ <summary>
+ To convert Image into bytes array
+ </summary>
+ <param name="LImage">Image to be converted</param>
+ <param name="PictureType">Image type as string eg jpeg,png,ico,bmp,gif,tiff</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetImageBlurred(System.Drawing.Bitmap,System.Int32,System.Single)">
+ <summary>
+ Convert image to low resolution .
+ </summary>
+ <param name="image">Image to be converted to low resolution</param>
+ <param name="BlurForce">Coef. of blurring,defalut is 5</param>
+ <param name="mOpacity" >0.5F ,which represents the opacity. so the drawing will be semi-trasparent.</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.MismatchedPropertiesString(System.Object,System.Object,System.String,System.Data.DataTable)">
+ <summary>
+ Compare the user changeable properties of two Instances of same control and return propline string of changed property.
+ </summary>
+ <param name="FirstInstance">First instance with properties of initial value</param>
+ <param name="SecondInstance">Second instance with properties of changed values</param>
+ <param name="ToBeChecked" >Comma separated string of properties to be checked for change,*"=AllowChange flag of properties.</param>
+ <param name="ERPControlsList"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.NewInstanceClone(System.Object,System.String,System.String,System.Data.DataTable)">
+ <summary>
+ 
+ </summary>
+ <param name="BaseControl"></param>
+ <param name="InstanceName"></param>
+ <param name="SetChangeableProperties"></param>
+ <param name="ERPControlsList"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetProperties(System.Object,System.Object@,System.String,System.Data.DataTable)">
+ <summary>
+ Set properties of second object as first object as per list of tobechanged properties.
+ </summary>
+ <param name="SourceControl">Source object</param>
+ <param name="TargetControl">Target object</param>
+ <param name="ToBeChanged">Comma separated string of properties to be changed ,*"=For User Changeable Properties properties.</param>
+ <param name="ERPControlsList"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.AddItemsToComboBox(System.Int16,System.Windows.Forms.ComboBox@,System.Object)">
+ <summary>
+ Add items from global MasterOptions datatable
+ </summary>
+ <param name="OptionKey">Key of MasterOptions</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillEntFormDtFromControl(System.Object,System.String,System.String,System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="Mform"></param>
+ <param name="ControlName">Control name of which property value to be set.</param>
+ <param name="VOColumnNames">Comma separated Column Names of VO.EntFormDt to be set</param>
+ <param name="ValuePropertyName">Leave blank if valuepropertyname will be fetched from ERPControlList</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetValueInEntFormDt(System.Object@,System.String,System.Object,System.String)">
+ <summary>
+ Set value of control in VO.ENTFormDt 
+ </summary>
+ <param name="FormObject">FormOObject having EntFormDT datatable</param>
+ <param name="controlName">Control Name whose value needs to be set</param>
+ <param name="ColumnNames">Comma separated ColumnName of EntFormDt in which value to be assigned</param>
+ <param name="mvalue">Value which is to assigned</param>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetValueFromEntFormDt(System.Object@,System.String,System.String,System.String)">
+ <summary>
+ Get value of control from FormObject.ENTFormDt as per valuetype
+ </summary>
+ <param name="FormObject">FormObject as object</param>
+ <param name="controlName">Control Name whose value needs to be get</param>
+ <param name="ColumnName">Can take values currentvalue,loadvalue  previousvalue</param>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillEntFormDtFromControls(System.Object@,System.String,System.String)">
+ <summary>
+ Fill VO object from Form as per valuetype
+ </summary>
+ <param name="FormObject">form from which VO has to filled</param>
+ <param name="ColumnNames">Comma separated ColumnNames for which values to be set in VO object</param>
+ <param name="ValuePropertyName">Leave blank if valuepropertyname will be fetched from ERPControlList</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillControlsFromEntFormDt(System.Object@,System.String,System.String)">
+ <summary>
+ Fill form from VO Object
+ </summary>
+ <param name="FormObject">Form to be filled</param>
+ <param name="ColumnNames">Fill form as per valuetype. Valuetype can be current, previous, load, accordingly currentvalue, loadvalue and previousvalue will be populated </param>
+ <param name="ValuePropertyName">Leave blank if valuepropertyname will be fetched from ERPControlList</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillControlFromEntFormDt(System.Object@,System.String,System.String,System.String,System.String)">
+ <summary>
+ Fill form from VO Object
+ </summary>
+ <param name="FormObject">Form to be filled</param>
+ <param name="ValuePropertyName">Leave blank if valuepropertyname will be fetched from ERPControlList</param>
+ <param name="ColumnNames">Fill form as per valuetype. Valuetype can be current, previous, load, accordingly currentvalue, loadvalue and previousvalue will be populated </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillTableRowFromEntFormDt(System.Data.DataRow@,System.Object@,System.String,System.String@)">
+ <summary>
+ Fill tableclass object from Form VO
+ </summary>
+ <param name="TableRow"></param>
+ <param name="FormObject"></param>
+ <param name="ColumnName"></param>
+ <param name="CompositeFields"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillTableFieldsFromEntFormDt(System.Object@,System.Object@,System.String)">
+ <summary>
+ Fill tableclass object from Form VO
+ </summary>
+ <param name="CLsTableclass"></param>
+ <param name="FormObject"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.FillEntFormDtFromTableRow(System.Data.DataRow,System.Object@,System.String@)">
+ <summary>
+ Fill VO from tableclass
+ </summary>
+ <param name="TableRow"></param>
+ <param name="FormObject"></param>
+ <param name="CompositeFields" >(!) separated composite fields</param>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetVBLineForControl(System.Data.DataTable,System.String,System.String,System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="dtProperties"></param>
+ <param name="controlname"></param>
+ <param name="EventTypes">0,1,2,3 ,load etc</param>
+ <param name="CodeFile" >PropLine of properties if set in D=Designer,V=VB-file,R=RunTime evaluation. </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetVBLineForControl(System.Data.DataTable,System.String,System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="ControlsProp"></param>
+ <param name="CodeFile" >PropLine of properties if set in D=Designer,V=VB-file,R=RunTime evaluation. </param>
+ <param name="CodeType" >Prop or s_stmt or e_stmt or m_stmt</param>
+ <param name="EventTypes">EventType Name say focuse,leave,enter,design etc </param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetControlByName(System.Object@,System.String)">
+ <summary>
+ Recursively find all child controls for a form
+ </summary>
+ <param name="StartingContainer"><c><seealso cref="T:System.Windows.Forms.Form">Form
+ </seealso></c> that is the starting container to check for children.</param>
+ <returns><c><seealso cref="T:System.Collections.Generic.List`1">List(Of Control)
+ </seealso></c> that contains a reference to all child controls.</returns>
+ <remarks>If you put this module in a separate namespace from your form, Visual Studio 
+ 2010 does not recognize the extension to the form.</remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPreviousControl(System.Object@,System.String,System.Boolean)">
+ <summary>
+ Return the previous control in a form using entrycontrol property
+ </summary>
+ <param name="MForm">Parent form on which controls are placed</param>
+ <param name="ControlName">Reference control for which next and previous control to be determined</param>
+ <param name="JumpToPreviousTab" >Default =True</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetNextcontrol(System.Object@,System.String,System.Boolean)">
+ <summary>
+ Return the next control in a form using entrycontrol property
+ </summary>
+ <param name="MForm">Parent form on which controls are placed</param>
+ <param name="ControlName">Reference control for which next control to be determined</param>
+ <param name="JumpToNextTab" >Default is True</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetPropertiesAllowToChange(System.Object)">
+ <summary>
+ Get the datatable having properies of control object allowable to change by the user.
+ </summary>
+ <param name="ControlObject">Control Object as Object</param>
+</member>
+<member name="M:SetPropertyClass.SetProperties.GetExtraMenuItems(System.Object)">
+ <summary>
+ Get the datatable having properies of control object allowable to change by the user.
+ </summary>
+ <param name="ControlObject">Control Object as Object</param>
+</member>
+<member name="M:SetPropertyClass.SetProperties.SetFormLocation(System.Object@,System.String@,System.Object@)">
+ <summary>
+  Permissible Form Location TopLeft,TopCenter,TopRight,MiddleLeft,MiddleCenter,MiddleRight,BottomLeft,BottomCenter,BottomRight,ControlRight,ControlBottom,ControlImpose and Left~Top (Integers) optional [,[Screen],[Caller],[Parent]].
+ </summary>
+ <param name="StartLocation"> Comma separated  values StartLocation and LocationReference eg. TopLeft,LocationReference(Screen Or MdiParent)</param>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

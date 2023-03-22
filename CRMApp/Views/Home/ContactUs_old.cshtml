@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_Nav.cshtml";
+    ViewData["Title"] = "Contact Us";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .input-group-addon {
+        background-color: #fff;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#navcontact").addClass("navActive");
+        $("#navcontact").css("padding-top", "5px");
+        $("#navcontact").css("padding-bottom", "5px");
+        $("#navcontact").css("margin-top", "10px");
+    })
+
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GVPR11ZTNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GVPR11ZTNT');
+</script>
+<!--CSS Reference-->
+<link rel="stylesheet" href="~/Content/Custom/ContactUs.css" type="text/css" />
+
+<div class="row" style="background:#fff; margin-left:10%; margin-right:10%; margin-top:50px; padding:20px;box-shadow: 0px 0px 34px -13px rgba(51,51,51,1);border-radius: 15px;">
+    <div class="col-md-6 col-xs-12">
+        <h3>Message Us</h3>
+        <br />
+        <p style="font-weight:bold">@ViewBag.msg</p>
+        <form style="" method="post" action="@Url.Action("ContactUs")">
+
+            <div class="form-group" style="margin-bottom:20px;">
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text"  id="Name" name="Name" class="form-control" placeholder="Name" required/>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required/>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                    </span>
+                    <input type="number" id="phonenumber" name="phone" class="form-control" placeholder="Mobile Number" maxlength="10" minlength="10" required/>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+                <div class="input-group">
+
+                    <span class="input-group-addon">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Subject" name="Subject" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Enquiry Description"  name="enquiryMessage" style="resize:none" required></textarea>
+            </div>
+            <br />
+            <button type="submit" style="width:100%; font-size:14px;" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-1 col-xs-12">
+
+    </div>
+    <div class="col-md-5 col-xs-12">
+        <h3 style="margin-top:30px;">Technopinch Solutions Pvt. Ltd.</h3>
+        <br />
+        <div class="row">
+            <div class="col-md-1">
+                <i class="fa fa-phone-square" style="margin-top:5px;"></i>
+            </div>
+            <div class="col-md-11">
+                <p>
+                    <span><b style="font-size:18px">Contact Us: </b></span><br>
+                    contact@gainbooks.com <br>
+                    +91 9653940874<br>
+                    +91 9414184250<br>
+                </p>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1">
+                <i class="fa fa-map-marker" style="margin-top:5px;"></i>
+            </div>
+            <div class="col-md-11">
+                <p>
+                    <span><b style="font-size:18px">Head Office: </b></span><br>
+                    1103, Ramses Tower<br />
+                    Omaxe The Nile, Sector-49, Sohna Road <br />
+                    Gurgaon-122018, <br />
+                    Haryana (India)<br />
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <i class="fa fa-map-marker" style="margin-top:5px;"></i>
+            </div>
+            <div class="col-md-11">
+                <p>
+                    <span><b style="font-size:18px">Branch Office: </b></span><br>
+                    8-A<br>
+                    Near Gumanpura Thana<br>
+                    Kota-324007, <br />
+                    Rajasthan (India)<br>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
