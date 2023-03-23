@@ -5,6 +5,7 @@ namespace CRMApp
     public class Accmasterviewmodel
     {
         public int Accmaster_key { get; set; } = -1;
+        public int Accmaster_key1 { get; set; } = -1;
         public int P_acccode { get; set; } = -1;
         public string AccName { get; set; } = "";
         public int rowstatus { get; set; } = 0;
